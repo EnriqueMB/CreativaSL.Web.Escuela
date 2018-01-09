@@ -12,7 +12,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
     public class PlanEstudioController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
-        // GET: Admin/PlanEstudio
+        // GET: Admin/PlanEstudio 
         [HttpGet]
         [Authorize(Roles = "4")]
         public ActionResult Index()
