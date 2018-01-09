@@ -58,8 +58,9 @@
                                                                 {
                                                                     <tr>
                                                                         <td>@Modalidad["Descripcion"].ToString()</td>
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatModalidad", new { id = Modalidad["IDPlanEstudio"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatModalidad", new {id = Modalidad["IDPlanEstudio"].ToString()})"><i class="icon-trash"></i></a></td>
+                                                                        <td>@Modalidad["PlanEstudio"].ToString()</td>
+                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatModalidad", new { id = Modalidad["IDModalidad"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatModalidad", new {id = Modalidad["IDModalidad"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>
