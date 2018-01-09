@@ -16,6 +16,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _id_usuario = value; }
         }
 
+
         private int _id_tipoUsuario;
         public int id_tipoUsuario
         {
