@@ -47,18 +47,19 @@
                                                         <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                                             <thead class="flip-content">
                                                                 <tr>
-                                                                    <th>Descripción</th>
+                                                                    <th>Madalidad</th>
+                                                                    <th>Plan de Estudio</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach (System.Data.DataRow Plan in Model.TablaDatos.Rows)
+                                                                @foreach (System.Data.DataRow Modalidad in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
-                                                                        <td>@Plan["Descripcion"].ToString()</td>
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatModalidad", new { id = Plan["IDPlanEstudio"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatModalidad", new {id = Plan["IDPlanEstudio"].ToString()})"><i class="icon-trash"></i></a></td>
+                                                                        <td>@Modalidad["Descripcion"].ToString()</td>
+                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatModalidad", new { id = Modalidad["IDPlanEstudio"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatModalidad", new {id = Modalidad["IDPlanEstudio"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>
