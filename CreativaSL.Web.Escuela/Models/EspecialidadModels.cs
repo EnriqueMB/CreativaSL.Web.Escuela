@@ -16,6 +16,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _id_especialidad = value; }
         }
         public string id_modalidad { get; set; }
+
       
         private string _descripcion;
         [Required(ErrorMessage = "La descripción es obligatoria")]
