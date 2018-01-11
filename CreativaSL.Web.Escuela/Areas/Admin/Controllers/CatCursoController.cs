@@ -123,7 +123,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
-
+ 
         // POST: Admin/PlanEstudio/Edit/5
         [HttpPost]
         [Authorize(Roles = "4")]
