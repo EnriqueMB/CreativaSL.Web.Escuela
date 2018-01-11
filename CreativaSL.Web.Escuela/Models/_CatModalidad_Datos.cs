@@ -20,7 +20,7 @@ namespace CreativaSL.Web.Escuela.Models
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatModalidad", parametros);
                 datos.IDModalidad = aux.ToString();
-                if (string.IsNullOrEmpty(datos.IDModalidad))
+                if (!string.IsNullOrEmpty(datos.IDModalidad))
                 {
                     datos.Completado = true;
                 }

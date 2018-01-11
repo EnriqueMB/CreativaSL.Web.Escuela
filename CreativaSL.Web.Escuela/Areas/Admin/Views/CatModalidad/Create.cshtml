@@ -1,0 +1,114 @@
+﻿@model CreativaSL.Web.Escuela.Models.CatModalidadModels
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Nueva Modalidad</div>
+                    </div>
+                    @using (Html.BeginForm("Create", "CatModalidad", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.IDModalidad)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Información de la Modalidad</h3>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre Modalidad<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.Descripcion)
+                                            <span class="help-bolck">Ingrese el nombre modalidad</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Plan de Estudio<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaPlanEstudioCmb, ViewData["cmbPlanEstudio"] as SelectList, new { id = "ListPlanEstudio", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaPlanEstudioCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el plan de estudio </span>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+                                <a href="@Url.Action("Index","CatModalidad")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+       
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            try
+            {
+                $("input[type='text']").each(function ()
+                {
+                    $(this).attr("autocomplete", "off");
+                    $(this).val = "";
+                });
+            }
+            catch (e)
+            {
+            }
+        });
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    </script>
+
+}
+
+
