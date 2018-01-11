@@ -54,7 +54,7 @@ namespace CreativaSL.Web.Escuela.Models
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw ex; 
             }
         }  
         public CatEspecialidadModels ObtenerDetalleCatEspecialidad(CatEspecialidadModels datos)

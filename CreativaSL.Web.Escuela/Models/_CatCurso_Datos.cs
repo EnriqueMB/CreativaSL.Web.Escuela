@@ -57,7 +57,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 throw ex;
             }
-        }  
+        }   
         public CatCursoModels ObtenerDetalleCatEspecialidad(CatCursoModels datos)
         {
             try
