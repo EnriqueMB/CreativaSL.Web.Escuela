@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,14 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _IDEspecialidad; }
             set { _IDEspecialidad = value; }
         }
+        private List<CatEspecialidadModels> _tablaEspecialidadCmb;
+        [Required(ErrorMessage = "La especialidad es un campo requerido")]
+        [Display(Name = "Especialidad")]
+        public List<CatEspecialidadModels> tablaEspecialidadCmb
+        {
+            get { return _tablaEspecialidadCmb; }
+            set { _tablaEspecialidadCmb = value; }
+        }
 
         private string _Descripcion;
         [Required(ErrorMessage = "La descripción es obligatorio")]
@@ -33,6 +42,13 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _Descripcion; }
             set { _Descripcion = value; }
+        }
+        private DataTable _TablaDatos;
+
+        public DataTable TablaDatos
+        {
+            get { return _TablaDatos; }
+            set { _TablaDatos = value; }
         }
 
         #region Datos de control

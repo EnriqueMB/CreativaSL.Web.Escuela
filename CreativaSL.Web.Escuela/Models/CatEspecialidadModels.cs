@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Web;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class EspecialidadModels
+    public class CatEspecialidadModels
     {
         private string _id_especialidad;
 
@@ -15,9 +16,27 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _id_especialidad; }
             set { _id_especialidad = value; }
         }
-        public string id_modalidad { get; set; }
 
-      
+        private string _id_modalidad;
+
+        public string id_modalidad
+        {
+            get { return _id_modalidad; }
+            set { _id_modalidad = value; }
+        }
+
+
+        private List<CatModalidadModels> _tablaModalidadCmb;
+        [Required(ErrorMessage = "Modalidad es un campo requerido")]
+        [Display(Name = "Modalidad")]
+        public List<CatModalidadModels> tablaModalidadCmb
+        {
+            get { return _tablaModalidadCmb; }
+            set { _tablaModalidadCmb = value; }
+        }
+
+
+
         private string _descripcion;
         [Required(ErrorMessage = "La descripción es obligatoria")]
         [Display(Name = "Descripción")]
@@ -28,6 +47,14 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _descripcion; }
             set { _descripcion = value; }
         }
+        private DataTable _TablaDatos;
+
+        public DataTable TablaDatos
+        {
+            get { return _TablaDatos; }
+            set { _TablaDatos = value; }
+        }
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }
