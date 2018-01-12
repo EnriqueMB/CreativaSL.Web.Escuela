@@ -40,7 +40,7 @@ namespace CreativaSL.Web.Escuela.Models
         private string _descripcion;
         [Required(ErrorMessage = "La descripción es obligatoria")]
         [Display(Name = "Descripción")]
-        [StringLength(180, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 1)]
+        [StringLength(180, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
         public string descripcion
         {

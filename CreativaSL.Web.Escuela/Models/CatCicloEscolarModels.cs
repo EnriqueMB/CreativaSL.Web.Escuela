@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Data;
 
 namespace CreativaSL.Web.Escuela.Models
 {
@@ -17,10 +18,10 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _Nombre;
-        [Required(ErrorMessage = "El Nombre es obligatorio")]
-        [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Display(Name = "nombre")]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
-        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\-\s]*$", ErrorMessage = "Solo Letras y guión")]
         public string Nombre
         {
             get { return _Nombre; }
@@ -38,7 +39,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _Descripcion = value; }
         }
 
-        private DateTime _FechaInicio;
+        private DateTime _FechaInicio = DateTime.Now;
 
         public DateTime FechaInicio
         {
@@ -46,7 +47,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _FechaInicio = value; }
         }
 
-        private DateTime _FechaFin;
+        private DateTime _FechaFin = DateTime.Now;
 
         public DateTime FechaFin
         {
@@ -62,6 +63,13 @@ namespace CreativaSL.Web.Escuela.Models
             set { _CicloActual = value; }
         }
 
+        private DataTable _TablaDatos;
+
+        public DataTable TablaDatos
+        {
+            get { return _TablaDatos; }
+            set { _TablaDatos = value; }
+        }
 
         #region Datos de control
         public int Resultado { get; set; }

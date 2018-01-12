@@ -66,7 +66,7 @@
         <div class="page-sidebar nav-collapse collapse">
             <ul>
                 <a class="brand" href="@Url.Content("~/Content/elements/Ofelia4.jpg")">
-                    <img src="@Url.Content("~/Content/elements/Ofelia4.jpg")" alt="logo" style="height: 80px; max-width: 200%; width: 220px;" />
+                    <img id="img-logo" src="@Url.Content("~/Content/elements/Ofelia4.jpg")" alt="logo" style="height: 80px; max-width: 200%; width: 220px;" />
                 </a>
                 <li>
                     <div class="sidebar-toggler hidden-phone"></div>
@@ -123,10 +123,13 @@
                             <a href="@Url.Action("Index", "CatEspecialidad")"><i class="icon-folder-close"></i> <span class="title">Especialidades</span></a>
                         </li>
                         <li class="">
-                            <a href="@Url.Action("Index", "CatCursos")"><i class="icon-folder-close"></i> <span class="title">Cursos</span></a>
+                            <a href="@Url.Action("Index", "CatCurso")"><i class="icon-folder-close"></i> <span class="title">Cursos</span></a>
                         </li>
                         <li class="">
-                            <a href="@Url.Action("Index", "")"><i class="icon-folder-close"></i> <span class="title">Ciclo Escolar</span></a>
+                            <a href="@Url.Action("Index", "CatCicloEscolar")"><i class="icon-folder-close"></i> <span class="title">Ciclo Escolar</span></a>
+                        </li>
+                        <li class="">
+                            <a href="@Url.Action("Index", "CatGrupo")"><i class="icon-folder-close"></i> <span class="title">Grupo</span></a>
                         </li>
                         <li class="">
                             <a href="@Url.Action("Index", "")"><i class="icon-folder-close"></i> <span class="title">Catedrático</span></a>

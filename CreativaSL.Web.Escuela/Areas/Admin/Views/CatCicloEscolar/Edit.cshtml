@@ -1,0 +1,136 @@
+﻿@model CreativaSL.Web.Escuela.Models.CatCicloEscolarModels
+@{
+    ViewBag.Title = "Editar Ciclo Escolar";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/assets2/plugins/cropper/cropper.min.css")" />
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Editar Ciclo Escolar</div>
+                    </div>
+                    @using (Html.BeginForm("Edit", "CatCicloEscolar", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.IDCiclo)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Información del Ciclo Escolar</h3>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.Nombre, new { id = "nombre", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.Nombre)
+                                            <span class="help-bolck">Ingrese el Nombre</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Descripción<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.Descripcion, new { id = "descripcion", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.Descripcion)
+                                            <span class="help-bolck">Ingrese una descripción</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha Hora Inicio<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            <div id="datetimepicker3" class="input-append date calendar">
+                                                @Html.TextBoxFor(model => model.FechaInicio, "{0:dd/MM/yyyy}", new { id = "fechaInicio", @class = "span12 m-wrap", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.FechaInicio)
+                                                <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+                                            </div>
+                                            <span class="help-block">Ingrese la fecha de inicio del ciclo escolar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Fecha Hora Fin<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            <div id="datetimepicker4" class="input-append date calendar">
+                                                @Html.TextBoxFor(model => model.FechaFin, "{0:dd/MM/yyyy}", new { id = "fechaFin", @class = "span12 m-wrap", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.FechaFin)
+                                                <span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span>
+                                            </div>
+                                            <span class="help-block">Ingrese la fecha de término del ciclo escolar</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="uno">
+                                        <label class="control-label">Ciclo Actual<span class="required"> *</span></label>
+                                    </div>
+                                    <div class="dos">
+                                        <label class="checkbox">Ciclo Actual </label>@Html.CheckBoxFor(model => model.CicloActual)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+                                <a href="@Url.Action("Index","CatCicloEscolar")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    </script>
+
+}

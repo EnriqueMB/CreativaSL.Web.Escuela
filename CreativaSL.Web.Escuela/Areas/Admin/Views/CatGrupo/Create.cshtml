@@ -1,0 +1,254 @@
+﻿@model CreativaSL.Web.Escuela.Models.CatGrupoModels
+@{
+    ViewBag.Title = "Crear Grupo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/assets2/plugins/cropper/cropper.min.css")" />
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Nuevo Grupo</div>
+                    </div>
+                    @using (Html.BeginForm("Create", "CatGrupo", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.IDGrupo)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Información del Grupo</h3>
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">Clave Grupo<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.Clave, new { id = "Clave", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.Clave)
+                                            <span class="help-bolck">Ingrese la clave del grupo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">Nombre Grupo<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.Nombre, new { id = "Nombre", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.Nombre)
+                                            <span class="help-bolck">Ingrese el nombre del grupo</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">Ciclo Escolar<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaCicloEscolarCmb, ViewData["cmbCicloEscolar"] as SelectList, new { id = "ListCicloEscolar", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaCicloEscolarCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el ciclo escolar</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Plan de Estudio<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaPlanEstudioCmb, ViewData["cmbPlanEstudio"] as SelectList, new { id = "ListPlanEstudio", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaPlanEstudioCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el plan de estudio</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Modalidad<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaModalidadCmb, ViewData["cmbModalidad"] as SelectList, new { id = "ListModalidad", @class = "span12 m-wrap" }) @*, disabled = "true" *@
+                                            @Html.ValidationMessageFor(model => model.TablaModalidadCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione la modalidad </span>
+                                </div>
+                            </div>
+
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Especialidad<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaEspecialidadCmb, ViewData["cmbEspecialidad"] as SelectList, new { id = "ListEspecialidad", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaEspecialidadCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione la especialidad</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Curso<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaCursosCmb, ViewData["cmbCursos"] as SelectList, new { id = "ListCurso", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaCursosCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el curso</span>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+                                <a href="@Url.Action("Index","CatGrupo")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var auxbol = 1;
+        var auxbol2 = 1;
+        var auxbol3 = 1;
+        $(document).ready(function () {
+            $("#ListPlanEstudio").change(function () {
+                getModalidad($("#ListPlanEstudio").val());
+            });
+            //getGradoEscolar($("#ListNivelEscolar").val());
+            //getGrupoEscolar($("#ListCicloEscolar").val(), $("#ListNivelEscolar").val(), $("#ListGradoEscolar").val());
+            $("#ListModalidad").change(function () {
+                getComboEspecialidad($("#ListModalidad").val());
+            });
+
+            $("#ListEspecialidad").change(function () {
+                getComboCurso($("#ListEspecialidad").val());
+            });
+
+            //$("#ListGradoEscolar").change(function () {
+            //    getGrupoEscolar($("#ListCicloEscolar").val(), $("#ListNivelEscolar").val(), $("#ListGradoEscolar").val());
+
+            //});
+        });
+
+        function getModalidad(id) {
+            $.ajax({
+                url: "/Admin/CatGrupo/ComboModalidad",
+                data: { id: id },
+                dataType: "json",
+                type: "POST",
+                error: function () {
+                    $("#ListModalidad").html('');
+                },
+                success: function (cmbModalidad) {
+                    var items = "";
+                    for (var i = 0; i < cmbModalidad.length; i++) {
+                        items += "<option value=\"" + cmbModalidad[i].IDModalidad + "\">" + cmbModalidad[i].Descripcion + "</option>";
+                    }
+                    $("#ListModalidad").html(items);
+                    if (auxbol == 1) {
+                        $("#ListModalidad").val('@Model.IDModalidad');
+                        auxbol = 0;
+                    }
+                    setTimeout(function () {
+                        getComboEspecialidad($("#ListModalidad").val());
+                    }, 500);
+                }
+            });
+        }
+
+
+        function getComboEspecialidad(idModalidad) {
+            $.ajax({
+                url: "/Admin/CatGrupo/ComboEspecialidad",
+                data: { IDMod: idModalidad },
+                dataType: "json",
+                type: "POST",
+                error: function () {
+                    $("#ListEspecialidad").html('');
+                },
+                success: function (cbmEspecialidad) {
+                    var items = "";
+                    for (var i = 0; i < cbmEspecialidad.length; i++) {
+                        items += "<option value=\"" + cbmEspecialidad[i].id_especialidad + "\">" + cbmEspecialidad[i].descripcion + "</option>";
+                    }
+                    $("#ListEspecialidad").html(items);
+                    if (auxbol2 == 1) {
+                        $("#ListEspecialidad").val('@Model.IDEspecialidad');
+                        auxbol2 = 0;
+                    }
+                    setTimeout(function () {
+                        getComboCurso($("#ListEspecialidad").val());
+                    }, 500);
+                }
+            });
+        }
+
+        function getComboCurso(idEspecialidad) {
+            $.ajax({
+                url: "/Admin/CatGrupo/ComboCurso",
+                data: { IDEsp: idEspecialidad },
+                dataType: "json",
+                type: "POST",
+                error: function () {
+                    $("#ListCurso").html('');
+                },
+                success: function (cbmCurso) {
+                    var items = "";
+                    for (var i = 0; i < cbmCurso.length; i++) {
+                        items += "<option value=\"" + cbmCurso[i].IDCurso + "\">" + cbmCurso[i].Descripcion + "</option>";
+                    }
+                    $("#ListCurso").html(items);
+                    if (auxbol3 == 1) {
+                        $("#ListCurso").val('@Model.IDCurso');
+                        auxbol3 = 0;
+                    }
+                }
+            });
+        }
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+    </script>
+
+}
+
+
+
+
+

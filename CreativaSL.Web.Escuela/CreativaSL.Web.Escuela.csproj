@@ -2636,6 +2636,12 @@
     <Content Include="Areas\Admin\Views\CatCurso\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatCurso\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CatCurso\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCicloEscolar\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCicloEscolar\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCicloEscolar\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGrupo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGrupo\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGrupo\Edit.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2822,8 +2828,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatCicloEscolarController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCursoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatEspecialidadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatGrupoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatModalidadController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
@@ -2840,6 +2848,7 @@
     <Compile Include="Models\CatCicloEscolarModels.cs" />
     <Compile Include="Models\CatCursoModels.cs" />
     <Compile Include="Models\CatDiasSemanaModels.cs" />
+    <Compile Include="Models\CatGrupoModels.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
     <Compile Include="Models\CatPlanEstudioModels.cs" />
     <Compile Include="Models\Comun.cs" />
@@ -2849,8 +2858,10 @@
     <Compile Include="Models\TipoUsuarioModels.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\_CatAdministrativo_Datos.cs" />
+    <Compile Include="Models\_CatCicloEscolar_Datos.cs" />
     <Compile Include="Models\_CatCurso_Datos.cs" />
     <Compile Include="Models\_CatEspecialidad_Datos.cs" />
+    <Compile Include="Models\_CatGrupo_Datos.cs" />
     <Compile Include="Models\_CatModalidad_Datos.cs" />
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
