@@ -27,11 +27,11 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                CatModalidadModels Modalidad = new CatModalidadModels();
-                Modalidad.TablaDatos = new DataTable();
+                CatCursoModels Curso = new CatCursoModels();
+                Curso.TablaDatos = new DataTable();
                 TempData["typemessage"] = "2";
                 TempData["message"] = "No se puede cargar la vista";
-                return View(Modalidad);
+                return View(Curso);
             }
         }
         // GET: Admin/CatEspecialidad/Create
