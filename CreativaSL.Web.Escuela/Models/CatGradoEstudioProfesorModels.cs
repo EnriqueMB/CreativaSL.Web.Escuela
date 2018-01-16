@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class CatAulaModels
+    public class CatGradoEstudioProfesorModels
     {
-        private string _IDAula;
+        private string _IDGradoEstudio;
 
-        public string IDAula
+        public string IDGradoEstudio
         {
-            get { return _IDAula; }
-            set { _IDAula = value; }
+            get { return _IDGradoEstudio; }
+            set { _IDGradoEstudio = value; }
         }
 
+
         private string _Descripcion;
-        [Required(ErrorMessage = "El descripción es obligatorio")]
-        [Display(Name = "descripción")]
-        [StringLength(180, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [Required(ErrorMessage = "El Descripción es obligatorio")]
+        [Display(Name = "Descripción")]
+        [StringLength(200, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
         [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string Descripcion
         {
@@ -35,7 +36,6 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _TablaDatos; }
             set { _TablaDatos = value; }
         }
-
 
         #region Datos de control
         public int Resultado { get; set; }

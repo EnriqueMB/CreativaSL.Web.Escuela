@@ -1,0 +1,116 @@
+﻿@model CreativaSL.Web.Escuela.Models.CatHorarioModels
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/assets2/plugins/cropper/cropper.min.css")" />
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Nuevo Horario</div>
+                    </div>
+                    @using (Html.BeginForm("Create", "CatHorario", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.IDHorario)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Información del Horario</h3>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Hora Inicio<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            <div class="input-append time input-group" id="timepicker1">
+                                                @Html.TextBoxFor(model => model.HoraInicio, new { id = "HoraInicio", @class = "form-control calendarFecha", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.HoraInicio)
+                                                <span class="add-on cotizar-form">
+                                                    <i data-time-icon="icon-time" data-date-icon="icon-time"></i>
+                                                </span>
+                                            </div>
+                                            <span class="help-block">Ingrese hora inicio</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Hora Fin<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            <div class="input-append time input-group" id="timepicker2">
+                                                @Html.TextBoxFor(model => model.HoraFin, new { id = "HoraFin", @class = "form-control calendarFecha", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.HoraFin)
+                                                <span class="add-on cotizar-form">
+                                                    <i data-time-icon="icon-time" data-date-icon="icon-time"></i>
+                                                </span>
+                                            </div>
+                                            <span class="help-block">Ingrese hora fin</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+                                <a href="@Url.Action("Index","CatHorario")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
