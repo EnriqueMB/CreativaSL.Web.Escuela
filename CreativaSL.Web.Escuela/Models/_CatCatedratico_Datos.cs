@@ -62,19 +62,19 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatGradoEstudioModels> obtenerComboCatGradoEstudio(CatCatedraticoModels datos)
+        public List<CatGradoEstudioProfesorModels> obtenerComboCatGradoEstudio(CatCatedraticoModels datos)
         {
             try
             {
-                List<CatGradoEstudioModels> lista = new List<CatGradoEstudioModels>();
-                CatGradoEstudioModels item;
+                List<CatGradoEstudioProfesorModels> lista = new List<CatGradoEstudioProfesorModels>();
+                CatGradoEstudioProfesorModels item;
                 SqlDataReader dr = null;
                 dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGradoEstudio");
                 while (dr.Read())
                 {
-                    item = new CatGradoEstudioModels();
-                    item.id_gradoEstudio =dr["IDGradoEstudio"].ToString();
-                    item.descripcion = dr["GradoEstudio"].ToString();
+                    item = new CatGradoEstudioProfesorModels();
+                    item.IDGradoEstudio =dr["IDGradoEstudio"].ToString();
+                    item.Descripcion = dr["GradoEstudio"].ToString();
                     lista.Add(item);
                 }
                 return lista;
