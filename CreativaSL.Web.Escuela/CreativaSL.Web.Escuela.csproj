@@ -2645,6 +2645,8 @@
     <Content Include="Areas\Admin\Views\CatMateria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatMateria\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatMateria\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\Create.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2831,6 +2833,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatCatedraticoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCicloEscolarController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCursoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatEspecialidadController.cs" />
@@ -2852,7 +2855,8 @@
     <Compile Include="Models\CatCicloEscolarModels.cs" />
     <Compile Include="Models\CatCursoModels.cs" />
     <Compile Include="Models\CatDiasSemanaModels.cs" />
-    <Compile Include="Models\CatedraticoModels.cs" />
+    <Compile Include="Models\CatCatedraticoModels.cs" />
+    <Compile Include="Models\CatGradoEstudioModels.cs" />
     <Compile Include="Models\CatGrupoModels.cs" />
     <Compile Include="Models\CatMateriaModels.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
@@ -2865,6 +2869,7 @@
     <Compile Include="Models\TipoUsuarioModels.cs" />
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\_CatAdministrativo_Datos.cs" />
+    <Compile Include="Models\_CatCatedratico_Datos.cs" />
     <Compile Include="Models\_CatCicloEscolar_Datos.cs" />
     <Compile Include="Models\_CatCurso_Datos.cs" />
     <Compile Include="Models\_CatEspecialidad_Datos.cs" />
