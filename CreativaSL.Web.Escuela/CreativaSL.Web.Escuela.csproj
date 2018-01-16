@@ -2645,6 +2645,17 @@
     <Content Include="Areas\Admin\Views\CatMateria\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatMateria\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatMateria\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAula\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAula\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAula\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGradoEstudioProfesor\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGradoEstudioProfesor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGradoEstudioProfesor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatHorario\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatHorario\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatHorario\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
