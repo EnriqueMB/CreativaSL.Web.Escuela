@@ -62,6 +62,36 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+        public CatCatedraticoModels ObtenerDetalleCatCatedratico(CatCatedraticoModels datos)
+        {
+            try
+            {
+                object[] parametros = { datos.id_persona };
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatCatedraticoXID", parametros);
+                while (dr.Read())
+                {
+                    datos.id_persona = dr["id_persona"].ToString();
+                    datos.nombre = dr["nombre"].ToString();
+                    datos.apPaterno = dr["apPaterno"].ToString();
+                    datos.apMaterno= dr["apMaterno"].ToString();
+                    datos.correo = dr["correo"].ToString();
+                    datos.telefono = dr["telefono"].ToString();
+                    datos.direccion = dr["direccion"].ToString();
+                    datos.clave = dr["matricula"].ToString();
+                    datos.id_tipoPersona =Convert.ToInt32( dr["TipoPersona"].ToString());
+                    datos.id_gradoEstudio = dr["gradoEstudio"].ToString();
+                    datos.curriculum= dr["curriculum"].ToString();
+                }
+                return datos;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<CatGradoEstudioProfesorModels> obtenerComboCatGradoEstudio(CatCatedraticoModels datos)
         {
             try
@@ -75,6 +105,29 @@ namespace CreativaSL.Web.Escuela.Models
                     item = new CatGradoEstudioProfesorModels();
                     item.IDGradoEstudio =dr["IDGradoEstudio"].ToString();
                     item.Descripcion = dr["GradoEstudio"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatTipoPersonaModels> obtenerComboCatTipoPersona(CatCatedraticoModels datos)
+        {
+            try
+            {
+                List<CatTipoPersonaModels> lista = new List<CatTipoPersonaModels>();
+                CatTipoPersonaModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatTipoPersona");
+                while (dr.Read())
+                {
+                    item = new CatTipoPersonaModels();
+                    item.id_tipoPersona = Convert.ToInt32(dr["IDPersona"].ToString());
+                    item.descripcion = dr["TipoPersona"].ToString();
                     lista.Add(item);
                 }
                 return lista;

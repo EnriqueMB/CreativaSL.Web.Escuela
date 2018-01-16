@@ -100,7 +100,10 @@ namespace CreativaSL.Web.Escuela.Models
             set { _telefono = value; }
         }
         private string _direccion;
-
+        [Required(ErrorMessage = "La dirección es obligatoria.")]
+        [Display(Name = "Direccion")]
+        [StringLength(500, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9#,.\s]*$", ErrorMessage = "Solo Letras y Números")]
         public string direccion
         {
             get { return _direccion; }
@@ -128,7 +131,7 @@ namespace CreativaSL.Web.Escuela.Models
         [Required(ErrorMessage = "La Clave es obligatoria")]
         [Display(Name = "clave")]
         [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
-        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\s]*$", ErrorMessage = "Solo Letras y Números")]
         public string clvUser
         {
             get { return _clvUser; }
@@ -136,7 +139,9 @@ namespace CreativaSL.Web.Escuela.Models
         }
         private bool  _validado;
         private string _passUser;
-
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        [Display(Name = "contraseña")]
+        [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
         public string passUser
         {
             get { return _passUser; }
@@ -170,6 +175,14 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _TablaGradoEstudioCmb; }
             set { _TablaGradoEstudioCmb = value; }
+        }
+        private List<CatTipoPersonaModels> _TablaTipoPersonaCmb;
+        [Required(ErrorMessage = "El tipo de persona es obligatorio")]
+        [Display(Name = "Plan de Estudio")]
+        public List<CatTipoPersonaModels> TablaTipoPersonaCmb
+        {
+            get { return _TablaTipoPersonaCmb; }
+            set { _TablaTipoPersonaCmb = value; }
         }
 
 
