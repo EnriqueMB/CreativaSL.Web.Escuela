@@ -163,10 +163,10 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _fecCaducidad; }
             set { _fecCaducidad = value; }
         }
-        private List<CatGradoEstudioModels> _TablaGradoEstudioCmb;
+        private List<CatGradoEstudioProfesorModels> _TablaGradoEstudioCmb;
         [Required(ErrorMessage = "El Grado de estudio es obligatorio")]
         [Display(Name = "Plan de Estudio")]
-        public List<CatGradoEstudioModels> TablaGradoEstudioCmb
+        public List<CatGradoEstudioProfesorModels> TablaGradoEstudioCmb
         {
             get { return _TablaGradoEstudioCmb; }
             set { _TablaGradoEstudioCmb = value; }
