@@ -7,9 +7,11 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class CatGradoEstudioModels
     {
+
         private string _id_gradoEstudio;
 
         public string id_gradoEstudio
+
         {
             get { return _id_gradoEstudio; }
             set { _id_gradoEstudio = value; }

@@ -2857,7 +2857,6 @@
     <Compile Include="Models\CatCicloEscolarModels.cs" />
     <Compile Include="Models\CatCursoModels.cs" />
     <Compile Include="Models\CatDiasSemanaModels.cs" />
-    <Compile Include="Models\CatedraticoModels.cs" />
     <Compile Include="Models\CatGradoEstudioModels.cs" />
     <Compile Include="Models\CatGradoEstudioProfesorModels.cs" />
     <Compile Include="Models\CatGrupoModels.cs" />
