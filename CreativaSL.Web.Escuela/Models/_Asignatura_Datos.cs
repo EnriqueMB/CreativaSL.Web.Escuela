@@ -108,5 +108,120 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        public List<CatGrupoModels> ObtenerComboCatGrupo(AsignaturaModels datos)
+        {
+            try
+            {
+                List<CatGrupoModels> lista = new List<CatGrupoModels>();
+                CatGrupoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGrupo");
+                while (dr.Read())
+                {
+                    item = new CatGrupoModels();
+                    item.IDGrupo = dr["IDGrupo"].ToString();
+                    item.Nombre = dr["NombreGrupo"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatMateriaModels> ObtenerComboCatMaterias(AsignaturaModels datos)
+        {
+            try
+            {
+                List<CatMateriaModels> lista = new List<CatMateriaModels>();
+                CatMateriaModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatMateria");
+                while (dr.Read())
+                {
+                    item = new CatMateriaModels();
+                    item.id_materia = dr["IDMateria"].ToString();
+                    item.nombre = dr["NombreMateria"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatHorarioModels> ObtenerComboCatHorario(AsignaturaModels datos)
+        {
+            try
+            {
+                List<CatHorarioModels> lista = new List<CatHorarioModels>();
+                CatHorarioModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatHorario");
+                while (dr.Read())
+                {
+                    item = new CatHorarioModels();
+                    item.IDHorario = dr["IDHorario"].ToString();
+                    item.Descripcion = dr["Horarios"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatCatedraticoModels> ObtenerComboCatProfesor(AsignaturaModels datos)
+        {
+            try
+            {
+                List<CatCatedraticoModels> lista = new List<CatCatedraticoModels>();
+                CatCatedraticoModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatProfesor");
+                while (dr.Read())
+                {
+                    item = new CatCatedraticoModels();
+                    item.id_persona = dr["IDProfesor"].ToString();
+                    item.Descripcion = dr["NombreProfesor"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatAulaModels> ObtenerComboCatAula(AsignaturaModels datos)
+        {
+            try
+            {
+                List<CatAulaModels> lista = new List<CatAulaModels>();
+                CatAulaModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatAula");
+                while (dr.Read())
+                {
+                    item = new CatAulaModels();
+                    item.IDAula = dr["IDAula"].ToString();
+                    item.Descripcion = dr["NombreAula"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

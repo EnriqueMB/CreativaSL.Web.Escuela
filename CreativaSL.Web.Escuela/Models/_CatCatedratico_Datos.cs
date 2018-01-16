@@ -38,7 +38,6 @@ namespace CreativaSL.Web.Escuela.Models
             }
         }
 
-
         public CatCatedraticoModels ObtenerCatCatedratico(CatCatedraticoModels Datos)
         {
             try
