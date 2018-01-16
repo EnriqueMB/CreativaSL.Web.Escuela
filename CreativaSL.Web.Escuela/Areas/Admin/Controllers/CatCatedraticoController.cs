@@ -45,7 +45,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatCatedraticoModels Catedratico = new CatCatedraticoModels();
                 _CatCatedratico_Datos CatedraticoDatos = new _CatCatedratico_Datos();
                 Catedratico.conexion = Conexion;
-                Catedratico.TablaGradoEstudioCmb = CatedraticoDatos.(Catedratico);
+                Catedratico.TablaGradoEstudioCmb = CatedraticoDatos.obtenerComboCatGradoEstudio(Catedratico);
                 var list = new SelectList(Catedratico.TablaGradoEstudioCmb, "IDGradoEstudio", "Descripcion");
                 ViewData["cmbGradoEstudio"] = list;
                 return View(Catedratico);
