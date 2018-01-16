@@ -117,6 +117,15 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaAulaCmb = value; }
         }
 
+        private List<CatCatedraticoModels> _TablaProfesorCmb;
+        [Required(ErrorMessage = "El profesor es obligatorio")]
+        [Display(Name = "Profesor")]
+        public List<CatCatedraticoModels> TablaProfesorCmb
+        {
+            get { return _TablaProfesorCmb; }
+            set { _TablaProfesorCmb = value; }
+        }
+
 
         #region Datos de control
         public int Resultado { get; set; }

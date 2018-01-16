@@ -44,6 +44,15 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaDatos = value; }
         }
 
+        private string _Descripcion;
+
+        public string Descripcion
+        {
+            get { return _Descripcion; }
+            set { _Descripcion = value; }
+        }
+
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

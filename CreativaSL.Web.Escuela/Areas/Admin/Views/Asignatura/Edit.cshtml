@@ -1,0 +1,154 @@
+﻿@model CreativaSL.Web.Escuela.Models.AsignaturaModels
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/assets2/plugins/cropper/cropper.min.css")" />
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Editar la Asignatura</div>
+                    </div>
+                    @using (Html.BeginForm("Edit", "Asignatura", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.IDAsignatura)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Información de la Asignatura</h3>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Ciclo Escolar<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaCicloEscolarCmb, ViewData["cmbCicloEscolar"] as SelectList, new { id = "ListCicloEscolar", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaCicloEscolarCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el ciclo escolar</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Grupo Escolar<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaGrupoCmb, ViewData["cmbGrupoEscolar"] as SelectList, new { id = "ListGrupo", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaGrupoCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el grupo escolar</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Materia Escolar<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaMateriaCmb, ViewData["cmbMateriaEscolar"] as SelectList, new { id = "ListMateria", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaMateriaCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione la materia escolar</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Horario Escolar<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaHorarioCmb, ViewData["cmbHorarioEscolar"] as SelectList, new { id = "ListHorario", @class = "span12 m-wrap" }) @*, disabled = "true" *@
+                                            @Html.ValidationMessageFor(model => model.TablaHorarioCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el horario escolar</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Profesor<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaProfesorCmb, ViewData["cmbProfesorEscolar"] as SelectList, new { id = "ListProfesor", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaProfesorCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el Profesor de la Asignatura</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Aula<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.DropDownListFor(model => model.TablaAulaCmb, ViewData["cmbAulaEscolar"] as SelectList, new { id = "ListAula", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.TablaAulaCmb)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Seleccione el curso</span>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+                                <a href="@Url.Action("Index","Asignatura")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#ListCicloEscolar").val('@Model.IDCiclo');
+            $("#ListGrupo").val('@Model.IDGrupo');
+            $("#ListMateria").val('@Model.IDMateria');
+            $("#ListHorario").val('@Model.IDHorario');
+            $("#ListProfesor").val('@Model.IDProfesor');
+            $("#ListAula").val('@Model.IDAula');
+        });
+
+
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+    </script>
+
+}
+
+
+
+
