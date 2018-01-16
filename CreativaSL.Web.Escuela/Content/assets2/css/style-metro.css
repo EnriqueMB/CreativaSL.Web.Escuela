@@ -12,7 +12,9 @@ div, input, select, textarea, span, img, table, td, th, p, a, button, ul, li {
 a:focus {
   outline: none !important;
 }
-
+.pad {
+padding-bottom:6px !important;
+}
 a:hover, a:active {
   outline: 0 !important;
 }
@@ -534,7 +536,7 @@ textarea[class*="span"].m-wrap
   width: auto;
   height: 30px;
   min-width: 16px;
-  padding: 4px 5px;
+  padding: 0px 5px;
   font-size: 14px;
   font-weight: normal;
   line-height: 24px;

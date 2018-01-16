@@ -44,7 +44,7 @@
                                         <label class="control-label">Hora Inicio<span class="required"> *</span></label>
                                         <div class="controls">
                                             <div class="input-append time input-group" id="timepicker1">
-                                                @Html.TextBoxFor(model => model.HoraInicio, new { id = "HoraInicio", @class = "form-control calendarFecha", @readonly = "readonly" })
+                                                @Html.TextBoxFor(model => model.HoraInicio, new { id = "HoraInicio", @class = "form-control calendarFecha pad", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.HoraInicio)
                                                 <span class="add-on cotizar-form">
                                                     <i data-time-icon="icon-time" data-date-icon="icon-time"></i>
@@ -59,7 +59,7 @@
                                         <label class="control-label">Hora Fin<span class="required"> *</span></label>
                                         <div class="controls">
                                             <div class="input-append time input-group" id="timepicker2">
-                                                @Html.TextBoxFor(model => model.HoraFin, new { id = "HoraFin", @class = "form-control calendarFecha", @readonly = "readonly" })
+                                                @Html.TextBoxFor(model => model.HoraFin, new { id = "HoraFin", @class = "form-control calendarFecha pad", @readonly = "readonly" })
                                                 @Html.ValidationMessageFor(model => model.HoraFin)
                                                 <span class="add-on cotizar-form">
                                                     <i data-time-icon="icon-time" data-date-icon="icon-time"></i>
