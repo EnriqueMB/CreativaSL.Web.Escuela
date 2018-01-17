@@ -35,12 +35,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/Roles/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Admin/Roles/Create
         public ActionResult Create()
         {

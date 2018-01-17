@@ -1,0 +1,30 @@
+﻿@using System.Data
+@model CreativaSL.Web.Escuela.Models.MenuModels
+@{
+    Layout = null;
+}
+@foreach (var item in Model.ListaMenu)
+{
+    if (item.ListaMenuDetalle.Count == 0)
+    {
+        <li class="">
+            <a href="@item.UrlMenu"><i class="@item.IconMenu"></i> <span class="title">@item.NombreMenu</span></a>
+        </li>
+    }
+    else
+    {
+        <li class="">
+            <a><i class="@item.IconMenu"></i><span class="title">@item.NombreMenu</span><span class="arrow "></span></a>
+            <ul class="sub-menu">
+                @foreach (var SubMenu in item.ListaMenuDetalle)
+                {
+                    <li class="">
+                        <a href="@Html.Raw(Html.Encode(SubMenu.UrlMenu)).ToString()"><i class="@SubMenu.IconMenu"></i> <span class="title">@SubMenu.NombreMenu</span></a>
+                    </li>
+                }   
+             </ul>
+        </li>
+    }
+
+}
+

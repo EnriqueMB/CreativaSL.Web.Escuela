@@ -2776,6 +2776,7 @@
     <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\LoadMenu.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3001,6 +3002,7 @@
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\CatEspecialidadModels.cs" />
     <Compile Include="Models\EstadoModels.cs" />
+    <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\MunicipioModels.cs" />
     <Compile Include="Models\RoleModels.cs" />
     <Compile Include="Models\TipoUsuarioModels.cs" />
@@ -3019,6 +3021,7 @@
     <Compile Include="Models\_CatModalidad_Datos.cs" />
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
+    <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
     <Compile Include="Models\_Usuario_Datos.cs" />
     <Compile Include="MyRoleProvider.cs" />
@@ -3379,6 +3382,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Permisos\" />
     <Folder Include="Areas\Profesor\Controllers\" />
     <Folder Include="Areas\Profesor\Models\" />
     <Folder Include="Areas\Profesor\Views\Shared\" />
