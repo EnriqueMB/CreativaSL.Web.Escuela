@@ -126,7 +126,6 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaProfesorCmb = value; }
         }
 
-
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }
