@@ -78,7 +78,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Catedratico.correo = collection["correo"];
                 Catedratico.direccion = collection["direccion"];
                 Catedratico.telefono = collection["telefono"];
-                Catedratico.id_tipoPersona = Convert.ToInt32(collection["TablaTipoPersonaCmb"]);
+                Catedratico.id_tipoPersona = 1;
                 Catedratico.id_gradoEstudio = collection["TablaGradoEstudioCmb"];
                 Catedratico.clvUser = collection["clvUser"];
                 Catedratico.clave = collection["clave"];
@@ -172,7 +172,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Catedratico.correo = collection["correo"];
                 Catedratico.direccion = collection["direccion"];
                 Catedratico.telefono = collection["telefono"];
-                Catedratico.id_tipoPersona = Convert.ToInt32(collection["TablaTipoPersonaCmb"]);
+                Catedratico.id_tipoPersona = 1;
                 Catedratico.id_gradoEstudio = collection["TablaGradoEstudioCmb"];
                 
                 Catedratico.clave = collection["clave"];

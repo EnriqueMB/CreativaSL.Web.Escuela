@@ -26,7 +26,7 @@
             <div class="tab-pane">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-reorder"></i>Nuevo Alumno</div>
+                        <div class="caption"><i class="icon-reorder"></i>Editar Alumno</div>
                     </div>
                     @using (Html.BeginForm("Edit", "CatAlumnos", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
                     {
@@ -36,7 +36,20 @@
                         @Html.HiddenFor(model => model.IDPersona)
 
                         <div class="portlet-body form">
-                            <h3 class="form-section">Información de la Catedrático</h3>
+                            <h3 class="form-section">Información del Alumno</h3>
+                            <div class="row-fluid">
+
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Número de Control<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.NumControl, new { id = "NumControl", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.NumControl)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Ingrese el Número de Control</span>
+                                </div>
+                            </div>
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
@@ -103,28 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Tipo de Persona<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.DropDownListFor(model => model.TablaTipoPersonaCmb, ViewData["cmbTipoPersona"] as SelectList, new { id = "ListTipoPersona", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.TablaTipoPersonaCmb)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Seleccione el grado de estudio </span>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Número de Control<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.TextBoxFor(model => model.NumControl, new { id = "NumControl", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.NumControl)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Ingrese el Número de Control</span>
-                                </div>
-                            </div>
+                          
 
 
 
