@@ -50,16 +50,7 @@
                                     </div>
                                     <span class="help-block">Ingrese la matrícula</span>
                                 </div>
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Clave de Usuario<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.TextBoxFor(model => model.clvUser, new { id = "clvUser", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.clvUser)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Clave de Usuario</span>
-                                </div>
+                               
                             </div>
                             <div class="row-fluid">
                                 <div class="span6">
@@ -154,6 +145,16 @@
 
                            
                             <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Clave de Usuario<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.clvUser, new { id = "clvUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.clvUser)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Clave de Usuario</span>
+                                </div>
 
                                 <div class="span6">
                                     <div class="control-group">
