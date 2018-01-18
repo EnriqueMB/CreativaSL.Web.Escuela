@@ -26,8 +26,8 @@ namespace CreativaSL.Web.Escuela.Models
                     while (dr.Read())
                     {
                         datos.id_persona = dr.GetString(dr.GetOrdinal("IDPersona"));
-                        datos.clvUser = dr.GetString(dr.GetOrdinal("usuario"));
-                        datos.passUser = dr.GetString(dr.GetOrdinal("contraseña"));
+                        datos.clvUser = dr.GetString(dr.GetOrdinal("ClaveUser"));
+                        datos.passUser = dr.GetString(dr.GetOrdinal("Contraseña"));
                     }
                 }
                 else if (datos.opcion == 2 || datos.opcion == 3)
