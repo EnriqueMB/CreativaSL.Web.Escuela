@@ -192,6 +192,9 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+       
+
         [HttpGet]
         [Authorize(Roles = "4")]
         public ActionResult Delete(string id)

@@ -2777,6 +2777,11 @@
     <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\LoadMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnos\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnos\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnos\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnosBaja\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnosGraduados\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2964,6 +2969,9 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AsignaturaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatAlumnosBajaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatAlumnosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatAlumnosGraduadosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatAulaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCatedraticoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCicloEscolarController.cs" />
@@ -3009,6 +3017,7 @@
     <Compile Include="Models\UsuarioModels.cs" />
     <Compile Include="Models\_Asignatura_Datos.cs" />
     <Compile Include="Models\_CatAdministrativo_Datos.cs" />
+    <Compile Include="Models\_CatAlumno_Datos.cs" />
     <Compile Include="Models\_CatAulas_Datos.cs" />
     <Compile Include="Models\_CatCatedratico_Datos.cs" />
     <Compile Include="Models\_CatCicloEscolar_Datos.cs" />
