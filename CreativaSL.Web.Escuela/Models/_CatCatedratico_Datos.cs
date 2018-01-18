@@ -20,8 +20,6 @@ namespace CreativaSL.Web.Escuela.Models
                     datos.telefono,datos.direccion,datos.id_tipoPersona,datos.id_gradoEstudio,datos.clave,datos.curriculum,
                     datos.clvUser,datos.passUser,datos.user
                 };
-                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatCatedraticos", parametros);
-                datos.id_persona = aux.ToString();
                 if (!string.IsNullOrEmpty(datos.id_persona))
                 {
                     SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_abc_CatCatedraticos", parametros);
