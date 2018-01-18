@@ -128,7 +128,7 @@ namespace CreativaSL.Web.Escuela.Models
       
        //CUENTA USER
         private string _clvUser;
-        [Required(ErrorMessage = "La Clave es obligatoria")]
+        
         [Display(Name = "clave")]
         [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
         [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\s]*$", ErrorMessage = "Solo Letras y Números")]
@@ -139,7 +139,7 @@ namespace CreativaSL.Web.Escuela.Models
         }
         private bool  _validado;
         private string _passUser;
-        [Required(ErrorMessage = "La contraseña es obligatoria.")]
+        
         [Display(Name = "contraseña")]
         [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
         public string passUser

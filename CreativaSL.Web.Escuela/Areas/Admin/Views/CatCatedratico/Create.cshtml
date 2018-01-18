@@ -39,6 +39,29 @@
                         <div class="portlet-body form">
                             <h3 class="form-section">Información de la Catedrático</h3>
                             <div class="row-fluid">
+
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Matrícula<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.clave, new { id = "clave", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.clave)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Ingrese la matrícula</span>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Clave de Usuario<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.clvUser, new { id = "clvUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.clvUser)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Clave de Usuario</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
                                         <label class="control-label">Nombre Catedrático<span class="required"> *</span></label>
@@ -129,29 +152,7 @@
                               
 
 
-                            <div class="row-fluid">
-                                
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Matrícula<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.TextBoxFor(model => model.clave, new { id = "clave", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.clave)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Ingrese la matrícula</span>
-                                </div>
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Clave de Usuario<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.TextBoxFor(model => model.clvUser, new { id = "clvUser", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.clvUser)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Clave de Usuario</span>
-                                </div>
-                            </div>
+                           
                             <div class="row-fluid">
 
                                 <div class="span6">
@@ -172,7 +173,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Currículum<span class="required"> *</span></label>
                                         <div class="controls">
-                                            @Html.TextAreaFor(model => model.curriculum, new { id = "curriculum", @class = "span12 m-wrap",style="height:300px; " })
+                                            @Html.TextAreaFor(model => model.curriculum, new { id = "curriculum", @class = "span12 m-wrap",style="height:300px; min-width:900px;width:1050px; max-width:1100px " })
                                             @Html.ValidationMessageFor(model => model.curriculum)
                                         </div>
                                     </div>
