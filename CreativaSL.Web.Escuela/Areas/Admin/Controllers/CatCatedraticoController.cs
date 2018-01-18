@@ -87,13 +87,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Catedratico.user = User.Identity.Name;
                 Catedratico.opcion = 1;
                 Catedratico = CatedraticoDatos.AbcCatCatedratico(Catedratico);
-                if (Catedratico.Completado == true)
-                {
-                    TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se guardaron correctamente.";
-                    return RedirectToAction("Index");
-                }
-                else
+                if (string.IsNullOrEmpty(Catedratico.id_persona))
                 {
                     Catedratico.TablaGradoEstudioCmb = CatedraticoDatos.obtenerComboCatGradoEstudio(Catedratico);
                     var list = new SelectList(Catedratico.TablaGradoEstudioCmb, "IDGradoEstudio", "Descripcion");
@@ -102,8 +96,26 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     var listTipoPersona = new SelectList(Catedratico.TablaTipoPersonaCmb, "id_tipoPersona", "descripcion");
                     ViewData["cmbTipoPersona"] = listTipoPersona;
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Ocurrio un error al intentar guardar.";
+                    TempData["message"] = "El usuario ingresado ya existe.";
                     return View(Catedratico);
+                }
+                else
+                {
+                    Comun.EnviarCorreo(
+                    ConfigurationManager.AppSettings.Get("CorreoTxt")
+                   , ConfigurationManager.AppSettings.Get("PasswordTxt")
+                   , Catedratico.correo
+                   , "Registro Profesor"
+                   , Comun.GenerarHtmlRegistoUsuario(Catedratico.clvUser, Catedratico.passUser)
+                   , false
+                   , ""
+                   , Convert.ToBoolean(ConfigurationManager.AppSettings.Get("HtmlTxt"))
+                   , ConfigurationManager.AppSettings.Get("HostTxt")
+                   , Convert.ToInt32(ConfigurationManager.AppSettings.Get("PortTxt"))
+                   , Convert.ToBoolean(ConfigurationManager.AppSettings.Get("EnableSslTxt")));
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Los datos se guardaron correctamente.";
+                    return RedirectToAction("Index");
                 }
             }
             catch
