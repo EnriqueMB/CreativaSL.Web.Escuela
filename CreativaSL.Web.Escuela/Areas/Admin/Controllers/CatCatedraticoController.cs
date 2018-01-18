@@ -97,7 +97,8 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbTipoPersona"] = listTipoPersona;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
-                    return View(Catedratico);
+                    return RedirectToAction("Create", "CatCatedratico");
+
                 }
                 else
                 {
