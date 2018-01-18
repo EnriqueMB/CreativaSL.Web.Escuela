@@ -28,12 +28,21 @@ namespace CreativaSL.Web.Escuela.Models
                         datos.id_persona = dr.GetString(dr.GetOrdinal("IDPersona"));
                         datos.clvUser = dr.GetString(dr.GetOrdinal("ClaveUser"));
                         datos.passUser = dr.GetString(dr.GetOrdinal("Contraseña"));
+                        datos.Completado = true;
                     }
                 }
                 else if (datos.opcion == 2 || datos.opcion == 3)
                 {
                     object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatCatedraticos", parametros);
                     datos.id_persona = aux.ToString();
+                    if (!string.IsNullOrEmpty(datos.id_persona))
+                    {
+                        datos.Completado = true;
+                    }
+                    else
+                    {
+                        datos.Completado = false;
+                    }
                 }
                 return datos;
             }

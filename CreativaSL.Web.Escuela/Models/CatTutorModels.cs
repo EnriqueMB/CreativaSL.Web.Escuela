@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -43,6 +44,16 @@ namespace CreativaSL.Web.Escuela.Models
             set { _Token = value; }
         }
 
+        private string _clave;
+        [Required(ErrorMessage = "La Clave es obligatoria")]
+        [Display(Name = "Clave")]
+        [StringLength(20, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
+        public string clave
+        {
+            get { return _clave; }
+            set { _clave = value; }
+        }
         private string _Nombre;
         [Required(ErrorMessage = "El nombre es obligatorio")]
         [Display(Name = "Nombre")]
@@ -108,6 +119,40 @@ namespace CreativaSL.Web.Escuela.Models
             set { _IDTipoPersona = value; }
         }
 
+        //CUENTA USER
+        private string _clvUser;
+
+        [Display(Name = "clave")]
+        [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\s]*$", ErrorMessage = "Solo Letras y Números")]
+        public string clvUser
+        {
+            get { return _clvUser; }
+            set { _clvUser = value; }
+        }
+        private bool _validado;
+        private string _passUser;
+
+        [Display(Name = "contraseña")]
+        [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
+        public string passUser
+        {
+            get { return _passUser; }
+            set { _passUser = value; }
+        }
+
+        public bool validado
+        {
+            get { return _validado; }
+            set { _validado = value; }
+        }
+        private DataTable _TablaDatos;
+
+        public DataTable TablaDatos
+        {
+            get { return _TablaDatos; }
+            set { _TablaDatos = value; }
+        }
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }
