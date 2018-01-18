@@ -82,7 +82,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno.correo = collection["correo"];
                 Alumno.direccion = collection["direccion"];
                 Alumno.telefono = collection["telefono"];
-                Alumno.id_tipoPersona = Convert.ToInt32(collection["TablaTipoPersonaCmb"]);
+                Alumno.id_tipoPersona = 2;
 
                 Alumno.Observaciones = collection["observaciones"];
                 Alumno.NumControl = collection["NumControl"];
@@ -156,7 +156,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno.correo = collection["correo"];
                 Alumno.direccion = collection["direccion"];
                 Alumno.telefono = collection["telefono"];
-                Alumno.id_tipoPersona = Convert.ToInt32(collection["TablaTipoPersonaCmb"]);
+                Alumno.id_tipoPersona =2;
 
                 Alumno.Observaciones = collection["observaciones"];
                 Alumno.NumControl = collection["NumControl"];
