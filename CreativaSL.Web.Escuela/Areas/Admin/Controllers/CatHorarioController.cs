@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/CatHorario
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
             try
@@ -37,7 +37,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatHorario/Create
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create()
         {
             try
@@ -95,7 +95,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatHorario/Edit/5
         [HttpGet]
-        [Authorize(Roles ="4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(string id)
         {
             try
@@ -118,7 +118,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatHorario/Edit/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(string id, FormCollection collection)
         {
             try
@@ -158,7 +158,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatHorario/Delete/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(string id)
         {
             return View();
@@ -166,7 +166,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatHorario/Delete/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(string id, FormCollection collection)
         {
             try

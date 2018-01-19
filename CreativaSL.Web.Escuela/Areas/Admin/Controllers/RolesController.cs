@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         // GET: Admin/Roles
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
             try

@@ -13,7 +13,7 @@ namespace CreativaSL.Web.Escuela.Models
             {                
                 object[] parametros = { datos.user, datos.password };
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "Login_sp", parametros);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "V2_Login_sp", parametros);
                 while (dr.Read())
                 {
                     datos.opcion = Convert.ToInt32(dr[0].ToString());

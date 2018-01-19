@@ -100,7 +100,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_get_tipoUsuarioByUserName", datos.cuenta);
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_get_TipoUsuarioByUserName", datos.cuenta);
                 return aux.ToString();
             }
             catch (Exception ex)

@@ -113,7 +113,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_get_tipoUsuarioByUserName", usuario.cuenta);
+                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_V2_get_TipoUsuarioByUserName", usuario.cuenta);
                 return aux.ToString();
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_get_CheckUserName", usuario.cuenta);
+                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_get_V2_CheckUserName", usuario.cuenta);
                 return aux.ToString().Equals("1") ? true : false;
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_get_CheckEmail", usuario.email);
+                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_V2_get_CheckEmail", usuario.email);
                 return aux.ToString().Equals("1") ? true : false;
             }
             catch (Exception ex)
@@ -153,7 +153,7 @@ namespace CreativaSL.Web.Escuela.Models
             try
             {
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(usuario.conexion, "spCSLDB_get_PasswordReset", usuario.email2);
+                dr = SqlHelper.ExecuteReader(usuario.conexion, "spCSLDB_V2_get_PasswordReset", usuario.email2);
                 while (dr.Read())
                 {
                     usuario.activo = dr["activo"].ToString().Equals("1") ? true : false;

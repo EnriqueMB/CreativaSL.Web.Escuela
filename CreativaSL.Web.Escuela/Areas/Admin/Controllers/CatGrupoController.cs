@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/CatGrupo
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
             try
@@ -37,7 +37,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatGrupo/Create
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create()
         {
             try
@@ -73,7 +73,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
         // POST: Admin/CatGrupo/ComboModalidad
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult ComboModalidad(int id)
         {
             try
@@ -97,7 +97,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatGrupo/ComboEspecialidad
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult ComboEspecialidad(string IDMod)
         {
             try
@@ -121,7 +121,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatGrupo/ComboCruso
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult ComboCurso(string IDEsp)
         {
             try
@@ -144,7 +144,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
         // POST: Admin/CatGrupo/Create
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -201,7 +201,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatGrupo/Edit/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(string id)
         {
             try
@@ -238,7 +238,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatGrupo/Edit/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(string id, FormCollection collection)
         {
             try
@@ -295,7 +295,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatGrupo/Delete/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -303,7 +303,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatGrupo/Delete/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(string id, FormCollection collection)
         {
             try

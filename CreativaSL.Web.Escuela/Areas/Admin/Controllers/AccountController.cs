@@ -32,11 +32,11 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     usuario.cuenta = User.Identity.Name;
                     UsuarioDatos usuario_datos = new UsuarioDatos();
                     string id_tipoUsuario = usuario_datos.ObtenerTipoUsuarioByUserName(usuario);
-                    if (id_tipoUsuario == "4")
+                    if (id_tipoUsuario == "3")
                     {
                         return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
                     }
-                    else if (id_tipoUsuario == "3")
+                    else if (id_tipoUsuario == "1")
                     {
                         return RedirectToAction("Index", "HomeProfesor", new { Area = "Profesor" });
                     }
@@ -71,11 +71,11 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 usuario.conexion = Conexion;
                 usuario.cuenta = model.id_administrativo;
                 string id_tipoUsuario = usuario_datos.ObtenerTipoUsuarioByUserName(usuario);
-                if (id_tipoUsuario == "4")
+                if (id_tipoUsuario == "3")
                 {
                     return RedirectToAction("Index", "HomeAdmin", new { Area = "Admin" });
                 }
-                else if (id_tipoUsuario == "3")
+                else if (id_tipoUsuario == "1")
                 {
                     return RedirectToAction("Index", "HomeProfesor", new { Area = "Profesor" });
                 }
@@ -99,6 +99,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             else if (model.opcion == 3)
             {
                 ModelState.AddModelError("", "Error de Contraseña");
+                Session.Abandon();
+                Session.Clear();
+                Session.RemoveAll();
+                return View(model);
+            }
+            else if (model.opcion == 4)
+            {
+                ModelState.AddModelError("", "El usuario tiene que ser de tipo. Administrador ó Profesor");
                 Session.Abandon();
                 Session.Clear();
                 Session.RemoveAll();

@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/CatModalidad
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
             try
@@ -37,7 +37,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatModalidad/Create
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create()
         {
             try
@@ -62,7 +62,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatModalidad/Create
         [HttpPost]
-        [Authorize(Roles ="4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -102,7 +102,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatModalidad/Edit/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(string id)
         {
             try
@@ -128,7 +128,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/CatModalidad/Edit/5
         [HttpPost]
-        [Authorize( Roles = "4")]
+        [Authorize( Roles = "3")]
         public ActionResult Edit(string id, FormCollection collection)
         {
             try

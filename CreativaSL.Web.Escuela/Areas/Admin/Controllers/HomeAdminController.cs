@@ -13,7 +13,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/HomeAdmin
         [HttpGet]
-        [Authorize(Roles = "4")]
         public ActionResult Index()
         {
             return View();
@@ -21,7 +20,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/CatAula/Create
         [HttpGet]
-        [Authorize(Roles = "4")]
         public ActionResult LoadMenu()
         {
             try

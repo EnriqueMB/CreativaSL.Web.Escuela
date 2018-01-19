@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/PlanEstudio 
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
             try
@@ -38,7 +38,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         
         // GET: Admin/PlanEstudio/Create
         [HttpGet]
-        [Authorize(Roles ="4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create()
         {
             try
@@ -58,7 +58,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/PlanEstudio/Create
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -95,7 +95,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/PlanEstudio/Edit/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(int id)
         {
             try
@@ -118,7 +118,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/PlanEstudio/Edit/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -154,7 +154,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // GET: Admin/PlanEstudio/Delete/5
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -162,7 +162,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/PlanEstudio/Delete/5
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

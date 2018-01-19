@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/CatAlumnos
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
 
@@ -37,13 +37,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         }
         [HttpGet]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult DarAlta(string id, int id2)
         {
             return View();
         }
         [HttpPost]
-        [Authorize(Roles = "4")]
+        //[Authorize(Roles = "3")]
         public ActionResult DarAlta(string id, int id2, FormCollection collection)
         {
             try
