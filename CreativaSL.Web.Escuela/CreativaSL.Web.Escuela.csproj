@@ -2785,6 +2785,9 @@
     <Content Include="Areas\Admin\Views\CatTutor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatTutor\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatTutor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAdministrativo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAdministrativo\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAdministrativo\Edit.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2972,6 +2975,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AsignaturaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatAdministrativoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatAlumnosBajaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatAlumnosController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatAlumnosGraduadosController.cs" />

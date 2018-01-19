@@ -114,6 +114,15 @@ namespace CreativaSL.Web.Escuela.Models
             set { _fecBloqueo = value; }
         }
 
+        private string _Observaciones;
+
+        public string Observaciones
+        {
+            get { return _Observaciones; }
+            set { _Observaciones = value; }
+        }
+
+
         private DateTime _fecCaducidad;
 
         public DateTime fecCaducidad
