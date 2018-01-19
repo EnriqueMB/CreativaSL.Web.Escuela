@@ -16,17 +16,32 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion, datos.IDPersona,datos.NumControl,datos.Observaciones,datos.nombre,datos.apPaterno,datos.apMaterno,datos.correo,datos.telefono,datos.direccion,datos.id_tipoPersona,datos.user
+                    datos.opcion, datos.IDPersona,datos.NumControl,datos.Observaciones,datos.nombre,datos.apPaterno,datos.apMaterno,datos.correo,datos.telefono,datos.direccion,datos.id_tipoPersona,datos.clvUser,datos.passUser,datos.user
                 };
-                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatAlumnos", parametros);
-                datos.IDPersona = aux.ToString();
-                if (!string.IsNullOrEmpty(datos.IDPersona))
+                
+                if (datos.opcion == 1)
                 {
-                    datos.Completado = true;
+                    SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_abc_CatAlumnos", parametros);
+                    while (dr.Read())
+                    {
+                        datos.IDPersona = dr.GetString(dr.GetOrdinal("IDPersona"));
+                        datos.clvUser = dr.GetString(dr.GetOrdinal("ClaveUser"));
+                        datos.passUser = dr.GetString(dr.GetOrdinal("Contraseña"));
+                        datos.Completado = true;
+                    }
                 }
-                else
+                else if (datos.opcion == 2 || datos.opcion == 3)
                 {
-                    datos.Completado = false;
+                    object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatAlumnos", parametros);
+                    datos.IDPersona = aux.ToString();
+                    if (!string.IsNullOrEmpty(datos.IDPersona))
+                    {
+                        datos.Completado = true;
+                    }
+                    else
+                    {
+                        datos.Completado = false;
+                    }
                 }
                 return datos;
             }

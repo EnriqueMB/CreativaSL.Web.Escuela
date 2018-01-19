@@ -110,9 +110,10 @@ namespace CreativaSL.Web.Escuela.Models
         [Required(ErrorMessage = "El Telefono es obligatorio")]
         [Display(Name = "Telefono")]
         [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
-        [RegularExpression(@"^[0-9\s\,\.\;\:\-\(\)\+]*$", ErrorMessage = "Solo numeros")]
+        [RegularExpression(@"^[0-9\s\-\(\)\+]*$", ErrorMessage = "Solo numeros")]
         public string telefono
         {
+           
             get { return _telefono; }
             set { _telefono = value; }
         }
@@ -127,7 +128,26 @@ namespace CreativaSL.Web.Escuela.Models
             set { _direccion = value; }
         }
 
-        
+        private string _clvUser;
+
+        [Display(Name = "clave")]
+        [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\s]*$", ErrorMessage = "Solo Letras y Números")]
+        public string clvUser
+        {
+            get { return _clvUser; }
+            set { _clvUser = value; }
+        }
+        private bool _validado;
+        private string _passUser;
+
+        [Display(Name = "contraseña")]
+        [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
+        public string passUser
+        {
+            get { return _passUser; }
+            set { _passUser = value; }
+        }
 
         private int _id_tipoPersona;
 
