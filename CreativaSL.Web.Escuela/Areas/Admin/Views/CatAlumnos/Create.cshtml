@@ -121,7 +121,30 @@
 
 
 
-                           
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Clave de Usuario<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.TextBoxFor(model => model.clvUser, new { id = "clvUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.clvUser)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Clave de Usuario</span>
+                                </div>
+
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Contraseña<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.PasswordFor(model => model.passUser, new { id = "passUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.passUser)
+                                        </div>
+                                    </div>
+                                    <span class="help-block">Ingrese la contraseña</span>
+                                </div>
+
+                            </div>
                           
                             <div class="row-fluid">
 
@@ -137,6 +160,7 @@
                                 </div>
 
                             </div>
+
 
                             <div class="form-actions">
                                 <input type="submit" value="Guardar" class="btn green">

@@ -89,15 +89,10 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Catedratico = CatedraticoDatos.AbcCatCatedratico(Catedratico);
                 if (string.IsNullOrEmpty(Catedratico.id_persona))
                 {
-                    Catedratico.TablaGradoEstudioCmb = CatedraticoDatos.obtenerComboCatGradoEstudio(Catedratico);
-                    var list = new SelectList(Catedratico.TablaGradoEstudioCmb, "IDGradoEstudio", "Descripcion");
-                    ViewData["cmbGradoEstudio"] = list;
-                    Catedratico.TablaTipoPersonaCmb = CatedraticoDatos.obtenerComboCatTipoPersona(Catedratico);
-                    var listTipoPersona = new SelectList(Catedratico.TablaTipoPersonaCmb, "id_tipoPersona", "descripcion");
-                    ViewData["cmbTipoPersona"] = listTipoPersona;
+                   
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
-                    return RedirectToAction("Create", "CatCatedratico");
+                    return RedirectToAction("Create");
 
                 }
                 else

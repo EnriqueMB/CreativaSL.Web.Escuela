@@ -115,7 +115,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception ex)
             {
 
                 TempData["typemessage"] = "2";

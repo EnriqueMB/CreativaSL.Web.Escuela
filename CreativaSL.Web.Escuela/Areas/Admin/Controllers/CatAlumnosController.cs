@@ -83,14 +83,30 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno.direccion = collection["direccion"];
                 Alumno.telefono = collection["telefono"];
                 Alumno.id_tipoPersona = 2;
-
+                Alumno.passUser = collection["passUser"];
+                Alumno.clvUser = collection["clvUser"];
                 Alumno.Observaciones = collection["observaciones"];
                 Alumno.NumControl = collection["NumControl"];
                 Alumno.user = User.Identity.Name;
                 Alumno.opcion = 1;
                 Alumno = AlumnoDatos.AbcCatAlumnos(Alumno);
-                if (Alumno.Completado == true)
+                if (!string.IsNullOrEmpty(Alumno.IDPersona))
                 {
+                    Comun.EnviarCorreo(
+                  ConfigurationManager.AppSettings.Get("CorreoTxt")
+                 , ConfigurationManager.AppSettings.Get("PasswordTxt")
+                 , Alumno.correo
+                 , "Registro Profesor"
+                 , Comun.GenerarHtmlRegistoTutorAlumno(Alumno.IDPersona, Alumno.clvUser, Alumno.passUser)
+                 , false
+                 , ""
+                 , Convert.ToBoolean(ConfigurationManager.AppSettings.Get("HtmlTxt"))
+                 , ConfigurationManager.AppSettings.Get("HostTxt")
+                 , Convert.ToInt32(ConfigurationManager.AppSettings.Get("PortTxt"))
+                 , Convert.ToBoolean(ConfigurationManager.AppSettings.Get("EnableSslTxt")));
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Los datos se guardaron correctamente.";
+                    return RedirectToAction("Index");
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Los datos se guardaron correctamente.";
                     return RedirectToAction("Index");
@@ -98,12 +114,9 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 else
                 {
 
-                    Alumno.TablaTipoPersonaCmb = AlumnoDatos.obtenerComboCatTipoPersona(Alumno);
-                    var listTipoPersona = new SelectList(Alumno.TablaTipoPersonaCmb, "id_tipoPersona", "descripcion");
-                    ViewData["cmbTipoPersona"] = listTipoPersona;
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Ocurrio un error al intentar guardar.";
-                    return View(Alumno);
+                    TempData["message"] = "El usuario ingresado ya existe.";
+                    return RedirectToAction("Create");
                 }
             }
             catch
