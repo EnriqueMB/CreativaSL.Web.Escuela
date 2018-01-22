@@ -69,15 +69,16 @@
                                                                             cadenaContAlumno = "idPermiso" + contAlumno.ToString();
                                                                             asistenciaContAlumno = "Permiso" + contAlumno.ToString();
                                                                         <tr>
-                                                                                <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista["PermissionID"])"></td>
-                                                                                <td>@Lista["DisplayName"].ToString()</td>
-                                                                         @if (Convert.ToBoolean(Lista["ver"].ToString()))
-                                                                                    {
-                                                                                        <td>@Item.NombreMenu</td>
-                                                                                    }
-                                                                            else
+                                                                                <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista.IDPermiso)"></td>
+                                                                                <td>@Lista.NombreMenu.ToString()
+                                                                            </td>
+                                                                         @if (Lista.ver)
+                                                                         {
+                                                                            <td><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked/></td>
+                                                                         }
+                                                                         else
 
-                                                                            {
+                                                                         {
                                                                                 <td><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
 
                                                                             }
