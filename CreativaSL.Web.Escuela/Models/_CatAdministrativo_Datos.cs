@@ -108,5 +108,30 @@ namespace CreativaSL.Web.Escuela.Models
                 return "";
             }
         }
+
+        public CatAdministrativoModels PermisosXUsuario(CatAdministrativoModels Datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_PermisosXID", Datos.id_administrativo);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            Datos.TablaPermisos = ds.Tables[0];
+                        }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

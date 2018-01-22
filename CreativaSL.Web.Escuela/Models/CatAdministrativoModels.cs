@@ -9,6 +9,13 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class CatAdministrativoModels
     {
+        private int _numeroMenu;
+
+        public int numeroMenu
+        {
+            get { return _numeroMenu; }
+            set { _numeroMenu = value; }
+        }
 
         private string _id_administrativo;
 
@@ -139,6 +146,13 @@ namespace CreativaSL.Web.Escuela.Models
             set { _tablaAdministracion = value; }
         }
 
+        private DataTable _TablaPermisos;
+
+        public DataTable TablaPermisos
+        {
+            get { return _TablaPermisos; }
+            set { _TablaPermisos = value; }
+        }
 
 
         #region Datos de control

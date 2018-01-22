@@ -2788,6 +2788,7 @@
     <Content Include="Areas\Admin\Views\CatAdministrativo\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatAdministrativo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatAdministrativo\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAdministrativo\Permisos.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3401,7 +3402,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Permisos\" />
     <Folder Include="Areas\Profesor\Controllers\" />
     <Folder Include="Areas\Profesor\Models\" />
     <Folder Include="Areas\Profesor\Views\Shared\" />

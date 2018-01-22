@@ -93,7 +93,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
                     return RedirectToAction("Create");
-
                 }
                 else
                 {

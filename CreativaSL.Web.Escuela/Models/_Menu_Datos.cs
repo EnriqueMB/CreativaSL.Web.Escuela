@@ -10,30 +10,6 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class Menu_Datos
     {
-        public MenuModels ObtenerMenu(MenuModels Datos)
-        {
-            try
-            {
-                DataSet ds = null;
-                ds = SqlHelper.ExecuteDataset(Datos.Conexion, "spCSLDB_V2_get_Menu");
-                if (ds != null)
-                {
-                    if (ds.Tables.Count > 0)
-                    {
-                        if (ds.Tables[0] != null)
-                        {
-                            Datos.TablaDatos = ds.Tables[0];
-                        }
-                    }
-                }
-                return Datos;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public MenuModels ObtenerMenu2(MenuModels Datos)
         {
             try

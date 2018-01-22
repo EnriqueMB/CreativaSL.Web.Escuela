@@ -194,5 +194,50 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        // GET: Admin/CatAdministrativo/Permisos
+        [HttpGet]
+        public ActionResult Permisos(string id)
+        {
+            try
+            {
+                CatAdministrativoModels Permisos = new CatAdministrativoModels();
+                CatAdministrativo_Datos PermisosD = new CatAdministrativo_Datos();
+                Permisos.conexion = Conexion;
+                Permisos.id_administrativo = id;
+                Permisos = PermisosD.PermisosXUsuario(Permisos);
+                if (Permisos.TablaPermisos != null)
+                {
+                    Permisos.numeroMenu = Permisos.TablaPermisos.Rows.Count;
+                }
+                else
+                {
+                    Permisos.numeroMenu = 0;
+                }
+                return View(Permisos);
+            }
+            catch (Exception)
+            {
+                CatAdministrativoModels Permisos = new CatAdministrativoModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return RedirectToAction("Index");
+            }
+        }
+
+        // POST: Admin/CatAdministrativo/Permisos
+        [HttpPost]
+        public ActionResult Permisos(string id, FormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
