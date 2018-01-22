@@ -68,13 +68,13 @@
                                                                             contAlumno = contAlumno + 1;
                                                                             cadenaContAlumno = "idPermiso" + contAlumno.ToString();
                                                                             asistenciaContAlumno = "Permiso" + contAlumno.ToString();
-                                                                            <tr>
+                                                                        <tr>
                                                                                 <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista["PermissionID"])"></td>
                                                                                 <td>@Lista["DisplayName"].ToString()</td>
                                                                          @if (Convert.ToBoolean(Lista["ver"].ToString()))
-                                                                            {
-                                                                                <td><input class="form-control validAsistencia disa" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista["ver"])" checked /></td>
-                                                                            }
+                                                                                    {
+                                                                                        <td>@Item.NombreMenu</td>
+                                                                                    }
                                                                             else
 
                                                                             {
