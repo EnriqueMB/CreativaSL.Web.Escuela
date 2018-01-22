@@ -81,6 +81,40 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _ListaMenuDetalle; }
             set { _ListaMenuDetalle = value; }
         }
+        public string IDPersona { get; set; }
+        public string User { get; set; }
+
+        private List<MenuModels> _ListaPermisos;
+
+        public List<MenuModels> ListaPermisos
+        {
+            get { return _ListaPermisos; }
+            set { _ListaPermisos = value; }
+        }
+
+        private List<MenuModels> _ListaPermisoDetalle;
+
+        public List<MenuModels> ListaPermisoDetalle
+        {
+            get { return _ListaPermisoDetalle; }
+            set { _ListaPermisoDetalle = value; }
+        }
+
+        private string _IDPermiso;
+
+        public string IDPermiso
+        {
+            get { return _IDPermiso; }
+            set { _IDPermiso = value; }
+        }
+
+        private bool _ver;
+
+        public bool ver
+        {
+            get { return _ver; }
+            set { _ver = value; }
+        }
 
     }
 }

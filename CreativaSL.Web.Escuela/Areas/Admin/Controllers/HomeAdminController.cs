@@ -27,6 +27,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 MenuModels Menu = new MenuModels();
                 Menu_Datos MenuD = new Menu_Datos();
                 Menu.Conexion = Conexion;
+                Menu.User = User.Identity.Name;
                 Menu = MenuD.ObtenerMenu2(Menu);
                 return View(Menu);
             }
