@@ -70,19 +70,38 @@
                                                                             asistenciaContAlumno = "Permiso" + contAlumno.ToString();
                                                                         <tr>
                                                                                 <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista.IDPermiso)"></td>
-                                                                                <td>@Lista.NombreMenu.ToString()
-                                                                            </td>
+                                                                                <td style="background:#ddd">@Lista.NombreMenu.ToString()</td>
+                                                                            
                                                                          @if (Lista.ver)
                                                                          {
-                                                                            <td><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked/></td>
+                                                                            <td style="background:#ddd"><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked/></td>
                                                                          }
                                                                          else
 
                                                                          {
-                                                                                <td><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
+                                                                                <td style="background:#ddd"><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
 
                                                                             }
                                                                         </tr>
+
+                                                                        <tr style="background:#f9f9f9;">
+                                                                            <td style="background:f9f9f9;">- Alumnos</td>
+                     
+
+                                                                            <td style="background:f9f9f9;">
+                                                                                <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr style="background:f9f9f9;">
+                                                                            <td style="background:f9f9f9;">- Alumnos</td>
+
+
+                                                                            <td style="background:f9f9f9;">
+                                                                                <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked />
+                                                                            </td>
+                                                                        </tr>
+
+
                                                                         }
                                                                     }
                                                                 </tbody>
