@@ -154,13 +154,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 administrativo_datos.AbcCatAdministrativo(administrativo);
 
                 TempData["typemessage"] = "1";
-                TempData["message"] = "Los datos se edito correctamente";
+                TempData["message"] = "Los datos se editó correctamente";
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se edito correctamente";
+                TempData["message"] = "Los datos no se editó correctamente";
                 return RedirectToAction("Index");
             }
         }
