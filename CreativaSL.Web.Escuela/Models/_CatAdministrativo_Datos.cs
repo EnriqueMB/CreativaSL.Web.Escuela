@@ -199,5 +199,20 @@ namespace CreativaSL.Web.Escuela.Models
             }
         }
 
+        public int GuardarPermisos(CatAdministrativoModels datos)
+        {
+            try
+            {
+                DataSet dt = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_abc_ActualizarPermiso",
+                new SqlParameter("@IDPersona", datos.id_administrativo),
+                new SqlParameter("@Permisos", datos.TablaPermisos),
+                new SqlParameter("@usuario", datos.user));
+                return Convert.ToInt32(dt.Tables[0].Rows[0][0].ToString());
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
+        }
     }
 }

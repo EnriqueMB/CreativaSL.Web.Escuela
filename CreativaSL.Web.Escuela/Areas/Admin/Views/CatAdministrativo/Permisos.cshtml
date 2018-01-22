@@ -60,14 +60,16 @@
                                                                 </thead>
                                                                 <tbody>
                                                                     @{
-                                                                        int contAlumno = 0;
-                                                                        string cadenaContAlumno = "";
-                                                                        string asistenciaContAlumno = "";
+                                                                        int contAlumno = 0, ContP = 0;
+                                                                        string cadenaContAlumno = "", CadenaContP = "";
+                                                                        string asistenciaContAlumno = "", PermisosContP = "";
+
                                                                         foreach (var Lista in Model.ListaPermisos)
                                                                         {
                                                                             contAlumno = contAlumno + 1;
                                                                             cadenaContAlumno = "idPermiso" + contAlumno.ToString();
                                                                             asistenciaContAlumno = "Permiso" + contAlumno.ToString();
+
                                                                         <tr>
                                                                                 <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista.IDPermiso)"></td>
                                                                                 <td style="background:#ddd">@Lista.NombreMenu.ToString()</td>
@@ -81,28 +83,35 @@
                                                                          {
                                                                                 <td style="background:#ddd"><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
 
-                                                                            }
+                                                                         }
                                                                         </tr>
-
-                                                                        <tr style="background:#f9f9f9;">
-                                                                            <td style="background:f9f9f9;">- Alumnos</td>
+                                                                            foreach (var Item in Lista.ListaPermisosDetalle)
+                                                                            {
+                                                                                ContP++;
+                                                                                CadenaContP = "ID" + ContP;
+                                                                                PermisosContP = "PermisoD" + ContP;
+                                                                            <tr style="background:#f9f9f9;">
+                                                                                <td style="display:none"><input type="hidden" name="@Html.Raw(CadenaContP)" value="@Html.Raw(Item.IDPermiso)"></td>
+                                                                                <td style="background:f9f9f9;">@Item.NombreMenu</td>
                      
-
-                                                                            <td style="background:f9f9f9;">
-                                                                                <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked />
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="background:f9f9f9;">
-                                                                            <td style="background:f9f9f9;">- Alumnos</td>
-
-
-                                                                            <td style="background:f9f9f9;">
-                                                                                <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked />
-                                                                            </td>
-                                                                        </tr>
-
-
+                                                                                @if (Item.ver)
+                                                                                {
+                                                                                <td style="background:f9f9f9;">
+                                                                                    <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" checked />
+                                                                                </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td style="background:f9f9f9;">
+                                                                                        <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" />
+                                                                                    </td>
+                                                                                }
+                                                                            </tr>
+                                                                            }
                                                                         }
+                                                                         int total = ContP + contAlumno;
+                                                                            
+                                                                        <input id="Total" name="Total" type="text" value="@total" style="display:none"/>
                                                                     }
                                                                 </tbody>
                                                             </table>
@@ -116,7 +125,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                                                }
+                                   }
                             </div>
                         </div>
                     </div>
