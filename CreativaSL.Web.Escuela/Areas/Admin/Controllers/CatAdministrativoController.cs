@@ -205,10 +205,10 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatAdministrativo_Datos PermisosD = new CatAdministrativo_Datos();
                 Permisos.conexion = Conexion;
                 Permisos.id_administrativo = id;
-                Permisos = PermisosD.PermisosXUsuario(Permisos);
-                if (Permisos.TablaPermisos != null)
+                Permisos = PermisosD.ObtenerPermisoUsuario(Permisos);
+                if (Permisos.ListaPermisos != null)
                 {
-                    Permisos.numeroMenu = Permisos.TablaPermisos.Rows.Count;
+                    Permisos.numeroMenu = Permisos.ListaPermisos.Count;
                 }
                 else
                 {
