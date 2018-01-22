@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.ApplicationBlocks.Data;
 using System.Security.Cryptography;
+using System.Xml;
 
 namespace CreativaSL.Web.Escuela.Models
 {
@@ -123,6 +124,71 @@ namespace CreativaSL.Web.Escuela.Models
                         {
                             Datos.TablaPermisos = ds.Tables[0];
                         }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public CatAdministrativoModels ObtenerPermisoUsuario(CatAdministrativoModels Datos)
+        {
+            try
+            {
+                DataSet Ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_PermisosXID", Datos.id_administrativo);
+                if (Ds != null)
+                {
+                    if (Ds.Tables.Count == 1)
+                    {
+                        List<CatAdministrativoModels> ListaPrinc = new List<CatAdministrativoModels>();
+                        CatAdministrativoModels Item;
+                        DataTableReader DTR = Ds.Tables[0].CreateDataReader();
+                        DataTable Tbl1 = Ds.Tables[0];
+                        while (DTR.Read())
+                        {
+                            Item = new CatAdministrativoModels();
+                            Item.ListaPermisosDetalle = new List<CatAdministrativoModels>();
+                            Item.IDPermiso = !DTR.IsDBNull(DTR.GetOrdinal("IDPermiso")) ? DTR.GetString(DTR.GetOrdinal("IDPermiso")) : string.Empty;
+                            Item.IDMenu = !DTR.IsDBNull(DTR.GetOrdinal("MenuID")) ? DTR.GetInt32(DTR.GetOrdinal("MenuID")) : 0;
+                            Item.NombreMenu = !DTR.IsDBNull(DTR.GetOrdinal("NombreMenu")) ? DTR.GetString(DTR.GetOrdinal("NombreMenu")) : string.Empty;
+                            Item.ver = DTR.GetBoolean(DTR.GetOrdinal("ver"));
+                            //string Aux = DTR.GetString(2);
+                            string Aux = !DTR.IsDBNull(DTR.GetOrdinal("TablaPermiso")) ? DTR.GetString(DTR.GetOrdinal("TablaPermiso")) : string.Empty;
+                            Aux = string.Format("<Main>{0}</Main>", Aux);
+                            XmlDocument xm = new XmlDocument();
+                            xm.LoadXml(Aux);
+                            XmlNodeList Registros = xm.GetElementsByTagName("Main");
+                            XmlNodeList Lista = ((XmlElement)Registros[0]).GetElementsByTagName("C");
+                            List<CatAdministrativoModels> ListaAux = new List<CatAdministrativoModels>();
+                            CatAdministrativoModels ItemAux;
+                            foreach (XmlElement Nodo in Lista)
+                            {
+                                ItemAux = new CatAdministrativoModels();
+                                XmlNodeList MenuID = Nodo.GetElementsByTagName("MenuID");
+                                XmlNodeList NombreMenu = Nodo.GetElementsByTagName("NombreMenu");
+                                XmlNodeList ver = Nodo.GetElementsByTagName("ver");
+                                XmlNodeList IDPermiso = Nodo.GetElementsByTagName("IDPermiso");
+                                ItemAux.IDMenu = Convert.ToInt32(MenuID[0].InnerText);
+                                ItemAux.NombreMenu = NombreMenu[0].InnerText;
+                                int Visto = 0;
+                                int.TryParse(ver[0].InnerText, out Visto);
+                                if (Visto == 1)
+                                {
+                                    ItemAux.ver = true;
+                                }
+                                else
+                                {
+                                    Item.ver = false;
+                                }
+                                ItemAux.IDPermiso = IDPermiso[0].InnerText;
+                                Item.ListaPermisosDetalle.Add(ItemAux);
+                            }
+                            ListaPrinc.Add(Item);
+                        }
+                        Datos.ListaPermisos = ListaPrinc;
                     }
                 }
                 return Datos;

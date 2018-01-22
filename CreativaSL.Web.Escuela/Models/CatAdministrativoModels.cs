@@ -155,6 +155,55 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
 
+        private List<CatAdministrativoModels> _ListaPermisos;
+
+        public List<CatAdministrativoModels> ListaPermisos
+        {
+            get { return _ListaPermisos; }
+            set { _ListaPermisos = value; }
+        }
+
+        private List<CatAdministrativoModels> _ListaPermisosDetalle;
+
+        public List<CatAdministrativoModels> ListaPermisosDetalle
+        {
+            get { return _ListaPermisosDetalle; }
+            set { _ListaPermisosDetalle = value; }
+        }
+
+        private string _IDPermiso;
+
+        public string IDPermiso
+        {
+            get { return _IDPermiso; }
+            set { _IDPermiso = value; }
+        }
+
+        private int _IDMenu;
+
+        public int IDMenu
+        {
+            get { return _IDMenu; }
+            set { _IDMenu = value; }
+        }
+
+        private bool _Ver;
+
+        public bool ver
+        {
+            get { return _Ver; }
+            set { _Ver = value; }
+        }
+
+        private string _NombreMenu;
+
+        public string NombreMenu
+        {
+            get { return _NombreMenu; }
+            set { _NombreMenu = value; }
+        }
+
+
         #region Datos de control
         public bool RememberMe { get; set; }
         public bool activo { get; set; }
