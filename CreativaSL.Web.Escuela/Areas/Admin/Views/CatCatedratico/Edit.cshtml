@@ -139,7 +139,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Currículum<span class="required"> *</span></label>
                                         <div class="controls">
-                                            @Html.TextAreaFor(model => model.curriculum, new { id = "curriculum", @class = "span12 m-wrap", style = "height:300px; " })
+                                            @Html.TextAreaFor(model => model.curriculum, new { id = "curriculum", @class = "span12 m-wrap",  })
                                             @Html.ValidationMessageFor(model => model.curriculum)
                                         </div>
                                     </div>
@@ -171,7 +171,10 @@
         sceditor.create(textarea, {
             format: 'bbcode',
             icons: 'monocons',
-            style: '../minified/themes/content/default.min.css'
+            style: '../minified/themes/content/default.min.css',
+            resizeEnabled: false,
+            width: "100%",
+            height: "100%"
         });
 
         jQuery(document).ready(function () {
