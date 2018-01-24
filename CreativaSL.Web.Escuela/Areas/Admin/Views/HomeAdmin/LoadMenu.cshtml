@@ -5,30 +5,25 @@
 }
 @foreach (var item in Model.ListaMenu)
 {
-    
-        if (item.ListaMenuDetalle.Count == 0)
-        {
+    if (item.ListaMenuDetalle.Count == 0)
+    {
         <li class="">
             <a href="@Url.Action("Index", item.UrlMenu)"><i class="@item.IconMenu"></i> <span class="title">@item.NombreMenu</span></a>
         </li>
-        }
-        else
-        {
+    }
+    else
+    {
         <li class="">
             <a><i class="@item.IconMenu"></i><span class="title">@item.NombreMenu</span><span class="arrow "></span></a>
             <ul class="sub-menu">
                 @foreach (var SubMenu in item.ListaMenuDetalle)
                 {
-                   
-                        <li class="">
-                            <a href="@Url.Action("Index", Html.Raw(Html.Encode(SubMenu.UrlMenu)).ToString())"><i class="@SubMenu.IconMenu"></i> <span class="title">@SubMenu.NombreMenu</span></a>
-                        </li>
-                   
+                    <li class="">
+                        <a href="@Url.Action("Index", Html.Raw(Html.Encode(SubMenu.UrlMenu)).ToString())"><i class="@SubMenu.IconMenu"></i> <span class="title">@SubMenu.NombreMenu</span></a>
+                    </li>
                 }
-             </ul>
+            </ul>
         </li>
-            }
-
-        
-    }
+   }
+}
 

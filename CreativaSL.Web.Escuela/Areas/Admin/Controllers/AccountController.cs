@@ -1,5 +1,6 @@
 ﻿using CreativaSL.Web.Escuela.Filters;
 using CreativaSL.Web.Escuela.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -64,8 +65,19 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             if (model.opcion == 1)
             {
                 FormsAuthentication.SignOut();
-                FormsAuthentication.SetAuthCookie(model.id_administrativo, model.RememberMe);
-
+                HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.id_administrativo, model.RememberMe);
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                List<string> listaPermiso = new List<string>();
+                foreach (var item in model.ListaPermisos)
+                {
+                    listaPermiso.Add(item.NombreUrl);
+                }
+                AdministrativoPermisoJson Json = new AdministrativoPermisoJson { NombreURl = listaPermiso};
+                string userDataString = JsonConvert.SerializeObject(Json);
+                FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, userDataString);
+                authCookie.Value = FormsAuthentication.Encrypt(newTicket);
+                Response.Cookies.Add(authCookie);
+               
                 UsuarioDatos usuario_datos = new UsuarioDatos();
                 UsuarioModels usuario = new UsuarioModels();
                 usuario.conexion = Conexion;

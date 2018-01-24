@@ -67,7 +67,7 @@ namespace CreativaSL.Web.Escuela.Models
                 return false;
             }
         }
-
+        
         public static string GenerarHtmlRegistoTutorAlumno(string id_cuenta, string usuario, string password)
         {
             string dominio = "http://www.creativasoftlineapps.com/ofelianarvaez";

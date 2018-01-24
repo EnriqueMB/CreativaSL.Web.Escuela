@@ -2999,6 +2999,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdministrativoPermisoJson.cs" />
     <Compile Include="Models\AlumnosXGruposModels.cs" />
     <Compile Include="Models\AsignaturaModels.cs" />
     <Compile Include="Models\CatAdministrativoModels.cs" />
@@ -3019,6 +3020,7 @@
     <Compile Include="Models\CatTutorModels.cs" />
     <Compile Include="Models\Comun.cs" />
     <Compile Include="Models\CatEspecialidadModels.cs" />
+    <Compile Include="Models\CustomIdentity.cs" />
     <Compile Include="Models\EstadoModels.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\MunicipioModels.cs" />

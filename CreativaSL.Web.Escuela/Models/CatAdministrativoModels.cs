@@ -203,6 +203,38 @@ namespace CreativaSL.Web.Escuela.Models
             set { _NombreMenu = value; }
         }
 
+        private string _NombreUrl;
+
+        public string NombreUrl
+        {
+            get { return _NombreUrl; }
+            set { _NombreUrl = value; }
+        }
+
+        private List<string> _ListaPermiso;
+
+        public List<string> ListaPermiso
+        {
+            get { return _ListaPermiso; }
+            set { _ListaPermiso = value; }
+        }
+
+
+        public AdministrativoPermisoJson GetAdminJson()
+        {
+            try
+            {
+                AdministrativoPermisoJson _customerJson = new AdministrativoPermisoJson
+                {
+                    NombreURl = _ListaPermiso
+                };
+                return _customerJson;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         #region Datos de control
         public bool RememberMe { get; set; }
