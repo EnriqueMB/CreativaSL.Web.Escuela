@@ -181,7 +181,7 @@ namespace CreativaSL.Web.Escuela.Models
                                 }
                                 else
                                 {
-                                    Item.ver = false;
+                                    ItemAux.ver = false;
                                 }
                                 ItemAux.IDPermiso = IDPermiso[0].InnerText;
                                 Item.ListaPermisosDetalle.Add(ItemAux);

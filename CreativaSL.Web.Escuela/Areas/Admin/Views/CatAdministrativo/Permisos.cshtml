@@ -62,10 +62,11 @@
                                                                     @{
                                                                         int contAlumno = 0, ContP = 0;
                                                                         string cadenaContAlumno = "", CadenaContP = "";
-                                                                        string asistenciaContAlumno = "", PermisosContP = "";
+                                                                        string asistenciaContAlumno = "", PermisosContP = "", Clase="";
 
                                                                         foreach (var Lista in Model.ListaPermisos)
                                                                         {
+                                                                            Clase = "clase" + contAlumno;
                                                                             contAlumno = contAlumno + 1;
                                                                             cadenaContAlumno = "idPermiso" + contAlumno.ToString();
                                                                             asistenciaContAlumno = "Permiso" + contAlumno.ToString();
@@ -76,18 +77,19 @@
                                                                             
                                                                          @if (Lista.ver)
                                                                          {
-                                                                            <td style="background:#ddd"><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked/></td>
+                                                                            <td style="background:#ddd"><input class="form-control validAsistencia maincheck " type="checkbox" id="@Html.Raw(asistenciaContAlumno)" data-cont="@contAlumno" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" checked/></td>
                                                                          }
                                                                          else
 
                                                                          {
-                                                                                <td style="background:#ddd"><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
+                                                                                <td style="background:#ddd"><input class="form-control validAsistencia maincheck " type="checkbox" id="@Html.Raw(asistenciaContAlumno)" data-cont="@contAlumno" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista.ver)" /></td>
 
                                                                          }
                                                                         </tr>
                                                                             foreach (var Item in Lista.ListaPermisosDetalle)
                                                                             {
                                                                                 ContP++;
+                                                                               
                                                                                 CadenaContP = "ID" + ContP;
                                                                                 PermisosContP = "PermisoD" + ContP;
                                                                             <tr style="background:#f9f9f9;">
@@ -97,13 +99,13 @@
                                                                                 @if (Item.ver)
                                                                                 {
                                                                                 <td style="background:f9f9f9;">
-                                                                                    <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" checked />
+                                                                                    <input class="form-control validAsistencia @Clase submaincheck" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" checked />
                                                                                 </td>
                                                                                 }
                                                                                 else
                                                                                 {
                                                                                     <td style="background:f9f9f9;">
-                                                                                        <input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" />
+                                                                                        <input class="form-control validAsistencia @Clase submaincheck" type="checkbox" id="@Html.Raw(PermisosContP)" name="@Html.Raw(PermisosContP)" value="@Html.Raw(Lista.ver)" />
                                                                                     </td>
                                                                                 }
                                                                             </tr>
@@ -142,7 +144,46 @@
                     return true;
                 });
             });
+            var contador = 0;
+            var cont = 0;
+            $(".maincheck").each(function () {
+                var c = $(this).attr('data-cont');
+                    cont = c - 1;
+                    
+                    if ($(this).is(':checked')) {
+                        $('.clase' + cont).removeAttr('disabled');
+                                
+                               
+                            }
+                    else {
+                        $('.clase' + cont).attr('disabled', 'disabled');
+                               
+                                $('.clase'+cont).prop("checked", false);
+                            }   
 
+                contador++;
+                $('#Permiso' + contador).change(function () {;
+                    var c = $(this).attr('data-cont');
+                    cont = c - 1;
+                    
+                    if ($(this).is(':checked')) {
+                        $('.clase' + cont).removeAttr('disabled');
+                                $('.clase'+cont).prop("checked", true);
+                               
+                            }
+                    else {
+                        $('.clase' + cont).attr('disabled', 'disabled');
+                               
+                                $('.clase'+cont).prop("checked", false);
+                            }   
+
+                  
+
+                });
+               
+                
+            });
+               
             $('#example').DataTable({
                 "bSort": false,
                 "bAutoWidth": false,
