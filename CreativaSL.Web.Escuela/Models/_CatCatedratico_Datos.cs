@@ -150,6 +150,5 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-
     }
 }

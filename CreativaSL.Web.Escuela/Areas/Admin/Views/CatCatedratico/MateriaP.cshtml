@@ -1,9 +1,8 @@
-﻿@model CreativaSL.Web.Escuela.Models.CatCatedraticoModels
+﻿@model CreativaSL.Web.Escuela.Models.CatMateriaXProfesorModels
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Materia Por Profesor";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-
 @section featured
 {
     @{
@@ -28,13 +27,15 @@
                     <div class="span12">
                         <div class="portlet box blue">
                             <div class="portlet-title">
-                                <div class="caption"><i class="icon-edit"></i>Catedrático</div>
+                                <div class="caption"><i class="icon-edit"></i>Lista de Materias</div>
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
                                         <div class="span12">
-                                            <a href="@Url.Action("Create","CatCatedratico")" class="btn btn-default green"><i class="icon-plus"></i> Nueva Catedráticos</a>
+                                            @{string id = Model.IDProfesor;}
+                                            <a href="@Url.Action("CreateMateria", "CatCatedratico", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Nueva Materia</a>
+                                            <a href="@Url.Action("Index", "CatCatedratico")" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -48,33 +49,21 @@
                                                         <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                                             <thead class="flip-content">
                                                                 <tr>
-                                                                    <th>Clave</th>
-                                                                    <th>Nombre</th>
-                                                                    
-                                                                    <th>Correo</th>
-                                                                    <th>Teléfono</th>
-                                                                    <th>Dirección</th>
-                                                                    <th>Tipo Persona</th>
-                                                                    <th>Grado de Estudio</th>
-                                                                    <th>Editar</th>
-                                                                    <th>Eliminar</th>
+                                                                    <th>Clave Materia</th>
                                                                     <th>Materia</th>
+                                                                    <th>Hora Semana</th>
+                                                                    <th>Eliminar</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach (System.Data.DataRow Catedratico in Model.TablaDatos.Rows)
+                                                                @foreach (System.Data.DataRow lista in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
-                                                                        <td>@Catedratico["Clave"].ToString()</td>
-                                                                        <td>@Catedratico["nombre"].ToString()</td>
-                                                                        <td>@Catedratico["correo"].ToString()</td>
-                                                                        <td>@Catedratico["telefono"].ToString()</td>
-                                                                        <td>@Catedratico["direccion"].ToString()</td>
-                                                                        <td>@Catedratico["TipoPersona"].ToString()</td>
-                                                                        <td>@Catedratico["gradoEstudio"].ToString()</td>
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatCatedratico", new {id = Catedratico["id_persona"].ToString()})"><i class="icon-trash"></i></a></td>
-                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaP", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                        <td>@lista["ClaveMateria"].ToString()</td>
+                                                                        <td>@lista["NombreMateria"].ToString()</td>
+                                                                        <td>@lista["HoraSemana"].ToString()</td>
+                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("DeleteMateria", "CatCatedratico", new {id = lista["IDMateria"].ToString(), id2 = id})"><i class="icon-trash"></i></a></td>
+
                                                                     </tr>
                                                                 }
                                                             </tbody>
@@ -143,7 +132,9 @@
                 }
             }
         });
-
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
     </script>
 }
+
+
 

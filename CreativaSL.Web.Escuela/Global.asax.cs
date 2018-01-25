@@ -54,9 +54,16 @@ namespace CreativaSL.Web.Escuela
                     {
                         if (string.IsNullOrEmpty(ci.NombreUrl.Find(x => x.Equals(URLValida))))
                         {
-                            Response.Redirect("/Admin/HomeAdmin/");
-                            //return RedirectToAction("Index", "HomeAdmin");
-                            //mandar a login
+                            if (fIdent.Ticket.Version == 3)
+                            {
+                                Response.Redirect("/Admin/HomeAdmin/");
+                                //return RedirectToAction("Index", "HomeAdmin");
+                                //mandar a login
+                            }
+                            else if (fIdent.Ticket.Version == 1)
+                            {
+                                Response.Redirect("/Admin/HomeProfesor/");
+                            }
                         }
                     }
                 }

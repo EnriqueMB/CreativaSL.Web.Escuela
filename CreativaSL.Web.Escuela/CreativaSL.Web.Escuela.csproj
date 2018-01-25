@@ -2789,6 +2789,8 @@
     <Content Include="Areas\Admin\Views\CatAdministrativo\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatAdministrativo\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CatAdministrativo\Permisos.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\MateriaP.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCatedratico\CreateMateria.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3013,6 +3015,8 @@
     <Compile Include="Models\CatGrupoModels.cs" />
     <Compile Include="Models\CatHorarioModels.cs" />
     <Compile Include="Models\CatMateriaModels.cs" />
+    <Compile Include="Models\CatMateriaXProfesorModels.cs" />
+    <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
     <Compile Include="Models\CatPlanEstudioModels.cs" />
     <Compile Include="Models\CatTipoMateriaModels.cs" />

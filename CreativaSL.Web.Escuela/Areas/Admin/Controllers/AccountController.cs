@@ -65,6 +65,11 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             if (model.opcion == 1)
             {
                 FormsAuthentication.SignOut();
+                UsuarioDatos usuario_datos = new UsuarioDatos();
+                UsuarioModels usuario = new UsuarioModels();
+                usuario.conexion = Conexion;
+                usuario.cuenta = model.id_administrativo;
+                int TipoUsario = usuario_datos.ObtenerTipoUsuarioByUserName2(usuario);
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.id_administrativo, model.RememberMe);
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
                 List<string> listaPermiso = new List<string>();
@@ -74,14 +79,9 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 }
                 AdministrativoPermisoJson Json = new AdministrativoPermisoJson { NombreURl = listaPermiso};
                 string userDataString = JsonConvert.SerializeObject(Json);
-                FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, userDataString);
+                FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(TipoUsario, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, userDataString);
                 authCookie.Value = FormsAuthentication.Encrypt(newTicket);
-                Response.Cookies.Add(authCookie);
-               
-                UsuarioDatos usuario_datos = new UsuarioDatos();
-                UsuarioModels usuario = new UsuarioModels();
-                usuario.conexion = Conexion;
-                usuario.cuenta = model.id_administrativo;
+                Response.Cookies.Add(authCookie);               
                 string id_tipoUsuario = usuario_datos.ObtenerTipoUsuarioByUserName(usuario);
                 if (id_tipoUsuario == "3")
                 {

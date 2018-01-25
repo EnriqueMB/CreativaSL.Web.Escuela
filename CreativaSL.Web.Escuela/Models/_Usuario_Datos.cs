@@ -122,6 +122,19 @@ namespace CreativaSL.Web.Escuela.Models
             }
         }
 
+        public int ObtenerTipoUsuarioByUserName2(UsuarioModels usuario)
+        {
+            try
+            {
+                object aux = SqlHelper.ExecuteScalar(usuario.conexion, "spCSLDB_V2_get_TipoUsuarioByUserName", usuario.cuenta);
+                return Convert.ToInt32(aux.ToString());
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
         public bool CheckUserName(UsuarioModels usuario)
         {
             try
