@@ -54,7 +54,7 @@ namespace CreativaSL.Web.Escuela.Models
         [Required(ErrorMessage = "La abreviatura es obligatoria")]
         [Display(Name = "nombre")]
         [StringLength(5, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
-        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\-\s]*$", ErrorMessage = "Solo Letras y guión")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\-\s]*$", ErrorMessage = "Solo Letras y guión")]
         public string abreviatura
         {
             get { return _abreviatura; }

@@ -69,7 +69,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatCicloEscolarModels CicloEscolar = new CatCicloEscolarModels();
                 CatCicloEscolar_Datos CicloEscolar_datos = new CatCicloEscolar_Datos();
                 CicloEscolar.conexion = Conexion;
-                CicloEscolar.Nombre = collection["abreviatura"];
+                CicloEscolar.abreviatura = collection["abreviatura"];
                 CicloEscolar.Nombre = collection["nombre"];
                 CicloEscolar.Descripcion = collection["descripcion"];
                 CicloEscolar.FechaInicio = DateTime.ParseExact(collection["fechaInicio"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
