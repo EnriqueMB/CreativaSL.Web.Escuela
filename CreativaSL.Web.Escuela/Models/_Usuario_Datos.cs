@@ -86,8 +86,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-
-
+        
         public UsuarioModels AbcCatUsuarios(UsuarioModels datos)
         {
             try
@@ -107,8 +106,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-
-       
+        
         public string ObtenerTipoUsuarioByUserName(UsuarioModels usuario)
         {
             try
@@ -181,8 +179,6 @@ namespace CreativaSL.Web.Escuela.Models
                 return usuario;
             }
         }
-
-
-     
+       
     }
 }

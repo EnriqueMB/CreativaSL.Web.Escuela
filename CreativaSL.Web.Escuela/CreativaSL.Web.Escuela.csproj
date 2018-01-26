@@ -2999,6 +2999,7 @@
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
+    <Compile Include="Filters\AutorizadoAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

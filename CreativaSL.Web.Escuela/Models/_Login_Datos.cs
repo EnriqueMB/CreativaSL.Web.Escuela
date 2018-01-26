@@ -85,5 +85,29 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        public CatAdministrativoModels ObtenerPermisos(CatAdministrativoModels datos)
+        {
+            try
+            {
+                List<CatAdministrativoModels> lista = new List<CatAdministrativoModels>();
+                CatAdministrativoModels item;
+                object[] parametros = { datos.cuenta };
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatPermisoPorUsuario", parametros);
+                while (dr.Read())
+                {
+                    item = new CatAdministrativoModels();
+                    item.NombreUrl = !dr.IsDBNull(dr.GetOrdinal("NombreUrl")) ? dr.GetString(dr.GetOrdinal("NombreUrl")) : string.Empty;
+                    lista.Add(item);
+                }
+                datos.ListaPermisos = lista;
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

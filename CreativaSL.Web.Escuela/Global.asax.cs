@@ -14,9 +14,12 @@ using Microsoft.ApplicationBlocks.Data;
 using System.Configuration;
 using System.Security.Principal;
 using System.Web.Security;
+using CreativaSL.Web.Escuela.Filters;
+using System.Web.SessionState;
 
 namespace CreativaSL.Web.Escuela
 {
+    [Autorizado]
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -29,8 +32,8 @@ namespace CreativaSL.Web.Escuela
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
-
-        protected void Application_EndRequest(object sender, EventArgs e)
+        [Autorizado]
+        protected void Application_PostRequestHandlerExecute(object sender, EventArgs e) //EndRequest
         {
             IPrincipal usr = HttpContext.Current.User;
             // If we are dealing with an authenticated forms authentication request
@@ -42,64 +45,62 @@ namespace CreativaSL.Web.Escuela
                 if (httpApp.Request.RawUrl.Split('/').Length > 2)
                 {
                     string URLValida = URLS[2];
-                    FormsIdentity fIdent = User.Identity as FormsIdentity;
-                    // Create a CustomIdentity based on the FormsAuthenticationTicket  
-                    CustomIdentity ci = new CustomIdentity(fIdent.Ticket);
-                    // Create the CustomPrincipal
-                    if (URLValida == "account")
+                    HttpContext context = HttpContext.Current;
+                    if (context != null && context.Session != null)
                     {
+                        int TipoUsuario = (int)HttpContext.Current.Session["SessionTipoUsuario"];
+                        List<string> ListaPermiso = new List<string>();
+                        ListaPermiso = (List<string>)HttpContext.Current.Session["SessionListaPermiso"];
 
-                    }
-                    else
-                    {
-                        if (string.IsNullOrEmpty(ci.NombreUrl.Find(x => x.Equals(URLValida))))
+                        if (URLValida == "account" || URLValida == "requestdata")
                         {
-                            if (fIdent.Ticket.Version == 3)
+
+                        }
+                        else
+                        {
+                            if (string.IsNullOrEmpty(ListaPermiso.Find(x => x.Equals(URLValida))))
                             {
-                                Response.Redirect("/Admin/HomeAdmin/");
-                                //return RedirectToAction("Index", "HomeAdmin");
-                                //mandar a login
-                            }
-                            else if (fIdent.Ticket.Version == 1)
-                            {
-                                Response.Redirect("/Admin/HomeProfesor/");
+                                if (TipoUsuario == 3)
+                                {
+                                    Response.Redirect("/Admin/HomeAdmin");
+                                    //return RedirectToAction("Index", "HomeAdmin");
+                                    //mandar a login
+                                }
+                                else if (TipoUsuario == 1)
+                                {
+                                    Response.Redirect("/Admin/HomeProfesor");
+                                }
                             }
                         }
                     }
+                    
+                    //FormsIdentity fIdent = User.Identity as FormsIdentity;
+                    //// Create a CustomIdentity based on the FormsAuthenticationTicket  
+                    //CustomIdentity ci = new CustomIdentity(fIdent.Ticket);
+                    //// Create the CustomPrincipal
+                    //if (URLValida == "account")
+                    //{
+
+                    //}
+                    //else
+                    //{
+                    //    if (string.IsNullOrEmpty(ci.NombreUrl.Find(x => x.Equals(URLValida))))
+                    //    {
+                    //        if (fIdent.Ticket.Version == 3)
+                    //        {
+                    //            Response.Redirect("/Admin/HomeAdmin/");
+                    //            //return RedirectToAction("Index", "HomeAdmin");
+                    //            //mandar a login
+                    //        }
+                    //        else if (fIdent.Ticket.Version == 1)
+                    //        {
+                    //            Response.Redirect("/Admin/HomeProfesor/");
+                    //        }
+                    //    }
+                    //}
                 }
             
             }
         }
-
-        public MenuModels ObtenerDetalleCatURL(MenuModels datos)
-        {
-            try
-            {
-                object[] parametros = { datos.NombreMenu };
-                SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.Conexion, "", parametros);
-                while (dr.Read())
-                {
-                    datos.NombreMenu = dr["IDAula"].ToString();
-                }
-                return datos;
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        //protected void Application_BeginRequest()
-        //{
-        //    if (!Context.Request.IsSecureConnection)
-        //    {
-        //        This is an insecure connection, so redirect to the secure version
-        //       UriBuilder uri = new UriBuilder(Context.Request.Url);
-
-
-        //    }
-
-        //}
     }
 }
