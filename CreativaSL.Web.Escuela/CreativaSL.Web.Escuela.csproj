@@ -2791,6 +2791,7 @@
     <Content Include="Areas\Admin\Views\CatAdministrativo\Permisos.cshtml" />
     <Content Include="Areas\Admin\Views\CatCatedratico\MateriaP.cshtml" />
     <Content Include="Areas\Admin\Views\CatCatedratico\CreateMateria.cshtml" />
+    <Content Include="Areas\Admin\Views\Notificacion\Create.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2994,6 +2995,7 @@
     <Compile Include="Areas\Admin\Controllers\CatModalidadController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatTutorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NotificacionController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
@@ -3017,6 +3019,8 @@
     <Compile Include="Models\CatHorarioModels.cs" />
     <Compile Include="Models\CatMateriaModels.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
+    <Compile Include="Models\NotificacionModels.cs" />
+    <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
     <Compile Include="Models\CatPlanEstudioModels.cs" />
@@ -3049,6 +3053,7 @@
     <Compile Include="Models\_CatTutor_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
+    <Compile Include="Models\_Notificacion_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
     <Compile Include="Models\_Usuario_Datos.cs" />
     <Compile Include="MyRoleProvider.cs" />
