@@ -73,7 +73,8 @@ namespace CreativaSL.Web.Escuela.Models
                     datos.id_tipoMateria = dr.GetInt32(dr.GetOrdinal("id_tipoMateria"));
                     datos.clave = dr["clave"].ToString();
                     datos.nombre = dr["Nombre"].ToString();
-                    datos.horaSemana = dr.GetInt32(dr.GetOrdinal("horaSemana"));                 }
+                    datos.horaSemana = dr.GetInt32(dr.GetOrdinal("horaSemana"));
+                }
                 return datos;
             }
 

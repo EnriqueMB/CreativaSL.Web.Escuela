@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.Routing;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
@@ -70,6 +72,8 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 usuario.conexion = Conexion;
                 usuario.cuenta = model.id_administrativo;
                 int TipoUsario = usuario_datos.ObtenerTipoUsuarioByUserName2(usuario);
+                System.Web.HttpContext.Current.Session["SessionTipoUsuario"] = TipoUsario;
+                FormsAuthentication.SetAuthCookie(model.id_administrativo, model.RememberMe);
                 HttpCookie authCookie = FormsAuthentication.GetAuthCookie(model.id_administrativo, model.RememberMe);
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
                 List<string> listaPermiso = new List<string>();
@@ -77,11 +81,12 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     listaPermiso.Add(item.NombreUrl);
                 }
-                AdministrativoPermisoJson Json = new AdministrativoPermisoJson { NombreURl = listaPermiso};
-                string userDataString = JsonConvert.SerializeObject(Json);
-                FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(TipoUsario, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, userDataString);
-                authCookie.Value = FormsAuthentication.Encrypt(newTicket);
-                Response.Cookies.Add(authCookie);               
+                System.Web.HttpContext.Current.Session["SessionListaPermiso"] = listaPermiso;
+                //AdministrativoPermisoJson Json = new AdministrativoPermisoJson { NombreURl = listaPermiso};
+                //string userDataString = JsonConvert.SerializeObject(Json);
+                //FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(TipoUsario, ticket.Name, ticket.IssueDate, ticket.Expiration, ticket.IsPersistent, userDataString);
+                //authCookie.Value = FormsAuthentication.Encrypt(newTicket);
+                //Response.Cookies.Add(authCookie);               
                 string id_tipoUsuario = usuario_datos.ObtenerTipoUsuarioByUserName(usuario);
                 if (id_tipoUsuario == "3")
                 {
