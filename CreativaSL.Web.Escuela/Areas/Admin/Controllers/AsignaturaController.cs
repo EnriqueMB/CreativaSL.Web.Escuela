@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.Data;
 using CreativaSL.Web.Escuela.Models;
+using CreativaSL.Web.Escuela.Filters;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class AsignaturaController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

@@ -19,7 +19,6 @@ using System.Web.SessionState;
 
 namespace CreativaSL.Web.Escuela
 {
-    [Autorizado]
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -32,7 +31,6 @@ namespace CreativaSL.Web.Escuela
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
         }
-        [Autorizado]
         protected void Application_PostRequestHandlerExecute(object sender, EventArgs e) //EndRequest
         {
             IPrincipal usr = HttpContext.Current.User;
@@ -102,5 +100,10 @@ namespace CreativaSL.Web.Escuela
             
             }
         }
+
+        //protected void Session_Start(object sender, EventArgs e)
+        //{
+        //    Session.Timeout = 1;
+        //}
     }
 }

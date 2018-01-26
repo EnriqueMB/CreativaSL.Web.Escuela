@@ -6,9 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using CreativaSL.Web.Escuela.Models;
 using System.Data;
+using CreativaSL.Web.Escuela.Filters;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CatModalidadController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

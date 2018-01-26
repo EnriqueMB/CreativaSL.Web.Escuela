@@ -1,4 +1,5 @@
-﻿using CreativaSL.Web.Escuela.Models;
+﻿using CreativaSL.Web.Escuela.Filters;
+using CreativaSL.Web.Escuela.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CatAdministrativoController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

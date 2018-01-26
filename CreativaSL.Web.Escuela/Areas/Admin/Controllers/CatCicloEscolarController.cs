@@ -7,9 +7,11 @@ using CreativaSL.Web.Escuela.Models;
 using System.Configuration;
 using System.Data;
 using System.Globalization;
+using CreativaSL.Web.Escuela.Filters;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CatCicloEscolarController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using System.Data;
 using System.Configuration;
 using CreativaSL.Web.Escuela.Models;
+using CreativaSL.Web.Escuela.Filters;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class CatHorarioController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
