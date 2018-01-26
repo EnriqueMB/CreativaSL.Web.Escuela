@@ -75,6 +75,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Modalidad.opcion = 1;
                 Modalidad.user = User.Identity.Name;
                 Modalidad.IDModalidad = "";
+                Modalidad.abreviatura = collection["abreviatura"];
                 Modalidad.IDPlanEstudio = Convert.ToInt32(collection["TablaPlanEstudioCmb"]);
                 Modalidad.Descripcion = collection["Descripcion"];
                 Modalidad = ModalidadDatos.AbcCatModalidad(Modalidad);
@@ -140,6 +141,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Modalidad.conexion = Conexion;
                 Modalidad.opcion = 2;
                 Modalidad.user = User.Identity.Name;
+                Modalidad.abreviatura = collection["abreviatura"];
                 Modalidad.IDModalidad = collection["IDModalidad"];
                 Modalidad.IDPlanEstudio = Convert.ToInt32(collection["TablaPlanEstudioCmb"]);
                 Modalidad.Descripcion = collection["Descripcion"];

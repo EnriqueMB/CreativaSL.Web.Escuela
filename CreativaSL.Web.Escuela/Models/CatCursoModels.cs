@@ -50,7 +50,16 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _TablaDatos; }
             set { _TablaDatos = value; }
         }
-
+        private string _abreviatura;
+        [Required(ErrorMessage = "La abreviatura es obligatoria")]
+        [Display(Name = "nombre")]
+        [StringLength(5, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\-\s]*$", ErrorMessage = "Solo Letras y guión")]
+        public string abreviatura
+        {
+            get { return _abreviatura; }
+            set { _abreviatura = value; }
+        }
 
         #region Datos de control
         public int Resultado { get; set; }

@@ -71,6 +71,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 _CatCurso_Datos CursoDatos = new _CatCurso_Datos();
                 Curso.conexion = Conexion;
                 Curso.IDCurso = "";
+                Curso.abreviatura = collection["abreviatura"];
                 Curso.Descripcion = collection["Descripcion"];
                 Curso.IDEspecialidad = collection["tablaEspecialidadCmb"];
                 Curso.user = User.Identity.Name;
@@ -139,6 +140,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Curso.opcion = 2;
                 Curso.IDCurso = id;
                 Curso.user = User.Identity.Name;
+                Curso.abreviatura = collection["abreviatura"];
                 Curso.Descripcion = collection["Descripcion"];
                 Curso.IDEspecialidad = collection["tablaEspecialidadCmb"];
                 Curso = CursoDatos.AbcCatCurso(Curso);

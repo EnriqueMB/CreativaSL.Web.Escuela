@@ -16,7 +16,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion, datos.IDCiclo, datos.Nombre, datos.Descripcion, datos.FechaInicio, datos.FechaFin, datos.CicloActual, datos.user
+                    datos.opcion, datos.IDCiclo, datos.Nombre, datos.Descripcion, datos.FechaInicio, datos.FechaFin, datos.CicloActual,datos.abreviatura, datos.user
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatCicloEscolar", parametros);
                 datos.IDCiclo = aux.ToString();
@@ -70,6 +70,7 @@ namespace CreativaSL.Web.Escuela.Models
                 while (dr.Read())
                 {
                     datos.IDCiclo = dr["IDCiclo"].ToString();
+                    datos.abreviatura = dr["Abreviatura"].ToString();
                     datos.Nombre = dr["Nombre"].ToString();
                     datos.Descripcion = dr["Descripcion"].ToString();
                     datos.FechaInicio = dr.GetDateTime(dr.GetOrdinal("FechaInicio"));

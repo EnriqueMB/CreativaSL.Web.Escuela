@@ -47,6 +47,7 @@
                                                         <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                                             <thead class="flip-content">
                                                                 <tr>
+                                                                    <th>Abreviatura</th>
                                                                     <th>Descripción</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
@@ -56,6 +57,7 @@
                                                                 @foreach (System.Data.DataRow Plan in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
+                                                                        <td>@Plan["Abreviatura"].ToString()</td>
                                                                         <td>@Plan["Descripcion"].ToString()</td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "PlanEstudio", new { id = Plan["IDPlanEstudio"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "PlanEstudio", new {id = Plan["IDPlanEstudio"].ToString()})"><i class="icon-trash"></i></a></td>

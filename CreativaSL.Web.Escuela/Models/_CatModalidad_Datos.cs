@@ -16,7 +16,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion, datos.IDModalidad, datos.IDPlanEstudio, datos.Descripcion, datos.user
+                    datos.opcion, datos.IDModalidad, datos.IDPlanEstudio, datos.Descripcion,datos.abreviatura, datos.user
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatModalidad", parametros);
                 datos.IDModalidad = aux.ToString();
@@ -72,6 +72,7 @@ namespace CreativaSL.Web.Escuela.Models
                     datos.IDModalidad = dr["IDModalidad"].ToString();
                     datos.IDPlanEstudio = Convert.ToInt32(dr["IDPlanEstudio"].ToString());
                     datos.Descripcion = dr["Descripcion"].ToString();
+                    datos.abreviatura = dr["Abreviatura"].ToString();
                 }
                 return datos;
             }

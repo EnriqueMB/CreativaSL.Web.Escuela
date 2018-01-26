@@ -71,6 +71,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 _CatEspecialidad_Datos EspecialidadDatos = new _CatEspecialidad_Datos();
                 Especialidad.conexion = Conexion;
                 Especialidad.id_especialidad = "";
+                Especialidad.abreviatura = collection["abreviatura"];
                 Especialidad.descripcion = collection["Descripcion"];
                 Especialidad.id_modalidad = collection["tablaModalidadCmb"];
                 Especialidad.user = User.Identity.Name;
@@ -138,6 +139,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Especialidad.opcion = 2;
                 Especialidad.id_especialidad = id;
                 Especialidad.user = User.Identity.Name;
+                Especialidad.abreviatura = collection["abreviatura"];
                 Especialidad.descripcion = collection["Descripcion"];
                 Especialidad.id_modalidad = collection["tablaModalidadCmb"];
                 Especialidad = EspecialidadDatos.AbcCatEspecialidad(Especialidad);

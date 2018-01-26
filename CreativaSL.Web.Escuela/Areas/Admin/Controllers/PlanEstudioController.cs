@@ -70,6 +70,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Plan.conexion = Conexion;
                 Plan.IDPlanEstudio = 0;
                 Plan.Descripcion = collection["descripcion"];
+                Plan.abreviatura = collection["abreviatura"];
                 Plan.user = User.Identity.Name;
                 Plan.opcion = 1;
                 Plan = PlanDatos.AbcCatPlanEstudio(Plan);
@@ -130,6 +131,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Plan.conexion = Conexion;
                 Plan.opcion = 2;
                 Plan.user = User.Identity.Name;
+                Plan.abreviatura = collection["abreviatura"];
                 Plan.IDPlanEstudio = Convert.ToInt32(collection["IDPlanEstudio"]);
                 Plan.Descripcion = collection["Descripcion"];
                 Plan = PlanDatos.AbcCatPlanEstudio(Plan);
