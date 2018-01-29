@@ -109,9 +109,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Los datos se guardaron correctamente.";
                     return RedirectToAction("Index");
-                    TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se guardaron correctamente.";
-                    return RedirectToAction("Index");
+                   
                 }
                 else
                 {
@@ -125,7 +123,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -191,15 +189,15 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     var listTipoPersona = new SelectList(Alumno.TablaTipoPersonaCmb, "id_tipoPersona", "descripcion");
                     ViewData["cmbTipoPersona"] = listTipoPersona;
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Ocurrio un error al intentar guardar.";
-                    return View(Alumno);
+                    TempData["message"] = "Ocurrió un error al intentar guardar.";
+                    return RedirectToAction("Edit");
                 }
             }
             catch
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -225,7 +223,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno.IDPersona = id;
                 AlumnoDatos.AbcCatAlumnos(Alumno);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch

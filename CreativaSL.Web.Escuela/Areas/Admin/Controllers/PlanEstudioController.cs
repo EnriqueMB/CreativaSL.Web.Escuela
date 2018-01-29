@@ -84,14 +84,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Ocurrio un error al intentar guardar.";
-                    return View(Plan);
+                    return RedirectToAction("Create");
                 }
             }
             catch
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -138,20 +138,20 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Plan.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente.";
-                    return View(Plan);
+                    TempData["message"] = "Los datos no se editaron correctamente.";
+                    return RedirectToAction("Edit");
                 }
             }
             catch
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se editarón correctamente. Contacte a soporte técnico.";
+                TempData["message"] = "Los datos no se editaron correctamente. Contacte a soporte técnico.";
                 return RedirectToAction("Index");
             }
         }
@@ -179,7 +179,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Plan.IDPlanEstudio = id;
                 PlanDatos.AbcCatPlanEstudio(Plan);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch

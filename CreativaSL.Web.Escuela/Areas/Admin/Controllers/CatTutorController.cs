@@ -96,7 +96,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                    
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
-                    return View(Tutor);
+                    return RedirectToAction("Create");
                 }
                 else
                 {
@@ -121,7 +121,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -177,14 +177,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Tutor.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente.";
-                    return View(Tutor);
+                    TempData["message"] = "Los datos no se editaron correctamente.";
+                    return RedirectToAction("Edit");
                 }
                 
             }
@@ -192,7 +192,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
                 CatTutorModels Tutor = new CatTutorModels();
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se editarón correctamente. Contacte a soporte técnico.";
+                TempData["message"] = "Los datos no se editaron correctamente. Contacte a soporte técnico.";
                 return RedirectToAction("Index");
                 
             }
@@ -222,7 +222,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Tutor.IDPersona = id;
                 TutorDatos.AbcCatTutor(Tutor);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch

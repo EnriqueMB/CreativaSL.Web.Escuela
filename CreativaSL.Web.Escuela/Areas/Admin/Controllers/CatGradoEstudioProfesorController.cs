@@ -81,7 +81,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(gradoEscolarProfesor);
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -140,7 +140,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(gradoEscolarProfesor);
+                    return RedirectToAction("Edit");
                 }
             }
 
@@ -177,13 +177,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (gradoEscolarProfesor.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "El registro se a eliminado correctamente.";
+                    TempData["message"] = "El registro se ha eliminado correctamente.";
                     return Json("");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "El registro no se a eliminado correctamente.";
+                    TempData["message"] = "El registro no se ha eliminado correctamente.";
                     return Json("");
                 }
             }

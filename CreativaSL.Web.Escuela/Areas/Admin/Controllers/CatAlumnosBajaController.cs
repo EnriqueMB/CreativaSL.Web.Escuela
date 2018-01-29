@@ -59,7 +59,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno.IDPersona = id;
                 AlumnoDatos.DarBaja(Alumno);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "Se dio de  alta al alumno correctamente.";
+                TempData["message"] = "Se dió de  alta al alumno correctamente.";
                 return Json("");
             }
             catch
