@@ -149,13 +149,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Modalidad.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente. Intente nuevamente";
+                    TempData["message"] = "Los datos no se editaron correctamente. Intente nuevamente";
                     return RedirectToAction("Edit");
                 }
             }
@@ -195,7 +195,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Ocurrio un error al eliminar. Intente nuevamente.";
+                    TempData["message"] = "Ocurrió un error al eliminar. Intente nuevamente.";
                     return Json("");
                 }
             }

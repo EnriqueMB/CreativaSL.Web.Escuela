@@ -89,7 +89,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     var list = new SelectList(Curso.tablaEspecialidadCmb, "id_especialidad", "descripcion");
                     ViewData["cmbTipoEspecialidad"] = list;
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Ocurrio un error al intentar guardar.";
+                    TempData["message"] = "Ocurrió un error al intentar guardar.";
                     return RedirectToAction("Create", "CatCurso");
                 }
             }
@@ -97,7 +97,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -147,20 +147,20 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Curso.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente.";
+                    TempData["message"] = "Los datos no se editaron correctamente.";
                     return View(Curso);
                 }
             }
             catch
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se editarón correctamente. Contacte a soporte técnico.";
+                TempData["message"] = "Los datos no se editaron correctamente. Contacte a soporte técnico.";
                 return RedirectToAction("Index");
             }
         } 
@@ -187,7 +187,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Curso.IDCurso = id;
                 CursoDatos.AbcCatCurso(Curso);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch

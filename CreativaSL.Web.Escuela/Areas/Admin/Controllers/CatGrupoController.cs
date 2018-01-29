@@ -262,7 +262,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Grupo.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
@@ -283,7 +283,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     var list5 = new SelectList(Grupo.TablaCursosCmb, "IDCurso", "Descripcion");
                     ViewData["cmbCursos"] = list5;
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente. Intente nuevamente";
+                    TempData["message"] = "Los datos no se editaron correctamente. Intente nuevamente";
                     return RedirectToAction("Edit");
                 }
             }

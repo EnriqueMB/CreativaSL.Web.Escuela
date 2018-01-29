@@ -119,7 +119,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
 
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Ocurrio un error el intentar guardar. Contacte a soporte técnico";
+                TempData["message"] = "Ocurrió un error el intentar guardar. Contacte a soporte técnico";
                 return RedirectToAction("Index");
             }
         }
@@ -181,20 +181,20 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Catedratico.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se editarón correctamente.";
+                    TempData["message"] = "Los datos se editaron correctamente.";
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "Los datos no se editarón correctamente.";
+                    TempData["message"] = "Los datos no se editaron correctamente.";
                     return RedirectToAction("Edit");
                 }
             }
             catch
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se editarón correctamente. Contacte a soporte técnico.";
+                TempData["message"] = "Los datos no se editaron correctamente. Contacte a soporte técnico.";
                 return RedirectToAction("Index");
             }
         }

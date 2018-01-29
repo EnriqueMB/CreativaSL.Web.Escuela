@@ -183,13 +183,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 if (Horario.Completado == true)
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "El registro se a eliminado correctamente";
+                    TempData["message"] = "El registro se ha eliminado correctamente";
                     return Json("");
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "El registro no se a eliminado correctamente. Intente nuevamente.";
+                    TempData["message"] = "El registro no se ha eliminado correctamente. Intente nuevamente.";
                     return Json("");
                 }
             }
