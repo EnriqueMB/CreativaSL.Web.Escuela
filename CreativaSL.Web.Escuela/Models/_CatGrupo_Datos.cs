@@ -16,7 +16,8 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion, datos.IDGrupo, datos.Clave, datos.Nombre, datos.IDCiclo, datos.IDEspecialidad, datos.IDCurso, datos.IDModalidad, datos.IDPlanEstudio, datos.user
+                    datos.opcion, datos.IDGrupo, datos.Clave, datos.Nombre, datos.IDCiclo, datos.IDEspecialidad, datos.IDCurso,
+                    datos.IDModalidad, datos.IDPlanEstudio, datos.ExtraEscolar, datos.user
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatGrupo", parametros);
                 datos.IDGrupo = aux.ToString();
@@ -78,6 +79,7 @@ namespace CreativaSL.Web.Escuela.Models
                     datos.IDCurso = dr.GetString(dr.GetOrdinal("IDCurso"));
                     datos.IDModalidad = dr.GetString(dr.GetOrdinal("IDModalidad"));
                     datos.IDPlanEstudio = dr.GetInt32(dr.GetOrdinal("IDPlanEstudio"));
+                    datos.ExtraEscolar = dr.GetBoolean(dr.GetOrdinal("ExtraEscolar"));
                 }
                 return datos;
             }

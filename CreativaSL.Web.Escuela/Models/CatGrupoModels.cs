@@ -85,7 +85,13 @@ namespace CreativaSL.Web.Escuela.Models
             set { _IDModalidad = value; }
         }
 
+        private bool _ExtraEscolar;
 
+        public bool ExtraEscolar
+        {
+            get { return _ExtraEscolar; }
+            set { _ExtraEscolar = value; }
+        }
         private List<CatCicloEscolarModels> _TablaCicloEscolarCmb;
         [Required(ErrorMessage = "El ciclo escolar es obligatorio")]
         [Display(Name = "Ciclo Escolar")]
