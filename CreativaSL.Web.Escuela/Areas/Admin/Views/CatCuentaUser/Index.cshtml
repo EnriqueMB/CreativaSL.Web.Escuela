@@ -1,0 +1,104 @@
+﻿@model CreativaSL.Web.Escuela.Models.CatCuentaUserModels
+@{
+    ViewBag.Title = "Modificar Contraseña";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section featured
+{
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/assets2/plugins/cropper/cropper.min.css")" />
+
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div class="tab-pane">
+                <div class="portlet box blue">
+                    <div class="portlet-title">
+                        <div class="caption"><i class="icon-reorder"></i>Nueva Contraseña</div>
+                    </div>
+                    @using (Html.BeginForm("Index", "CatCuentaUser", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.id_cuenta)
+
+                        <div class="portlet-body form">
+                            <h3 class="form-section">Cambiar Contraseña</h3>
+                            <div class="row-fluid">
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Contraseña Vieja<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.PasswordFor(model => model.passUser, new { id = "passUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.passUser)
+                                            <span class="help-block">Ingrese la Contraseña Vieja</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="control-group">
+                                        <label class="control-label">Contraseña Actual<span class="required"> *</span></label>
+                                        <div class="controls">
+                                            @Html.PasswordFor(model => model.passActualizado, new { id = "passUser", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.passActualizado)
+                                            <span class="help-block">Ingrese la contraseña del usuario</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <input type="submit" value="Guardar" class="btn green">
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        jQuery(document).ready(function () {
+            var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+    </script>
+
+}
+
+
+
+
+
+
+

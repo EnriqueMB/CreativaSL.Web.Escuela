@@ -2792,6 +2792,7 @@
     <Content Include="Areas\Admin\Views\CatCatedratico\MateriaP.cshtml" />
     <Content Include="Areas\Admin\Views\CatCatedratico\CreateMateria.cshtml" />
     <Content Include="Areas\Admin\Views\Notificacion\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCuentaUser\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2986,6 +2987,7 @@
     <Compile Include="Areas\Admin\Controllers\CatAulaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCatedraticoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCicloEscolarController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatCuentaUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatCursoController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatEspecialidadController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatGradoEstudioProfesorController.cs" />
@@ -3012,6 +3014,7 @@
     <Compile Include="Models\CatAulaModels.cs" />
     <Compile Include="Models\CatCatedraticoModels.cs" />
     <Compile Include="Models\CatCicloEscolarModels.cs" />
+    <Compile Include="Models\CatCuentaUserModels.cs" />
     <Compile Include="Models\CatCursoModels.cs" />
     <Compile Include="Models\CatDiasSemanaModels.cs" />
     <Compile Include="Models\CatGradoEstudioProfesorModels.cs" />
@@ -3021,6 +3024,7 @@
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
+    <Compile Include="Models\_CatCuentaUser_Datos.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
     <Compile Include="Models\CatPlanEstudioModels.cs" />
