@@ -81,7 +81,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(gradoEscolarProfesor);
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -140,7 +140,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(gradoEscolarProfesor);
+                    return RedirectToAction("Edit");
                 }
             }
 

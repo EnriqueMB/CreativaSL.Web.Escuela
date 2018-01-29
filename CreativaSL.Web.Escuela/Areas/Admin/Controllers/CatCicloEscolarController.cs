@@ -90,7 +90,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     CicloEscolar.CicloActual = Convert.ToBoolean("true");
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardarón correctamente. Intente nuevamente.";
-                    return View(CicloEscolar);
+                    return RedirectToAction("Create");
                 }
             }
 
@@ -154,13 +154,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente. Intente nuevamente.";
-                    return View(CicloEscolar);
+                    return RedirectToAction("Edit");
                 }
             }
             catch
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se edito correctamente. Contacte a soporte técnico.";
+                TempData["message"] = "Los datos no se editarón correctamente. Contacte a soporte técnico.";
                 return RedirectToAction("Index");
             }
         }
@@ -196,7 +196,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "El resgistro no se a eliminado correctamente. Intente nuevamente.";
+                    TempData["message"] = "El registro no se a eliminado correctamente. Intente nuevamente.";
                     return Json("");
                 }
             }

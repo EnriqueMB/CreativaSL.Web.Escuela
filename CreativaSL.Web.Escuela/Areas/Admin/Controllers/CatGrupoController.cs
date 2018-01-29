@@ -190,7 +190,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbCursos"] = list5;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente";
-                    return View(Grupo);
+                    return RedirectToAction("Create");
                 }
             }
             catch
@@ -284,7 +284,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbCursos"] = list5;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente. Intente nuevamente";
-                    return View(Grupo);
+                    return RedirectToAction("Edit");
                 }
             }
             catch

@@ -90,7 +90,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbTipoEspecialidad"] = list;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Ocurrio un error al intentar guardar.";
-                    return View(Curso);
+                    return RedirectToAction("Create", "CatCurso");
                 }
             }
             catch

@@ -92,7 +92,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbPlanEstudio"] = list;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente";
-                    return View(Modalidad);
+                    return RedirectToAction("Create");
                 }
             }
             catch
@@ -156,7 +156,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente. Intente nuevamente";
-                    return View(Modalidad);
+                    return RedirectToAction("Edit");
                 }
             }
             catch

@@ -188,7 +188,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente.";
-                    return View(Catedratico);
+                    return RedirectToAction("Edit");
                 }
             }
             catch
@@ -220,7 +220,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Catedratico.id_persona = id;
                 CatedraticoDatos.AbcCatCatedratico(Catedratico);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch
@@ -337,7 +337,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 MateriaProfesor.user = User.Identity.Name;
                 MateriaProfesor = MateriaProfesorD.AbcCatMateriaXProfesor(MateriaProfesor);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El resgistro se a eliminado correctamente.";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
                 return Json("");
             }
             catch (Exception)

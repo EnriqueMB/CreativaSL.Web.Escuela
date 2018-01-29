@@ -99,7 +99,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbTipoMateria"] = listtm;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Ocurrio un error al intentar guardar.";
-                    return View(Materia);
+                    return RedirectToAction("Create");
                 }
             }
             catch
@@ -171,7 +171,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente.";
-                    return View(Materia);
+                    return RedirectToAction("Edit");
                 }
             }
             catch

@@ -124,7 +124,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbAulaEscolar"] = list5;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(Asignatura);
+                    return RedirectToAction("Create");
                 }
             }
             catch
@@ -225,7 +225,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     Asignatura = AsignaturaDatos.ObtenerDetalleAsignatura(Asignatura);
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se guardaron correctamente. Intente nuevamente.";
-                    return View(Asignatura);
+                    return RedirectToAction("Edit");
                 }
             }
             catch

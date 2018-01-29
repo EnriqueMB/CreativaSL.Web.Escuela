@@ -96,7 +96,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                    
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
-                    return View(Tutor);
+                    return RedirectToAction("Create");
                 }
                 else
                 {
@@ -184,7 +184,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos no se editarón correctamente.";
-                    return View(Tutor);
+                    return RedirectToAction("Edit");
                 }
                 
             }

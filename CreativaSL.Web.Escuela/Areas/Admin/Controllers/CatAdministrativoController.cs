@@ -80,7 +80,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 {
                     TempData["typemessage"] = "2";
                     TempData["message"] = "El usuario ingresado ya existe.";
-                    return View(administrativo);
+                    return RedirectToAction("Create");
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                   , Convert.ToInt32(ConfigurationManager.AppSettings.Get("PortTxt"))
                   , Convert.ToBoolean(ConfigurationManager.AppSettings.Get("EnableSslTxt")));
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "Los datos se a guardado correctamente";
+                    TempData["message"] = "Los datos se han guardado correctamente";
                     return RedirectToAction("Index");
                 }
             }
@@ -156,13 +156,13 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 administrativo_datos.AbcCatAdministrativo(administrativo);
 
                 TempData["typemessage"] = "1";
-                TempData["message"] = "Los datos se editó correctamente";
+                TempData["message"] = "Los datos se editaron correctamente";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 TempData["typemessage"] = "2";
-                TempData["message"] = "Los datos no se editó correctamente";
+                TempData["message"] = "Los datos no se editaron correctamente";
                 return RedirectToAction("Index");
             }
         }
@@ -188,7 +188,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 administrativo.user = User.Identity.Name;
                 administrativo_datos.AbcCatAdministrativo(administrativo);
                 TempData["typemessage"] = "1";
-                TempData["message"] = "El registro se a eliminado correctamente";
+                TempData["message"] = "El registro se ha eliminado correctamente";
                 return Json("");
             }
             catch
