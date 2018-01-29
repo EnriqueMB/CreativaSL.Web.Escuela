@@ -41,14 +41,13 @@
                 <ul class="nav pull-right">
                     <li class="dropdown user">
                         @{
-
-                            string Conexion = System.Configuration.ConfigurationManager.AppSettings.Get("strConnection");
-                            CreativaSL.Web.Escuela.Models.CatCuentaUserModels CuentaUsuario = new CreativaSL.Web.Escuela.Models.CatCuentaUserModels();
-                            CuentaUsuario.conexion = Conexion;
-                            CuentaUsuario.id_cuenta = User.Identity.Name;
-                            CuentaUsuario.IDTipoPersona = 3;
-                            CuentaUsuario = CreativaSL.Web.Escuela.Models.CatCuentaUser_Datos.ObtenerUsuario(CuentaUsuario);
-                        }
+                                string Conexion = System.Configuration.ConfigurationManager.AppSettings.Get("strConnection");
+                                CreativaSL.Web.Escuela.Models.CatCuentaUserModels CuentaUsuario = new CreativaSL.Web.Escuela.Models.CatCuentaUserModels();
+                                CuentaUsuario.conexion = Conexion;
+                                CuentaUsuario.id_cuenta = User.Identity.Name;
+                                CuentaUsuario.IDTipoPersona = 1;
+                                CuentaUsuario = CreativaSL.Web.Escuela.Models.CatCuentaUser_Datos.ObtenerUsuario(CuentaUsuario);
+                            }
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             @*<img alt="" src="~/Imagenes/Usuarios/483F6D27-FE95-4515-9247-7A0A457EEC70.jpg" style="width: 50px;">*@
                             <span class="username">@Html.Raw(@Html.Encode(CuentaUsuario.tablaUsuarioCuenta.Rows[0]["nombre"]))</span>
@@ -78,7 +77,9 @@
                         </div>
                     </form>
                 </li>
-                @{Html.RenderAction("LoadMenu", "HomeAdmin");}
+                <li class="">
+                    <a href="@Url.Action("Index", "HomeProfesor")"><i class="icon-home"></i> <span class="title">INICIO</span></a>
+                </li>
             </ul>
         </div>
 
@@ -120,7 +121,7 @@
     <script src="@Url.Content("~/Content/assets2/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Content/assets2/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Content/assets2/scripts/form-components.js")"></script>
-  
+
     @RenderSection("scripts", required: false)
     <script>
         function zoom() {

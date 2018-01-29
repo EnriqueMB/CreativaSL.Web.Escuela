@@ -29,6 +29,32 @@ namespace CreativaSL.Web.Escuela.Models
             }
         }
 
+        public static CatCuentaUserModels ObtenerUsuario(CatCuentaUserModels datos)
+        {
+            try
+            {
+                object[] parametros = { datos.id_cuenta, datos.IDTipoPersona };
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_CatCuentaUser", parametros);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.tablaUsuarioCuenta = ds.Tables[0];
+                        }
+                    }
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public CatCuentaUserModels ValidadCuenta(CatCuentaUserModels datos)
         {
             try
