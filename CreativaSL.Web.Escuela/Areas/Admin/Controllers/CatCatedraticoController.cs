@@ -251,7 +251,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
         }
 
-
+        //GET: Admin/CatCatedratico/CreateMateria/5
         [HttpGet]
         public ActionResult CreateMateria(string id)
         {
@@ -261,24 +261,27 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatMateriaXProfesor_Datos MateriaProfesorD = new CatMateriaXProfesor_Datos();
                 MateriaProfesor.IDProfesor = id;
                 MateriaProfesor.conexion = Conexion;
+                MateriaProfesor.tablaModalidadCmb = MateriaProfesorD.obtenerComboCatModalidad(MateriaProfesor);
+                var list = new SelectList(MateriaProfesor.tablaModalidadCmb, "IDModalidad", "descripcion");
+                ViewData["cmbTipoModalidad"] = list;
                 MateriaProfesor.TablaMateriaCmb = MateriaProfesorD.obtenerComboCatMateriaPorProfesor(MateriaProfesor);
                 var listTipoPersona = new SelectList(MateriaProfesor.TablaMateriaCmb, "IDMateria", "NombreM");
                 ViewData["cmbMateria"] = listTipoPersona;
+
                 return View(MateriaProfesor);
             }
             catch (Exception)
             {
                 CatMateriaXProfesorModels MateriaProfesor = new CatMateriaXProfesorModels();
                 MateriaProfesor.IDProfesor = id;
-                MateriaProfesor.TablaMateriaCmb = new List<CatMateriaXProfesorModels>();
-                var listTipoPersona = new SelectList(MateriaProfesor.TablaMateriaCmb, "", "");
-                ViewData["cmbMateria"] = listTipoPersona;
                 TempData["typemessage"] = "2";
                 TempData["message"] = "No se puede cargar la vista";
                 return RedirectToAction("MateriaP", new { id = MateriaProfesor.IDProfesor });
             }
         }
 
+        //GET: Admin/CatCatedratico/CreateMateria/5
+        [HttpPost]
         public ActionResult CreateMateria(string id, FormCollection collection)
         {
             try
@@ -313,16 +316,41 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 MateriaProfesor.IDProfesor = collection["IDProfesor"];
                 TempData["typemessage"] = "2";
                 TempData["message"] = "Los datos se guardaron correctamente.";
-                return RedirectToAction("MateriaP", "CreateMateria", new { id = MateriaProfesor.IDProfesor });
+                return RedirectToAction("MateriaP", new { id = MateriaProfesor.IDProfesor });
             }
         }
 
+        // POST: Admin/CatCatedratico/Materia
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult CombMateria(string IDEsp, string IDProfesor)
+        {
+            try
+            {
+                CatMateriaXProfesorModels Materia = new CatMateriaXProfesorModels();
+                CatMateriaXProfesor_Datos MateriaDatos = new CatMateriaXProfesor_Datos();
+
+                List<CatMateriaXProfesorModels> listaMateria = new List<CatMateriaXProfesorModels>();
+                Materia.conexion = Conexion;
+                Materia.IDModalidad = IDEsp;
+                Materia.IDProfesor = IDProfesor;
+                listaMateria = MateriaDatos.obtenerComboCatMateriaPorProfesor(Materia);
+                return Json(listaMateria, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        //GET: Admin/CatCatedratico/DeleteMateria/5
         [HttpGet]
         public ActionResult DeleteMateria(string id, string id2)
         {
             return View();
         }
 
+        //POST: Admin/CatCatedratico/DeleteMateria/5
         [HttpPost]
         public ActionResult DeleteMateria(string id, string id2, FormCollection collection)
         {

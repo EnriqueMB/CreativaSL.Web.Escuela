@@ -41,7 +41,7 @@ namespace CreativaSL.Web.Escuela.Models
                 List<CatMateriaXProfesorModels> lista = new List<CatMateriaXProfesorModels>();
                 CatMateriaXProfesorModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatMateriaXProfesor", datos.IDProfesor);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatMateriaXProfesor", datos.IDProfesor, datos.IDModalidad);
                 while (dr.Read())
                 {
                     item = new CatMateriaXProfesorModels();
@@ -77,6 +77,29 @@ namespace CreativaSL.Web.Escuela.Models
                 }
 
                 return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatModalidadModels> obtenerComboCatModalidad(CatMateriaXProfesorModels datos)
+        {
+            try
+            {
+                List<CatModalidadModels> lista = new List<CatModalidadModels>();
+                CatModalidadModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatModalidad");
+                while (dr.Read())
+                {
+                    item = new CatModalidadModels();
+                    item.IDModalidad = dr["IDModalidad"].ToString();
+                    item.Descripcion = dr["Modalidad"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
             }
             catch (Exception ex)
             {
