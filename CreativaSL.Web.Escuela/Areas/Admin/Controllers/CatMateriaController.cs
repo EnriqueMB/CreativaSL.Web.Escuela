@@ -131,7 +131,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Materia = MateriaDatos.ObtenerDetalleCatMateria(Materia);
                 return View(Materia);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 CatMateriaModels Materia = new CatMateriaModels();
                 TempData["typemessage"] = "2";
