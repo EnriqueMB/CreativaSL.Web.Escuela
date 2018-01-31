@@ -26,7 +26,7 @@
             <div class="tab-pane">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-reorder"></i>Nueva Materia</div>
+                        <div class="caption"><i class="icon-reorder"></i>Crear Materia</div>
                     </div>
                     @using (Html.BeginForm("Create", "CatMateria", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
                     {
@@ -40,23 +40,23 @@
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Tipo de Curso<span class="required"> *</span></label>
+                                        <label class="control-label">Modalidad<span class="required"> *</span></label>
                                         <div class="controls">
                                             @Html.DropDownListFor(model => model.tablaCursoCmb, ViewData["cmbTipoCurso"] as SelectList, new { id = "ListTipo", @class = "span12 m-wrap chosen" })
                                             @Html.ValidationMessageFor(model => model.tablaCursoCmb)
                                         </div>
                                     </div>
-                                    <span class="help-block">Seleccione un tipo de Curso</span>
+                                    <span class="help-block">Seleccione una modalidad</span>
                                 </div>
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Tipo de Materia<span class="required"> *</span></label>
+                                        <label class="control-label">Tipo de materia<span class="required"> *</span></label>
                                         <div class="controls">
                                             @Html.DropDownListFor(model => model.tablaTipoMateriaCmb, ViewData["cmbTipoMateria"] as SelectList, new { id = "ListTipoMateria", @class = "span12 m-wrap chosen" })
                                             @Html.ValidationMessageFor(model => model.tablaTipoMateriaCmb)
                                         </div>
                                     </div>
-                                    <span class="help-block">Seleccione un tipo de Curso</span>
+                                    <span class="help-block">Seleccione un tipo de materia</span>
                                 </div>
                                 
                             </div>
@@ -73,11 +73,11 @@
                                 </div>
                                 <div class="span4">
                                     <div class="control-group">
-                                        <label class="control-label">Nombre de Materia<span class="required"> *</span></label>
+                                        <label class="control-label">Nombre<span class="required"> *</span></label>
                                         <div class="controls">
                                             @Html.TextBoxFor(model => model.nombre, new { id = "Nombre", @class = "span12 m-wrap" })
                                             @Html.ValidationMessageFor(model => model.nombre)
-                                            <span class="help-bolck">Ingrese el nombre de Materia</span>
+                                            <span class="help-bolck">Ingrese el nombre de la materia</span>
                                         </div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                         <div class="controls">
                                             @Html.TextBoxFor(model => model.horaSemana, new { id = "horaSemana", @class = "span12 m-wrap" })
                                             @Html.ValidationMessageFor(model => model.horaSemana)
-                                            <span class="help-bolck">Ingrese el número de horas</span>
+                                            <span class="help-bolck">Ingrese el número de horas por semana</span>
                                         </div>
                                     </div>
                                 </div>

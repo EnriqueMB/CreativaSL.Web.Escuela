@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Ciclo Actual<span class="required"> *</span></label>
+                                        <label class="control-label">¿Es el ciclo escolar actual?<span class="required"> *</span></label>
                                         <div class="controls">
                                             @Html.CheckBoxFor(model => model.CicloActual)
 
@@ -64,11 +64,11 @@
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Nombre<span class="required"> *</span></label>
+                                        <label class="control-label">Nombre del ciclo escolar<span class="required"> *</span></label>
                                         <div class="controls">
                                             @Html.TextBoxFor(model => model.Nombre, new { id = "nombre", @class = "span12 m-wrap" })
                                             @Html.ValidationMessageFor(model => model.Nombre)
-                                            <span class="help-bolck">Ingrese el Nombre</span>
+                                            <span class="help-bolck">Ingrese el nombre del ciclo escolar</span>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Fecha Hora Inicio<span class="required"> *</span></label>
+                                        <label class="control-label">Fecha de inicio<span class="required"> *</span></label>
                                         <div class="controls">
                                             <div id="datetimepicker3" class="input-append date calendar">
                                                 @Html.TextBoxFor(model => model.FechaInicio, "{0:dd/MM/yyyy}", new { id = "fechaInicio", @class = "span12 m-wrap", @readonly = "readonly" })
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Fecha Hora Fin<span class="required"> *</span></label>
+                                        <label class="control-label">Fecha de término<span class="required"> *</span></label>
                                         <div class="controls">
                                             <div id="datetimepicker4" class="input-append date calendar">
                                                 @Html.TextBoxFor(model => model.FechaFin, "{0:dd/MM/yyyy}", new { id = "fechaFin", @class = "span12 m-wrap", @readonly = "readonly" })
