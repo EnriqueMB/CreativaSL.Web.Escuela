@@ -36,6 +36,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View(Curso);
             }
         }
+       
         // GET: Admin/CatEspecialidad/Create
         [HttpGet]
         //[Authorize(Roles = "3")]
@@ -195,5 +196,153 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        //[Authorize(Roles = "3")]
+        // GET: Admin/CatEspecialidad
+        public ActionResult MateriaCurso(string id)
+        {
+            try
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
+                MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.IDCurso = id;
+                MateriaXCurso = MateriaXCursoDatos.ObtenerListMaterias(MateriaXCurso);
+                return View(MateriaXCurso);
+            }
+            catch (Exception)
+            {
+
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                MateriaXCurso.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(MateriaXCurso);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult CreateMateria(string id)
+        {
+            try
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
+                MateriaXCurso.IDCurso = id;
+                MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.TablaMateriaCmb = MateriaXCursoDatos.obtenerComboCatMateriaPorCurso(MateriaXCurso);
+                var listTipoPersona = new SelectList(MateriaXCurso.TablaMateriaCmb, "IDMateria", "NombreM");
+                MateriaXCurso.tablaModalidadCmb = MateriaXCursoDatos.obtenerComboCatModalidad(MateriaXCurso);
+                var list = new SelectList(MateriaXCurso.tablaModalidadCmb, "IDModalidad", "descripcion");
+                ViewData["cmbTipoModalidad"] = list;
+                ViewData["cmbMateria"] = listTipoPersona;
+                return View(MateriaXCurso);
+            }
+            catch (Exception ex)
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                MateriaXCurso.IDCurso = id;
+                MateriaXCurso.TablaMateriaCmb = new List<CatMateriaXCursoModels>();
+                var listTipoPersona = new SelectList(MateriaXCurso.TablaMateriaCmb, "", "");
+                ViewData["cmbMateria"] = listTipoPersona;
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso });
+            }
+        }
+
+        public ActionResult CreateMateria(string id, FormCollection collection)
+        {
+            try
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
+                MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.opcion = 1;
+                MateriaXCurso.IDCurso = collection["IDCurso"];
+                MateriaXCurso.IDMateria = collection["TablaMateriaCmb"];
+                MateriaXCurso.user = User.Identity.Name;
+                MateriaXCurso = MateriaXCursoDatos.AbcCatMateriaXProfesor(MateriaXCurso);
+                if (MateriaXCurso.Completado == true)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Los datos se guardaron correctamente.";
+                    return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso });
+                }
+                else
+                {
+                    MateriaXCurso.TablaMateriaCmb = MateriaXCursoDatos.obtenerComboCatMateriaPorCurso(MateriaXCurso);
+                    var listTipoPersona = new SelectList(MateriaXCurso.TablaMateriaCmb, "IDMateria", "NombreM");
+                    ViewData["cmbMateria"] = listTipoPersona;
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Los datos se guardaron correctamente.";
+                    return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso });
+                }
+            }
+            catch (Exception)
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                MateriaXCurso.IDCurso = collection["IDCurso"];
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Los datos se guardaron correctamente.";
+                return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso });
+            }
+        }
+        // POST: Admin/CatCatedratico/Materia
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult CombMateria(string IDEsp, string IDCurso)
+        {
+            try
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
+
+                List<CatMateriaXCursoModels> listaMateria = new List<CatMateriaXCursoModels>();
+                MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.IDModalidad = IDEsp;
+                MateriaXCurso.IDCurso = IDCurso;
+                listaMateria = MateriaXCursoDatos.obtenerComboCatMateriaPorCurso(MateriaXCurso);
+                return Json(listaMateria, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult DeleteMateria(string id, string id2)
+        {
+            return View();
+        }
+
+        //POST: Admin/CatCatedratico/DeleteMateria/5
+        [HttpPost]
+        public ActionResult DeleteMateria(string id, string id2, FormCollection collection)
+        {
+            try
+            {
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
+
+                MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.opcion = 3;
+                MateriaXCurso.IDCurso = id2;
+                MateriaXCurso.IDMateria = id;
+                MateriaXCurso.user = User.Identity.Name;
+                MateriaXCurso = MateriaXCursoDatos.AbcCatMateriaXProfesor(MateriaXCurso);
+                TempData["typemessage"] = "1";
+                TempData["message"] = "El resgistro se ha eliminado correctamente.";
+                return Json("");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

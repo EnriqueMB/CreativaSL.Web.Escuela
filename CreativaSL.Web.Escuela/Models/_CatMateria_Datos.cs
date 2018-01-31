@@ -69,7 +69,7 @@ namespace CreativaSL.Web.Escuela.Models
                 while (dr.Read())
                 {
                     datos.id_materia = dr["id_materia"].ToString();
-                    datos.id_curso = dr["id_curso"].ToString();
+                    datos.id_curso = dr["id_modalidad"].ToString();
                     datos.id_tipoMateria = dr.GetInt32(dr.GetOrdinal("id_tipoMateria"));
                     datos.clave = dr["clave"].ToString();
                     datos.nombre = dr["Nombre"].ToString();
@@ -91,12 +91,12 @@ namespace CreativaSL.Web.Escuela.Models
                 List<CatCursoModels> lista = new List<CatCursoModels>();
                 CatCursoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatCurso");
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatModalidad");
                 while (dr.Read())
                 {
                     item = new CatCursoModels();
-                    item.IDCurso = dr["IDCurso"].ToString();
-                    item.Descripcion = dr["Curso"].ToString();
+                    item.IDCurso = dr["IDModalidad"].ToString();
+                    item.Descripcion = dr["Modalidad"].ToString();
                     lista.Add(item);
                 }
                 return lista;

@@ -2795,6 +2795,8 @@
     <Content Include="Areas\Admin\Views\CatCuentaUser\Index.cshtml" />
     <Content Include="Areas\Profesor\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Profesor\Views\HomeProfesor\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCurso\MateriaCurso.cshtml" />
+    <Content Include="Areas\Admin\Views\CatCurso\CreateMateria.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3024,6 +3026,8 @@
     <Compile Include="Models\CatGrupoModels.cs" />
     <Compile Include="Models\CatHorarioModels.cs" />
     <Compile Include="Models\CatMateriaModels.cs" />
+    <Compile Include="Models\CatMateriaXCursoModels.cs" />
+    <Compile Include="Models\CatMateriaXCurso_Datos.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
