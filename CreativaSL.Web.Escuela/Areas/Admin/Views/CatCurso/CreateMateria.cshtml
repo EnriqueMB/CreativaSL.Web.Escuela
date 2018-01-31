@@ -36,7 +36,7 @@
                         @Html.ValidationSummary(true)
 
                         @Html.HiddenFor(model => model.IDCurso)
-
+                        @Html.HiddenFor(model => model.IDModalidad)
                         <div class="portlet-body form">
                             <h3 class="form-section">Información de la Materia Profesor</h3>
                             <div class="row-fluid">
@@ -54,9 +54,10 @@
                               
                             </div>
                             <div class="form-actions">
-                                @{string id = Model.IDCurso; }
+                                @{string id = Model.IDCurso;
+                                    string id2 = Model.IDModalidad;}
                                 <input type="submit" value="Guardar" class="btn green">
-                                <a href="@Url.Action("MateriaCurso", "CatCurso", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                <a href="@Url.Action("MateriaCurso", "CatCurso", new { id = id, id2=id2})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
                             </div>
                         </div>
                                     }
