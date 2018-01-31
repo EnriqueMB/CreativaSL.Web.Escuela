@@ -40,16 +40,7 @@
                         <div class="portlet-body form">
                             <h3 class="form-section">Información de la Materia Profesor</h3>
                             <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Modalidad<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.DropDownListFor(model => model.tablaModalidadCmb, ViewData["cmbTipoModalidad"] as SelectList, new { id = "ListTipo", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.tablaModalidadCmb)
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Seleccione la Materia </span>
-                                </div>
+                                
                                 <div class="span6">
                                     <div class="control-group">
                                         <label class="control-label">Materia<span class="required"> *</span></label>
@@ -65,7 +56,7 @@
                             <div class="form-actions">
                                 @{string id = Model.IDCurso; }
                                 <input type="submit" value="Guardar" class="btn green">
-                                <a href="@Url.Action("MateriaP", "CatCatedratico", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                <a href="@Url.Action("MateriaCurso", "CatCurso", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
                             </div>
                         </div>
                                     }
@@ -76,33 +67,33 @@
     <script>
         $(document).ready(function () {
            
-            $("#ListTipo").change(function () {
+            @*$("#ListTipo").change(function () {
                 getComboCurso($("#ListTipo").val(), "@Model.IDCurso");
 
             });
-        });
-        function getComboCurso(idModalidad, IDC) {
-            $.ajax({
-                url: "/Admin/CatCurso/CombMateria",
-                data: {
-                    IDEsp: idModalidad
-                    , IDCurso: IDC
-                },
-                dataType: "json",
-                type: "POST",
-                error: function () {
-                    $("#ListMateria").html('');
-                },
-                success: function (cbmMateria) {
-                    var items = "";
-                    for (var i = 0; i < cbmMateria.length; i++) {
-                        items += "<option value=\"" + cbmMateria[i].IDMateria + "\">" + cbmMateria[i].NombreM + "</option>";
-                    }
-                    $("#ListMateria").html(items);
+        });*@
+        //function getComboCurso(idModalidad, IDC) {
+        //    $.ajax({
+        //        url: "/Admin/CatCurso/CombMateria",
+        //        data: {
+        //            IDEsp: idModalidad
+        //            , IDCurso: IDC
+        //        },
+        //        dataType: "json",
+        //        type: "POST",
+        //        error: function () {
+        //            $("#ListMateria").html('');
+        //        },
+        //        success: function (cbmMateria) {
+        //            var items = "";
+        //            for (var i = 0; i < cbmMateria.length; i++) {
+        //                items += "<option value=\"" + cbmMateria[i].IDMateria + "\">" + cbmMateria[i].NombreM + "</option>";
+        //            }
+        //            $("#ListMateria").html(items);
 
-                }
-            });
-        }
+        //        }
+        //    });
+        //}
             jQuery(document).ready(function () {
                 var message = '@message';
             var typemessage = '@typemessage';
