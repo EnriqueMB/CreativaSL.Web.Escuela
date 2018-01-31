@@ -33,7 +33,7 @@
                                 <div class="clearfix">
                                     <div class="btn-group">
                                         <div class="span12">
-                                            <a href="@Url.Action("Create","CatGrupo")" class="btn btn-default green"><i class="icon-plus"></i> Nuevo Grupo</a>
+                                            <a href="@Url.Action("Create", "CatGrupo")" class="btn btn-default green"><i class="icon-plus"></i> Nuevo Grupo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -55,32 +55,36 @@
                                                                     <th>Extra Escolar</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
+                                                                    <th>Materia</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
-                                                                {
-                                                                    <tr>
-                                                                        <td>@grupo["Clave"].ToString()</td>
-                                                                        <td>@grupo["Nombre"].ToString()</td>
-                                                                        <td>@grupo["NombreCiclo"].ToString()</td>
-                                                                        <td>@grupo["NombreEspecialidad"].ToString()</td>
-                                                                        <td>@grupo["NombreCurso"].ToString()</td>
-                                                                        @{bool Extra = false;
-                                                                            bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
-                                                                            if (Extra == true)
-                                                                            {
-                                                                                <td>SI</td>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <td>NO</td>
-                                                                            }
-                                                                        }
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new {id = grupo["IDGrupo"].ToString()})"><i class="icon-trash"></i></a></td>
-                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                    </tr>
+                                                                @{ 
+                                                                    foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>@grupo["Clave"].ToString()</td>
+                                                                            <td>@grupo["Nombre"].ToString()</td>
+                                                                            <td>@grupo["NombreCiclo"].ToString()</td>
+                                                                            <td>@grupo["NombreEspecialidad"].ToString()</td>
+                                                                            <td>@grupo["NombreCurso"].ToString()</td>
+                                                                           @{bool Extra = false;
+
+                                                                                bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
+                                                                                if (Extra == true)
+                                                                                {
+                                                                                    <td>SI</td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td>NO</td>
+                                                                                }
+                                                                               }
+                                                                            <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                            <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                            <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                        </tr>
+                                                                    }
                                                                   }
                                                             </tbody>
                                                         </table>
