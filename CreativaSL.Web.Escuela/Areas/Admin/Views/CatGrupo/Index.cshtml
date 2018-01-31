@@ -52,6 +52,7 @@
                                                                     <th>Ciclo</th>
                                                                     <th>Especialidad</th>
                                                                     <th>Curso</th>
+                                                                    <th>Extra Escolar</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
                                                                 </tr>
@@ -65,6 +66,17 @@
                                                                         <td>@grupo["NombreCiclo"].ToString()</td>
                                                                         <td>@grupo["NombreEspecialidad"].ToString()</td>
                                                                         <td>@grupo["NombreCurso"].ToString()</td>
+                                                                        @{bool Extra = false;
+                                                                            bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
+                                                                            if (Extra == true)
+                                                                            {
+                                                                                <td>SI</td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td>NO</td>
+                                                                            }
+                                                                        }
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new {id = grupo["IDGrupo"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>

@@ -62,6 +62,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Grupo.TablaCursosCmb = GrupoDatos.ObtenerComboCatCursos(Grupo);
                 var list5 = new SelectList(Grupo.TablaCursosCmb, "IDCurso", "Descripcion");
                 ViewData["cmbCursos"] = list5;
+                Grupo.ExtraEscolar = Convert.ToBoolean("false");
                 return View(Grupo);
             }
             catch (Exception)
@@ -164,6 +165,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Grupo.IDModalidad = collection["TablaModalidadCmb"];
                 Grupo.IDEspecialidad = collection["TablaEspecialidadCmb"];
                 Grupo.IDCurso = collection["TablaCursosCmb"];
+                Grupo.ExtraEscolar = collection["ExtraEscolar"].StartsWith("true");
                 Grupo = GrupoDatos.AbcCatGrupo(Grupo);
                 if (Grupo.Completado == true)
                 {
@@ -258,6 +260,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Grupo.IDModalidad = collection["TablaModalidadCmb"];
                 Grupo.IDEspecialidad = collection["TablaEspecialidadCmb"];
                 Grupo.IDCurso = collection["TablaCursosCmb"];
+                Grupo.ExtraEscolar = collection["ExtraEscolar"].StartsWith("true");
                 Grupo = GrupoDatos.AbcCatGrupo(Grupo);
                 if (Grupo.Completado == true)
                 {
