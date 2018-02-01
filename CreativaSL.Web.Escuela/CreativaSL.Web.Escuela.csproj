@@ -2800,6 +2800,7 @@
     <Content Include="Areas\Admin\Views\CatGrupo\MateriaProfesor.cshtml" />
     <Content Include="Areas\Admin\Views\CatGrupo\Inscribir.cshtml" />
     <Content Include="Areas\Admin\Views\CatGrupo\Inscripcion.cshtml" />
+    <Content Include="Areas\Admin\Views\Promocion\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
