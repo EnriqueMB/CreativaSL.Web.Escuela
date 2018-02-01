@@ -137,6 +137,70 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaModalidadCmb = value; }
         }
 
+        private List<CatGrupoModels> _ListaGrupoDetalle;
+
+        public List<CatGrupoModels> ListaGrupoDetalle
+        {
+            get { return _ListaGrupoDetalle; }
+            set { _ListaGrupoDetalle = value; }
+        }
+
+        private string _IDMateria;
+
+        public string IDMateria
+        {
+            get { return _IDMateria; }
+            set { _IDMateria = value; }
+        }
+        private string _NombreMateria;
+
+        public string NombreMateria
+        {
+            get { return _NombreMateria; }
+            set { _NombreMateria = value; }
+        }
+
+        private string _IDProfesor;
+
+        public string IDProfesor
+        {
+            get { return _IDProfesor; }
+            set { _IDProfesor = value; }
+        }
+
+        private string _NombreProfesor;
+
+        public string NombreProfesor
+        {
+            get { return _NombreProfesor; }
+            set { _NombreProfesor = value; }
+        }
+
+        private List<CatGrupoModels> _ListaGrupoMateria;
+
+        public List<CatGrupoModels> ListaGrupoMateria
+        {
+            get { return _ListaGrupoMateria; }
+            set { _ListaGrupoMateria = value; }
+        }
+
+        private DataTable _TablaMateria;
+
+        public DataTable TablaMateria
+        {
+            get { return _TablaMateria; }
+            set { _TablaMateria = value; }
+        }
+
+        private string _IDAsignacion;
+
+        public string IDAsignacion
+        {
+            get { return _IDAsignacion; }
+            set { _IDAsignacion = value; }
+        }
+
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

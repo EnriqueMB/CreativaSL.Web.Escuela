@@ -16,9 +16,9 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion,datos.id_persona,datos.nombre,datos.apPaterno,datos.apMaterno,datos.correo,
-                    datos.telefono,datos.direccion,datos.id_tipoPersona,datos.id_gradoEstudio,datos.clave,datos.curriculum,
-                    datos.clvUser,datos.passUser,datos.user
+                    datos.opcion, datos.id_persona, datos.nombre.Trim(), datos.apPaterno.Trim(), datos.apMaterno.Trim(), datos.correo,
+                    datos.telefono, datos.direccion, datos.id_tipoPersona, datos.id_gradoEstudio, datos.clave, datos.curriculum,
+                    datos.clvUser, datos.passUser, datos.user
                 };
                 if (datos.opcion == 1)
                 {
