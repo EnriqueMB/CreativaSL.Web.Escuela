@@ -1,0 +1,170 @@
+﻿using CreativaSL.Web.Escuela.Models;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
+{
+    public class PromocionController : Controller
+    {
+        string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
+        // GET: Admin/Promocion
+        public ActionResult Index()
+        {
+            PromocionModels Promocion = new PromocionModels();
+            _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+            Promocion.conexion = Conexion;
+            Promocion.TablaCicloEscolarCmb = PromocionDatos.ObtenerComboCatCicloEscolar(Promocion);
+            var list = new SelectList(Promocion.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+            ViewData["cmbCicloEscolar"] = list;
+
+            Promocion.TablaPlanEstudioCmb = PromocionDatos.ObtenerComboCatPlanEstudio(Promocion);
+            var listaPE = new SelectList(Promocion.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
+            ViewData["cmbPlanEstudio"] = listaPE;
+
+            Promocion.TablaModalidadCmb = PromocionDatos.ObtenerComboCatModalidad(Promocion);
+            var listModalidad = new SelectList(Promocion.TablaModalidadCmb, "IDModalidad", "Descripcion");
+            ViewData["cmbModalidad"] = listModalidad;
+
+            Promocion.TablaEspecialidadCmb = PromocionDatos.ObtenerComboCatEspecialidad(Promocion);
+            var listEspecialidad = new SelectList(Promocion.TablaEspecialidadCmb, "id_especialidad", "descripcion");
+            ViewData["cmbEspecialidad"] = listEspecialidad;
+
+            Promocion.TablaCursosCmb = PromocionDatos.ObtenerComboCatCursos(Promocion);
+            var listCursos = new SelectList(Promocion.TablaCursosCmb, "IDCurso", "Descripcion");
+            ViewData["cmbCursos"] = listCursos;
+
+
+            Promocion.TablaGrupoCmb = PromocionDatos.ObtenerComboCatGrupo(Promocion);
+            var listGrupo = new SelectList(Promocion.TablaGrupoCmb, "IDGrupo", "Nombre");
+            ViewData["cmbGrupo"] = listGrupo;
+
+
+            Promocion.TablaAlumnosXGrupo = PromocionDatos.ObtenertablaCatAlumnoXGrupo(Promocion);
+            var listAlumnosXGrupo = new SelectList(Promocion.TablaAlumnosXGrupo, "IDGrupo", "Nombre");
+            ViewData["tblAlumnosXGrupo"] = listAlumnosXGrupo;
+
+            return View();
+        }
+
+
+
+
+        //FUNCIONES MEDIANTE AJAX DESDE VISTA
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboModalidad(int idplanEstudio)
+        {
+            try
+            {
+                PromocionModels Promocion = new PromocionModels();
+                _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+
+                List<CatModalidadModels> listaModalidad = new List<CatModalidadModels>();
+                Promocion.conexion = Conexion;
+                Promocion.idplanEstudio = idplanEstudio;
+
+                listaModalidad = PromocionDatos.ObtenerComboCatModalidad(Promocion);
+                return Json(listaModalidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboEspecialidad(string IDModalidad)
+        {
+            try
+            {
+                PromocionModels Promocion = new PromocionModels();
+                _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+
+                List<CatEspecialidadModels> listaEspecialidad = new List<CatEspecialidadModels>();
+                Promocion.conexion = Conexion;
+                Promocion.IDModalidad = IDModalidad;
+
+                listaEspecialidad = PromocionDatos.ObtenerComboCatEspecialidad(Promocion);
+                return Json(listaEspecialidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboCursos(string IDEspecialidad)
+        {
+            try
+            {
+                PromocionModels Promocion = new PromocionModels();
+                _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+
+                List<CatCursoModels> listaEspecialidad = new List<CatCursoModels>();
+                Promocion.conexion = Conexion;
+                Promocion.IDEspecialidad = IDEspecialidad;
+
+                listaEspecialidad = PromocionDatos.ObtenerComboCatCursos(Promocion);
+                return Json(listaEspecialidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboGrupo(string ciclo, string IDEspecialidad, string curso)
+        {
+            try
+            {
+                PromocionModels Promocion = new PromocionModels();
+                _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+
+                List<CatGrupoModels> listaGrupo = new List<CatGrupoModels>();
+                Promocion.conexion = Conexion;
+                Promocion.ciclo = ciclo;
+                Promocion.IDEspecialidad = IDEspecialidad;
+                Promocion.curso = curso;
+
+                listaGrupo = PromocionDatos.ObtenerComboCatGrupo(Promocion);
+                return Json(listaGrupo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult TablaAlumnosXGrupo(string grupo)
+        {
+            try
+            {
+                PromocionModels Promocion = new PromocionModels();
+                _Promocion_Datos PromocionDatos = new _Promocion_Datos();
+
+                List<CatAlumnoModels> listaAlumnosXGrupo = new List<CatAlumnoModels>();
+                Promocion.conexion = Conexion;
+                Promocion.grupo = grupo;
+
+
+                listaAlumnosXGrupo = PromocionDatos.ObtenertablaCatAlumnoXGrupo(Promocion);
+                return Json(listaAlumnosXGrupo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+    }
+}

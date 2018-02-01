@@ -2797,8 +2797,6 @@
     <Content Include="Areas\Profesor\Views\HomeProfesor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatCurso\MateriaCurso.cshtml" />
     <Content Include="Areas\Admin\Views\CatCurso\CreateMateria.cshtml" />
-    <Content Include="Areas\Admin\Views\CatGrupo\Inscripcion.cshtml" />
-    <Content Include="Areas\Admin\Views\CatGrupo\Inscribir.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3005,6 +3003,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NotificacionController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\Controllers\HomeProfesorController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
@@ -3034,6 +3033,7 @@
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
+    <Compile Include="Models\PromocionModels.cs" />
     <Compile Include="Models\_CatCuentaUser_Datos.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
@@ -3068,6 +3068,7 @@
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
+    <Compile Include="Models\_Promocion_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
     <Compile Include="Models\_Usuario_Datos.cs" />
     <Compile Include="MyRoleProvider.cs" />

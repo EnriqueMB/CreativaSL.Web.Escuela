@@ -33,8 +33,9 @@
                                 <div class="clearfix">
                                     <div class="btn-group">
                                         <div class="span12">
-                                            @{string id = Model.IDCurso;}
-                                            <a href="@Url.Action("CreateMateria", "CatCurso", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Nueva Materia</a>
+                                            @{string id = Model.IDCurso;
+                                                string id2 = Model.IDModalidad;}
+                                            <a href="@Url.Action("CreateMateria", "CatCurso", new { id = id ,id2=id2} )" class="btn btn-default green"><i class="icon-plus"></i>Nueva Materia</a>
                                             <a href="@Url.Action("Index", "CatCurso")" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
