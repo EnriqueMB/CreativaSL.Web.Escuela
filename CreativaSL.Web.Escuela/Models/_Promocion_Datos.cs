@@ -9,6 +9,31 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class _Promocion_Datos
     {
+        public PromocionModels PromoverGrupo(PromocionModels datos) {
+           
+            try
+            {
+                object[] parametros =
+                {
+                    datos.grupo,datos.grupoD,datos.TablaAlumnos,datos.user
+                };
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_PromocionGrupo", parametros);
+                datos.estado = aux.ToString();
+                if (!string.IsNullOrEmpty(datos.estado))
+                {
+                    datos.Completado = true;
+                }
+                else
+                {
+                    datos.Completado = false;
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<CatAlumnoModels> ObtenertablaCatAlumnoXGrupo(PromocionModels datos)
         {
             try

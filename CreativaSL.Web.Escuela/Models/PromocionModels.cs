@@ -23,6 +23,13 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _idplanEstudio; }
             set { _idplanEstudio = value; }
         }
+        private string _estado;
+
+        public string estado
+        {
+            get { return _estado; }
+            set { _estado = value; }
+        }
 
         private string _IDModalidad;
 
@@ -37,6 +44,13 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _IDEspecialidad; }
             set { _IDEspecialidad = value; }
+        }
+        private int _numAlumnos;
+
+        public int numAlumnos
+        {
+            get { return _numAlumnos; }
+            set { _numAlumnos = value; }
         }
 
 
@@ -68,6 +82,14 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _grupo; }
             set { _grupo = value; }
         }
+        private string _grupoD;
+
+        public string grupoD
+        {
+            get { return _grupoD; }
+            set { _grupoD = value; }
+        }
+
         private DataTable _TablaDatos;
 
         public DataTable TablaDatos
@@ -76,7 +98,13 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaDatos = value; }
         }
 
+        private DataTable _TablaAlumnos;
 
+        public DataTable TablaAlumnos
+        {
+            get { return _TablaAlumnos; }
+            set { _TablaAlumnos = value; }
+        }
         private List<CatPlanEstudioModels> _TablaPlanEstudioCmb;
         [Required(ErrorMessage = "El plan de estudio es obligatorio")]
         [Display(Name = "Plan Estudio")]
@@ -128,6 +156,14 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaGrupoCmb = value; }
         }
 
+        private List<CatGrupoModels> _TablaGrupoDCmb;
+        [Required(ErrorMessage = "El Grupo es obligatorio")]
+        [Display(Name = "Grupo")]
+        public List<CatGrupoModels> TablaGrupoDCmb
+        {
+            get { return _TablaGrupoDCmb; }
+            set { _TablaGrupoDCmb = value; }
+        }
         private List<CatAlumnoModels> _TablaAlumnosXGrupo;
         [Required(ErrorMessage = "El Grupo es obligatorio")]
         [Display(Name = "Grupo")]
