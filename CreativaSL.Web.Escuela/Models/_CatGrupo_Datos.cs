@@ -268,6 +268,7 @@ namespace CreativaSL.Web.Escuela.Models
                         {
                             Item = new CatGrupoModels();
                             Item.ListaGrupoDetalle = new List<CatGrupoModels>();
+                            Item.IDAsignacion = !DTR.IsDBNull(DTR.GetOrdinal("IDAsignatura")) ? DTR.GetString(DTR.GetOrdinal("IDAsignatura")) : string.Empty;
                             Item.IDMateria = !DTR.IsDBNull(DTR.GetOrdinal("IDMateria")) ? DTR.GetString(DTR.GetOrdinal("IDMateria")) : string.Empty;
                             Item.NombreMateria = !DTR.IsDBNull(DTR.GetOrdinal("NombreMateria")) ? DTR.GetString(DTR.GetOrdinal("NombreMateria")) : string.Empty;
                             //string Aux = DTR.GetString(2);
@@ -283,8 +284,10 @@ namespace CreativaSL.Web.Escuela.Models
                             {
                                 ItemAux = new CatGrupoModels();
                                 XmlNodeList IDProfesor = Nodo.GetElementsByTagName("IDProfesor");
+                                XmlNodeList IDProfesorR = Nodo.GetElementsByTagName("IDProfesorR");
                                 XmlNodeList NombreProfesor = Nodo.GetElementsByTagName("NombreProfesor");
                                 ItemAux.IDProfesor = IDProfesor[0].InnerText;
+                                ItemAux.IDProfesorR = IDProfesorR[0].InnerText;
                                 ItemAux.NombreProfesor = NombreProfesor[0].InnerText;
                                 Item.ListaGrupoDetalle.Add(ItemAux);
                             }
@@ -308,11 +311,9 @@ namespace CreativaSL.Web.Escuela.Models
                 Datos.Completado = false;
                 int Resultado = 0;
                 SqlDataReader dr = SqlHelper.ExecuteReader(Datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_abc_Asignatura",
-                     new SqlParameter("@opcion", Datos.opcion),
-                     new SqlParameter("@IDAsignatura", Datos.IDAsignacion),
                      new SqlParameter("@IDGrupo", Datos.IDGrupo),
                      new SqlParameter("@MateriaProfe", Datos.TablaMateria),
-                     new SqlParameter("@IDUsuario", Datos.user)
+                     new SqlParameter("@usuario", Datos.user)
                      );
                 while (dr.Read())
                 {

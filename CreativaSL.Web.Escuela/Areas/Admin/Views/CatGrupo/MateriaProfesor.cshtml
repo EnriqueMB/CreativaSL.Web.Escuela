@@ -41,6 +41,7 @@
                             <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                 <thead>
                                     <tr>
+                                        <th style="display:none"></th>
                                         <th>Materias</th>
                                         <th>Profesores</th>
                                     </tr>
@@ -50,6 +51,9 @@
                                         foreach (var Item in Model.ListaGrupoMateria)
                                         {
                                         <tr>
+                                            <td style="display:none">
+                                             <input  name="IDA-@Item.IDAsignacion"/>
+                                            </td>
                                             <td>@Item.NombreMateria</td>
                                             <td>
                                                 <div class="form-group">
@@ -57,7 +61,14 @@
                                                         <option value="">--SELECCIONE--</option>
                                                         @foreach (var itemP in Item.ListaGrupoDetalle)
                                                         {
-                                                            <option value="@itemP.IDProfesor"> @itemP.NombreProfesor</option>
+                                                            if (itemP.IDProfesor == itemP.IDProfesorR)
+                                                            {
+                                                                <option value="@itemP.IDProfesor" selected>@itemP.NombreProfesor</option>
+                                                            }
+                                                            else
+                                                            {
+                                                                <option value="@itemP.IDProfesor"> @itemP.NombreProfesor</option>
+                                                            }
                                                         }
                                                     </select>
                                                 </div>

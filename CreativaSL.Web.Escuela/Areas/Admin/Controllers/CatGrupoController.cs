@@ -453,38 +453,61 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             try
             {
                 CatGrupoModels Grupo = new CatGrupoModels();
+                CatGrupo_Datos GrupoD = new CatGrupo_Datos();
                 Grupo.IDGrupo = collection["IDGrupo"];
                 Grupo.user = User.Identity.Name;
-                Grupo.IDAsignacion = "";
                 Grupo.conexion = Conexion;
-                Grupo.opcion = 1;
                 DataTable TablaMateriasProfesor = new DataTable();
+                TablaMateriasProfesor.Columns.Add("IDAsignacion", typeof(string));
                 TablaMateriasProfesor.Columns.Add("IDMateria", typeof(string));
                 TablaMateriasProfesor.Columns.Add("IDProfesor", typeof(string));
                 TablaMateriasProfesor.Columns.Add("IDHorario", typeof(string));
                 TablaMateriasProfesor.Columns.Add("IDAula", typeof(string));
                 String[] Cadena = Request.Form.AllKeys;
-                for (int i = 1; i < Cadena.Length; i++)
+                for (int i = 0; i < Cadena.Length; i++)
                 {
                     if (Cadena[i].Length > 4)
                     {
                         string BeginText = Cadena[i].Substring(0, 4);
+                        if (BeginText.Equals("IDA-"))
+                        {
+                            string IDAsignacion = Cadena[i].Substring(4, Cadena[i].Length - 4);
+                            Grupo.IDAsignacion = IDAsignacion;
+                        }
                         if (BeginText.Equals("cmb-"))
                         {
                             string IDMateria = Cadena[i].Substring(4, Cadena[i].Length - 4);
                             string IDProfesor = Request.Form[Cadena[i]].ToString();
                             string IDHorario = string.Empty;
                             string IDAula = string.Empty;
-                            TablaMateriasProfesor.Rows.Add(new Object[] { IDMateria, IDProfesor, IDHorario, IDAula });
+                            TablaMateriasProfesor.Rows.Add(new Object[] { Grupo.IDAsignacion, IDMateria, IDProfesor, IDHorario, IDAula });
                         }
                     }
+                    else
+                    {
+                        Grupo.IDAsignacion = string.Empty;
+                    }
                 }
-                return RedirectToAction("Index");
+                Grupo.TablaMateria = TablaMateriasProfesor;
+                GrupoD.AMateriaPorProfesor(Grupo);
+                if (Grupo.Completado == true)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Las materia se guardaron correctamente.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Ocurrió un error al guardar las materias. Intente nuevamente.";
+                    return RedirectToAction("Index");
+                }
             }
             catch (Exception)
             {
-
-                throw;
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Ocurrió un error al guardar las materias. Contacte a soporte técnico.";
+                return RedirectToAction("Index");
             }
         }
     }

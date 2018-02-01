@@ -168,6 +168,14 @@ namespace CreativaSL.Web.Escuela.Models
             set { _IDProfesor = value; }
         }
 
+        private string _IDProfesorR;
+
+        public string IDProfesorR
+        {
+            get { return _IDProfesorR; }
+            set { _IDProfesorR = value; }
+        }
+
         private string _NombreProfesor;
 
         public string NombreProfesor
@@ -198,6 +206,14 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _IDAsignacion; }
             set { _IDAsignacion = value; }
+        }
+
+        private string _IDAsignacion2;
+
+        public string IDAsignacion2
+        {
+            get { return _IDAsignacion2; }
+            set { _IDAsignacion2 = value; }
         }
 
 
