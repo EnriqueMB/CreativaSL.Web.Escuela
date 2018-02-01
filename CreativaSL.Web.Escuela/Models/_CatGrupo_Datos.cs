@@ -203,5 +203,51 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        public CatGrupoModels ObtenerListAlumnos(CatGrupoModels datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_AlumnosXGrupo", datos.IDGrupo);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatAlumnoModels> ObtenerComboAlumnosInscripcion(CatAlumnosXGrupoModels datos)
+        {
+            try
+            {
+                List<CatAlumnoModels> Lista = new List<CatAlumnoModels>();
+                CatAlumnoModels Item;
+                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion");
+                while(dr.Read())
+                {
+                    Item = new CatAlumnoModels();
+                    Item.IDPersona = dr.GetString(dr.GetOrdinal("IDAlumno"));
+                    Item.nombre = dr.GetString(dr.GetOrdinal("NombreAlumno"));
+                    Lista.Add(Item);
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
