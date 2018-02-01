@@ -1,8 +1,9 @@
-﻿@model CreativaSL.Web.Escuela.Models.CatPlanEstudioModels
+﻿
 @{
-    ViewBag.Title = "Plan de Estudio";
+    ViewBag.Title = "Inscripcion";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 @section featured
 {
     @{
@@ -27,13 +28,15 @@
                     <div class="span12">
                         <div class="portlet box blue">
                             <div class="portlet-title">
-                                <div class="caption"><i class="icon-edit"></i>Plan de Estudio</div>
+                                <div class="caption"><i class="icon-edit"></i>Alumnos inscritos</div>
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
                                         <div class="span12">
-                                            <a href="@Url.Action("Create","PlanEstudio")" class="btn btn-default green"><i class="icon-plus"></i> Nuevo Plan de Estudio</a>
+                                            @{string id = Model.IDGrupo;}
+                                            <a href="@Url.Action("Inscribir", "CatGrupo", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Inscribir alumno</a>
+                                            <a href="@Url.Action("Index", "CatGrupo")" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -47,20 +50,17 @@
                                                         <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                                             <thead class="flip-content">
                                                                 <tr>
-                                                                    <th>Abreviatura</th>
-                                                                    <th>Descripción</th>
-                                                                    <th>Editar</th>
-                                                                    <th>Eliminar</th>
+                                                                    <th>Número de control</th>
+                                                                    <th>Alumno</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach (System.Data.DataRow Plan in Model.TablaDatos.Rows)
+                                                                @foreach (System.Data.DataRow lista in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
-                                                                        <td>@Plan["Abreviatura"].ToString()</td>
-                                                                        <td>@Plan["Descripcion"].ToString()</td>
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "PlanEstudio", new { id = Plan["IDPlanEstudio"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "PlanEstudio", new {id = Plan["IDPlanEstudio"].ToString()})"><i class="icon-trash"></i></a></td>
+                                                                        <td>@lista["NumeroControl"].ToString()</td>
+                                                                        <td>@lista["NombreAlumno"].ToString()</td>
+                                                                        @*<td style="text-align: center;"><a class="btn red delete" href="@Url.Action("DeleteAlumno", "CatGrupo", new {id = lista["IDAlumno"].ToString(), id2 = id})"><i class="icon-trash"></i></a></td>*@
                                                                     </tr>
                                                                 }
                                                             </tbody>
@@ -129,9 +129,14 @@
                 }
             }
         });
-
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
     </script>
 }
+
+
+
+
+
 
 
 

@@ -3004,6 +3004,7 @@
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NotificacionController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\Controllers\HomeProfesorController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
@@ -3017,6 +3018,7 @@
     <Compile Include="Models\AsignaturaModels.cs" />
     <Compile Include="Models\CatAdministrativoModels.cs" />
     <Compile Include="Models\CatAlumnoModels.cs" />
+    <Compile Include="Models\CatAlumnosXGrupoModels.cs" />
     <Compile Include="Models\CatAulaModels.cs" />
     <Compile Include="Models\CatCatedraticoModels.cs" />
     <Compile Include="Models\CatCicloEscolarModels.cs" />
@@ -3032,6 +3034,7 @@
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
+    <Compile Include="Models\PromocionModels.cs" />
     <Compile Include="Models\_CatCuentaUser_Datos.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
@@ -3066,6 +3069,7 @@
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
+    <Compile Include="Models\_Promocion_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
     <Compile Include="Models\_Usuario_Datos.cs" />
     <Compile Include="MyRoleProvider.cs" />

@@ -1,8 +1,9 @@
-﻿@model CreativaSL.Web.Escuela.Models.CatPlanEstudioModels
+﻿@model CreativaSL.Web.Escuela.Models.CatAlumnosXGrupoModels
 @{
-    ViewBag.Title = "Crear Plan de Estudio";
+    ViewBag.Title = "Inscribir";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 @section featured
 {
     @{
@@ -16,63 +17,57 @@
         <div id="Success" class="success message" style="display: none">
             <h3></h3>
         </div>
+
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
-                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small> Administración</small></h3>
                 </div>
             </div>
             <div class="tab-pane">
                 <div class="portlet box blue">
                     <div class="portlet-title">
-                        <div class="caption"><i class="icon-reorder"></i>Crear Plan de Estudio</div>
+                        <div class="caption"><i class="icon-reorder"></i>Inscripción</div>
                     </div>
-                    @using (Html.BeginForm("Create", "PlanEstudio", FormMethod.Post, new { @class = "form-horizontal", autocomplete = "off" }))
+
+                    @using (Html.BeginForm("Inscribir", "CatGrupo", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
-                        @Html.HiddenFor(model => model.IDPlanEstudio)
+                        @Html.HiddenFor(model => model.IDGrupo)
 
                         <div class="portlet-body form">
-                            <h3 class="form-section">Información del plan de estudio</h3>
+                            <h3 class="form-section">Inscripción de un alumno</h3>
                             <div class="row-fluid">
                                 <div class="span6">
                                     <div class="control-group">
-                                        <label class="control-label">Abreviatura<span class="required"> *</span></label>
+                                        <label class="control-label">Alumno<span class="required"> *</span></label>
                                         <div class="controls">
-                                            @Html.TextBoxFor(model => model.abreviatura, new { id = "abreviatura", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.abreviatura)
-                                            <span class="help-bolck">Ingrese una abreviatura</span>
+                                            @Html.DropDownListFor(model => model.tablaAlumnos, ViewData["cmbAlumnos"] as SelectList, new { id = "ListTipo", @class = "span12 m-wrap" })
+                                            @Html.ValidationMessageFor(model => model.tablaAlumnos)
                                         </div>
                                     </div>
+                                    <span class="help-block">Seleccione un alumno </span>
                                 </div>
-                                <div class="span6">
-                                    <div class="control-group">
-                                        <label class="control-label">Nombre del plan de estudio<span class="required"> *</span></label>
-                                        <div class="controls">
-                                            @Html.TextBoxFor(model => model.Descripcion, new { id = "Descripcion", @class = "span12 m-wrap" })
-                                            @Html.ValidationMessageFor(model => model.Descripcion)
-                                            <span class="help-bolck">Ingrese el nombre del plan de estudio</span>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
-                            
                             <div class="form-actions">
+                                @{string id = Model.IDGrupo; }
                                 <input type="submit" value="Guardar" class="btn green">
-                                <a href="@Url.Action("Index","PlanEstudio")" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                <a href="@Url.Action("Inscripcion", "CatGrupo", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
                             </div>
                         </div>
-                    }
+                                    }
                 </div>
             </div>
         </div>
     </div>
     <script>
        
-        jQuery(document).ready(function () {
-            var message = '@message';
+
+            jQuery(document).ready(function () {
+                var message = '@message';
             var typemessage = '@typemessage';
 
             if (typemessage && message) {
@@ -92,3 +87,11 @@
         });
     </script>
 }
+
+
+
+
+
+
+
+

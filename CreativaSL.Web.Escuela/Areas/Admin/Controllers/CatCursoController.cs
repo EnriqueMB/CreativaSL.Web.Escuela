@@ -200,7 +200,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         [HttpGet]
         //[Authorize(Roles = "3")]
         // GET: Admin/CatEspecialidad
-        public ActionResult MateriaCurso(string id)
+        public ActionResult MateriaCurso(string id,string id2)
         {
             try
             {
@@ -208,6 +208,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
                 MateriaXCurso.conexion = Conexion;
                 MateriaXCurso.IDCurso = id;
+                MateriaXCurso.IDModalidad = id2;
                 MateriaXCurso = MateriaXCursoDatos.ObtenerListMaterias(MateriaXCurso);
                 return View(MateriaXCurso);
             }
@@ -223,7 +224,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateMateria(string id)
+        public ActionResult CreateMateria(string id,string id2)
         {
             try
             {
@@ -231,11 +232,10 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatMateriaXCurso_Datos MateriaXCursoDatos = new CatMateriaXCurso_Datos();
                 MateriaXCurso.IDCurso = id;
                 MateriaXCurso.conexion = Conexion;
+                MateriaXCurso.IDModalidad = id2;
                 MateriaXCurso.TablaMateriaCmb = MateriaXCursoDatos.obtenerComboCatMateriaPorCurso(MateriaXCurso);
                 var listTipoPersona = new SelectList(MateriaXCurso.TablaMateriaCmb, "IDMateria", "NombreM");
-                MateriaXCurso.tablaModalidadCmb = MateriaXCursoDatos.obtenerComboCatModalidad(MateriaXCurso);
-                var list = new SelectList(MateriaXCurso.tablaModalidadCmb, "IDModalidad", "descripcion");
-                ViewData["cmbTipoModalidad"] = list;
+                
                 ViewData["cmbMateria"] = listTipoPersona;
                 return View(MateriaXCurso);
             }
@@ -248,7 +248,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 ViewData["cmbMateria"] = listTipoPersona;
                 TempData["typemessage"] = "2";
                 TempData["message"] = "No se puede cargar la vista";
-                return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso });
+                return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso,id2 = MateriaXCurso.IDModalidad });
             }
         }
 
@@ -262,13 +262,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 MateriaXCurso.opcion = 1;
                 MateriaXCurso.IDCurso = collection["IDCurso"];
                 MateriaXCurso.IDMateria = collection["TablaMateriaCmb"];
+                MateriaXCurso.IDModalidad = collection["IDModalidad"];
                 MateriaXCurso.user = User.Identity.Name;
                 MateriaXCurso = MateriaXCursoDatos.AbcCatMateriaXProfesor(MateriaXCurso);
                 if (MateriaXCurso.Completado == true)
                 {
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Los datos se guardaron correctamente.";
-                    return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso });
+                    return RedirectToAction("MateriaCurso", new { id = MateriaXCurso.IDCurso , id2= MateriaXCurso.IDModalidad });
                 }
                 else
                 {
@@ -277,7 +278,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     ViewData["cmbMateria"] = listTipoPersona;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Los datos se guardaron correctamente.";
-                    return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso });
+                    return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso, id2 = MateriaXCurso.IDModalidad });
                 }
             }
             catch (Exception)
@@ -286,7 +287,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 MateriaXCurso.IDCurso = collection["IDCurso"];
                 TempData["typemessage"] = "2";
                 TempData["message"] = "Los datos se guardaron correctamente.";
-                return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso });
+                return RedirectToAction("MateriaCurso", "CreateMateria", new { id = MateriaXCurso.IDCurso, id2 = MateriaXCurso.IDModalidad });
             }
         }
         // POST: Admin/CatCatedratico/Materia

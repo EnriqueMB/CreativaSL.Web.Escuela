@@ -28,7 +28,7 @@
                     <div class="span12">
                         <div class="portlet box blue">
                             <div class="portlet-title">
-                                <div class="caption"><i class="icon-edit"></i>Curso</div>
+                                <div class="caption"><i class="icon-edit"></i>Cursos</div>
                             </div>
                             <div class="portlet-body">
                                 <div class="clearfix">
@@ -50,9 +50,9 @@
                                                                 <tr>
                                                                     <th>Abreviatura</th>
                                                                     <th>Descripción</th>
+                                                                    <th>Materias</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
-                                                                    <th>Agregar Materia</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -61,9 +61,9 @@
                                                                     <tr>
                                                                         <td>@Curso["Abreviatura"].ToString()</td>
                                                                         <td>@Curso["Descripcion"].ToString()</td>
+                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaCurso", "CatCurso", new { id = Curso["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatCurso", new { id = Curso["IDCurso"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatCurso", new {id = Curso["IDCurso"].ToString()})"><i class="icon-trash"></i></a></td>
-                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaCurso", "CatCurso", new { id = Curso["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>
