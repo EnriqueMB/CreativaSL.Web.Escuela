@@ -338,5 +338,154 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult Inscripcion(string id)
+        {
+            try
+            {
+                CatGrupoModels grupoModel = new CatGrupoModels();
+                CatGrupo_Datos grupoDatos = new CatGrupo_Datos();
+                grupoModel.conexion = Conexion;
+                grupoModel.IDGrupo = id;
+                grupoModel = grupoDatos.ObtenerListAlumnos(grupoModel);
+                return View(grupoModel);
+            }
+            catch (Exception)
+            {
+
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                MateriaXCurso.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(MateriaXCurso);
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult Inscribir(string id)
+        {
+            try
+            {
+                CatAlumnosXGrupoModels AlumnoGrupo = new CatAlumnosXGrupoModels();
+                CatGrupo_Datos GrupoDatos = new CatGrupo_Datos();
+                AlumnoGrupo.conexion = Conexion;
+                AlumnoGrupo.IDGrupo = id;
+                //Grupo.TablaCicloEscolarCmb = GrupoDatos.ObtenerComboAlumnosInscripcion(Grupo);
+                AlumnoGrupo.tablaAlumnos = GrupoDatos.ObtenerComboAlumnosInscripcion(AlumnoGrupo);
+                var list = new SelectList(AlumnoGrupo.tablaAlumnos, "IDPersona", "nombre");
+                ViewData["cmbAlumnos"] = list;
+                return View(AlumnoGrupo);
+            }
+            catch (Exception)
+            {
+
+                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
+                MateriaXCurso.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(MateriaXCurso);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Inscribir(string id, FormCollection collection)
+        {
+            try
+            {
+                CatAlumnoModels Alumno = new CatAlumnoModels();
+                CatGrupo_Datos GrupoDatos = new CatGrupo_Datos();
+                Alumno.conexion = Conexion;
+                Alumno.user = User.Identity.Name;
+                Alumno.IDPersona = collection["IDAlumno"];
+                //Alumno = GrupoDatos.AbcCatGrupo(Alumno);
+                if (Alumno.Completado == true)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Alumno inscrito.";
+                    return RedirectToAction("Inscripcion");
+                }
+                else
+                {
+                    //Recargar el combo de Alumnos
+                    //Grupo.TablaCicloEscolarCmb = GrupoDatos.ObtenerComboCatCicloEscolar(Grupo);
+                    //var list = new SelectList(Grupo.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+                    //ViewData["cmbCicloEscolar"] = list;
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Ocurrió un error al inscribir al alumno. Intente nuevamente.";
+                    return RedirectToAction("Inscribir");
+                }
+            }
+            catch
+            {
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Los datos no se guardaron correctamente. Contacte a soporte técnico.";
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult MateriaProfesor(string id, string id2)
+        {
+            try
+            {
+                CatGrupoModels Grupo = new CatGrupoModels();
+                CatGrupo_Datos GrupoD = new CatGrupo_Datos();
+                Grupo.conexion = Conexion;
+                Grupo.IDGrupo = id;
+                Grupo.IDCurso = id2;
+                Grupo = GrupoD.ObtenerMateriaPRofesr(Grupo);
+                return View(Grupo);
+            }
+            catch (Exception)
+            {
+                CatGrupoModels Grupo = new CatGrupoModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return RedirectToAction("Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult MateriaProfesor(string id, FormCollection collection)
+        {
+            try
+            {
+                CatGrupoModels Grupo = new CatGrupoModels();
+                Grupo.IDGrupo = collection["IDGrupo"];
+                Grupo.user = User.Identity.Name;
+                Grupo.IDAsignacion = "";
+                Grupo.conexion = Conexion;
+                Grupo.opcion = 1;
+                DataTable TablaMateriasProfesor = new DataTable();
+                TablaMateriasProfesor.Columns.Add("IDMateria", typeof(string));
+                TablaMateriasProfesor.Columns.Add("IDProfesor", typeof(string));
+                TablaMateriasProfesor.Columns.Add("IDHorario", typeof(string));
+                TablaMateriasProfesor.Columns.Add("IDAula", typeof(string));
+                String[] Cadena = Request.Form.AllKeys;
+                for (int i = 1; i < Cadena.Length; i++)
+                {
+                    if (Cadena[i].Length > 4)
+                    {
+                        string BeginText = Cadena[i].Substring(0, 4);
+                        if (BeginText.Equals("cmb-"))
+                        {
+                            string IDMateria = Cadena[i].Substring(4, Cadena[i].Length - 4);
+                            string IDProfesor = Request.Form[Cadena[i]].ToString();
+                            string IDHorario = string.Empty;
+                            string IDAula = string.Empty;
+                            TablaMateriasProfesor.Rows.Add(new Object[] { IDMateria, IDProfesor, IDHorario, IDAula });
+                        }
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

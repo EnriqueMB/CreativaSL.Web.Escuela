@@ -204,5 +204,134 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        public CatGrupoModels ObtenerListAlumnos(CatGrupoModels datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_AlumnosXGrupo", datos.IDGrupo);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<CatAlumnoModels> ObtenerComboAlumnosInscripcion(CatAlumnosXGrupoModels datos)
+        {
+            try
+            {
+                List<CatAlumnoModels> Lista = new List<CatAlumnoModels>();
+                CatAlumnoModels Item;
+                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion");
+                while (dr.Read())
+                {
+                    Item = new CatAlumnoModels();
+                    Item.IDPersona = dr.GetString(dr.GetOrdinal("IDAlumno"));
+                    Item.nombre = dr.GetString(dr.GetOrdinal("NombreAlumno"));
+                    Lista.Add(Item);
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public CatGrupoModels ObtenerMateriaPRofesr(CatGrupoModels Datos)
+        {
+            try
+            {
+                DataSet Ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_CatAsignarMateriaYProfesor", Datos.IDGrupo, Datos.IDCurso);
+                if (Ds != null)
+                {
+                    if (Ds.Tables.Count == 1)
+                    {
+                        List<CatGrupoModels> ListaPrinc = new List<CatGrupoModels>();
+                        CatGrupoModels Item;
+                        DataTableReader DTR = Ds.Tables[0].CreateDataReader();
+                        DataTable Tbl1 = Ds.Tables[0];
+                        while (DTR.Read())
+                        {
+                            Item = new CatGrupoModels();
+                            Item.ListaGrupoDetalle = new List<CatGrupoModels>();
+                            Item.IDMateria = !DTR.IsDBNull(DTR.GetOrdinal("IDMateria")) ? DTR.GetString(DTR.GetOrdinal("IDMateria")) : string.Empty;
+                            Item.NombreMateria = !DTR.IsDBNull(DTR.GetOrdinal("NombreMateria")) ? DTR.GetString(DTR.GetOrdinal("NombreMateria")) : string.Empty;
+                            //string Aux = DTR.GetString(2);
+                            string Aux = !DTR.IsDBNull(DTR.GetOrdinal("TablaProfesores")) ? DTR.GetString(DTR.GetOrdinal("TablaProfesores")) : string.Empty;
+                            Aux = string.Format("<Main>{0}</Main>", Aux);
+                            XmlDocument xm = new XmlDocument();
+                            xm.LoadXml(Aux);
+                            XmlNodeList Registros = xm.GetElementsByTagName("Main");
+                            XmlNodeList Lista = ((XmlElement)Registros[0]).GetElementsByTagName("AB");
+                            List<CatGrupoModels> ListaAux = new List<CatGrupoModels>();
+                            CatGrupoModels ItemAux;
+                            foreach (XmlElement Nodo in Lista)
+                            {
+                                ItemAux = new CatGrupoModels();
+                                XmlNodeList IDProfesor = Nodo.GetElementsByTagName("IDProfesor");
+                                XmlNodeList NombreProfesor = Nodo.GetElementsByTagName("NombreProfesor");
+                                ItemAux.IDProfesor = IDProfesor[0].InnerText;
+                                ItemAux.NombreProfesor = NombreProfesor[0].InnerText;
+                                Item.ListaGrupoDetalle.Add(ItemAux);
+                            }
+                            ListaPrinc.Add(Item);
+                        }
+                        Datos.ListaGrupoMateria = ListaPrinc;
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void AMateriaPorProfesor(CatGrupoModels Datos)
+        {
+            try
+            {
+                Datos.Completado = false;
+                int Resultado = 0;
+                SqlDataReader dr = SqlHelper.ExecuteReader(Datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_abc_Asignatura",
+                     new SqlParameter("@opcion", Datos.opcion),
+                     new SqlParameter("@IDAsignatura", Datos.IDAsignacion),
+                     new SqlParameter("@IDGrupo", Datos.IDGrupo),
+                     new SqlParameter("@MateriaProfe", Datos.TablaMateria),
+                     new SqlParameter("@IDUsuario", Datos.user)
+                     );
+                while (dr.Read())
+                {
+                    Resultado = !dr.IsDBNull(dr.GetOrdinal("Resultado")) ? dr.GetInt32(dr.GetOrdinal("Resultado")) : 0;
+                    if (Resultado == 1)
+                    {
+                        Datos.Completado = true;
+                    }
+                    else
+                    {
+                        Datos.Completado = false;
+                    }
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

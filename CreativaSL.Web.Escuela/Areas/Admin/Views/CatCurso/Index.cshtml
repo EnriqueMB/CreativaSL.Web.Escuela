@@ -61,7 +61,7 @@
                                                                     <tr>
                                                                         <td>@Curso["Abreviatura"].ToString()</td>
                                                                         <td>@Curso["Descripcion"].ToString()</td>
-                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaCurso", "CatCurso", new { id = Curso["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaCurso", "CatCurso", new { id = Curso["IDCurso"].ToString(), id2 = Curso["id_modalidad"].ToString() })"><i class="icon-book"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatCurso", new { id = Curso["IDCurso"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatCurso", new {id = Curso["IDCurso"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>
