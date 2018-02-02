@@ -374,5 +374,104 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 throw;
             }
         }
+
+        // GET: Admin/CatCatedratico/Permisos/5
+        [HttpGet]
+        public ActionResult Permisos(string id)
+        {
+            try
+            {
+                CatAdministrativoModels Permisos = new CatAdministrativoModels();
+                CatAdministrativo_Datos PermisosD = new CatAdministrativo_Datos();
+                Permisos.conexion = Conexion;
+                Permisos.id_administrativo = id;
+                Permisos.id_tipoUser = 2;
+                Permisos = PermisosD.ObtenerPermisoUsuario(Permisos);
+                if (Permisos.ListaPermisos != null)
+                {
+                    Permisos.numeroMenu = Permisos.ListaPermisos.Count;
+                }
+                else
+                {
+                    Permisos.numeroMenu = 0;
+                }
+                return View(Permisos);
+            }
+            catch (Exception)
+            {
+                CatAdministrativoModels Permisos = new CatAdministrativoModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return RedirectToAction("Index");
+            }
+        }
+
+        // POST: Admin/CatCatedratico/Permisos
+        [HttpPost]
+        public ActionResult Permisos(string id, FormCollection collection)
+        {
+            try
+            {
+                CatAdministrativoModels Administrador = new CatAdministrativoModels();
+                CatAdministrativo_Datos AdministradorD = new CatAdministrativo_Datos();
+                Administrador.numeroMenu = Convert.ToInt32(collection["Total"]);
+                Administrador.opcion = 1;
+                Administrador.user = User.Identity.Name;
+                Administrador.conexion = Conexion;
+                Administrador.id_administrativo = collection["id_administrativo"];
+                Administrador.TablaPermisos = new DataTable();
+                Administrador.TablaPermisos.Columns.Add("IDPermiso", typeof(string));
+                Administrador.TablaPermisos.Columns.Add("Ver", typeof(bool));
+                string IdPermiso = "";
+                string IDPermisos = "";
+                bool Ver = false;
+                bool Ver2 = false;
+                for (int AuxNumero = 1; AuxNumero <= Administrador.numeroMenu; AuxNumero++)
+                {
+                    try
+                    {
+                        IdPermiso = collection["idPermiso" + AuxNumero.ToString()];
+                        Ver = Convert.ToBoolean(collection["Permiso" + AuxNumero.ToString()] == null ? "False" : "True");
+                        if (!string.IsNullOrEmpty(IdPermiso))
+                        {
+                            Administrador.TablaPermisos.Rows.Add(IdPermiso, Ver);
+                        }
+                        IDPermisos = collection["ID" + AuxNumero.ToString()];
+                        Ver2 = Convert.ToBoolean(collection["PermisoD" + AuxNumero.ToString()] == null ? "False" : "True");
+                        if (!string.IsNullOrEmpty(IDPermisos))
+                        {
+                            Administrador.TablaPermisos.Rows.Add(IDPermisos, Ver2);
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+                        if (IdPermiso != "")
+                        {
+                            Administrador.TablaPermisos.Rows.Add(Administrador, false);
+                        }
+                    }
+                }
+                if (AdministradorD.GuardarPermisos(Administrador) == 1)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Los permisos se guardaron correctamente.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Los permisos no se guardaron correctamente. Intente más tarde.";
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (Exception)
+            {
+                TempData["typemessage"] = "2";
+                TempData["message"] = "Los permisos no se guardaron correctamente. Contacte a soporte técnico.";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }
