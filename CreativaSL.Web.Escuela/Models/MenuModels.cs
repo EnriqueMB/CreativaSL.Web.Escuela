@@ -116,5 +116,13 @@ namespace CreativaSL.Web.Escuela.Models
             set { _ver = value; }
         }
 
+        private int _TipoMenu;
+
+        public int TipoMenu
+        {
+            get { return _TipoMenu; }
+            set { _TipoMenu = value; }
+        }
+
     }
 }

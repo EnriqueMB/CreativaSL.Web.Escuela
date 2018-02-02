@@ -138,7 +138,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                DataSet Ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_PermisosXID", Datos.id_administrativo);
+                DataSet Ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_PermisosXID", Datos.id_administrativo, Datos.id_tipoUser);
                 if (Ds != null)
                 {
                     if (Ds.Tables.Count == 1)

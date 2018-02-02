@@ -14,7 +14,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                DataSet Ds = SqlHelper.ExecuteDataset(Datos.Conexion, "spCSLDB_V2_get_Menu", Datos.User);
+                DataSet Ds = SqlHelper.ExecuteDataset(Datos.Conexion, "spCSLDB_V2_get_Menu", Datos.User, Datos.TipoMenu);
                 if (Ds != null)
                 {
                     if (Ds.Tables.Count == 1)
