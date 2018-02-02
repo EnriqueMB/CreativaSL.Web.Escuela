@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,60 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class _Promocion_Datos
     {
+        public void PromoverGrupo(PromocionModels datos) {
+
+            try
+            {
+                datos.Completado = false;
+                int Resultado = 0;
+                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_PromocionGrupo",
+                     new SqlParameter("@IDGrupoOrigen", datos.grupo),
+                     new SqlParameter("@IDGrupoDestino", datos.grupoD),
+                     new SqlParameter("@TablaAlumnos", datos.TablaAlumnos),
+                     new SqlParameter("@IDUsuario", datos.user)
+                     );
+                while (dr.Read())
+                {
+                    Resultado = !dr.IsDBNull(dr.GetOrdinal("Resultado")) ? dr.GetInt32(dr.GetOrdinal("Resultado")) : 0;
+                    if (Resultado == 1)
+                    {
+                        datos.Completado = true;
+                    }
+                    else
+                    {
+                        datos.Completado = false;
+                    }
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            //try
+            //{
+            //    object[] parametros =
+            //    {
+            //        datos.grupo,datos.grupoD,datos.TablaAlumnos,datos.user
+            //    };
+            //    object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_PromocionGrupo", parametros);
+            //    datos.estado = aux.ToString();
+            //    if (!string.IsNullOrEmpty(datos.estado))
+            //    {
+            //        datos.Completado = true;
+            //    }
+            //    else
+            //    {
+            //        datos.Completado = false;
+            //    }
+            //    return datos;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw ex;
+            //}
+        }
         public List<CatAlumnoModels> ObtenertablaCatAlumnoXGrupo(PromocionModels datos)
         {
             try
