@@ -25,8 +25,8 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private List<CatAlumnoModels> _tablaAlumnos;
-        [Required(ErrorMessage = "Modalidad es un campo requerido")]
-        [Display(Name = "Modalidad")]
+        [Required(ErrorMessage = "Seleccione el alumno a inscribir")]
+        [Display(Name = "Alumno")]
         public List<CatAlumnoModels> tablaAlumnos
         {
             get { return _tablaAlumnos; }

@@ -334,5 +334,30 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        public void InscribirAlumno(AlumnosXGruposModels datos)
+        {
+            try
+            {
+                datos.Completado = false;
+                object[] parametros = { datos.IDGrupo, datos.IDAlumno, datos.user };
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_PromocionAlumno", parametros);
+                if(aux != null)
+                {
+                    int Resultado = 0;
+                    int.TryParse(aux.ToString(), out Resultado);
+                    if(Resultado == 1)
+                    {
+                        datos.Completado = true;
+                    }
+                }
+                //return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

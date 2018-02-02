@@ -394,34 +394,35 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         {
             try
             {
-                CatAlumnoModels Alumno = new CatAlumnoModels();
+                AlumnosXGruposModels Alumno = new AlumnosXGruposModels();
                 CatGrupo_Datos GrupoDatos = new CatGrupo_Datos();
                 Alumno.conexion = Conexion;
                 Alumno.user = User.Identity.Name;
-                Alumno.IDPersona = collection["IDAlumno"];
-                //Alumno = GrupoDatos.AbcCatGrupo(Alumno);
+                Alumno.IDAlumno = collection["tablaAlumnos"];
+                Alumno.IDGrupo = id;
+                GrupoDatos.InscribirAlumno(Alumno);
                 if (Alumno.Completado == true)
                 {
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Alumno inscrito.";
-                    return RedirectToAction("Inscripcion");
+                    return RedirectToAction("Inscripcion", new { id= id });
                 }
                 else
                 {
                     //Recargar el combo de Alumnos
-                    //Grupo.TablaCicloEscolarCmb = GrupoDatos.ObtenerComboCatCicloEscolar(Grupo);
+                    //Grupo. = GrupoDatos.ObtenerComboCatCicloEscolar(Grupo);
                     //var list = new SelectList(Grupo.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
                     //ViewData["cmbCicloEscolar"] = list;
                     TempData["typemessage"] = "2";
                     TempData["message"] = "Ocurrió un error al inscribir al alumno. Intente nuevamente.";
-                    return RedirectToAction("Inscribir");
+                    return RedirectToAction("Inscribir", new { id = id });
                 }
             }
             catch
             {
                 TempData["typemessage"] = "2";
                 TempData["message"] = "Los datos no se guardaron correctamente. Contacte a soporte técnico.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Inscripcion", new { id=id });
             }
         }
 

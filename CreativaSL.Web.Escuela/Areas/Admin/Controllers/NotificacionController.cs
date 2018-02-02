@@ -91,5 +91,12 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+
+        [HttpGet]
+        public ActionResult Detalle(string id)
+        {
+            return View();
+        }
     }
 }
