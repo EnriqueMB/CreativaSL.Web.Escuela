@@ -361,8 +361,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View(MateriaXCurso);
             }
         }
-
-
+        
         [HttpGet]
         public ActionResult Inscribir(string id)
         {
@@ -372,7 +371,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 CatGrupo_Datos GrupoDatos = new CatGrupo_Datos();
                 AlumnoGrupo.conexion = Conexion;
                 AlumnoGrupo.IDGrupo = id;
-                //Grupo.TablaCicloEscolarCmb = GrupoDatos.ObtenerComboAlumnosInscripcion(Grupo);
                 AlumnoGrupo.tablaAlumnos = GrupoDatos.ObtenerComboAlumnosInscripcion(AlumnoGrupo);
                 var list = new SelectList(AlumnoGrupo.tablaAlumnos, "IDPersona", "nombre");
                 ViewData["cmbAlumnos"] = list;
@@ -381,11 +379,11 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             catch (Exception)
             {
 
-                CatMateriaXCursoModels MateriaXCurso = new CatMateriaXCursoModels();
-                MateriaXCurso.TablaDatos = new DataTable();
+                CatAlumnosXGrupoModels AlumnoGrupo = new CatAlumnosXGrupoModels();
+                AlumnoGrupo.tablaAlumnos = new List<CatAlumnoModels>();
                 TempData["typemessage"] = "2";
                 TempData["message"] = "No se puede cargar la vista";
-                return View(MateriaXCurso);
+                return View(AlumnoGrupo);
             }
         }
 
@@ -511,5 +509,62 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        // POST: Admin/CatGrupo/Delete/5
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult Concluir(string id, FormCollection collection)
+        {
+            try
+            {
+                CatGrupoModels Grupo = new CatGrupoModels();
+                CatGrupo_Datos GrupoDatos = new CatGrupo_Datos();
+                Grupo.conexion = Conexion;
+                Grupo.IDGrupo = id;
+                Grupo.opcion = 3;
+                Grupo.user = User.Identity.Name;
+                GrupoDatos.ConcluirGrupo(Grupo);
+                if (Grupo.Completado == true)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "El grupo ha sido concluido.";
+                    return Json("");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Error. El grupo no se pudo concluir.";
+                    return Json("");
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult Graduar(string id)
+        {
+            try
+            {
+                CatGrupoModels grupoModel = new CatGrupoModels();
+                CatGrupo_Datos grupoDatos = new CatGrupo_Datos();
+                grupoModel.conexion = Conexion;
+                grupoModel.IDGrupo = id;
+                grupoModel = grupoDatos.ObtenerListAlumnos(grupoModel);
+                return View(grupoModel);
+            }
+            catch (Exception)
+            {
+                CatGrupoModels grupoModel = new CatGrupoModels();
+                grupoModel.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(grupoModel);
+            }
+        }
+
     }
 }

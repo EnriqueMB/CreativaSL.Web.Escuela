@@ -37,65 +37,131 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tabbable">
+                                    <!-- Only required for left/right tabs -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab">Curriculares</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Extra-Escolares</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
 
-                                <div class="dataTables_wrapper form-inline" style="min-height:100px;">
-                                    <div id="miGrid">
-                                        <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
-                                            <div class="row-fluid" style="margin:0px; padding:0px">
-                                                <div class="portlet-body flip-scroll" style="text-align:center;">
-                                                    <section id="flip-scroll">
-                                                        <table id="example" class="table table-striped table-hover table-bordered dataTable">
-                                                            <thead class="flip-content">
-                                                                <tr>
-                                                                    <th>Clave</th>
-                                                                    <th>Nombre</th>
-                                                                    <th>Ciclo</th>
-                                                                    <th>Especialidad</th>
-                                                                    <th>Curso</th>
-                                                                    <th>Extra Escolar</th>
-                                                                    <th>Alumnos</th>
-                                                                    <th>Editar</th>
-                                                                    <th>Eliminar</th>
-                                                                    <th>Materia</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                @{ 
-                                                                    foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
-                                                                    {
-                                                                        <tr>
-                                                                            <td>@grupo["Clave"].ToString()</td>
-                                                                            <td>@grupo["Nombre"].ToString()</td>
-                                                                            <td>@grupo["NombreCiclo"].ToString()</td>
-                                                                            <td>@grupo["NombreEspecialidad"].ToString()</td>
-                                                                            <td>@grupo["NombreCurso"].ToString()</td>
-                                                                           @{bool Extra = false;
-
-                                                                                bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
-                                                                                if (Extra == true)
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                <th>Clave</th>
+                                                                                <th>Nombre</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Materias</th>
+                                                                                <th>Alumnos</th>
+                                                                                <th>Graduar</th>
+                                                                                <th>Editar</th>
+                                                                                <th>Eliminar</th>
+                                                                                
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @{
+                                                                                foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
                                                                                 {
-                                                                                    <td>SI</td>
+                                                                                    bool Extra = false;
+                                                                                    bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
+                                                                                    if (!Extra)
+                                                                                    {
+                                                                                    <tr>
+                                                                                        <td>@grupo["Clave"].ToString()</td>
+                                                                                        <td>@grupo["Nombre"].ToString()</td>
+                                                                                        <td>@grupo["NombreCiclo"].ToString()</td>
+                                                                                        <td>@grupo["NombreEspecialidad"].ToString()</td>
+                                                                                        <td>@grupo["NombreCurso"].ToString()</td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn green" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-user"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn black graduar" href="@Url.Action("Graduar", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-briefcase"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                    </tr>
+                                                                                        }
+                                                                                    }
                                                                                 }
-                                                                                else
-                                                                                {
-                                                                                    <td>NO</td>
-                                                                                }
-                                                                               }
-                                                                            <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-pinterest"></i></a></td>
-                                                                            <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                            <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
-                                                                            <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString()})"><i class="icon-book"></i></a></td>
-                                                                        </tr>
-                                                                    }
-                                                                  }
-                                                            </tbody>
-                                                        </table>
-                                                    </section>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example1" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                <th>Clave</th>
+                                                                                <th>Nombre</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Materias</th>
+                                                                                <th>Alumnos</th>
+                                                                                <th>Finalizar</th>
+                                                                                <th>Editar</th>
+                                                                                <th>Eliminar</th>
+                                                                                
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @{
+                                                                                foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
+                                                                                {
+                                                                                    bool Extra = false;
+                                                                                    bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
+                                                                                    if (Extra)
+                                                                                    {
+                                                                                    <tr>
+                                                                                        <td>@grupo["Clave"].ToString()</td>
+                                                                                        <td>@grupo["Nombre"].ToString()</td>
+                                                                                        <td>@grupo["NombreCiclo"].ToString()</td>
+                                                                                        <td>@grupo["NombreEspecialidad"].ToString()</td>
+                                                                                        <td>@grupo["NombreCurso"].ToString()</td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn green" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-user"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn black finalizar" href="@Url.Action("Concluir", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-check"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                    </tr>
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
+
+                                
                             </div>
                         </div>
                     </div>
@@ -115,6 +181,15 @@
 	        "iDisplayLength" : 10
             });
 
+            $('#example1').DataTable({
+                "bSort": false,
+                "bAutoWidth": false,
+                "aLengthMenu": [
+                [10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]
+                ],
+                "iDisplayLength": 10
+            });
+
             $('a.delete').live('click', function (e) {
                 e.preventDefault();
                 if (confirm("¿Confirmar eliminación?") == false) return;
@@ -126,6 +201,24 @@
                     success: function (result) { location.reload(true); },
                     error: function () {
                         $('#Error').html('<h3>Ocurrio un error al eliminar este registro<h3>');
+                        $('#Error').css("display", "block");
+                        $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                        $('#Error').css("display", "block");
+                    }
+                });
+            });
+
+            $('a.finalizar').live('click', function (e) {
+                e.preventDefault();
+                if (confirm("¿Está seguro de finalizar el grupo? El proceso no es reversible.") == false) return;
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) { location.reload(true); },
+                    error: function () {
+                        $('#Error').html('<h3>Ocurrio un error al finalizar el grupo<h3>');
                         $('#Error').css("display", "block");
                         $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
                         $('#Error').css("display", "block");

@@ -2803,6 +2803,7 @@
     <Content Include="Areas\Admin\Views\Promocion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Notificacion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Notificacion\Detalle.cshtml" />
+    <Content Include="Areas\Admin\Views\CatGrupo\Graduar.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
