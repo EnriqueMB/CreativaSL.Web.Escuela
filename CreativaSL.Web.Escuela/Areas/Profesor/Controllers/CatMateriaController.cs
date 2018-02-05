@@ -61,5 +61,61 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 return View(alumnoXgrupo);
             }
         }
+
+        // GET: /Profesor/CatMateria/ListaAsistencia/5
+        [HttpGet]
+        public ActionResult ListaAsistencia(string id)
+        {
+            try
+            {
+                ListaAsistenciaModels listaAsistencia = new ListaAsistenciaModels();
+                ListaAsistencia_Datos listaAsistencia_datos = new ListaAsistencia_Datos();
+                listaAsistencia.conexion = Conexion;
+                listaAsistencia.IDAsignatura = id;
+                listaAsistencia = listaAsistencia_datos.ObtenerListaAsistencia(listaAsistencia);
+                return View(listaAsistencia);
+            }
+            catch (Exception)
+            {
+                ListaAsistenciaModels listaAsistencia = new ListaAsistenciaModels();
+                listaAsistencia.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(listaAsistencia);
+            }
+        }
+
+        // GET: /Profesor/CatMateria/ListaAsistencia/5
+        [HttpGet]
+        [Authorize(Roles = "3")]
+        public ActionResult PaseAsistencia(string id, string id2)
+        {
+            try
+            {
+                AlumnoXAsistenciaModels AlumXAsistencia = new AlumnoXAsistenciaModels();
+                AlumnoXAsistencia_Datos AlumXAsistencia_datos = new AlumnoXAsistencia_Datos();
+                AlumXAsistencia.conexion = Conexion;
+                AlumXAsistencia.IDLista = id;
+                AlumXAsistencia.IDAsignatura = id2;
+                AlumXAsistencia = AlumXAsistencia_datos.ObtenerListaAsistenciaPROXID(AlumXAsistencia);
+                if (AlumXAsistencia.TablaDatos != null)
+                {
+                    AlumXAsistencia.NumeroAlumnos = AlumXAsistencia.TablaDatos.Rows.Count;
+                }
+                else
+                {
+                    AlumXAsistencia.NumeroAlumnos = 0;
+                }
+                return View(AlumXAsistencia);
+            }
+            catch (Exception)
+            {
+                AlumnoXAsistenciaModels AlumXAsistencia = new AlumnoXAsistenciaModels();
+                AlumXAsistencia.IDAsignatura = id2;
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No puede mostrar la vista";
+                return RedirectToAction("PaseAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+            }
+        }
     }
 }

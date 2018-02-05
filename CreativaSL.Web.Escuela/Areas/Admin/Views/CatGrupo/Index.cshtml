@@ -76,21 +76,21 @@
                                                                                     bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
                                                                                     if (!Extra)
                                                                                     {
-                                                                                    <tr>
-                                                                                        <td>@grupo["Clave"].ToString()</td>
-                                                                                        <td>@grupo["Nombre"].ToString()</td>
-                                                                                        <td>@grupo["NombreCiclo"].ToString()</td>
-                                                                                        <td>@grupo["NombreEspecialidad"].ToString()</td>
-                                                                                        <td>@grupo["NombreCurso"].ToString()</td>
-                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn green" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-user"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn black graduar" href="@Url.Action("Graduar", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-briefcase"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
-                                                                                    </tr>
-                                                                                        }
+                                                                                        <tr>
+                                                                                            <td>@grupo["Clave"].ToString()</td>
+                                                                                            <td>@grupo["Nombre"].ToString()</td>
+                                                                                            <td>@grupo["NombreCiclo"].ToString()</td>
+                                                                                            <td>@grupo["NombreEspecialidad"].ToString()</td>
+                                                                                            <td>@grupo["NombreCurso"].ToString()</td>
+                                                                                            <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                            <td style="text-align:center;"><a class="btn green" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-user"></i></a></td>
+                                                                                            <td style="text-align:center;"><a class="btn black graduar" href="@Url.Action("Graduar", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-briefcase"></i></a></td>
+                                                                                            <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
+                                                                                            <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                        </tr> 
                                                                                     }
                                                                                 }
+                                                                            }
                                                                         </tbody>
                                                                     </table>
                                                                 </section>

@@ -2806,6 +2806,9 @@
     <Content Include="Areas\Admin\Views\CatCatedratico\Permisos.cshtml" />
     <Content Include="Areas\Profesor\Views\HomeProfesor\LoadMenu.cshtml" />
     <Content Include="Areas\Profesor\Views\CatCuentaUser\Index.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\Index.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\ListaAlumno.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\ListaAsistencia.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -2982,7 +2985,9 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
@@ -3025,6 +3030,7 @@
     </Compile>
     <Compile Include="Models\AdministrativoPermisoJson.cs" />
     <Compile Include="Models\AlumnosXGruposModels.cs" />
+    <Compile Include="Models\AlumnoXAsistenciaModels.cs" />
     <Compile Include="Models\AsignaturaModels.cs" />
     <Compile Include="Models\CatAdministrativoModels.cs" />
     <Compile Include="Models\CatAlumnoModels.cs" />
@@ -3043,9 +3049,11 @@
     <Compile Include="Models\CatMateriaXCurso_Datos.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\CatProfesorXMateriaModels.cs" />
+    <Compile Include="Models\ListaAsistenciaModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\PromocionModels.cs" />
+    <Compile Include="Models\_AlumnoXAsistencia_Datos.cs" />
     <Compile Include="Models\_CatAlumnoXGrupo_Datos.cs" />
     <Compile Include="Models\_CatCuentaUser_Datos.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
@@ -3078,6 +3086,7 @@
     <Compile Include="Models\_CatModalidad_Datos.cs" />
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
     <Compile Include="Models\_CatTutor_Datos.cs" />
+    <Compile Include="Models\_ListaAsistencia_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
