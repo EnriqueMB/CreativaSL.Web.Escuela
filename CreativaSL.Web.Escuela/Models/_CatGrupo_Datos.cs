@@ -235,7 +235,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 List<CatAlumnoModels> Lista = new List<CatAlumnoModels>();
                 CatAlumnoModels Item;
-                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion");
+                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion", datos.IDGrupo);
                 while (dr.Read())
                 {
                     Item = new CatAlumnoModels();
@@ -352,6 +352,52 @@ namespace CreativaSL.Web.Escuela.Models
                     }
                 }
                 //return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ConcluirGrupo(CatGrupoModels datos)
+        {
+            try
+            {
+                datos.Completado = false;
+                object[] parametros = { datos.IDGrupo, datos.user };
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_ConcluirGrupoExtraEscolar", parametros);
+                if (aux != null)
+                {
+                    int Resultado = 0;
+                    int.TryParse(aux.ToString(), out Resultado);
+                    if (Resultado == 1)
+                    {
+                        datos.Completado = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void GraduarGrupo(CatGrupoModels datos)
+        {
+            try
+            {
+                datos.Completado = false;
+                object[] parametros = { datos.IDGrupo, datos.TablaDatos, datos.user };
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_GraduarGrupo", parametros);
+                if (aux != null)
+                {
+                    int Resultado = 0;
+                    int.TryParse(aux.ToString(), out Resultado);
+                    if (Resultado == 1)
+                    {
+                        datos.Completado = true;
+                    }
+                }
             }
             catch (Exception ex)
             {
