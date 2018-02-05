@@ -58,8 +58,10 @@
                             }
                             else
                             {
-                                Html.RenderAction("LogOff", "Account");
-                                //Html.RenderAction("LogOff", "Account", new { Area = "Admin" });
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="username">Administrador Defaul</span>
+                                    <i class="icon-angle-down"></i>
+                                </a>
                             }
                         }
                         <ul class="dropdown-menu">
@@ -86,9 +88,7 @@
                         </div>
                     </form>
                 </li>
-                <li class="">
-                    <a href="@Url.Action("Index", "HomeProfesor")"><i class="icon-home"></i> <span class="title">INICIO</span></a>
-                </li>
+                @{Html.RenderAction("LoadMenu", "HomeProfesor");}
             </ul>
         </div>
 

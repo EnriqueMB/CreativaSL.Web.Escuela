@@ -50,15 +50,15 @@
                                                                 <tr>
                                                                     <th>Clave</th>
                                                                     <th>Nombre</th>
-                                                                    
                                                                     <th>Correo</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Dirección</th>
                                                                     <th>Tipo Persona</th>
                                                                     <th>Grado de Estudio</th>
+                                                                    <th>Materia</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
-                                                                    <th>Materia</th>
+                                                                    <th>Permisos</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -72,9 +72,10 @@
                                                                         <td>@Catedratico["direccion"].ToString()</td>
                                                                         <td>@Catedratico["TipoPersona"].ToString()</td>
                                                                         <td>@Catedratico["gradoEstudio"].ToString()</td>
+                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaP", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-book"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatCatedratico", new {id = Catedratico["id_persona"].ToString()})"><i class="icon-trash"></i></a></td>
-                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaP", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Permisos", "CatCatedratico", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-lock"></i></a></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>

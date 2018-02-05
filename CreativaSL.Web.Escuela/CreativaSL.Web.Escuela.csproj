@@ -2803,7 +2803,6 @@
     <Content Include="Areas\Admin\Views\Promocion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Notificacion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Notificacion\Detalle.cshtml" />
-    <Content Include="Areas\Admin\Views\CatGrupo\Graduar.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3012,6 +3011,7 @@
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Profesor\Controllers\CatCuentaUserController.cs" />
     <Compile Include="Areas\Profesor\Controllers\HomeProfesorController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
     <Compile Include="Filters\AutorizadoAttribute.cs" />
