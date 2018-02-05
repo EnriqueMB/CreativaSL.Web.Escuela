@@ -106,5 +106,33 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
+        #region Procedimiento PROFESOR ADMINITRADOR
+
+        public CatProfesorXMateriaModels ObtenerCatProXMateriaPROF(CatProfesorXMateriaModels datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_ProfesorXMateria_PROF", datos.IDProfesor);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
     }
 }

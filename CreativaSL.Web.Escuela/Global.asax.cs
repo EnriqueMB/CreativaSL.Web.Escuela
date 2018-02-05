@@ -71,7 +71,7 @@ namespace CreativaSL.Web.Escuela
                             }
                         }
                     }
-                    
+
                     //FormsIdentity fIdent = User.Identity as FormsIdentity;
                     //// Create a CustomIdentity based on the FormsAuthenticationTicket  
                     //CustomIdentity ci = new CustomIdentity(fIdent.Ticket);
@@ -97,8 +97,9 @@ namespace CreativaSL.Web.Escuela
                     //    }
                     //}
                 }
-            
+
             }
+           
         }
 
         //protected void Session_Start(object sender, EventArgs e)

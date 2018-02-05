@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -32,7 +33,40 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _tablaAlumnos; }
             set { _tablaAlumnos = value; }
         }
-        
+
+        private DataTable _TablaDatos;
+
+        public DataTable TablaDatos
+        {
+            get { return _TablaDatos; }
+            set { _TablaDatos = value; }
+        }
+
+        private string _IDAsignatura;
+
+        public string IDAsignatura
+        {
+            get { return _IDAsignatura; }
+            set { _IDAsignatura = value; }
+        }
+
+        private string _IDProfesor;
+
+        public string IDProfesor
+        {
+            get { return _IDProfesor; }
+            set { _IDProfesor = value; }
+        }
+
+        private string _IDMateria;
+
+        public string IDMateria
+        {
+            get { return _IDMateria; }
+            set { _IDMateria = value; }
+        }
+
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

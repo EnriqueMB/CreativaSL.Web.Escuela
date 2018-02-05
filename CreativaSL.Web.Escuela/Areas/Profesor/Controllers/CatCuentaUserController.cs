@@ -1,4 +1,5 @@
-﻿using CreativaSL.Web.Escuela.Models;
+﻿using CreativaSL.Web.Escuela.Filters;
+using CreativaSL.Web.Escuela.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,10 +10,12 @@ using System.Web.Mvc;
 
 namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
 {
+    [Autorizado]
     public class CatCuentaUserController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Profesor/CatCuentaUser
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -33,6 +36,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
             try

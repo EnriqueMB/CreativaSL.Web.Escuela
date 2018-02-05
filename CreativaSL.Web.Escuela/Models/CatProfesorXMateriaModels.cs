@@ -1,14 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Web;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class CatMateriaXProfesorModels
+    public class CatProfesorXMateriaModels
     {
+        private string _IDAsignatura;
+
+        public string IDAsignatura
+        {
+            get { return _IDAsignatura; }
+            set { _IDAsignatura = value; }
+        }
+
+        private string _IDGupo;
+
+        public string IDGrupo
+        {
+            get { return _IDGupo; }
+            set { _IDGupo = value; }
+        }
+
         private string _IDProfesor;
 
         public string IDProfesor
@@ -24,7 +39,7 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _IDModalidad; }
             set { _IDModalidad = value; }
         }
-        
+
         private string _IDMateria;
 
         public string IDMateria
@@ -32,29 +47,21 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _IDMateria; }
             set { _IDMateria = value; }
         }
-        private List<CatModalidadModels> _tablaModalidadCmb;
-        [Required(ErrorMessage = "Modalidad es un campo requerido")]
-        [Display(Name = "Modalidad")]
-        public List<CatModalidadModels> tablaModalidadCmb
+
+        private string _IDCurso;
+
+        public string IDCurso
         {
-            get { return _tablaModalidadCmb; }
-            set { _tablaModalidadCmb = value; }
-        }
-        private List<CatMateriaXProfesorModels> _TablaMateriaCmb;
-        [Required(ErrorMessage = "Materia es un campo requerido")]
-        [Display(Name = "Materia")]
-        public List<CatMateriaXProfesorModels> TablaMateriaCmb
-        {
-            get { return _TablaMateriaCmb; }
-            set { _TablaMateriaCmb = value; }
+            get { return _IDCurso; }
+            set { _IDCurso = value; }
         }
 
-        private string _NombreM;
+        private string _IDCiclo;
 
-        public string NombreM
+        public string IDCiclo
         {
-            get { return _NombreM; }
-            set { _NombreM = value; }
+            get { return _IDCiclo; }
+            set { _IDCiclo = value; }
         }
 
         private DataTable _TablaDatos;
@@ -65,13 +72,12 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaDatos = value; }
         }
 
-
         #region Datos de control
-        public int Resultado { get; set; }
-        public bool Completado { get; set; }
+        public bool activo { get; set; }
         public string user { get; set; }
         public string conexion { get; set; }
         public int opcion { get; set; }
         #endregion
+
     }
 }
