@@ -8,49 +8,62 @@ using System.Web;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class _Promocion_Datos
+    public class _Historial_Datos
     {
-        public void PromoverGrupo(PromocionModels datos) {
-
+        public HistorialModels ObtenerListaMateriasCursadas(HistorialModels datos)
+        {
             try
             {
-                datos.Completado = false;
-                int Resultado = 0;
-                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_PromocionGrupo",
-                     new SqlParameter("@IDGrupoOrigen", datos.grupo),
-                     new SqlParameter("@IDGrupoDestino", datos.grupoD),
-                     new SqlParameter("@TablaAlumnos", datos.TablaAlumnos),
-                     new SqlParameter("@IDUsuario", datos.user)
-                     );
-                while (dr.Read())
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_DetalleMateriaCursadaXAlumno", datos.id_alumno);
+                if (ds != null)
                 {
-                    Resultado = !dr.IsDBNull(dr.GetOrdinal("Resultado")) ? dr.GetInt32(dr.GetOrdinal("Resultado")) : 0;
-                    if (Resultado == 1)
+                    if (ds.Tables.Count > 0)
                     {
-                        datos.Completado = true;
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.TablaDatos = ds.Tables[0];
+                        }
                     }
-                    else
-                    {
-                        datos.Completado = false;
-                    }
-                    break;
                 }
+                return datos;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
-           
         }
-        public List<CatAlumnoModels> ObtenertablaCatAlumnoXGrupo(PromocionModels datos)
+        public HistorialModels ObtenerListaCursoCursados(HistorialModels datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_CursosCursadosXAlumno",datos.id_alumno);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CatAlumnoModels> ObtenertablaCatAlumnoXGrupo(HistorialModels datos)
         {
             try
             {
                 List<CatAlumnoModels> lista = new List<CatAlumnoModels>();
                 CatAlumnoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupo",  datos.grupo);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupo", datos.grupo);
                 while (dr.Read())
                 {
                     item = new CatAlumnoModels();
@@ -65,14 +78,14 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatGrupoModels> ObtenerComboCatGrupo(PromocionModels datos)
+        public List<CatGrupoModels> ObtenerComboCatGrupo(HistorialModels datos)
         {
             try
             {
                 List<CatGrupoModels> lista = new List<CatGrupoModels>();
                 CatGrupoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGrupoXID", datos.ciclo,datos.IDEspecialidad,datos.curso);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGrupoXID", datos.ciclo, datos.IDEspecialidad, datos.curso);
                 while (dr.Read())
                 {
                     item = new CatGrupoModels();
@@ -87,7 +100,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatEspecialidadModels> ObtenerComboCatEspecialidad(PromocionModels datos)
+        public List<CatEspecialidadModels> ObtenerComboCatEspecialidad(HistorialModels datos)
         {
             try
             {
@@ -109,8 +122,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-
-        public List<CatCursoModels> ObtenerComboCatCursos(PromocionModels datos)
+        public List<CatCursoModels> ObtenerComboCatCursos(HistorialModels datos)
         {
             try
             {
@@ -132,7 +144,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatModalidadModels> ObtenerComboCatModalidad(PromocionModels datos)
+        public List<CatModalidadModels> ObtenerComboCatModalidad(HistorialModels datos)
         {
             try
             {
@@ -154,7 +166,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatPlanEstudioModels> ObtenerComboCatPlanEstudio(PromocionModels datos)
+        public List<CatPlanEstudioModels> ObtenerComboCatPlanEstudio(HistorialModels datos)
         {
             try
             {
@@ -176,7 +188,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
-        public List<CatCicloEscolarModels> ObtenerComboCatCicloEscolar(PromocionModels datos)
+        public List<CatCicloEscolarModels> ObtenerComboCatCicloEscolar(HistorialModels datos)
         {
             try
             {

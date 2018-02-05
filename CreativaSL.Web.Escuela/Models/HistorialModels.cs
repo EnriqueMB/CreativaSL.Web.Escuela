@@ -7,15 +7,16 @@ using System.Web;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class PromocionModels
+    public class HistorialModels
     {
-        private string _ciclo;
+        private string _id_alumno;
 
-        public string ciclo
+        public string id_alumno
         {
-            get { return _ciclo; }
-            set { _ciclo = value; }
+            get { return _id_alumno; }
+            set { _id_alumno = value; }
         }
+
         private int _idplanEstudio;
 
         public int idplanEstudio
@@ -23,14 +24,13 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _idplanEstudio; }
             set { _idplanEstudio = value; }
         }
-        private string _estado;
+        private string _ciclo;
 
-        public string estado
+        public string ciclo
         {
-            get { return _estado; }
-            set { _estado = value; }
+            get { return _ciclo; }
+            set { _ciclo = value; }
         }
-
         private string _IDModalidad;
 
         public string IDModalidad
@@ -45,29 +45,6 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _IDEspecialidad; }
             set { _IDEspecialidad = value; }
         }
-        private int _numAlumnos;
-
-        public int numAlumnos
-        {
-            get { return _numAlumnos; }
-            set { _numAlumnos = value; }
-        }
-
-
-        private string _modalidad;
-
-        public string modalidad
-        {
-            get { return _modalidad; }
-            set { _modalidad = value; }
-        }
-        private string  _especialidad;
-
-        public string  especialidad
-        {
-            get { return _especialidad; }
-            set { _especialidad = value; }
-        }
         private string _curso;
 
         public string curso
@@ -81,13 +58,6 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _grupo; }
             set { _grupo = value; }
-        }
-        private string _grupoD;
-
-        public string grupoD
-        {
-            get { return _grupoD; }
-            set { _grupoD = value; }
         }
 
         private DataTable _TablaDatos;
@@ -139,6 +109,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaEspecialidadCmb = value; }
         }
 
+
         private List<CatCursoModels> _TablaCursosCmb;
         [Required(ErrorMessage = "El curso es obligatorio")]
         [Display(Name = "Curso")]
@@ -156,14 +127,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaGrupoCmb = value; }
         }
 
-        private List<CatGrupoModels> _TablaGrupoDCmb;
-        [Required(ErrorMessage = "El Grupo es obligatorio")]
-        [Display(Name = "Grupo")]
-        public List<CatGrupoModels> TablaGrupoDCmb
-        {
-            get { return _TablaGrupoDCmb; }
-            set { _TablaGrupoDCmb = value; }
-        }
+       
         private List<CatAlumnoModels> _TablaAlumnosXGrupo;
         [Required(ErrorMessage = "El Alumno es obligatorio")]
         [Display(Name = "Alumno")]
@@ -172,9 +136,6 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _TablaAlumnosXGrupo; }
             set { _TablaAlumnosXGrupo = value; }
         }
-
-
-
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }
