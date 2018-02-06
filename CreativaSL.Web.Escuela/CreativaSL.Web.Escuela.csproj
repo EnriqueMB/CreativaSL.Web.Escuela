@@ -2810,6 +2810,9 @@
     <Content Include="Areas\Admin\Views\Historial\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Historial\GrupoConcluido.cshtml" />
     <Content Include="Areas\Admin\Views\Historial\MateriasCursadas.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\Index.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\ListaAlumno.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\ListaAsistencia.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3020,6 +3023,7 @@
     <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\Controllers\CatCuentaUserController.cs" />
+    <Compile Include="Areas\Profesor\Controllers\CatMateriaController.cs" />
     <Compile Include="Areas\Profesor\Controllers\HomeProfesorController.cs" />
     <Compile Include="Areas\Profesor\ProfesorAreaRegistration.cs" />
     <Compile Include="Filters\AutorizadoAttribute.cs" />
@@ -3029,6 +3033,7 @@
     </Compile>
     <Compile Include="Models\AdministrativoPermisoJson.cs" />
     <Compile Include="Models\AlumnosXGruposModels.cs" />
+    <Compile Include="Models\AlumnoXAsistenciaModels.cs" />
     <Compile Include="Models\AsignaturaModels.cs" />
     <Compile Include="Models\CatAdministrativoModels.cs" />
     <Compile Include="Models\CatAlumnoModels.cs" />
@@ -3046,10 +3051,14 @@
     <Compile Include="Models\CatMateriaXCursoModels.cs" />
     <Compile Include="Models\CatMateriaXCurso_Datos.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
+    <Compile Include="Models\CatProfesorXMateriaModels.cs" />
     <Compile Include="Models\HistorialModels.cs" />
+    <Compile Include="Models\ListaAsistenciaModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\PromocionModels.cs" />
+    <Compile Include="Models\_AlumnoXAsistencia_Datos.cs" />
+    <Compile Include="Models\_CatAlumnoXGrupo_Datos.cs" />
     <Compile Include="Models\_CatCuentaUser_Datos.cs" />
     <Compile Include="Models\_CatMateriaXProfesor_Datos.cs" />
     <Compile Include="Models\CatModalidadModels.cs" />
@@ -3082,6 +3091,7 @@
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
     <Compile Include="Models\_CatTutor_Datos.cs" />
     <Compile Include="Models\_Historial_Datos.cs" />
+    <Compile Include="Models\_ListaAsistencia_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
