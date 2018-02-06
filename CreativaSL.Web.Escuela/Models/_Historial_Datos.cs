@@ -33,6 +33,7 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+
         public HistorialModels ObtenerListaCursoCursados(HistorialModels datos)
         {
             try

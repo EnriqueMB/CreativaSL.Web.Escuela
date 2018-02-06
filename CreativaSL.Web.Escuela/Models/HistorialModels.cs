@@ -11,6 +11,7 @@ namespace CreativaSL.Web.Escuela.Models
     {
         private string _id_alumno;
 
+
         public string id_alumno
         {
             get { return _id_alumno; }
