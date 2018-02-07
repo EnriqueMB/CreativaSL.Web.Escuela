@@ -1,0 +1,176 @@
+﻿@model CreativaSL.Web.Escuela.Models.AlumnoXAsistenciaModels
+@{
+    ViewBag.Title = "Pase de Asistencia";
+    Layout = "~/Areas/Profesor/Views/Shared/_Layout.cshtml";
+}
+@section featured
+{
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div id="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption"><i class="icon-edit"></i>Pase de Inasistencia</div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <div class="span12">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @using (Html.BeginForm("PaseAsistencia", "CatMateria", FormMethod.Post, new { id = "formAsistencia", @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(model => model.IDAsignatura)
+                                    @Html.HiddenFor(model => model.IDLista)
+                                    @Html.HiddenFor(model => model.NumeroAlumnos)
+
+                                    <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                        <div id="miGrid">
+                                            <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                <div class="row-fluid" style="margin:0px; padding:0px">
+                                                    <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                        <section id="flip-scroll">
+                                                            <table id="example" class="table table-striped table-hover table-bordered dataTable">
+                                                                <thead class="flip-content">
+                                                                    <tr>
+                                                                        <th style="display:none"></th>
+                                                                        <th style="display:none"></th>
+                                                                        <th>Nombre Completo</th>
+                                                                        <th>Materia</th>
+                                                                        <th>Inasistencia</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                                                        int contAlumno = 0;
+                                                                        string cadenaContAlumno = "";
+                                                                        string asistenciaContAlumno = "";
+                                                                        string cadenaContAistencia = "";
+                                                                        foreach (System.Data.DataRow Lista in Model.TablaDatos.Rows)
+                                                                        {
+                                                                            contAlumno = contAlumno + 1;
+                                                                            cadenaContAistencia = "idLista" + contAlumno.ToString();
+                                                                            cadenaContAlumno = "idAlumno" + contAlumno.ToString();
+                                                                            asistenciaContAlumno = "asistencia" + contAlumno.ToString();
+                                                                            @: <tr>
+                                                                                @:<td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(Lista["IDAlumno"])"></td>
+                                                                                @:<td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAistencia)" value="@Html.Raw(Lista["IDLista"])"></td>
+                                                                                @:<td>@Lista["NombreCompleto"].ToString()</td>
+                                                                                @:<td>@Lista["NombreMateria"].ToString()</td>
+                                                                             if (Convert.ToBoolean(Lista["Asistencia"].ToString()))
+                                                                            {
+                                                                                <td><input class="form-control validAsistencia disa" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista["asistencia"])" checked/></td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td><input class="form-control validAsistencia" type="checkbox" id="@Html.Raw(asistenciaContAlumno)" name="@Html.Raw(asistenciaContAlumno)" value="@Html.Raw(Lista["asistencia"])" /></td>
+
+                                                                            }
+                                                                            @:</tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                        <div class="span12">
+                                                            @{string id = Model.IDAsignatura;}
+                                                            <a href="@Url.Action("ListaAsistencia", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                                            <input type="submit" value="Guardar" class="btn btn-default green">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                $("#formAsistencia").submit(function () {
+                    $(".disa").removeAttr('disabled');
+                    return true;
+                });
+            });
+
+            $('#example').DataTable({
+                "bSort": false,
+                "bAutoWidth": false,
+                "aLengthMenu": [
+                [-1], ["All"]
+                ],
+                "iDisplayLength": -1
+            });
+
+            $('a.delete').live('click', function (e) {
+                e.preventDefault();
+                if (confirm("¿Confirmar eliminación?") == false) return;
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) { location.reload(true); },
+                    error: function () {
+                        $('#Error').html('<h3>Ocurrio un error al eliminar este registro<h3>');
+                        $('#Error').css("display", "block");
+                        $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                        $('#Error').css("display", "block");
+                    }
+                });
+            });
+
+        });
+
+       jQuery(document).ready(function () {
+           var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    </script>
+}
+
+

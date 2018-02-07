@@ -10,23 +10,34 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class AlumnoXAsistencia_Datos
     {
-        public AlumnoXAsistenciaModels ObtenerListaAsistenciaPROXID(AlumnoXAsistenciaModels datos)
+        public AlumnoXAsistenciaModels ObtenerListaAsistenciaPROXID(AlumnoXAsistenciaModels Datos)
         {
             try
             {
-                DataSet ds = null;
-                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_get_AlumnoXAsistenciaPROFXID", datos.IDLista, datos.IDAsignatura);
-                if (ds != null)
+                object[] parametros =
                 {
-                    if (ds.Tables.Count > 0)
+                    Datos.IDAsignatura, Datos.IDLista, Datos.FechaLista, Datos.user
+                };
+                DataSet Ds = null;
+                Ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_abc_ListaAsistencia_PROF", parametros);
+                if (Ds != null)
+                {
+                    if (Ds.Tables.Count == 2)
                     {
-                        if (ds.Tables[0] != null)
+                        //DataTableReader Dr = Ds.Tables[0].CreateDataReader();
+                        //while (Dr.Read())
+                        //{
+                            Datos.TablaDatos = Ds.Tables[0];
+                        //}
+                        DataTableReader DTR = Ds.Tables[1].CreateDataReader();
+                        DataTable Tbl1 = Ds.Tables[1];
+                        while (DTR.Read())
                         {
-                            datos.TablaDatos = ds.Tables[0];
+                            Datos.IDLista = !DTR.IsDBNull(DTR.GetOrdinal("IDLista")) ? DTR.GetString(DTR.GetOrdinal("IDLista")) : string.Empty;
                         }
                     }
                 }
-                return datos;
+                return Datos;
             }
             catch (Exception ex)
             {
@@ -38,11 +49,11 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                DataSet dt = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_abc_AsistenciaPorAlumnoPROF",
-                new SqlParameter("@id_lista", datos.IDLista),
-                new SqlParameter("@tablaAlumnoXAsistencia", datos.TablaDatos),
+                DataSet dt = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_abc_AsistenciaPorAlumno_PROF",
+                new SqlParameter("@IDAsignatura", datos.IDAsignatura),
+                new SqlParameter("@IDLista", datos.IDLista),
+                new SqlParameter("@tablaAlumnoXAsistencia", datos.tablaAlumnoXAsistencia),
                 new SqlParameter("@usuario", datos.user));
-                datos.TablaNotificaciones = dt.Tables[1];
                 return Convert.ToInt32(dt.Tables[0].Rows[0][0].ToString());
             }
             catch (Exception ex)

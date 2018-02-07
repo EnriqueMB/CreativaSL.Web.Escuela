@@ -2813,6 +2813,9 @@
     <Content Include="Areas\Profesor\Views\CatMateria\Index.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAlumno.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAsistencia.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\PaseAsistencia.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnos\TutorXAlumno.cshtml" />
+    <Content Include="Areas\Admin\Views\CatAlumnos\CreateTutorXalumno.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3052,6 +3055,7 @@
     <Compile Include="Models\CatMateriaXCurso_Datos.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
     <Compile Include="Models\CatProfesorXMateriaModels.cs" />
+    <Compile Include="Models\CatTutorXalumnoModels.cs" />
     <Compile Include="Models\HistorialModels.cs" />
     <Compile Include="Models\ListaAsistenciaModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
@@ -3089,6 +3093,7 @@
     <Compile Include="Models\_CatMateria_Datos.cs" />
     <Compile Include="Models\_CatModalidad_Datos.cs" />
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
+    <Compile Include="Models\_CatTutorXAlumno_Datos.cs" />
     <Compile Include="Models\_CatTutor_Datos.cs" />
     <Compile Include="Models\_Historial_Datos.cs" />
     <Compile Include="Models\_ListaAsistencia_Datos.cs" />

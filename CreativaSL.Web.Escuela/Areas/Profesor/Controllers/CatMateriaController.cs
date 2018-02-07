@@ -72,6 +72,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 ListaAsistencia_Datos listaAsistencia_datos = new ListaAsistencia_Datos();
                 listaAsistencia.conexion = Conexion;
                 listaAsistencia.IDAsignatura = id;
+                listaAsistencia.FechaLista = DateTime.Now;
                 listaAsistencia = listaAsistencia_datos.ObtenerListaAsistencia(listaAsistencia);
                 return View(listaAsistencia);
             }
@@ -87,16 +88,17 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
 
         // GET: /Profesor/CatMateria/ListaAsistencia/5
         [HttpGet]
-        [Authorize(Roles = "3")]
-        public ActionResult PaseAsistencia(string id, string id2)
+        public ActionResult PaseAsistencia(string id)
         {
             try
             {
                 AlumnoXAsistenciaModels AlumXAsistencia = new AlumnoXAsistenciaModels();
                 AlumnoXAsistencia_Datos AlumXAsistencia_datos = new AlumnoXAsistencia_Datos();
                 AlumXAsistencia.conexion = Conexion;
-                AlumXAsistencia.IDLista = id;
-                AlumXAsistencia.IDAsignatura = id2;
+                AlumXAsistencia.IDAsignatura = id;
+                AlumXAsistencia.IDLista = "";
+                AlumXAsistencia.FechaLista = DateTime.Now;
+                AlumXAsistencia.user = User.Identity.Name;
                 AlumXAsistencia = AlumXAsistencia_datos.ObtenerListaAsistenciaPROXID(AlumXAsistencia);
                 if (AlumXAsistencia.TablaDatos != null)
                 {
@@ -111,10 +113,83 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
             catch (Exception)
             {
                 AlumnoXAsistenciaModels AlumXAsistencia = new AlumnoXAsistenciaModels();
-                AlumXAsistencia.IDAsignatura = id2;
+                AlumXAsistencia.IDAsignatura = id;
                 TempData["typemessage"] = "2";
                 TempData["message"] = "No puede mostrar la vista";
                 return RedirectToAction("PaseAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PaseAsistencia(string id, FormCollection collection)
+        {
+            try
+            {
+                AlumnoXAsistenciaModels AlumXAsistencia = new AlumnoXAsistenciaModels();
+                AlumnoXAsistencia_Datos AlumXAsistencia_datos = new AlumnoXAsistencia_Datos();
+                AlumXAsistencia.conexion = Conexion;
+                AlumXAsistencia.opcion = 1;
+                AlumXAsistencia.IDAsignatura = collection["IDAsignatura"];
+                AlumXAsistencia.IDLista = collection["IDLista"];
+                AlumXAsistencia.NumeroAlumnos = Convert.ToInt32(collection["NumeroAlumnos"]);
+                AlumXAsistencia.user = User.Identity.Name;
+                AlumXAsistencia.tablaAlumnoXAsistencia = new DataTable();
+                AlumXAsistencia.tablaAlumnoXAsistencia.Columns.Add("IDLista", typeof(string));
+                AlumXAsistencia.tablaAlumnoXAsistencia.Columns.Add("IDAlumno", typeof(string));
+                AlumXAsistencia.tablaAlumnoXAsistencia.Columns.Add("asistencia", typeof(bool));
+                string idAlumno = "", IdLista = "";
+
+                bool asistencia = false;
+                for (int auxNumAlum = 1; auxNumAlum <= AlumXAsistencia.NumeroAlumnos; auxNumAlum++)
+                {
+                    try
+                    {
+                        IdLista = collection["idLista" + auxNumAlum.ToString()];
+                        idAlumno = collection["idAlumno" + auxNumAlum.ToString()];
+                        object s = collection["asistencia" + auxNumAlum.ToString()];
+
+                        asistencia = Convert.ToBoolean(collection["asistencia" + auxNumAlum.ToString()] == null ? "False" : "True");
+                        AlumXAsistencia.tablaAlumnoXAsistencia.Rows.Add(IdLista, idAlumno, asistencia);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        if (idAlumno != "")
+                        {
+
+                            AlumXAsistencia.tablaAlumnoXAsistencia.Rows.Add(IdLista, idAlumno, false);
+                        }
+                    }
+                }
+                if (AlumXAsistencia_datos.GuardarAsistencia(ref AlumXAsistencia) == 1)
+                {
+                    //foreach (DataRow notificacion in AlumXAsistencia.tablaNotificaciones.Rows)
+                    //{
+                    //    int Bagde = 0, IDTipoCelular = 0;
+                    //    Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
+                    //    IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
+
+                    //    Comun.EnviarMensaje(notificacion["idCelular"].ToString(), notificacion["TituloNot"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
+                    //}
+
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Las Asistencias se agregaron correctamente";
+                    return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "No puede guardar correctamente";
+                    return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura});
+                }
+            }
+            catch (Exception)
+            {
+                AlumnoXAsistenciaModels alumnoXexamen = new AlumnoXAsistenciaModels();
+                alumnoXexamen.IDAsignatura = collection["IDAsignatura"];
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No puede guardar correctamente";
+                return RedirectToAction("ListaAsistencia", new { id = alumnoXexamen.IDAsignatura });
             }
         }
     }
