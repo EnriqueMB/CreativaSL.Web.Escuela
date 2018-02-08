@@ -19,7 +19,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         //[Authorize(Roles = "3")]
         public ActionResult Index()
         {
-
             try
             {
                 CatAlumnoModels Alumno = new CatAlumnoModels();
@@ -36,7 +35,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 TempData["message"] = "No se puede cargar la vista";
                 return View(Alumno);
             }
-            
         }
 
         // GET: Admin/CatAlumnos/Details/5
@@ -144,7 +142,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Alumno = AlumnoDatos.ObtenerDetalleCatAlumno(Alumno);
                 return View(Alumno);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 CatAlumnoModels Alumno = new CatAlumnoModels();
                 TempData["typemessage"] = "2";
@@ -260,5 +258,114 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return View();
             }
         }
+
+        // GET: Admin/CatAlumnos/TutorXAlumno/5
+        [HttpGet]
+        public ActionResult TutorXAlumno(string id)
+        {
+            try
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                CatTutorXAlumno_Datos TutorXAlumno_datos = new CatTutorXAlumno_Datos();
+                TutorXAlumno.conexion = Conexion;
+                TutorXAlumno.IDAlumno = id;
+                TutorXAlumno = TutorXAlumno_datos.ObtenerCatTutorXAlumno(TutorXAlumno);
+                return View(TutorXAlumno);
+            }
+
+            catch (Exception)
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return RedirectToAction("Index");
+            }
+        }
+
+
+        // GET: Admin/CatAlumnos/CreateTutor
+        [HttpGet]
+        public ActionResult CreateTutorXalumno(string id)
+        {
+            try
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                CatTutorXAlumno_Datos TutorXAlumno_datos = new CatTutorXAlumno_Datos();
+                TutorXAlumno.conexion = Conexion;
+                TutorXAlumno.IDAlumno = id;
+                TutorXAlumno.TablaTurorCmb = TutorXAlumno_datos.obtenerComboCatTutorXalumno(TutorXAlumno);
+                var list = new SelectList(TutorXAlumno.TablaTurorCmb, "IDPersona", "Nombre");
+                ViewData["cmbTutor"] = list;
+                return View(TutorXAlumno);
+            }
+            catch (Exception)
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                TutorXAlumno.IDAlumno = id;
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No puede mostrar la vista";
+                return RedirectToAction("TutorXAlumno", new { id = TutorXAlumno.IDAlumno });
+            }
+        }
+
+        // POST: Admin/CatAlumnos/CreateParticipanteCurso
+        [HttpPost]
+        public ActionResult CreateTutorXalumno(string id, FormCollection collection)
+        {
+            try
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                CatTutorXAlumno_Datos TutorXAlumno_datos = new CatTutorXAlumno_Datos();
+                TutorXAlumno.conexion = Conexion;
+                TutorXAlumno.opcion = 1;
+                TutorXAlumno.IDAlumno = collection["IDAlumno"];
+                TutorXAlumno.IDTutor = collection["TablaTurorCmb"];
+                TutorXAlumno.user = User.Identity.Name;
+                TutorXAlumno_datos.abcTutorXAlumno(TutorXAlumno);
+                TempData["typemessage"] = "1";
+                TempData["message"] = "El registro sea creado correctamente";
+
+                return RedirectToAction("TutorXAlumno", new { id = TutorXAlumno.IDAlumno });
+            }
+            catch (Exception)
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                TutorXAlumno.IDAlumno = collection["id_alumno"];
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No puede guardar correctamente";
+                return RedirectToAction("TutorXAlumno", new { id = TutorXAlumno.IDAlumno });
+            }
+        }
+
+        // GET: Admin/CatAlumnos/DeleteActividadesCurso/5
+        [HttpGet]
+        public ActionResult DeleteTutorAlumno(string id)
+        {
+            return View();
+        }
+        // POST: Admin/CatAlumnos/DeleteActividadesCurso/5
+        [HttpPost]
+        public ActionResult DeleteTutorAlumno(string id, string id2, FormCollection collection)
+        {
+            try
+            {
+                CatTutorXalumnoModels TutorXAlumno = new CatTutorXalumnoModels();
+                CatTutorXAlumno_Datos TutorXAlumno_datos = new CatTutorXAlumno_Datos();
+                TutorXAlumno.conexion = Conexion;
+                TutorXAlumno.IDTutor = id;
+                TutorXAlumno.IDAlumno = id2;
+                TutorXAlumno.opcion = 3;
+                TutorXAlumno.user = User.Identity.Name;
+                TutorXAlumno_datos.AbcCatTutorXAlumnoModiBorr(TutorXAlumno);
+                TempData["typemessage"] = "1";
+                TempData["message"] = "El resgistro se elimino correctamente";
+                return Json("");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
     }
 }

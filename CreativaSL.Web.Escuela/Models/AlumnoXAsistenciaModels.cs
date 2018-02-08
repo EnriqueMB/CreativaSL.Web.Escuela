@@ -64,6 +64,22 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaNotificaciones = value; }
         }
 
+        private DateTime _FechaLista;
+
+        public DateTime FechaLista
+        {
+            get { return _FechaLista; }
+            set { _FechaLista = value; }
+        }
+
+        private DataTable _tablaAlumnoXAsistencia;
+
+        public DataTable tablaAlumnoXAsistencia
+        {
+            get { return _tablaAlumnoXAsistencia; }
+            set { _tablaAlumnoXAsistencia = value; }
+        }
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

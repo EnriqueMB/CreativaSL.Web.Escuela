@@ -15,7 +15,7 @@ namespace CreativaSL.Web.Escuela.Models
             try
             {
                 DataSet ds = null;
-                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_get_V2_ListaAsistencia_PROF", datos.IDAsignatura);
+                ds = SqlHelper.ExecuteDataset(datos.conexion, "spCSLDB_V2_get_ListaAsistencia_PROF", datos.IDAsignatura, datos.FechaLista);
                 if (ds != null)
                 {
                     if (ds.Tables.Count > 0)

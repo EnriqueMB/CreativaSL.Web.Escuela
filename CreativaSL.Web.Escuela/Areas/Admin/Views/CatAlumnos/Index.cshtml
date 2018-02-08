@@ -50,12 +50,10 @@
                                                                 <tr>
                                                                     <th>Número de Control</th>
                                                                     <th>Nombre</th>
-
                                                                     <th>Correo</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Estatus</th>
-                                                                    
-
+                                                                    <th>Tutor</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
                                                                 </tr>
@@ -63,20 +61,17 @@
                                                             <tbody>
                                                                 @foreach (System.Data.DataRow Catedratico in Model.TablaDatos.Rows)
                                                                 {
-
-
                                                                     <tr>
                                                                         <td>@Catedratico["numControl"].ToString()</td>
                                                                         <td>@Catedratico["nombre"].ToString()</td>
                                                                         <td>@Catedratico["correo"].ToString()</td>
                                                                         <td>@Catedratico["telefono"].ToString()</td>
                                                                         @{ var estatus = Convert.ToInt32(Catedratico["id_estatus"].ToString()); }
-                                                                            @if (estatus == 1)
+                                                                        @if (estatus == 1)
                                                                         {
                                                                             <td style="text-align:center;"><a class="btn green estado" href="@Url.Action("DarBaja", "CatAlumnos", new { id = Catedratico["id_persona"].ToString(), id2=Catedratico["id_estatus"].ToString() })">Baja</a></td>
                                                                         }
-                                                                        
-                                                                        
+                                                                        <td style="text-align: center;"><a class="btn green" href="@Url.Action("TutorXAlumno", "CatAlumnos", new {id = Catedratico["id_persona"].ToString()})"><i class="icon-user"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatAlumnos", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatAlumnos", new {id = Catedratico["id_persona"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>
