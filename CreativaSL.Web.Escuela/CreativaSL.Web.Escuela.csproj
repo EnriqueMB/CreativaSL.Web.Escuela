@@ -2812,6 +2812,9 @@
     <Content Include="Areas\Profesor\Views\CatMateria\Index.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAlumno.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAsistencia.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\PaseAsistencia.cshtml" />
+    <Content Include="Areas\Admin\Views\Notificacion\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Notificacion\NotificacionesGenerales.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
