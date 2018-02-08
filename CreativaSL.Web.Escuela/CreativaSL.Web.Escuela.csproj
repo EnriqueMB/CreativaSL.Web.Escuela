@@ -2791,7 +2791,6 @@
     <Content Include="Areas\Admin\Views\CatAdministrativo\Permisos.cshtml" />
     <Content Include="Areas\Admin\Views\CatCatedratico\MateriaP.cshtml" />
     <Content Include="Areas\Admin\Views\CatCatedratico\CreateMateria.cshtml" />
-    <Content Include="Areas\Admin\Views\Notificacion\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CatCuentaUser\Index.cshtml" />
     <Content Include="Areas\Profesor\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Profesor\Views\HomeProfesor\Index.cshtml" />
@@ -2813,6 +2812,8 @@
     <Content Include="Areas\Profesor\Views\CatMateria\Index.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAlumno.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\ListaAsistencia.cshtml" />
+    <Content Include="Areas\Admin\Views\Notificacion\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Notificacion\NotificacionesGenerales.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3054,6 +3055,7 @@
     <Compile Include="Models\CatProfesorXMateriaModels.cs" />
     <Compile Include="Models\HistorialModels.cs" />
     <Compile Include="Models\ListaAsistenciaModels.cs" />
+    <Compile Include="Models\NotificacionesGeneralesModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\PromocionModels.cs" />
@@ -3094,6 +3096,7 @@
     <Compile Include="Models\_ListaAsistencia_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
+    <Compile Include="Models\_NotificacionesGenerales_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
     <Compile Include="Models\_Promocion_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
