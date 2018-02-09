@@ -96,11 +96,20 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     }
                 }
                 NotificacionGeneralDatos.insertarNotificacion(NotificacionGeneral);
-                if (NotificacionGeneral.Completado == true)
+
+                if (NotificacionGeneral.Resultado == 1)
                 {
+                    foreach (DataRow notificacion in NotificacionGeneral.TablaAlumnos.Rows)
+                    {
+                        int Bagde = 0, IDTipoCelular = 0;
+                        Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
+                        IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
+
+                        Comun.EnviarMensaje(notificacion["token"].ToString(), notificacion["titulo"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
+                    }
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Se ha realizado el envio correctamente.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("NotificacionesGenerales");
                 }
                 else
                 {
@@ -134,6 +143,10 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     NotificacionGeneral.TablaAlumnosXGrupo = NotificacionGeneralDatos.ObtenertablaCatAlumnoXGrupo(NotificacionGeneral);
                     var listAlumnosXGrupo = new SelectList(NotificacionGeneral.TablaAlumnosXGrupo, "IDPersona", "nombre");
                     ViewData["tblAlumnosXGrupo"] = listAlumnosXGrupo;
+
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Ocurrió un error. Por favor Contacte a soporte técnico";
+                    return RedirectToAction("NotificacionesGenerales");
                 }
 
                 return View();
@@ -146,7 +159,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("NotificacionesGenerales");
             }
         }
-        // GET: Admin/Notificacion
+        // GET: Admin/Notificacion 
         public ActionResult Index()
         {
             return View();

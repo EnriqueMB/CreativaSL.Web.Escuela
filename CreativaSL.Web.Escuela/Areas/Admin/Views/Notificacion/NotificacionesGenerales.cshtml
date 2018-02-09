@@ -151,14 +151,14 @@
                                                                     </div>
                                                                     <div class="span3">
                                                                         <div class="control-group">
-                                                                            <label class="control-label">Tutores<span class="required"> *</span></label>
+                                                                            <label class="control-label">Solo a Tutores<span class="required"> *</span></label>
                                                                             <div class="controls">
                                                                                 @Html.CheckBoxFor(model => model.tutores)
                                                                                 
                                                                               
                                                                             </div>
                                                                         </div>
-                                                                        <span class="help-block">Seleccione si desea incluir a los tutores</span>
+                                                                       
                                                                     </div>
                                                                     
 
@@ -167,13 +167,13 @@
 
                                                                     <div class="span12">
                                                                         <div class="control-group">
-                                                                            <label class="control-label">Texto<span class="required"> *</span></label>
+                                                                            <label class="control-label">Descripción de notificación<span class="required"> *</span></label>
                                                                             <div class="controls">
                                                                                @Html.TextAreaFor(model => model.texto, new { id = "texto", @class = "span12 m-wrap" })
                                                                             @Html.ValidationMessageFor(model => model.texto)
                                                                             </div>
                                                                         </div>
-                                                                        <span class="help-block">Texto</span>
+                                                                        <span class="help-block">Descripción de notificación</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row-fluid">
@@ -206,13 +206,21 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" src="https://d3js.org/d3.v4.0.0-alpha.35.min.js"></script>
     <script>
+       
         $(document).ready(function () {
+           
+            
+            d3.select("#ListPlanEstudioOrigen option[value='-1']").raise();
+            d3.select("#ListModalidadOrigen option[value='all']").raise();
+            d3.select("#ListCicloOrigen option[value='all']").raise();
 
             $("#ListPlanEstudioOrigen").change(function () {
                 var combo = $('#ListModalidadOrigen').attr('id');
-                getComboModalidad($("#ListPlanEstudioOrigen").val(),combo);
+                getComboModalidad($("#ListPlanEstudioOrigen").val(), combo);
+                
+                
             });
             $("#ListModalidadOrigen").change(function () {
                 var combo = $('#ListEspecialidadOrigen').attr('id');
@@ -356,7 +364,7 @@
                         
                     }
                     $("#" + combo).html(items);
-                    
+                    d3.select("#ListGrupoOrigen option[value='all']").raise();
 
                 }
             });
@@ -382,7 +390,7 @@
                         items += "<option value=\"" + cmbCursos[i].IDCurso + "\">" + cmbCursos[i].Descripcion + "</option>";
                     }
                     $("#" + combo).html(items);
-
+                    d3.select("#ListCursosOrigen option[value='all']").raise();
                 }
             });
         }
@@ -407,7 +415,7 @@
                         items += "<option value=\"" + cmbEspecialidad[i].id_especialidad + "\">" + cmbEspecialidad[i].descripcion + "</option>";
                     }
                     $("#" + combo).html(items);
-
+                    d3.select("#ListEspecialidadOrigen option[value='all']").raise();
                 }
             });
         }
@@ -433,7 +441,7 @@
                                 items += "<option value=\"" + cmbModalidad[i].IDModalidad + "\">" + cmbModalidad[i].Descripcion + "</option>";
                             }
                             $("#" + combo).html(items);
-
+                            d3.select("#ListModalidadOrigen option[value='all']").raise();
                         }
                     });
         }

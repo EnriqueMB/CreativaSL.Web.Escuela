@@ -11,14 +11,14 @@ namespace CreativaSL.Web.Escuela.Models
     public class _NotificacionesGenerales_Datos
     {
         public void insertarNotificacion(NotificacionesGeneralesModels datos) {
-
+           
             try
             {
                 datos.Completado = false;
-                int Resultado = 0;
-                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_NotificacionGeneral",
+                //int Resultado = 0;
+                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_NotificacionGeneral",
                     
-                     new SqlParameter("@IDPlanEstudio", datos.idplanEstudio),
+                     new SqlParameter("@IDPlanEstudios", datos.idplanEstudio),
                      new SqlParameter("@IDModalidad", datos.IDModalidad),
                      new SqlParameter("@IDEspecialidad", datos.IDEspecialidad),
                      new SqlParameter("@IDCurso", datos.curso),
@@ -30,21 +30,25 @@ namespace CreativaSL.Web.Escuela.Models
                      new SqlParameter("@Tutores", datos.tutores),
                      new SqlParameter("@TablaAlumnos", datos.TablaAlumnos),
                      new SqlParameter("@IDUsuario", datos.user)
+                     
                      );
-                while (dr.Read())
+                   
+                if (dr != null)
                 {
-                    Resultado = !dr.IsDBNull(dr.GetOrdinal("Resultado")) ? dr.GetInt32(dr.GetOrdinal("Resultado")) : 0;
-                    if (Resultado == 1)
+                    if (dr.Tables.Count == 2)
                     {
-                        datos.Completado = true;
+                        datos.TablaAlumnos = dr.Tables[0];
+
+                        DataTableReader DTR = dr.Tables[1].CreateDataReader();
+                        DataTable Tbl1 = dr.Tables[1];
+                        while (DTR.Read())
+                        {
+                            datos.Resultado = !DTR.IsDBNull(DTR.GetOrdinal("resultado")) ? DTR.GetInt32(DTR.GetOrdinal("resultado")) :0;
+                        }
                     }
-                    else
-                    {
-                        datos.Completado = false;
-                    }
-                    break;
                 }
-            }
+
+                    }
             catch (Exception ex)
             {
                 throw ex;
@@ -58,7 +62,7 @@ namespace CreativaSL.Web.Escuela.Models
                 List<CatAlumnoModels> lista = new List<CatAlumnoModels>();
                 CatAlumnoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupo", datos.grupo);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupoNotificacionGeneral", datos.grupo);
                 while (dr.Read())
                 {
                     item = new CatAlumnoModels();

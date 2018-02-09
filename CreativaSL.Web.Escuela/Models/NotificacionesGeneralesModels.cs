@@ -159,14 +159,16 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _titulo;
-
+        [Required(ErrorMessage = "El título de la notificación es obligatorio ")]
+        [Display(Name = "Título")]
         public string titulo
         {
             get { return _titulo; }
             set { _titulo = value; }
         }
         private string _texto;
-
+        [Required(ErrorMessage = "La descripción  de la notificación es obligatoria ")]
+        [Display(Name = "Descripción")]
         public string texto
         {
             get { return _texto; }
