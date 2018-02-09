@@ -1,0 +1,178 @@
+﻿@model CreativaSL.Web.Escuela.Models.AlumnoXTareaModels
+@{
+    ViewBag.Title = "Calificación Tarea";
+    Layout = "~/Areas/Profesor/Views/Shared/_Layout.cshtml";
+}
+@section featured
+{
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small>   Administración</small></h3>
+                </div>
+            </div>
+            <div id="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption"><i class="icon-edit"></i>Calificación del Examen</div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="clearfix">
+                                    <div class="btn-group">
+                                        <div class="span12">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @using (Html.BeginForm("CalificacionTarea", "CatMateria", FormMethod.Post, new { @class = "form-horizontal" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    @Html.HiddenFor(model => model.IDAsignatura)
+                                    @Html.HiddenFor(model => model.IDTarea)
+                                    @Html.HiddenFor(model => model.NumeroAlumno)
+
+                                    <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                        <div id="miGrid">
+                                            <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                <div class="row-fluid" style="margin:0px; padding:0px">
+                                                    <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                        <section id="flip-scroll">
+                                                            <table id="example" class="table table-striped table-hover table-bordered dataTable">
+                                                                <thead class="flip-content">
+                                                                    <tr>
+                                                                        <th style="display:none"></th>
+                                                                        <th>Nombre Completo</th>
+                                                                        <th>Calificación</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                                                        int contAlumno = 0;
+                                                                        string cadenaContAlumno = "";
+                                                                        string calificacionContAlumno = "";
+                                                                        foreach (System.Data.DataRow aluXtarea in Model.TablaAlumnoTarea.Rows)
+                                                                        {
+                                                                            contAlumno = contAlumno + 1;
+                                                                            cadenaContAlumno = "idAlumno" + contAlumno.ToString();
+                                                                            calificacionContAlumno = "calificacion" + contAlumno.ToString();
+                                                                            @:<tr>
+                                                                                @: <td style="display:none"><input type="hidden" name="@Html.Raw(cadenaContAlumno)" value="@Html.Raw(aluXtarea["IDAlumno"])"></td>
+                                                                                @:<td>@aluXtarea["NombreCompleto"].ToString()</td>
+                                                                                @: <td><input class="form-control validCalificacion" type="text" id="@Html.Raw(calificacionContAlumno)" name="@Html.Raw(calificacionContAlumno)" value="@Html.Raw(aluXtarea["Calificacion"])" /></td>
+                                                                                @:</tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </section>
+                                                        <div class="span12">
+                                                            @{string id = Model.IDAsignatura;}
+                                                            <a href="@Url.Action("Tarea", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                                            <input type="submit" value="Guardar" class="btn btn-default green">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            $('input.validCalificacion').keypress(function (evt) {
+                var charCode = evt.keyCode || evt.which;
+                if (charCode == 46) {
+                    if (this.value.contains(".")) {
+                        if (evt.preventDefault) {
+                            evt.preventDefault();
+                        } else {
+                            evt.returnValue = false;
+                        }
+                    }
+                }
+                if (!((charCode >= 48 && charCode <= 57) || (charCode == 46) || (charCode == 8) || (charCode == 46) || (charCode == 116))) {
+                    if (evt.preventDefault) {
+                        evt.preventDefault();
+                    } else {
+                        evt.returnValue = false;
+                    }
+                }
+            });
+
+            $('#example').DataTable({
+	        "bSort" : false,
+	        "bAutoWidth" : false,
+	        "aLengthMenu" : [
+	        [-1], ["All"]
+	        ],
+	        "iDisplayLength" : -1
+            });
+
+            $('a.delete').live('click', function (e) {
+                e.preventDefault();
+                if (confirm("¿Confirmar eliminación?") == false) return;
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) { location.reload(true); },
+                    error: function () {
+                        $('#Error').html('<h3>Ocurrio un error al eliminar este registro<h3>');
+                        $('#Error').css("display", "block");
+                        $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                        $('#Error').css("display", "block");
+                    }
+                });
+            });
+
+        });
+
+       jQuery(document).ready(function () {
+           var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+        jQuery.validator.methods["date"] = function (value, element) { return true; }
+    </script>
+}
+
+
+
+

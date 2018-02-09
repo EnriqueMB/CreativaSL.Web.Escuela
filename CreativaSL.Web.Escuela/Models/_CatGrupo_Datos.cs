@@ -235,7 +235,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 List<CatAlumnoModels> Lista = new List<CatAlumnoModels>();
                 CatAlumnoModels Item;
-                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion");
+                SqlDataReader dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_comboAlumnosInscripcion", datos.IDGrupo);
                 while (dr.Read())
                 {
                     Item = new CatAlumnoModels();
