@@ -46,16 +46,12 @@
                                                 <div class="portlet-body flip-scroll" >
                                                     <section id="flip-scroll">
 
-
-
                                                         <h3 class="form-section">Notificaciones Generales</h3>
                                                         @using (Html.BeginForm("NotificacionesGenerales", "Notificacion", FormMethod.Post, new { @class = "form-horizontal" }))
                                                         {
                                                             @Html.AntiForgeryToken()
                                                             @Html.ValidationSummary(true)
-
-                                                           
-
+                                                            
                                                             <div class="portlet-body form">
                                                                 <h3 class="form-section">Información del Horario</h3>
                                                                 <div class="row-fluid">
