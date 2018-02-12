@@ -9,7 +9,6 @@ using System.Configuration;
 
 namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
 {
-    [Autorizado]
     public class HomeProfesorController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

@@ -1,6 +1,6 @@
-﻿@model CreativaSL.Web.Escuela.Models.CatGrupoModels
+﻿
 @{
-    ViewBag.Title = "Inscripcion";
+    ViewBag.Title = "Graduar";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
@@ -50,6 +50,7 @@
                                                         <table id="example" class="table table-striped table-hover table-bordered dataTable">
                                                             <thead class="flip-content">
                                                                 <tr>
+                                                                    <th><input type="checkbox" readonly="readonly" /></th>
                                                                     <th>Número de control</th>
                                                                     <th>Alumno</th>
                                                                 </tr>
@@ -58,9 +59,9 @@
                                                                 @foreach (System.Data.DataRow lista in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
+                                                                        <td><input type="checkbox" readonly="readonly" /></td>
                                                                         <td>@lista["NumeroControl"].ToString()</td>
                                                                         <td>@lista["NombreAlumno"].ToString()</td>
-                                                                        @*<td style="text-align: center;"><a class="btn red delete" href="@Url.Action("DeleteAlumno", "CatGrupo", new {id = lista["IDAlumno"].ToString(), id2 = id})"><i class="icon-trash"></i></a></td>*@
                                                                     </tr>
                                                                 }
                                                             </tbody>
@@ -81,14 +82,14 @@
 
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
-	        "bSort" : false,
-	        "bAutoWidth" : false,
-	        "aLengthMenu" : [
-	        [10,25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]
-	        ],
-	        "iDisplayLength" : 10
-            });
+            //$('#example').DataTable({
+	        //"bSort" : false,
+	        //"bAutoWidth" : false,
+	        //"aLengthMenu" : [
+	        //[10,25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]
+	        //],
+	        //"iDisplayLength" : 10
+            //});
 
             $('a.delete').live('click', function (e) {
                 e.preventDefault();
@@ -132,3 +133,4 @@
         jQuery.validator.methods["date"] = function (value, element) { return true; }
     </script>
 }
+
