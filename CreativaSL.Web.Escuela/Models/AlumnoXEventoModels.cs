@@ -56,6 +56,63 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaNotificaciones = value; }
         }
 
+        private string _Nombre;
+
+        public string Nombre
+        {
+            get { return _Nombre; }
+            set { _Nombre = value; }
+        }
+
+        private DateTime _FechaEvento;
+
+        public DateTime FechaEvento
+        {
+            get { return _FechaEvento; }
+            set { _FechaEvento = value; }
+        }
+
+        private string _NombreEvento;
+
+        public string NombreEvento
+        {
+            get { return _NombreEvento; }
+            set { _NombreEvento = value; }
+        }
+
+        private string _Cadena;
+
+        public string Cadena
+        {
+            get { return _Cadena; }
+            set { _Cadena = value; }
+        }
+
+        private string _CadenaFinal;
+
+        public string CadenaFinal
+        {
+            get { return _CadenaFinal; }
+            set { _CadenaFinal = value; }
+        }
+
+        private string _IDNofificacionDetalle;
+
+        public string IDNotificacionDetalle
+        {
+            get { return _IDNofificacionDetalle; }
+            set { _IDNofificacionDetalle = value; }
+        }
+
+        private DataTable _TablaCadenaNotificacion;
+
+        public DataTable TablaCadenaNotificacion
+        {
+            get { return _TablaCadenaNotificacion; }
+            set { _TablaCadenaNotificacion = value; }
+        }
+
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

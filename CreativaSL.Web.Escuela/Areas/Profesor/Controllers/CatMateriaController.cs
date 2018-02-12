@@ -632,7 +632,6 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
 
         // GET: /Profesor/CatMateria/CreateEvento
         [HttpGet]
-        [Authorize(Roles = "3")]
         public ActionResult CreateEvento(string id)
         {
             try
@@ -707,14 +706,26 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 alumnoXevento.IDAsignatura = id2;
                 alumnoXevento.user = User.Identity.Name;
                 alumnoXevento_datos.EnviarEvento(ref alumnoXevento);
+                alumnoXevento.TablaCadenaNotificacion = new DataTable();
+                alumnoXevento.TablaCadenaNotificacion.Columns.Add("IDNoficacion", typeof(string));
+                alumnoXevento.TablaCadenaNotificacion.Columns.Add("Titulo", typeof(string));
+                alumnoXevento.TablaCadenaNotificacion.Columns.Add("Cadena", typeof(string));
                 foreach (DataRow notificacion in alumnoXevento.TablaNotificaciones.Rows)
                 {
+                    alumnoXevento.IDNotificacionDetalle = notificacion["IDNotificacion"].ToString();
+                    alumnoXevento.Nombre = notificacion["NombreAlumno"].ToString();
+                    alumnoXevento.FechaEvento = Convert.ToDateTime(notificacion["FechaEvento"].ToString());
+                    alumnoXevento.NombreEvento = notificacion["NombreEvento"].ToString();
+                    alumnoXevento.Cadena = notificacion["TextoEnviar"].ToString();
+                    alumnoXevento_datos.CadenaFinal(alumnoXevento);
+                    string CadenaFin = alumnoXevento.CadenaFinal;
                     int Bagde = 0, IDTipoCelular = 0;
-                    Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
-                    IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
-
-                    Comun.EnviarMensaje(notificacion["idCelular"].ToString(), notificacion["TituloNot"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
+                    int.TryParse(notificacion["Badge"].ToString(), out Bagde);
+                    int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
+                    //Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), CadenaFin, Bagde, IDTipoCelular);
+                    alumnoXevento.TablaCadenaNotificacion.Rows.Add(alumnoXevento.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin);
                 }
+                alumnoXevento_datos.ActualizarTexto(ref alumnoXevento);
                 return Json("");
             }
             catch
