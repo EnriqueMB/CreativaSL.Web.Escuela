@@ -722,7 +722,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                     int Bagde = 0, IDTipoCelular = 0;
                     int.TryParse(notificacion["Badge"].ToString(), out Bagde);
                     int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
-                    //Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), CadenaFin, Bagde, IDTipoCelular);
+                    Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), CadenaFin, Bagde, IDTipoCelular);
                     alumnoXevento.TablaCadenaNotificacion.Rows.Add(alumnoXevento.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin);
                 }
                 alumnoXevento_datos.ActualizarTexto(ref alumnoXevento);
