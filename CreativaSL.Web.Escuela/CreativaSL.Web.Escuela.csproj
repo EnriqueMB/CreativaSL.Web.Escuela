@@ -3139,6 +3139,7 @@
     <Compile Include="Models\_ListaAsistencia_Datos.cs" />
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
+    <Compile Include="Models\_NotificacionCadena_Datos.cs" />
     <Compile Include="Models\_NotificacionesGenerales_Datos.cs" />
     <Compile Include="Models\_Notificaciones_Profesor_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />

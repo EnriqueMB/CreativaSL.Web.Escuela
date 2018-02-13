@@ -24,7 +24,7 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _id_registro; }
             set { _id_registro = value; }
         }
-        
+
 
         private string _IDNotificacionGeneral;
 
@@ -191,6 +191,81 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _texto; }
             set { _texto = value; }
         }
+
+        private DataTable _TablaNotificacionXTipo;
+
+        public DataTable TablaNotificacionXTipo
+        {
+            get { return _TablaNotificacionXTipo; }
+            set { _TablaNotificacionXTipo = value; }
+        }
+
+        //datos de la notificacion 
+        private string _nombreAlumno;
+
+        public string nombreAlumno
+        {
+            get { return _nombreAlumno; }
+            set { _nombreAlumno = value; }
+        }
+        private DateTime _fechaEvento;
+
+        public DateTime fechaEvento
+        {
+            get { return _fechaEvento; }
+            set { _fechaEvento = value; }
+        }
+        private string _nombreEvento;
+
+        public string nombreEvento
+        {
+            get { return _nombreEvento; }
+            set { _nombreEvento = value; }
+        }
+        private string _notificacionFinal;
+
+        public string notificacionFinal
+        {
+            get { return _notificacionFinal; }
+            set { _notificacionFinal = value; }
+        }
+        private string _notificacionPlantilla;
+
+        public string notificacionPlantilla
+        {
+            get { return _notificacionPlantilla; }
+            set { _notificacionPlantilla = value; }
+        }
+        private float _calificacion;
+
+        public float calificacion
+        {
+            get { return _calificacion; }
+            set { _calificacion = value; }
+        }
+        private string _materia;
+
+        public string materia
+        {
+            get { return _materia; }
+            set { _materia = value; }
+        }
+
+        private string _nombreTarea;
+
+        public string nombreTarea
+        {
+            get { return _nombreTarea; }
+            set { _nombreTarea = value; }
+        }
+        private DateTime _fechaTarea;
+
+        public DateTime fechaTarea
+        {
+            get { return _fechaTarea; }
+            set { _fechaTarea = value; }
+        }
+
 
         #region Datos de control
         public int Resultado { get; set; }

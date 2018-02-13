@@ -33,6 +33,39 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+        public void actualizarDetalleNotificacion(NotificacionesProfesorModels datos)
+        {
+
+            try
+            {
+                datos.Completado = false;
+                //int Resultado = 0;
+                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_NotificacionDetalleActualizar",
+                    new SqlParameter("@TablaNotificacion", datos.TablaNotificacionXTipo)
+                     );
+
+                if (dr != null)
+                {
+                    if (dr.Tables.Count == 1)
+                    {
+                        
+
+                        DataTableReader DTR = dr.Tables[0].CreateDataReader();
+                        DataTable Tbl1 = dr.Tables[0];
+                        while (DTR.Read())
+                        {
+                            datos.Resultado = !DTR.IsDBNull(DTR.GetOrdinal("resultado")) ? DTR.GetInt32(DTR.GetOrdinal("resultado")) : 0;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         public void ReenviarNotificacion(NotificacionesProfesorModels datos)
         {
 
@@ -40,9 +73,10 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 datos.Completado = false;
                 //int Resultado = 0;
-                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_get_ReenviarNotificacionGeneralXID",
-                    new SqlParameter("@id_cat", datos.IDNotificacionGeneral)
-
+                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_get_ReenviarTipoNotificacionXID",
+                    new SqlParameter("@id_notificacion", datos.IDNotificacionGeneral),
+                    new SqlParameter("@id_registro", datos.id_registro),
+                    new SqlParameter("@tipo_notificacion", datos.IDTipoNotificacion)
                      );
 
                 if (dr != null)
