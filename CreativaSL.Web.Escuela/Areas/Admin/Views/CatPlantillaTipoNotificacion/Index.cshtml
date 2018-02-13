@@ -42,8 +42,7 @@
                                                             <thead class="flip-content">
                                                                 <tr>
                                                                     <th>Título</th>
-                                                                    <th>Descripción</th>
-                                                                                                                                
+                                                                    <th>Descripción</th>                                             
                                                                     <th>Editar</th>
 
                                                                 </tr>
@@ -52,14 +51,14 @@
                                                                 @foreach (System.Data.DataRow plantilla in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
+                                                                        @{int IDNot = 0;
+                                                                            int.TryParse(plantilla["id_tipoNotificacion"].ToString(), out IDNot);
+                                                                        }
                                                                         <td>@plantilla["titulo"].ToString()</td>
-                                                                        
                                                                         <td>@plantilla["texto"].ToString()</td>
-                                                                        
-                                                                       
-                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatPlantillaTipoNotificacion", new { id = plantilla["id_plantilla"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                         </tr>
-                                                                            }
+                                                                        <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatPlantillaTipoNotificacion", new { id = plantilla["id_plantilla"].ToString(), id2 = IDNot })"><i class="icon-edit"></i></a></td>
+                                                                    </tr>
+                                                                 }
                                                             </tbody>
                                                         </table>
                                                     </section>

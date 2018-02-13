@@ -9,6 +9,7 @@ using CreativaSL.Web.Escuela.Filters;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     public class HomeAdminController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");

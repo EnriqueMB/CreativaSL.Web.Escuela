@@ -16,6 +16,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
         // GET: Admin/CatPlantillaTipoNotificacion
+        [HttpGet]
         public ActionResult Index()
         {
             try
@@ -44,6 +45,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
 
         // GET: Admin/CatPlantillaTipoNotificacion/Create
+        [HttpGet]
         public ActionResult Create()
         {
             CatPlantillaTipoNotificacionModels PlantillaTipoNotificacion = new CatPlantillaTipoNotificacionModels();
@@ -100,7 +102,8 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
 
         // GET: Admin/CatPlantillaTipoNotificacion/Edit/5
-        public ActionResult Edit(string id)
+        [HttpGet]
+        public ActionResult Edit(string id, int id2)
         {
             try
             {
@@ -116,6 +119,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 var lista = new SelectList(PlantillaTipoNotificacion.listaVariableNotificacion, "clave", "descripcion");
                 ViewData["tablaVariables"] = lista;
                 PlantillaTipoNotificacion.id_plantilla = id;
+                PlantillaTipoNotificacion.id_tipoNotificacion = id2;
                 PlantillaTipoNotificacion = PlantillaTipoNotificacionDatos.ObtenerDetallePlantillaNotificacion(PlantillaTipoNotificacion);
                 return View(PlantillaTipoNotificacion);
             }
