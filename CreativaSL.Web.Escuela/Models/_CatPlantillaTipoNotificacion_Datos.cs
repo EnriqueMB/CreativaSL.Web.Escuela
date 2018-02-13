@@ -63,7 +63,7 @@ namespace CreativaSL.Web.Escuela.Models
         {
             try
             {
-                object[] parametros = { datos.id_plantilla };
+                object[] parametros = { datos.id_plantilla};
                 SqlDataReader dr = null;
                 dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatPlantillaNotificacionXID", parametros);
                 while (dr.Read())
