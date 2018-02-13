@@ -717,6 +717,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                     alumnoXevento.FechaEvento = Convert.ToDateTime(notificacion["FechaEvento"].ToString());
                     alumnoXevento.NombreEvento = notificacion["NombreEvento"].ToString();
                     alumnoXevento.Cadena = notificacion["TextoEnviar"].ToString();
+                    alumnoXevento.NombreMateria = notificacion["NombreMateria"].ToString();
                     alumnoXevento_datos.CadenaFinal(alumnoXevento);
                     string CadenaFin = alumnoXevento.CadenaFinal;
                     int Bagde = 0, IDTipoCelular = 0;

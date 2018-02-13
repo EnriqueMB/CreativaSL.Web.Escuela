@@ -50,23 +50,24 @@
                                 CuentaUsuario.IDTipoPersona = 1;
                                 CuentaUsuario = CreativaSL.Web.Escuela.Models.CatCuentaUser_Datos.ObtenerUsuario(CuentaUsuario);
 
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            @*<img alt="" src="~/Imagenes/Usuarios/483F6D27-FE95-4515-9247-7A0A457EEC70.jpg" style="width: 50px;">*@
-                            <span class="username">@Html.Raw(@Html.Encode(CuentaUsuario.tablaUsuarioCuenta.Rows[0]["nombre"]))</span>
-                            <i class="icon-angle-down"></i>
-                        </a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                @*<img alt="" src="~/Imagenes/Usuarios/483F6D27-FE95-4515-9247-7A0A457EEC70.jpg" style="width: 50px;">*@
+                                <span class="username">@Html.Raw(@Html.Encode(CuentaUsuario.tablaUsuarioCuenta.Rows[0]["nombre"]))</span>
+                                <i class="icon-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("LogOff", "Account", new { Area = "Admin"})"><i class="icon-key"></i> Cerrar Sesión</a></li>
+                            </ul>
                             }
                             else
                             {
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <script> window.location.href='@Url.Action("LogOff", "Account", new { Area = "Admin" })'; </script>
+                                @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="username">Administrador Defaul</span>
                                     <i class="icon-angle-down"></i>
-                                </a>
+                                </a>*@
                             }
                         }
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("LogOff", "Account", new { Area = "Admin"})"><i class="icon-key"></i> Cerrar Sesión</a></li>
-                        </ul>
                     </li>
                 </ul>
             </div>

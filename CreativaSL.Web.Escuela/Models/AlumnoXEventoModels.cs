@@ -112,6 +112,14 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaCadenaNotificacion = value; }
         }
 
+        private string _NombreMateria;
+
+        public string NombreMateria
+        {
+            get { return _NombreMateria; }
+            set { _NombreMateria = value; }
+        }
+
 
         #region Datos de control
         public int Resultado { get; set; }
