@@ -16,11 +16,28 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
     public class NotificacionController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
+        [HttpGet]
+        public ActionResult Index()
+        {
+            NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+            _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+            NotificacionGeneral.conexion = Conexion;
+            NotificacionGeneral = NotificacionGeneralDatos.obtenerCatNotificacionGeneral(NotificacionGeneral);
+            return View(NotificacionGeneral);
+         
+        }
+        
 
+        [HttpGet]
         public ActionResult NotificacionesGenerales() {
             NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
             _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
             NotificacionGeneral.conexion = Conexion;
+
+            NotificacionGeneral.TablaTipoNotificacionCmb = NotificacionGeneralDatos.obtenerListaTipoNotificacion(NotificacionGeneral);
+            var listtn = new SelectList(NotificacionGeneral.TablaTipoNotificacionCmb, "id_tipoNotificacion", "descripcion");
+            ViewData["cmbTipoNotificacion"] = listtn;
+
             NotificacionGeneral.TablaCicloEscolarCmb = NotificacionGeneralDatos.ObtenerComboCatCicloEscolar(NotificacionGeneral);
             var list = new SelectList(NotificacionGeneral.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
             ViewData["cmbCicloEscolar"] = list;
@@ -61,13 +78,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
                 _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
                 NotificacionGeneral.conexion = Conexion;
+                NotificacionGeneral.IDNotificacionGeneral = "";
                 NotificacionGeneral.idplanEstudio = Convert.ToInt32(collection["TablaPlanEstudioCmb"]);
                 NotificacionGeneral.IDModalidad = collection["TablaModalidadCmb"];
                 NotificacionGeneral.IDEspecialidad = collection["TablaEspecialidadCmb"];
                 NotificacionGeneral.curso = collection["TablaCursosCmb"];
                 NotificacionGeneral.grupo = collection["TablaGrupoCmb"];
                 NotificacionGeneral.ciclo = collection["TablaCicloEscolarCmb"];
-                NotificacionGeneral.IDTipoNotificacion = Convert.ToInt32(collection["TipoNotificacion"]);
+                NotificacionGeneral.IDTipoNotificacion = Convert.ToInt32(collection["TablaTipoNotificacionCmb"]);
                 NotificacionGeneral.titulo = collection["titulo"];
                 NotificacionGeneral.texto = collection["texto"];
                 NotificacionGeneral.tutores = (collection["tutores"]).StartsWith("true");
@@ -76,6 +94,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 NotificacionGeneral.TablaAlumnos.Columns.Add("id_alumno", typeof(string));
                 NotificacionGeneral.user = User.Identity.Name;
                 string idalumno = "";
+                NotificacionGeneral.opcion = 1;
                 for (int i = 0; i <= NotificacionGeneral.numAlumnos; i++)
                 {
                     try
@@ -159,11 +178,9 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return RedirectToAction("NotificacionesGenerales");
             }
         }
+
         // GET: Admin/Notificacion 
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
         [HttpGet]
         //[Authorize(Roles = "3")]
         public ActionResult Create()
@@ -239,13 +256,95 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Detalle(string id) {
+            NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+            _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+            NotificacionGeneral.conexion = Conexion;
+            NotificacionGeneral.IDNotificacionGeneral = id;
+            NotificacionGeneral = NotificacionGeneralDatos.obtenerDetalleCatNotificacionGeneralXID(NotificacionGeneral);
+
+            return View(NotificacionGeneral);
+        }
 
         [HttpGet]
-        public ActionResult Detalle(string id)
+        //[Authorize(Roles = "3")]
+        public ActionResult Delete(string id)
         {
             return View();
         }
+
+        // POST: Admin/CatGrupo/Delete/5
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult Delete(string id, FormCollection collection)
+        {
+            try
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+                NotificacionGeneral.conexion = Conexion;
+                NotificacionGeneral.IDNotificacionGeneral = id;
+                NotificacionGeneral.opcion = 2;
+                NotificacionGeneral.TablaAlumnos = new DataTable();
+                NotificacionGeneral.TablaAlumnos.Columns.Add("id_alumno", typeof(string));
+                NotificacionGeneral.user = User.Identity.Name;
+                 NotificacionGeneralDatos.insertarNotificacion(NotificacionGeneral);
+                if (NotificacionGeneral.Resultado == 1)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "El registro se elimino correctamente.";
+                    return Json("");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "El registro no se elimino correctamente.";
+                    return Json("");
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
         //FUNCIONES MEDIANTE AJAX DESDE VISTA
+        [HttpPost]
+        public ActionResult ReenviarNotificacion(string id)
+        {
+            try
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+
+                
+                NotificacionGeneral.conexion = Conexion;
+                NotificacionGeneral.IDNotificacionGeneral = id;
+                NotificacionGeneralDatos.ReenviarNotificacion(NotificacionGeneral);
+
+                if (NotificacionGeneral.Resultado == 1)
+                {
+                    foreach (DataRow notificacion in NotificacionGeneral.TablaAlumnos.Rows)
+                    {
+                        int Bagde = 0, IDTipoCelular = 0;
+                        Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
+                        IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
+
+                        Comun.EnviarMensaje(notificacion["token"].ToString(), notificacion["titulo"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
+                    }
+                  
+                }
+
+
+                TempData["message"] = "El Evento se elimino correctamente";
+                return Json("");
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
         //[Authorize(Roles = "3")]
         public ActionResult ComboModalidad(int idplanEstudio)

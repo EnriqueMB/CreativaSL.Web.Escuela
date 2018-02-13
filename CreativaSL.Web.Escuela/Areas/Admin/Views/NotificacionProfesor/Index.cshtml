@@ -1,0 +1,415 @@
+﻿@model CreativaSL.Web.Escuela.Models.NotificacionesProfesorModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section featured
+{
+    @{
+        var message = TempData["message"] ?? string.Empty;
+        var typemessage = TempData["typemessage"] ?? string.Empty;
+    }
+    <div class="page-content">
+        <div id="Error" class="error message" style="display: none">
+            <h3></h3>
+        </div>
+        <div id="Success" class="success message" style="display: none">
+            <h3></h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <h3 class="page-title">Ofelia Narvaez Rincón<small> Administración</small></h3>
+                </div>
+            </div>
+            <div id="dashboard">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="portlet box blue">
+                            <div class="portlet-title">
+                                <div class="caption"><i class="icon-edit"></i>Notificaciones</div>
+                            </div>
+                            <div class="portlet-body">
+                                
+
+
+
+                                <div class="tabbable">
+                                    <!-- Only required for left/right tabs -->
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tab1" data-toggle="tab">Notificación Tarea</a></li>
+                                        <li><a href="#tab2" data-toggle="tab">Notificación Evento</a></li>
+                                        <li><a href="#tab3" data-toggle="tab">Notificación Examen</a></li>
+                                        <li><a href="#tab4" data-toggle="tab">Notificación Asistencia</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab1">
+
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                @*<th>Tipo</th>*@
+                                                                                <th>Título</th>
+                                                                                <th>Texto</th>
+                                                                                <th>Plan Estudios</th>
+                                                                                <th>Modalidad</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Grupo</th>
+                                                                                <th>Reenviar</th>
+                                                                                <th>Ver detalle</th>
+                                                                                <th>Eliminar</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach (System.Data.DataRow notificacion in Model.TablaDatos.Rows)
+                                                                            {
+                                                                                int ID = 0;
+                                                                                int.TryParse(notificacion["id_tipoNotificacion"].ToString(), out ID);
+                                                                                if (ID == 112)
+                                                                                {
+                                                                                    <tr>
+
+                                                                                        @*<td>@notificacion["tipoNotificacion"].ToString()</td>*@
+                                                                                        <td>@notificacion["titulo"].ToString()</td>
+                                                                                        <td>@notificacion["texto"].ToString()</td>
+                                                                                        <td>@notificacion["id_planEstudios"].ToString()</td>
+                                                                                        <td>@notificacion["id_modalidad"].ToString()</td>
+                                                                                        <td>@notificacion["id_especialidad"].ToString()</td>
+                                                                                        <td>@notificacion["id_curso"].ToString()</td>
+                                                                                        <td>@notificacion["id_ciclo"].ToString()</td>
+                                                                                        <td>@notificacion["id_grupo"].ToString()</td>
+
+
+                                                                                        <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor",new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                    </tr>
+                                                                                }
+                                                                                
+
+                                                                            }
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab2">
+
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example1" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                @*<th>Tipo</th>*@
+                                                                                <th>Título</th>
+                                                                                <th>Texto</th>
+                                                                                <th>Plan Estudios</th>
+                                                                                <th>Modalidad</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Grupo</th>
+                                                                                <th>Reenviar</th>
+                                                                                <th>Ver detalle</th>
+                                                                                <th>Eliminar</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            ody>
+                                                                            @foreach (System.Data.DataRow notificacion in Model.TablaDatos.Rows)
+                                                                            {
+                                                                                int ID = 0;
+                                                                                int.TryParse(notificacion["id_tipoNotificacion"].ToString(), out ID);
+                                                                                if (ID == 110)
+                                                                                {
+                                                                                <tr>
+                                                                                    @*<td>@notificacion["tipoNotificacion"].ToString()</td>*@
+                                                                                    <td>@notificacion["titulo"].ToString()</td>
+                                                                                    <td>@notificacion["texto"].ToString()</td>
+                                                                                    <td>@notificacion["id_planEstudios"].ToString()</td>
+                                                                                    <td>@notificacion["id_modalidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_especialidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_curso"].ToString()</td>
+                                                                                    <td>@notificacion["id_ciclo"].ToString()</td>
+                                                                                    <td>@notificacion["id_grupo"].ToString()</td>
+
+
+                                                                                    <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
+                                                                                    <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                    <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab3">
+
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example1" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                @*<th>Tipo</th>*@
+                                                                                <th>Título</th>
+                                                                                <th>Texto</th>
+                                                                                <th>Plan Estudios</th>
+                                                                                <th>Modalidad</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Grupo</th>
+                                                                                <th>Reenviar</th>
+                                                                                <th>Ver detalle</th>
+                                                                                <th>Eliminar</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            ody>
+                                                                            @foreach (System.Data.DataRow notificacion in Model.TablaDatos.Rows)
+                                                                            {
+                                                                                int ID = 0;
+                                                                                int.TryParse(notificacion["id_tipoNotificacion"].ToString(), out ID);
+                                                                                if (ID == 111)
+                                                                                {
+                                                                                <tr>
+                                                                                    @*<td>@notificacion["tipoNotificacion"].ToString()</td>*@
+                                                                                    <td>@notificacion["titulo"].ToString()</td>
+                                                                                    <td>@notificacion["texto"].ToString()</td>
+                                                                                    <td>@notificacion["id_planEstudios"].ToString()</td>
+                                                                                    <td>@notificacion["id_modalidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_especialidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_curso"].ToString()</td>
+                                                                                    <td>@notificacion["id_ciclo"].ToString()</td>
+                                                                                    <td>@notificacion["id_grupo"].ToString()</td>
+
+
+                                                                                    <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
+                                                                                    <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                    <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane" id="tab4">
+
+                                            <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                                <div id="miGrid">
+                                                    <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                                        <div class="row-fluid" style="margin:0px; padding:0px">
+                                                            <div class="portlet-body flip-scroll" style="text-align:center;">
+                                                                <section id="flip-scroll">
+                                                                    <table id="example1" class="table table-striped table-hover table-bordered dataTable">
+                                                                        <thead class="flip-content">
+                                                                            <tr>
+                                                                                @*<th>Tipo</th>*@
+                                                                                <th>Título</th>
+                                                                                <th>Texto</th>
+                                                                                <th>Plan Estudios</th>
+                                                                                <th>Modalidad</th>
+                                                                                <th>Especialidad</th>
+                                                                                <th>Curso</th>
+                                                                                <th>Ciclo</th>
+                                                                                <th>Grupo</th>
+                                                                                <th>Reenviar</th>
+                                                                                <th>Ver detalle</th>
+                                                                                <th>Eliminar</th>
+
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            ody>
+                                                                            @foreach (System.Data.DataRow notificacion in Model.TablaDatos.Rows)
+                                                                            {
+                                                                                int ID = 0;
+                                                                                int.TryParse(notificacion["id_tipoNotificacion"].ToString(), out ID);
+                                                                                if (ID == 113)
+                                                                                {
+                                                                                <tr>
+                                                                                    @*<td>@notificacion["tipoNotificacion"].ToString()</td>*@
+                                                                                    <td>@notificacion["titulo"].ToString()</td>
+                                                                                    <td>@notificacion["texto"].ToString()</td>
+                                                                                    <td>@notificacion["id_planEstudios"].ToString()</td>
+                                                                                    <td>@notificacion["id_modalidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_especialidad"].ToString()</td>
+                                                                                    <td>@notificacion["id_curso"].ToString()</td>
+                                                                                    <td>@notificacion["id_ciclo"].ToString()</td>
+                                                                                    <td>@notificacion["id_grupo"].ToString()</td>
+
+
+                                                                                    <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString()})"><i class="icon-circle-arrow-right"></i></a></td>
+                                                                                    <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
+                                                                                    <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                </tr>
+                                                                                }
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        cursor_wait = function () {
+            // switch to cursor wait for the current element over
+            var elements = $(':hover');
+            if (elements.length) {
+                // get the last element which is the one on top
+                elements.last().addClass('cursor-wait');
+            }
+            // use .off() and a unique event name to avoid duplicates
+            $('html').
+            off('mouseover.cursorwait').
+            on('mouseover.cursorwait', function (e) {
+                // switch to cursor wait for all elements you'll be over
+                $(e.target).addClass('cursor-wait');
+            });
+        }
+
+        remove_cursor_wait = function () {
+            $('html').off('mouseover.cursorwait'); // remove event handler
+            $('.cursor-wait').removeClass('cursor-wait'); // get back to default
+        }
+        $('a.enviar').live('click', function (e) {
+            e.preventDefault();
+            if (confirm("¿Desea enviar las notificaciones?") == false) return;
+            cursor_wait();
+            var url = $(this).attr('href');
+
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    remove_cursor_wait();
+                    $('#Success').html('<h3>Las notificaciones fueron enviadas correctamente<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+
+                },
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    alert(xhr.status);
+                    alert(thrownError);
+                    remove_cursor_wait();
+                    $('#Error').html('<h3>Ocurrio un error al enviar las notificaciones<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('#example').DataTable({
+	        "bSort" : false,
+	        "bAutoWidth" : false,
+	        "aLengthMenu" : [
+	        [10,25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]
+	        ],
+	        "iDisplayLength" : 10
+            });
+
+            $('a.delete').live('click', function (e) {
+                e.preventDefault();
+                if (confirm("¿Confirmar eliminación?") == false) return;
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (result) { location.reload(true); },
+                    error: function () {
+                        $('#Error').html('<h3>Ocurrio un error al eliminar este registro<h3>');
+                        $('#Error').css("display", "block");
+                        $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                        $('#Error').css("display", "block");
+                    }
+                });
+            });
+
+        });
+
+       jQuery(document).ready(function () {
+           var message = '@message';
+            var typemessage = '@typemessage';
+
+            if (typemessage && message) {
+                if (typemessage == '1') {
+                    $('#Success').html('<h3>' + message + '<h3>');
+                    $('#Success').css("display", "block");
+                    $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Success').css("display", "block");
+                }
+                else if (typemessage == '2') {
+                    $('#Error').html('<h3>' + message + '<h3>');
+                    $('#Error').css("display", "block");
+                    $('#Error').delay(400).slideDown(400).delay(2000).slideUp(400);
+                    $('#Error').css("display", "block");
+                }
+            }
+        });
+
+    </script>
+}
+
+

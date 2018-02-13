@@ -17,7 +17,8 @@ namespace CreativaSL.Web.Escuela.Models
                 datos.Completado = false;
                 //int Resultado = 0;
                 DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_NotificacionGeneral",
-                    
+                    new SqlParameter("@opcion", datos.opcion),
+                     new SqlParameter("@id_notificacion", datos.IDNotificacionGeneral),
                      new SqlParameter("@IDPlanEstudios", datos.idplanEstudio),
                      new SqlParameter("@IDModalidad", datos.IDModalidad),
                      new SqlParameter("@IDEspecialidad", datos.IDEspecialidad),
@@ -54,6 +55,63 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
 
+        }
+        public void ReenviarNotificacion(NotificacionesGeneralesModels datos)
+        {
+
+            try
+            {
+                datos.Completado = false;
+                //int Resultado = 0;
+                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_get_ReenviarNotificacionGeneralXID",
+                    new SqlParameter("@id_cat", datos.IDNotificacionGeneral)
+
+                     );
+
+                if (dr != null)
+                {
+                    if (dr.Tables.Count == 2)
+                    {
+                        datos.TablaAlumnos = dr.Tables[0];
+
+                        DataTableReader DTR = dr.Tables[1].CreateDataReader();
+                        DataTable Tbl1 = dr.Tables[1];
+                        while (DTR.Read())
+                        {
+                            datos.Resultado = !DTR.IsDBNull(DTR.GetOrdinal("resultado")) ? DTR.GetInt32(DTR.GetOrdinal("resultado")) : 0;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public NotificacionesGeneralesModels obtenerCatNotificacionGeneral(NotificacionesGeneralesModels Datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_CatNotificacionesGenerales");
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            Datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public List<CatAlumnoModels> ObtenertablaCatAlumnoXGrupo(NotificacionesGeneralesModels datos)
         {
@@ -186,6 +244,52 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 throw ex;
             }
+        }
+        public NotificacionesGeneralesModels obtenerDetalleCatNotificacionGeneralXID(NotificacionesGeneralesModels Datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_CatNotificacionesGeneralesDetaleXID",Datos.IDNotificacionGeneral);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            Datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<CatTipoNotificacionModels> obtenerListaTipoNotificacion(NotificacionesGeneralesModels datos)
+        {
+            try
+            {
+                List<CatTipoNotificacionModels> lista = new List<CatTipoNotificacionModels>();
+                CatTipoNotificacionModels item;
+                SqlDataReader dr = null;
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatTipoNotificacion");
+                while (dr.Read())
+                {
+                    item = new CatTipoNotificacionModels();
+                    item.id_tipoNotificacion = Convert.ToInt32(dr["id_tipoNotificacion"].ToString());
+                    item.descripcion = dr["descripcion"].ToString();
+                    lista.Add(item);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
         public List<CatCicloEscolarModels> ObtenerComboCatCicloEscolar(NotificacionesGeneralesModels datos)
         {

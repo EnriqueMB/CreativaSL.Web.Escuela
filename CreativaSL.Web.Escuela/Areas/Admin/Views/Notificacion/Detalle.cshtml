@@ -1,4 +1,4 @@
-﻿@model CreativaSL.Web.Escuela.Models.NotificacionModels
+﻿@model CreativaSL.Web.Escuela.Models.NotificacionesGeneralesModels
 @{
     ViewBag.Title = "Detalle";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -33,6 +33,7 @@
                                 <div class="clearfix">
                                     <div class="btn-group">
                                         <div class="span12">
+                                            @Html.HiddenFor(model => model.IDNotificacionGeneral)
                                             @*<a href="@Url.Action("Create", "Notificacion")" class="btn btn-default green"><i class="icon-plus"></i> Crear Notificación</a>*@
                                         </div>
                                     </div>
@@ -55,42 +56,44 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>Carlos Eduardo Higuera Gutiérrez</td>
-                                                                    <td>No aplica</td>
-                                                                    <td>Invitación a reunión</td>
-                                                                    <td>Se les invita a una reunión urgente que se llevará a cabo el día 02 de Febrero del presente año a las 16:00 horas en las instalaciones del plantel. Su asistencia es de suma importancia.</td>
-                                                                    <td style="text-align:center;"><i class="icon-signin"></i></td>
-                                                                </tr>
+                                                               
 
-                                                                @*@{
-                                                                        foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
-                                                                        {
+                                                                @{ 
+                                                                    foreach (System.Data.DataRow grupo in Model.TablaDatos.Rows)
+                                                                    {
                                                                             <tr>
-                                                                                <td>@grupo["Clave"].ToString()</td>
-                                                                                <td>@grupo["Nombre"].ToString()</td>
-                                                                                <td>@grupo["NombreCiclo"].ToString()</td>
-                                                                                <td>@grupo["NombreEspecialidad"].ToString()</td>
-                                                                                <td>@grupo["NombreCurso"].ToString()</td>
+                                                                                <td>@grupo["nombreCompleto"].ToString()</td>
+                                                                                @{ string alumno = "";
+                                                                                    if (string.IsNullOrEmpty(@grupo["id_persona"].ToString()))
+                                                                                    {
+                                                                                        <td>No aplica</td>
+                                                                                    }
+                                                                                    else {
+                                                                                        <td>@grupo["nombreCompletoAlumno"].ToString()</td>
+                                                                                    }
+
+
+                                                                                }
+                                                                                
+                                                                                <td>@grupo["titulo"].ToString()</td>
+                                                                                <td>@grupo["texto"].ToString()</td>
+                                                                               
                                                                                 @{bool Extra = false;
 
-                                                                                    bool.TryParse(grupo["ExtraEscolar"].ToString(), out Extra);
+                                                                                    bool.TryParse(@grupo["visto"].ToString(), out Extra);
                                                                                     if (Extra == true)
                                                                                     {
-                                                                                        <td>SI</td>
+                                                                                        <td><a class="btn green default " disable="false" onclick="return false"><i class="icon-ok"></i></a></td>
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        <td>NO</td>
+                                                                                        <td><a class="btn-default blue" disable="false" onclick="return false"><i class="icon-refresh icon-spin"></i></a></td>
+                                                                                        @**@
                                                                                     }
                                                                                 }
-                                                                                <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Inscripcion", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-pinterest"></i></a></td>
-                                                                                <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-edit"></i></a></td>
-                                                                                <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatGrupo", new { id = grupo["IDGrupo"].ToString() })"><i class="icon-trash"></i></a></td>
-                                                                                <td style="text-align:center;"><a class="btn blue" href="@Url.Action("MateriaProfesor", "CatGrupo", new { id = grupo["IDGrupo"].ToString(), id2 = grupo["IDCurso"].ToString()})"><i class="icon-book"></i></a></td>
-                                                                            </tr>
+                                                                                </tr>
                                                                                     }
-                                                                    }*@
+                                                                    }
                                                             </tbody>
                                                         </table>
                                                     </section>

@@ -2828,6 +2828,10 @@
     <Content Include="Areas\Profesor\Views\CatMateria\CalificacionExamen.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\Evento.cshtml" />
     <Content Include="Areas\Profesor\Views\CatMateria\CreateEvento.cshtml" />
+    <Content Include="Areas\Admin\Views\CatPlantillaTipoNotificacion\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\CatPlantillaTipoNotificacion\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\CatPlantillaTipoNotificacion\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\NotificacionProfesor\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3030,10 +3034,12 @@
     <Compile Include="Areas\Admin\Controllers\CatHorarioController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatMateriaController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatModalidadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CatPlantillaTipoNotificacionController.cs" />
     <Compile Include="Areas\Admin\Controllers\CatTutorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HistorialController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NotificacionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NotificacionProfesorController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
@@ -3069,13 +3075,17 @@
     <Compile Include="Models\CatMateriaXCursoModels.cs" />
     <Compile Include="Models\CatMateriaXCurso_Datos.cs" />
     <Compile Include="Models\CatMateriaXProfesorModels.cs" />
+    <Compile Include="Models\CatPlantillaTipoNotificacionModels.cs" />
     <Compile Include="Models\CatProfesorXMateriaModels.cs" />
+    <Compile Include="Models\CatTipoNotificacionModels.cs" />
     <Compile Include="Models\CatTutorXalumnoModels.cs" />
+    <Compile Include="Models\CatVariablesNotificacionModels.cs" />
     <Compile Include="Models\EventosModels.cs" />
     <Compile Include="Models\ExamenModels.cs" />
     <Compile Include="Models\HistorialModels.cs" />
     <Compile Include="Models\ListaAsistenciaModels.cs" />
     <Compile Include="Models\NotificacionesGeneralesModels.cs" />
+    <Compile Include="Models\NotificacionesProfesorModels.cs" />
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\PromocionModels.cs" />
@@ -3115,6 +3125,7 @@
     <Compile Include="Models\_CatMateria_Datos.cs" />
     <Compile Include="Models\_CatModalidad_Datos.cs" />
     <Compile Include="Models\_CatPlanEstudio_Datos.cs" />
+    <Compile Include="Models\_CatPlantillaTipoNotificacion_Datos.cs" />
     <Compile Include="Models\_CatTutorXAlumno_Datos.cs" />
     <Compile Include="Models\_CatTutor_Datos.cs" />
     <Compile Include="Models\_Evento_Datos.cs" />
@@ -3124,6 +3135,7 @@
     <Compile Include="Models\_Login_Datos.cs" />
     <Compile Include="Models\_Menu_Datos.cs" />
     <Compile Include="Models\_NotificacionesGenerales_Datos.cs" />
+    <Compile Include="Models\_Notificaciones_Profesor_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
     <Compile Include="Models\_Promocion_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />

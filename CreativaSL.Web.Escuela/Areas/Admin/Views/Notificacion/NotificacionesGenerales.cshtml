@@ -117,7 +117,7 @@
                                                                                 @Html.ValidationMessageFor(model => model.TablaGrupoCmb)
                                                                             </div>
                                                                         </div>
-                                                                        <span class="help-block">Ingrese notificación</span>
+                                                                        <span class="help-block">Ingrese grupo</span>
                                                                     </div>
 
                                                                 </div>
@@ -127,11 +127,8 @@
                                                                         <div class="control-group">
                                                                             <label class="control-label">Tipo de notificación<span class="required"> *</span></label>
                                                                             <div class="controls">
-                                                                                <select name="TipoNotificacion" class="span12 m-wrap">
-                                                                                    <option value="1">General</option>
-                                                                                    <option value="2">Inasistencia</option>
-                                                                                    <option value="3">Aprobación</option>
-                                                                                </select>
+                                                                                @Html.DropDownListFor(model => model.TablaTipoNotificacionCmb, ViewData["cmbTipoNotificacion"] as SelectList, new { id = "ListTipoNotificacion", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaTipoNotificacionCmb)
                                                                             </div>
                                                                         </div>
                                                                         <span class="help-block">Ingrese el tipo de notificación</span>

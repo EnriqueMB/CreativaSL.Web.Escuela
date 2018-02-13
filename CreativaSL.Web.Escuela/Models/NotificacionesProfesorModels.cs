@@ -7,8 +7,9 @@ using System.Web;
 
 namespace CreativaSL.Web.Escuela.Models
 {
-    public class NotificacionesGeneralesModels
+    public class NotificacionesProfesorModels
     {
+
         private bool _tutores;
 
         public bool tutores
@@ -16,6 +17,14 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _tutores; }
             set { _tutores = value; }
         }
+        private string _id_registro;
+
+        public string id_registro
+        {
+            get { return _id_registro; }
+            set { _id_registro = value; }
+        }
+        
 
         private string _IDNotificacionGeneral;
 
