@@ -59,14 +59,14 @@
                                     <li><a href="@Url.Action("LogOff", "Account", new { Area = "Admin"})"><i class="icon-key"></i> Cerrar Sesión</a></li>
                                 </ul>
                             }
-                            else
+                            @*else
                             {
                                 <script> window.location.href='@Url.Action("LogOff", "Account", new { Area = "Admin" })'; </script>
                                 @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="username">Administrador Defaul</span>
                                     <i class="icon-angle-down"></i>
-                                </a>*@
-                            }
+                                </a>
+                            }*@
                         }
                     </li>
                 </ul>
