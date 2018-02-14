@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
+    [Autorizado]
     [Authorize]
     [InitializeSimpleMembership]
     public class AccountController : Controller
