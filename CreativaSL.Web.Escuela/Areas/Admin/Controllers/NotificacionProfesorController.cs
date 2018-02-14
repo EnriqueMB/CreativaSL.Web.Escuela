@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
@@ -280,51 +281,29 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
                 NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
                 _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
-                
-               
+
+                List<string> Lsiat = new List<string>();
                 NotificacionProfesor.conexion = Conexion;
                 NotificacionProfesor.id_profesor = id_profesor;
                 NotificacionProfesor.grupo = id_grupo;
 
                 NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
-                DataSet ds = new DataSet();
-                ds.Merge(NotificacionProfesor.TablaDatos);
-                StringBuilder JsonString = new StringBuilder();
-                if (ds != null && ds.Tables[0].Rows.Count > 0)
-                {
-                    JsonString.Append("[");
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        JsonString.Append("{");
-                        for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
-                        {
-                            if (j < ds.Tables[0].Columns.Count - 1)
-                            {
-                                JsonString.Append("\"" + ds.Tables[0].Columns[j].ColumnName.ToString() + "\":" + "\"" + ds.Tables[0].Rows[i][j].ToString() + "\",");
-                            }
-                            else if (j == ds.Tables[0].Columns.Count - 1)
-                            {
-                                JsonString.Append("\"" + ds.Tables[0].Columns[j].ColumnName.ToString() + "\":" + "\"" + ds.Tables[0].Rows[i][j].ToString() + "\"");
-                            }
-                        }
-                        if (i == ds.Tables[0].Rows.Count - 1)
-                        {
-                            JsonString.Append("}");
-                        }
-                        else
-                        {
-                            JsonString.Append("},");
-                        }
-                    }
-                    JsonString.Append("]");
-                    
-                }
-                else
-                {
-                    return null;
-                }
 
-                return Json(JsonString, JsonRequestBehavior.AllowGet);
+                var list = new List<Dictionary<string, object>>();
+
+                foreach (DataRow row in NotificacionProfesor.TablaDatos.Rows)
+                {
+                    var dict = new Dictionary<string, object>();
+
+                    foreach (DataColumn col in NotificacionProfesor.TablaDatos.Columns)
+                    {
+                        dict[col.ColumnName] = (Convert.ToString(row[col]));
+                    }
+                    list.Add(dict);
+                }
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                
+                return Json(list, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -332,7 +311,26 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 return Json("", JsonRequestBehavior.AllowGet);
             }
         }
-       
+
+        public static object DataTableToJSON(DataTable table)
+        {
+            var list = new List<Dictionary<string, object>>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                var dict = new Dictionary<string, object>();
+
+                foreach (DataColumn col in table.Columns)
+                {
+                    dict[col.ColumnName] = (Convert.ToString(row[col]));
+                }
+                list.Add(dict);
+            }
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+            return serializer.Serialize(list);
+        }
+
         [HttpPost]
         //[Authorize(Roles = "3")]
         public ActionResult ComboModalidad(int idplanEstudio)

@@ -433,38 +433,69 @@
     </div>
 
     <script>
+        //var data = [{ "Codi": 25, "Nom": "LLEIDA" }];
+
+        //$.each(data, function (index, item) {
+        //    console.log(item.Codi);
+        //    console.log(item.Nom);
+        //});
         function llenarTabla() {
             var grupo = $('#ListGrupoOrigen').val();
             var profesor = $("#ListProfesor").val();
             $.ajax({
                 url: "/Admin/NotificacionProfesor/llenarTabla",
-                data: {
-                    
-                    id_profesor: profesor,
-                    id_grupo: grupo
-                },
+                data: {id_profesor: profesor,
+                          id_grupo: grupo },
                 dataType: "json",
                 type: "POST",
-                error: function (xhr, ajaxOptions, thrownError, request) {
-                   
-                    console.log(xhr, thrownError, request);
-                    alert(xhr.status);
-                    alert(thrownError);
+                success: function (data) {
+                    console.log(data);
+                    //$.each(data, function (index, item) {
+                    //    console.log(item.id_notificacion);
+                    //    console.log(item.texto);
+                    //});
+                    //var valors = JSON.parse(data);
+                    //$.each(valors, function (index, item) {
+                    //    console.log(item.Codi);
+                    //    console.log(item.Nom);
+                    //});
                 },
-                success: function (TablaDatos) {
-                  
-                    alert(TablaDatos[0].id_notificacion);
-                    //var items = "";
-
-                    //for (var i = 0; i < cmbProfesor.length; i++) {
-                    //    items += "<option value=\"" + cmbProfesor[i].id_persona + "\">" + cmbProfesor[i].nombre + "</option>";
-
-                    //}
-                    //$("#ListProfesor").html(items);
-
-
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                },
+                failure: function (response) {
+                    alert("arriva al failure");
                 }
             });
+            //$.ajax({
+            //    url: "/Admin/NotificacionProfesor/llenarTabla",
+            //    data: {
+                    
+            //        id_profesor: profesor,
+            //        id_grupo: grupo
+            //    },
+            //    dataType: "json",
+            //    type: "POST"
+            //    //error: function (xhr, ajaxOptions, thrownError, request) {
+                   
+            //    //    console.log(xhr, thrownError, request);
+            //    //    alert(xhr.status);
+            //    //    alert(thrownError);
+            //    //},
+            //    //success: function (TablaDatos) {
+                  
+            //    //    alert(TablaDatos[0].id_notificacion);
+            //    //    //var items = "";
+
+            //    //    //for (var i = 0; i < cmbProfesor.length; i++) {
+            //    //    //    items += "<option value=\"" + cmbProfesor[i].id_persona + "\">" + cmbProfesor[i].nombre + "</option>";
+
+            //    //    //}
+            //    //    //$("#ListProfesor").html(items);
+
+
+            //    //}
+            //});
             return false;
         }
         $("#ListPlanEstudioOrigen").change(function () {
@@ -505,6 +536,7 @@
                     alert(thrownError);
                 },
                 success: function (cmbProfesor) {
+                    console.log(cmbProfesor);
                     var items = "";
 
                     for (var i = 0; i < cmbProfesor.length; i++) {
