@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,11 +19,102 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         // GET: Admin/NotificacionProfesor
         public ActionResult Index()
         {
-            NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
-            _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
-            NotificacionProfesor.conexion = Conexion;
-            NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
-            return View(NotificacionProfesor);
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                NotificacionProfesor.conexion = Conexion;
+
+
+
+                NotificacionProfesor.TablaCicloEscolarCmb = NotificacionProfesorDatos.ObtenerComboCatCicloEscolar(NotificacionProfesor);
+                var list = new SelectList(NotificacionProfesor.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+                ViewData["cmbCicloEscolar"] = list;
+
+                NotificacionProfesor.TablaPlanEstudioCmb = NotificacionProfesorDatos.ObtenerComboCatPlanEstudio(NotificacionProfesor);
+                var listaPE = new SelectList(NotificacionProfesor.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
+                ViewData["cmbPlanEstudio"] = listaPE;
+
+                NotificacionProfesor.TablaModalidadCmb = NotificacionProfesorDatos.ObtenerComboCatModalidad(NotificacionProfesor);
+                var listModalidad = new SelectList(NotificacionProfesor.TablaModalidadCmb, "IDModalidad", "Descripcion");
+                ViewData["cmbModalidad"] = listModalidad;
+
+                NotificacionProfesor.TablaEspecialidadCmb = NotificacionProfesorDatos.ObtenerComboCatEspecialidad(NotificacionProfesor);
+                var listEspecialidad = new SelectList(NotificacionProfesor.TablaEspecialidadCmb, "id_especialidad", "descripcion");
+                ViewData["cmbEspecialidad"] = listEspecialidad;
+
+                NotificacionProfesor.TablaCursosCmb = NotificacionProfesorDatos.ObtenerComboCatCursos(NotificacionProfesor);
+                var listCursos = new SelectList(NotificacionProfesor.TablaCursosCmb, "IDCurso", "Descripcion");
+                ViewData["cmbCursos"] = listCursos;
+
+
+                NotificacionProfesor.TablaGrupoCmb = NotificacionProfesorDatos.ObtenerComboCatGrupo(NotificacionProfesor);
+                var listGrupoOr = new SelectList(NotificacionProfesor.TablaGrupoCmb, "IDGrupo", "Nombre");
+                ViewData["cmbGrupo"] = listGrupoOr;
+
+                NotificacionProfesor.TablaProfesorCmb = NotificacionProfesorDatos.obtenerComboCatCatedraticos(NotificacionProfesor);
+                var listaProfesor = new SelectList(NotificacionProfesor.TablaProfesorCmb,"id_persona","nombre");
+                ViewData["cmbProfesor"] = listaProfesor;
+
+                NotificacionProfesor.TablaDatos = new DataTable();
+
+                //NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
+                return View(NotificacionProfesor);
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                NotificacionProfesor.conexion = Conexion;
+
+                NotificacionProfesor.id_profesor = collection["TablaProfesorCmb"];
+                NotificacionProfesor.grupo = collection["TablaGrupoCmb"];
+
+
+                NotificacionProfesor.TablaCicloEscolarCmb = NotificacionProfesorDatos.ObtenerComboCatCicloEscolar(NotificacionProfesor);
+                var list = new SelectList(NotificacionProfesor.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+                ViewData["cmbCicloEscolar"] = list;
+
+                NotificacionProfesor.TablaPlanEstudioCmb = NotificacionProfesorDatos.ObtenerComboCatPlanEstudio(NotificacionProfesor);
+                var listaPE = new SelectList(NotificacionProfesor.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
+                ViewData["cmbPlanEstudio"] = listaPE;
+
+                NotificacionProfesor.TablaModalidadCmb = NotificacionProfesorDatos.ObtenerComboCatModalidad(NotificacionProfesor);
+                var listModalidad = new SelectList(NotificacionProfesor.TablaModalidadCmb, "IDModalidad", "Descripcion");
+                ViewData["cmbModalidad"] = listModalidad;
+
+                NotificacionProfesor.TablaEspecialidadCmb = NotificacionProfesorDatos.ObtenerComboCatEspecialidad(NotificacionProfesor);
+                var listEspecialidad = new SelectList(NotificacionProfesor.TablaEspecialidadCmb, "id_especialidad", "descripcion");
+                ViewData["cmbEspecialidad"] = listEspecialidad;
+
+                NotificacionProfesor.TablaCursosCmb = NotificacionProfesorDatos.ObtenerComboCatCursos(NotificacionProfesor);
+                var listCursos = new SelectList(NotificacionProfesor.TablaCursosCmb, "IDCurso", "Descripcion");
+                ViewData["cmbCursos"] = listCursos;
+
+
+                NotificacionProfesor.TablaGrupoCmb = NotificacionProfesorDatos.ObtenerComboCatGrupo(NotificacionProfesor);
+                var listGrupoOr = new SelectList(NotificacionProfesor.TablaGrupoCmb, "IDGrupo", "Nombre");
+                ViewData["cmbGrupo"] = listGrupoOr;
+
+                NotificacionProfesor.TablaProfesorCmb = NotificacionProfesorDatos.obtenerComboCatCatedraticos(NotificacionProfesor);
+                var listaProfesor = new SelectList(NotificacionProfesor.TablaProfesorCmb, "id_persona", "nombre");
+                ViewData["cmbProfesor"] = listaProfesor;
+
+                NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public ActionResult ReenviarNotificacion(string id,string id2,int id3)
         {
@@ -177,6 +269,181 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             catch
             {
                 return View();
+            }
+        }
+        //FUNCIONES MEDIANTE AJAX DESDE VISTA
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult llenarTabla(string id_profesor,string id_grupo)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                
+               
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.id_profesor = id_profesor;
+                NotificacionProfesor.grupo = id_grupo;
+
+                NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
+                DataSet ds = new DataSet();
+                ds.Merge(NotificacionProfesor.TablaDatos);
+                StringBuilder JsonString = new StringBuilder();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    JsonString.Append("[");
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        JsonString.Append("{");
+                        for (int j = 0; j < ds.Tables[0].Columns.Count; j++)
+                        {
+                            if (j < ds.Tables[0].Columns.Count - 1)
+                            {
+                                JsonString.Append("\"" + ds.Tables[0].Columns[j].ColumnName.ToString() + "\":" + "\"" + ds.Tables[0].Rows[i][j].ToString() + "\",");
+                            }
+                            else if (j == ds.Tables[0].Columns.Count - 1)
+                            {
+                                JsonString.Append("\"" + ds.Tables[0].Columns[j].ColumnName.ToString() + "\":" + "\"" + ds.Tables[0].Rows[i][j].ToString() + "\"");
+                            }
+                        }
+                        if (i == ds.Tables[0].Rows.Count - 1)
+                        {
+                            JsonString.Append("}");
+                        }
+                        else
+                        {
+                            JsonString.Append("},");
+                        }
+                    }
+                    JsonString.Append("]");
+                    
+                }
+                else
+                {
+                    return null;
+                }
+
+                return Json(JsonString, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+       
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboModalidad(int idplanEstudio)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                
+                List<CatModalidadModels> listaModalidad = new List<CatModalidadModels>();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.idplanEstudio = idplanEstudio;
+
+                listaModalidad = NotificacionProfesorDatos.ObtenerComboCatModalidad(NotificacionProfesor);
+                return Json(listaModalidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboEspecialidad(string IDModalidad)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+
+                List<CatEspecialidadModels> listaEspecialidad = new List<CatEspecialidadModels>();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.IDModalidad = IDModalidad;
+
+                listaEspecialidad = NotificacionProfesorDatos.ObtenerComboCatEspecialidad(NotificacionProfesor);
+                return Json(listaEspecialidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboCursos(string IDEspecialidad)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+
+                List<CatCursoModels> listaEspecialidad = new List<CatCursoModels>();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.IDEspecialidad = IDEspecialidad;
+
+                listaEspecialidad = NotificacionProfesorDatos.ObtenerComboCatCursos(NotificacionProfesor);
+                return Json(listaEspecialidad, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboGrupo(string ciclo, string IDEspecialidad, string curso)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+
+                List<CatGrupoModels> listaGrupo = new List<CatGrupoModels>();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.ciclo = ciclo;
+                NotificacionProfesor.IDEspecialidad = IDEspecialidad;
+                NotificacionProfesor.curso = curso;
+
+                listaGrupo = NotificacionProfesorDatos.ObtenerComboCatGrupo(NotificacionProfesor);
+                return Json(listaGrupo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        //[Authorize(Roles = "3")]
+        public ActionResult ComboProfesor(string grupo)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+
+                List<CatCatedraticoModels> listaGrupo = new List<CatCatedraticoModels>();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.grupo = grupo;
+               
+
+                listaGrupo = NotificacionProfesorDatos.obtenerComboCatCatedraticos(NotificacionProfesor);
+                return Json(listaGrupo, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+                return Json("", JsonRequestBehavior.AllowGet);
             }
         }
     }

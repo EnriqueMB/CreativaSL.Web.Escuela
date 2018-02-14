@@ -17,41 +17,47 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         // GET: Admin/Historial
         public ActionResult Index()
         {
-            HistorialModels Historial = new HistorialModels();
-            _Historial_Datos HistorialDatos = new _Historial_Datos();
-            Historial.conexion = Conexion;
-            Historial.TablaCicloEscolarCmb = HistorialDatos.ObtenerComboCatCicloEscolar(Historial);
-            var list = new SelectList(Historial.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
-            ViewData["cmbCicloEscolar"] = list;
+            try
+            {
+                HistorialModels Historial = new HistorialModels();
+                _Historial_Datos HistorialDatos = new _Historial_Datos();
+                Historial.conexion = Conexion;
+                Historial.TablaCicloEscolarCmb = HistorialDatos.ObtenerComboCatCicloEscolar(Historial);
+                var list = new SelectList(Historial.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+                ViewData["cmbCicloEscolar"] = list;
 
-            Historial.TablaPlanEstudioCmb = HistorialDatos.ObtenerComboCatPlanEstudio(Historial);
-            var listaPE = new SelectList(Historial.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
-            ViewData["cmbPlanEstudio"] = listaPE;
+                Historial.TablaPlanEstudioCmb = HistorialDatos.ObtenerComboCatPlanEstudio(Historial);
+                var listaPE = new SelectList(Historial.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
+                ViewData["cmbPlanEstudio"] = listaPE;
 
-            Historial.TablaModalidadCmb = HistorialDatos.ObtenerComboCatModalidad(Historial);
-            var listModalidad = new SelectList(Historial.TablaModalidadCmb, "IDModalidad", "Descripcion");
-            ViewData["cmbModalidad"] = listModalidad;
+                Historial.TablaModalidadCmb = HistorialDatos.ObtenerComboCatModalidad(Historial);
+                var listModalidad = new SelectList(Historial.TablaModalidadCmb, "IDModalidad", "Descripcion");
+                ViewData["cmbModalidad"] = listModalidad;
 
-            Historial.TablaEspecialidadCmb = HistorialDatos.ObtenerComboCatEspecialidad(Historial);
-            var listEspecialidad = new SelectList(Historial.TablaEspecialidadCmb, "id_especialidad", "descripcion");
-            ViewData["cmbEspecialidad"] = listEspecialidad;
+                Historial.TablaEspecialidadCmb = HistorialDatos.ObtenerComboCatEspecialidad(Historial);
+                var listEspecialidad = new SelectList(Historial.TablaEspecialidadCmb, "id_especialidad", "descripcion");
+                ViewData["cmbEspecialidad"] = listEspecialidad;
 
-            Historial.TablaCursosCmb = HistorialDatos.ObtenerComboCatCursos(Historial);
-            var listCursos = new SelectList(Historial.TablaCursosCmb, "IDCurso", "Descripcion");
-            ViewData["cmbCursos"] = listCursos;
+                Historial.TablaCursosCmb = HistorialDatos.ObtenerComboCatCursos(Historial);
+                var listCursos = new SelectList(Historial.TablaCursosCmb, "IDCurso", "Descripcion");
+                ViewData["cmbCursos"] = listCursos;
 
 
-            Historial.TablaGrupoCmb = HistorialDatos.ObtenerComboCatGrupo(Historial);
-            var listGrupoOr = new SelectList(Historial.TablaGrupoCmb, "IDGrupo", "Nombre");
-            ViewData["cmbGrupo"] = listGrupoOr;
+                Historial.TablaGrupoCmb = HistorialDatos.ObtenerComboCatGrupo(Historial);
+                var listGrupoOr = new SelectList(Historial.TablaGrupoCmb, "IDGrupo", "Nombre");
+                ViewData["cmbGrupo"] = listGrupoOr;
 
-            
 
-            Historial.TablaAlumnosXGrupo = HistorialDatos.ObtenertablaCatAlumnoXGrupo(Historial);
-            var listAlumnosXGrupo = new SelectList(Historial.TablaAlumnosXGrupo, "IDPersona", "nombre");
-            ViewData["TablaAlumnosXGrupo"] = listAlumnosXGrupo;
 
-            return View();
+                Historial.TablaAlumnosXGrupo = HistorialDatos.ObtenertablaCatAlumnoXGrupo(Historial);
+                var listAlumnosXGrupo = new SelectList(Historial.TablaAlumnosXGrupo, "IDPersona", "nombre");
+                ViewData["TablaAlumnosXGrupo"] = listAlumnosXGrupo;
+
+                return View();
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
            
         }
         [HttpGet]

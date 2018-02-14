@@ -31,6 +31,130 @@
                             </div>
                             <div class="portlet-body">
                                 
+                                <div class="dataTables_wrapper form-inline" style="min-height:100px;">
+                                    <div id="miGrid">
+                                        <div id="datdim" class="dataTables_wrapper form-inline" style="border-bottom-style: solid; border-bottom-color: #abd1eb; border-bottom-width: thin;">
+                                            <div class="row-fluid" style="margin:0px; padding:0px">
+                                                <div class="portlet-body flip-scroll">
+                                                    <section id="flip-scroll">
+
+                                                        <h3 class="form-section">Notificaciones por Profesor</h3>
+                                                        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal" , @id="Form-notificacion" ,@onsubmit= "return llenarTabla();" }))
+                                                        {
+                                                            @Html.AntiForgeryToken()
+                                                            @Html.ValidationSummary(true)
+
+                                                            <div class="portlet-body form">
+                                                                
+                                                                <div class="row-fluid">
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Plan de estudio<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaPlanEstudioCmb, ViewData["cmbPlanEstudio"] as SelectList, new { id = "ListPlanEstudioOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaPlanEstudioCmb)
+                                                                                <span class="help-bolck">Ingrese el Plan de estudio</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Modalidad<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaModalidadCmb, ViewData["cmbModalidad"] as SelectList, new { id = "ListModalidadOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaModalidadCmb)
+                                                                                <span class="help-bolck">Ingrese la modalidad</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Especialidad<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaEspecialidadCmb, ViewData["cmbEspecialidad"] as SelectList, new { id = "ListEspecialidadOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaEspecialidadCmb)
+                                                                                <span class="help-bolck">Ingrese la especialidad</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row-fluid">
+
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Ciclo Escolar<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaCicloEscolarCmb, ViewData["cmbCicloEscolar"] as SelectList, new { id = "ListCicloOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaCicloEscolarCmb)
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">Ingrese ciclo escolar</span>
+                                                                    </div>
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Curso<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaCursosCmb, ViewData["cmbCursos"] as SelectList, new { id = "ListCursosOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaCursosCmb)
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">Ingrese Curso</span>
+                                                                    </div>
+                                                                    <div class="span4">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Grupo<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaGrupoCmb, ViewData["cmbGrupo"] as SelectList, new { id = "ListGrupoOrigen", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaGrupoCmb)
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">Ingrese grupo</span>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="row-fluid">
+
+                                                                    <div class="span6">
+                                                                        <div class="control-group">
+                                                                            <label class="control-label">Profesor<span class="required"> *</span></label>
+                                                                            <div class="controls">
+                                                                                @Html.DropDownListFor(model => model.TablaProfesorCmb, ViewData["cmbProfesor"] as SelectList, new { id = "ListProfesor", @class = "span12 m-wrap" })
+                                                                                @Html.ValidationMessageFor(model => model.TablaProfesorCmb)
+                                                                            </div>
+                                                                        </div>
+                                                                        <span class="help-block">Ingrese Profesor</span>
+                                                                    </div>
+                                                                    <div class="span6" style="text-align:center">
+                                                                        <input type="submit" value="Guardar" class="btn green" style="margin-top: 35px;">
+                                                                    </div>
+                                                                    
+                                                                    
+
+                                                                </div>
+                                                             
+                                                                
+                                                                
+                                                                    
+                                                              
+                                                            </div>
+                                                        }
+
+
+
+
+
+
+
+
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
 
 
@@ -309,6 +433,198 @@
     </div>
 
     <script>
+        function llenarTabla() {
+            var grupo = $('#ListGrupoOrigen').val();
+            var profesor = $("#ListProfesor").val();
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/llenarTabla",
+                data: {
+                    
+                    id_profesor: profesor,
+                    id_grupo: grupo
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                   
+                    console.log(xhr, thrownError, request);
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (TablaDatos) {
+                  
+                    alert(TablaDatos[0].id_notificacion);
+                    //var items = "";
+
+                    //for (var i = 0; i < cmbProfesor.length; i++) {
+                    //    items += "<option value=\"" + cmbProfesor[i].id_persona + "\">" + cmbProfesor[i].nombre + "</option>";
+
+                    //}
+                    //$("#ListProfesor").html(items);
+
+
+                }
+            });
+            return false;
+        }
+        $("#ListPlanEstudioOrigen").change(function () {
+            var combo = $('#ListModalidadOrigen').attr('id');
+            getComboModalidad($("#ListPlanEstudioOrigen").val(), combo);
+
+
+        });
+        $("#ListModalidadOrigen").change(function () {
+            var combo = $('#ListEspecialidadOrigen').attr('id');
+            getComboEspecialidad($("#ListModalidadOrigen").val(), combo);
+        });
+        $("#ListEspecialidadOrigen").change(function () {
+            var combo = $('#ListCursosOrigen').attr('id');
+            getComboCursos($("#ListEspecialidadOrigen").val(), combo);
+        });
+        $("#ListCursosOrigen").change(function () {
+            var combo = $('#ListGrupoOrigen').attr('id');
+            getComboGrupo($("#ListCicloOrigen").val(), $("#ListEspecialidadOrigen").val(), $("#ListCursosOrigen").val(), combo);
+        });
+        $('#ListGrupoOrigen').change(function () {
+            
+            getComboProfesor($(this).val());
+        });
+        function getComboProfesor(idgrupo) {
+
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/ComboProfesor",
+                data: { 
+                    grupo: idgrupo
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    $("#" + combo).html('');
+
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (cmbProfesor) {
+                    var items = "";
+
+                    for (var i = 0; i < cmbProfesor.length; i++) {
+                        items += "<option value=\"" + cmbProfesor[i].id_persona + "\">" + cmbProfesor[i].nombre + "</option>";
+
+                    }
+                    $("#ListProfesor").html(items);
+
+
+                }
+            });
+        }
+        function getComboGrupo(ciclo, especialidad, curso, combo) {
+
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/ComboGrupo",
+                data: {
+                    ciclo: ciclo,
+                    IDEspecialidad: especialidad,
+                    curso: curso
+
+
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    $("#" + combo).html('');
+
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (cmbGrupo) {
+                    var items = "";
+
+                    for (var i = 0; i < cmbGrupo.length; i++) {
+                        items += "<option value=\"" + cmbGrupo[i].IDGrupo + "\">" + cmbGrupo[i].Nombre + "</option>";
+
+                    }
+                    $("#" + combo).html(items);
+                  
+
+                }
+            });
+        }
+        function getComboCursos(IDE, combo) {
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/ComboCursos",
+                data: {
+                    IDEspecialidad: IDE
+
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    $("#" + combo).html('');
+
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (cmbCursos) {
+                    var items = "";
+                    for (var i = 0; i < cmbCursos.length; i++) {
+                        items += "<option value=\"" + cmbCursos[i].IDCurso + "\">" + cmbCursos[i].Descripcion + "</option>";
+                    }
+                    $("#" + combo).html(items);
+                    
+                }
+            });
+        }
+        function getComboEspecialidad(IDM, combo) {
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/ComboEspecialidad",
+                data: {
+                    IDModalidad: IDM
+
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    $("#" + combo).html('');
+
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (cmbEspecialidad) {
+                    var items = "";
+                    for (var i = 0; i < cmbEspecialidad.length; i++) {
+                        items += "<option value=\"" + cmbEspecialidad[i].id_especialidad + "\">" + cmbEspecialidad[i].descripcion + "</option>";
+                    }
+                    $("#" + combo).html(items);
+                   
+                }
+            });
+        }
+        function getComboModalidad(IDP, combo) {
+
+            $.ajax({
+                url: "/Admin/NotificacionProfesor/ComboModalidad",
+                data: {
+                    idplanEstudio: IDP
+
+                },
+                dataType: "json",
+                type: "POST",
+                error: function (xhr, ajaxOptions, thrownError, request) {
+                    $("#" + combo).html('');
+
+                    alert(xhr.status);
+                    alert(thrownError);
+                },
+                success: function (cmbModalidad) {
+                    var items = "";
+                    for (var i = 0; i < cmbModalidad.length; i++) {
+                        items += "<option value=\"" + cmbModalidad[i].IDModalidad + "\">" + cmbModalidad[i].Descripcion + "</option>";
+                    }
+                    $("#" + combo).html(items);
+                    
+                }
+            });
+        }
         cursor_wait = function () {
             // switch to cursor wait for the current element over
             var elements = $(':hover');

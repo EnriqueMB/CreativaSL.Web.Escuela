@@ -76,6 +76,14 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _IDEspecialidad; }
             set { _IDEspecialidad = value; }
         }
+        private string _id_profesor;
+
+        public string id_profesor
+        {
+            get { return _id_profesor; }
+            set { _id_profesor = value; }
+        }
+
         private string _curso;
 
         public string curso
@@ -163,6 +171,14 @@ namespace CreativaSL.Web.Escuela.Models
         {
             get { return _TablaGrupoCmb; }
             set { _TablaGrupoCmb = value; }
+        }
+        private List<CatCatedraticoModels> _TablaProfesorCmb;
+        [Required(ErrorMessage = "El Grupo es obligatorio")]
+        [Display(Name = "Grupo")]
+        public List<CatCatedraticoModels> TablaProfesorCmb
+        {
+            get { return _TablaProfesorCmb; }
+            set { _TablaProfesorCmb = value; }
         }
 
 
@@ -265,6 +281,7 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _fechaTarea; }
             set { _fechaTarea = value; }
         }
+        //lista filtros
 
 
         #region Datos de control
