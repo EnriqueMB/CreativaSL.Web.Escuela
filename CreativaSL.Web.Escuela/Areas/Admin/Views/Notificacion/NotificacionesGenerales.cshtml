@@ -135,13 +135,13 @@
                                                                     </div>
                                                                     <div class="span3">
                                                                         <div class="control-group">
-                                                                            <label class="control-label">Título<span class="required"> *</span></label>
+                                                                            <label class="control-label">Asunto<span class="required"> *</span></label>
                                                                             <div class="controls">
                                                                                 @Html.TextBoxFor(model => model.titulo, new { id = "texto", @class = "span12 m-wrap" })
                                                                                 @Html.ValidationMessageFor(model => model.titulo)
                                                                             </div>
                                                                         </div>
-                                                                        <span class="help-block">Ingrese título</span>
+                                                                        <span class="help-block">Ingrese Asunto</span>
                                                                     </div>
                                                                     <div class="span3">
                                                                         <div class="control-group">
@@ -161,13 +161,13 @@
 
                                                                     <div class="span12">
                                                                         <div class="control-group">
-                                                                            <label class="control-label">Descripción de notificación<span class="required"> *</span></label>
+                                                                            <label class="control-label">Mensaje<span class="required"> *</span></label>
                                                                             <div class="controls">
                                                                                @Html.TextAreaFor(model => model.texto, new { id = "texto", @class = "span12 m-wrap" })
                                                                             @Html.ValidationMessageFor(model => model.texto)
                                                                             </div>
                                                                         </div>
-                                                                        <span class="help-block">Descripción de notificación</span>
+                                                                        <span class="help-block">Ingrese el Mensaje</span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row-fluid">
@@ -179,14 +179,6 @@
                                                                 </div>
                                                             </div>
                                                         }
-                                                        
-
-
-
-
-
-
-
                                                     </section>
                                                 </div>
                                             </div>
