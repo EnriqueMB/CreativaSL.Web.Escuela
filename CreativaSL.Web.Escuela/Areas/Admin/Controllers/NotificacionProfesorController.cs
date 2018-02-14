@@ -1,5 +1,6 @@
 ﻿using CreativaSL.Web.Escuela.Filters;
 using CreativaSL.Web.Escuela.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+
 
 namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 {
@@ -66,8 +68,8 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 throw ex;
             }
         }
-        [HttpPost]
-        public ActionResult Index(FormCollection collection)
+        [HttpGet]
+        public ActionResult TablaNotificacion(string id,string id2)
         {
             try
             {
@@ -75,48 +77,20 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
                 NotificacionProfesor.conexion = Conexion;
 
-                NotificacionProfesor.id_profesor = collection["TablaProfesorCmb"];
-                NotificacionProfesor.grupo = collection["TablaGrupoCmb"];
+                NotificacionProfesor.id_profesor = id;
+                NotificacionProfesor.grupo = id2;
 
-
-                NotificacionProfesor.TablaCicloEscolarCmb = NotificacionProfesorDatos.ObtenerComboCatCicloEscolar(NotificacionProfesor);
-                var list = new SelectList(NotificacionProfesor.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
-                ViewData["cmbCicloEscolar"] = list;
-
-                NotificacionProfesor.TablaPlanEstudioCmb = NotificacionProfesorDatos.ObtenerComboCatPlanEstudio(NotificacionProfesor);
-                var listaPE = new SelectList(NotificacionProfesor.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
-                ViewData["cmbPlanEstudio"] = listaPE;
-
-                NotificacionProfesor.TablaModalidadCmb = NotificacionProfesorDatos.ObtenerComboCatModalidad(NotificacionProfesor);
-                var listModalidad = new SelectList(NotificacionProfesor.TablaModalidadCmb, "IDModalidad", "Descripcion");
-                ViewData["cmbModalidad"] = listModalidad;
-
-                NotificacionProfesor.TablaEspecialidadCmb = NotificacionProfesorDatos.ObtenerComboCatEspecialidad(NotificacionProfesor);
-                var listEspecialidad = new SelectList(NotificacionProfesor.TablaEspecialidadCmb, "id_especialidad", "descripcion");
-                ViewData["cmbEspecialidad"] = listEspecialidad;
-
-                NotificacionProfesor.TablaCursosCmb = NotificacionProfesorDatos.ObtenerComboCatCursos(NotificacionProfesor);
-                var listCursos = new SelectList(NotificacionProfesor.TablaCursosCmb, "IDCurso", "Descripcion");
-                ViewData["cmbCursos"] = listCursos;
-
-
-                NotificacionProfesor.TablaGrupoCmb = NotificacionProfesorDatos.ObtenerComboCatGrupo(NotificacionProfesor);
-                var listGrupoOr = new SelectList(NotificacionProfesor.TablaGrupoCmb, "IDGrupo", "Nombre");
-                ViewData["cmbGrupo"] = listGrupoOr;
-
-                NotificacionProfesor.TablaProfesorCmb = NotificacionProfesorDatos.obtenerComboCatCatedraticos(NotificacionProfesor);
-                var listaProfesor = new SelectList(NotificacionProfesor.TablaProfesorCmb, "id_persona", "nombre");
-                ViewData["cmbProfesor"] = listaProfesor;
 
                 NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
-
-                return RedirectToAction("Index");
+                return View(NotificacionProfesor);
+                //return RedirectToAction("TablaNotificacion");
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
         public ActionResult ReenviarNotificacion(string id,string id2,int id3)
         {
             try
@@ -281,13 +255,14 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             {
                 NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
                 _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
-
-                List<string> Lsiat = new List<string>();
+                
+               
                 NotificacionProfesor.conexion = Conexion;
                 NotificacionProfesor.id_profesor = id_profesor;
                 NotificacionProfesor.grupo = id_grupo;
 
                 NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesor(NotificacionProfesor);
+
 
                 var list = new List<Dictionary<string, object>>();
 
@@ -302,8 +277,9 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     list.Add(dict);
                 }
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
-                
+
                 return Json(list, JsonRequestBehavior.AllowGet);
+
             }
             catch (Exception ex)
             {
@@ -312,26 +288,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
         }
 
-        public static object DataTableToJSON(DataTable table)
-        {
-            var list = new List<Dictionary<string, object>>();
-
-            foreach (DataRow row in table.Rows)
-            {
-                var dict = new Dictionary<string, object>();
-
-                foreach (DataColumn col in table.Columns)
-                {
-                    dict[col.ColumnName] = (Convert.ToString(row[col]));
-                }
-                list.Add(dict);
-            }
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-
-            return serializer.Serialize(list);
-        }
-
-        [HttpPost]
+      [HttpPost]
         //[Authorize(Roles = "3")]
         public ActionResult ComboModalidad(int idplanEstudio)
         {
