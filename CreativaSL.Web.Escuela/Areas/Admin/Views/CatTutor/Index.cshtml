@@ -50,13 +50,10 @@
                                                                 <tr>
                                                                   
                                                                     <th>Nombre</th>
-
                                                                     <th>Correo</th>
                                                                     <th>Teléfono</th>
-                                                                    
                                                                     <th>Tipo Persona</th>
-                                                                    
-
+                                                                    <th>Usuario</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
                                                                 </tr>
@@ -69,9 +66,8 @@
                                                                         <td>@Catedratico["nombre"].ToString()</td>
                                                                         <td>@Catedratico["correo"].ToString()</td>
                                                                         <td>@Catedratico["telefono"].ToString()</td>
-                                                                        
                                                                         <td>@Catedratico["TipoPersona"].ToString()</td>
-                                                                       
+                                                                        <td>@Catedratico["Usuario"].ToString()</td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatTutor", new { id = Catedratico["id_persona"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "CatTutor", new {id = Catedratico["id_persona"].ToString()})"><i class="icon-trash"></i></a></td>
                                                                     </tr>

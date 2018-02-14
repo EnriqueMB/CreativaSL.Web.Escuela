@@ -19,56 +19,79 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
-            _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
-            NotificacionGeneral.conexion = Conexion;
-            NotificacionGeneral = NotificacionGeneralDatos.obtenerCatNotificacionGeneral(NotificacionGeneral);
-            return View(NotificacionGeneral);
-         
+            try
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+                NotificacionGeneral.conexion = Conexion;
+                NotificacionGeneral = NotificacionGeneralDatos.obtenerCatNotificacionGeneral(NotificacionGeneral);
+                return View(NotificacionGeneral);
+            }
+            catch (Exception)
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                NotificacionGeneral.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(NotificacionGeneral);
+            }
         }
         
 
         [HttpGet]
-        public ActionResult NotificacionesGenerales() {
-            NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
-            _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
-            NotificacionGeneral.conexion = Conexion;
+        public ActionResult NotificacionesGenerales()
+        {
+            try
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+                NotificacionGeneral.conexion = Conexion;
 
-            NotificacionGeneral.TablaTipoNotificacionCmb = NotificacionGeneralDatos.obtenerListaTipoNotificacion(NotificacionGeneral);
-            var listtn = new SelectList(NotificacionGeneral.TablaTipoNotificacionCmb, "id_tipoNotificacion", "descripcion");
-            ViewData["cmbTipoNotificacion"] = listtn;
+                NotificacionGeneral.TablaTipoNotificacionCmb = NotificacionGeneralDatos.obtenerListaTipoNotificacion(NotificacionGeneral);
+                var listtn = new SelectList(NotificacionGeneral.TablaTipoNotificacionCmb, "id_tipoNotificacion", "descripcion");
+                ViewData["cmbTipoNotificacion"] = listtn;
 
-            NotificacionGeneral.TablaCicloEscolarCmb = NotificacionGeneralDatos.ObtenerComboCatCicloEscolar(NotificacionGeneral);
-            var list = new SelectList(NotificacionGeneral.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
-            ViewData["cmbCicloEscolar"] = list;
+                NotificacionGeneral.TablaCicloEscolarCmb = NotificacionGeneralDatos.ObtenerComboCatCicloEscolar(NotificacionGeneral);
+                var list = new SelectList(NotificacionGeneral.TablaCicloEscolarCmb, "IDCiclo", "Nombre");
+                ViewData["cmbCicloEscolar"] = list;
 
-            NotificacionGeneral.TablaPlanEstudioCmb = NotificacionGeneralDatos.ObtenerComboCatPlanEstudio(NotificacionGeneral);
-            var listaPE = new SelectList(NotificacionGeneral.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
-            ViewData["cmbPlanEstudio"] = listaPE;
+                NotificacionGeneral.TablaPlanEstudioCmb = NotificacionGeneralDatos.ObtenerComboCatPlanEstudio(NotificacionGeneral);
+                var listaPE = new SelectList(NotificacionGeneral.TablaPlanEstudioCmb, "IDPlanEstudio", "Descripcion");
+                ViewData["cmbPlanEstudio"] = listaPE;
 
-            NotificacionGeneral.TablaModalidadCmb = NotificacionGeneralDatos.ObtenerComboCatModalidad(NotificacionGeneral);
-            var listModalidad = new SelectList(NotificacionGeneral.TablaModalidadCmb, "IDModalidad", "Descripcion");
-            ViewData["cmbModalidad"] = listModalidad;
+                NotificacionGeneral.TablaModalidadCmb = NotificacionGeneralDatos.ObtenerComboCatModalidad(NotificacionGeneral);
+                var listModalidad = new SelectList(NotificacionGeneral.TablaModalidadCmb, "IDModalidad", "Descripcion");
+                ViewData["cmbModalidad"] = listModalidad;
 
-            NotificacionGeneral.TablaEspecialidadCmb = NotificacionGeneralDatos.ObtenerComboCatEspecialidad(NotificacionGeneral);
-            var listEspecialidad = new SelectList(NotificacionGeneral.TablaEspecialidadCmb, "id_especialidad", "descripcion");
-            ViewData["cmbEspecialidad"] = listEspecialidad;
+                NotificacionGeneral.TablaEspecialidadCmb = NotificacionGeneralDatos.ObtenerComboCatEspecialidad(NotificacionGeneral);
+                var listEspecialidad = new SelectList(NotificacionGeneral.TablaEspecialidadCmb, "id_especialidad", "descripcion");
+                ViewData["cmbEspecialidad"] = listEspecialidad;
 
-            NotificacionGeneral.TablaCursosCmb = NotificacionGeneralDatos.ObtenerComboCatCursos(NotificacionGeneral);
-            var listCursos = new SelectList(NotificacionGeneral.TablaCursosCmb, "IDCurso", "Descripcion");
-            ViewData["cmbCursos"] = listCursos;
+                NotificacionGeneral.TablaCursosCmb = NotificacionGeneralDatos.ObtenerComboCatCursos(NotificacionGeneral);
+                var listCursos = new SelectList(NotificacionGeneral.TablaCursosCmb, "IDCurso", "Descripcion");
+                ViewData["cmbCursos"] = listCursos;
 
 
-            NotificacionGeneral.TablaGrupoCmb = NotificacionGeneralDatos.ObtenerComboCatGrupo(NotificacionGeneral);
-            var listGrupoOr = new SelectList(NotificacionGeneral.TablaGrupoCmb, "IDGrupo", "Nombre");
-            ViewData["cmbGrupo"] = listGrupoOr;
+                NotificacionGeneral.TablaGrupoCmb = NotificacionGeneralDatos.ObtenerComboCatGrupo(NotificacionGeneral);
+                var listGrupoOr = new SelectList(NotificacionGeneral.TablaGrupoCmb, "IDGrupo", "Nombre");
+                ViewData["cmbGrupo"] = listGrupoOr;
 
-            NotificacionGeneral.tutores = Convert.ToBoolean("true");
+                NotificacionGeneral.tutores = Convert.ToBoolean("true");
 
-            NotificacionGeneral.TablaAlumnosXGrupo = NotificacionGeneralDatos.ObtenertablaCatAlumnoXGrupo(NotificacionGeneral);
-            var listAlumnosXGrupo = new SelectList(NotificacionGeneral.TablaAlumnosXGrupo, "IDPersona", "nombre");
-            ViewData["tblAlumnosXGrupo"] = listAlumnosXGrupo;
-            return View();
+                NotificacionGeneral.TablaAlumnosXGrupo = NotificacionGeneralDatos.ObtenertablaCatAlumnoXGrupo(NotificacionGeneral);
+                var listAlumnosXGrupo = new SelectList(NotificacionGeneral.TablaAlumnosXGrupo, "IDPersona", "nombre");
+                ViewData["tblAlumnosXGrupo"] = listAlumnosXGrupo;
+                return View();
+            }
+            catch (Exception)
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                NotificacionGeneral.TablaDatos = new DataTable();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(NotificacionGeneral);
+            }
+            
         }
         [HttpPost]
         public ActionResult NotificacionesGenerales(FormCollection collection)
@@ -167,8 +190,6 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     TempData["message"] = "Ocurrió un error. Por favor Contacte a soporte técnico";
                     return RedirectToAction("NotificacionesGenerales");
                 }
-
-                return View();
             }
             catch (Exception ex)
             {
@@ -257,14 +278,26 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Detalle(string id) {
-            NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
-            _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
-            NotificacionGeneral.conexion = Conexion;
-            NotificacionGeneral.IDNotificacionGeneral = id;
-            NotificacionGeneral = NotificacionGeneralDatos.obtenerDetalleCatNotificacionGeneralXID(NotificacionGeneral);
+        public ActionResult Detalle(string id)
+        {
+            try
+            {
+                NotificacionesGeneralesModels NotificacionGeneral = new NotificacionesGeneralesModels();
+                _NotificacionesGenerales_Datos NotificacionGeneralDatos = new _NotificacionesGenerales_Datos();
+                NotificacionGeneral.conexion = Conexion;
+                NotificacionGeneral.IDNotificacionGeneral = id;
+                NotificacionGeneral = NotificacionGeneralDatos.obtenerDetalleCatNotificacionGeneralXID(NotificacionGeneral);
 
-            return View(NotificacionGeneral);
+                return View(NotificacionGeneral);
+            }
+            catch (Exception)
+            {
+                NotificacionModels Notificacion = new NotificacionModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(Notificacion);
+            }
+            
         }
 
         [HttpGet]

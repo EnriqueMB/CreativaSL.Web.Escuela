@@ -51,6 +51,7 @@
                                                                     <th>Correo</th>
                                                                     <th>Teléfono</th>
                                                                     <th>Dirección</th>
+                                                                    <th>Usuario</th>
                                                                     <th>Editar</th>
                                                                     <th>Eliminar</th>
                                                                     <th>Permisos</th>
@@ -64,6 +65,7 @@
                                                                         <td>@admin["correo"].ToString()</td>
                                                                         <td>@admin["telefono"].ToString()</td>
                                                                         <td>@admin["direccion"].ToString()</td>
+                                                                        <td>@admin["Usuario"].ToString()</td>
                                                                         <td style="text-align:center;"><a class="btn yellow" href="@Url.Action("Edit", "CatAdministrativo", new { id = admin["id_persona"].ToString() })"><i class="icon-edit"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn red delete" href="@Url.Action("Delete", "CatAdministrativo", new { id = admin["id_persona"].ToString() })"><i class="icon-trash"></i></a></td>
                                                                         <td style="text-align:center;"><a class="btn red blue" href="@Url.Action("Permisos", "CatAdministrativo", new { id = admin["id_persona"].ToString() })"><i class="icon-lock"></i></a></td>

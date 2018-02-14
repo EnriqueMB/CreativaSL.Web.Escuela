@@ -52,6 +52,7 @@
                                                                     <th>Nombre</th>
                                                                     <th>Correo</th>
                                                                     <th>Teléfono</th>
+                                                                    <th>Usuario</th>
                                                                     <th>Estatus</th>
                                                                     <th>Tutor</th>
                                                                     <th>Editar</th>
@@ -66,6 +67,7 @@
                                                                         <td>@Catedratico["nombre"].ToString()</td>
                                                                         <td>@Catedratico["correo"].ToString()</td>
                                                                         <td>@Catedratico["telefono"].ToString()</td>
+                                                                        <td>@Catedratico["Usuario"].ToString()</td>
                                                                         @{ var estatus = Convert.ToInt32(Catedratico["id_estatus"].ToString()); }
                                                                         @if (estatus == 1)
                                                                         {
