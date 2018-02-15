@@ -335,6 +335,29 @@ namespace CreativaSL.Web.Escuela.Models
             }
         }
 
+        public void ConcluirGrupo(CatGrupoModels datos)
+        {
+            try
+            {
+                datos.Completado = false;
+                object[] parametros = { datos.IDGrupo, datos.user };
+                object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_set_ConcluirGrupoExtraEscolar", parametros);
+                if (aux != null)
+                {
+                    int Resultado = 0;
+                    int.TryParse(aux.ToString(), out Resultado);
+                    if (Resultado == 1)
+                    {
+                        datos.Completado = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void InscribirAlumno(AlumnosXGruposModels datos)
         {
             try
