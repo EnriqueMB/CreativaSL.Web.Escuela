@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Web;
@@ -16,14 +17,19 @@ namespace CreativaSL.Web.Escuela.Models
             set { _id_plantilla = value; }
         }
         private string _titulo;
-
+        [Required(ErrorMessage = "Observaciones es obligatorio")]
+        [Display(Name = "Observaciones")]
+        [StringLength(80, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+       // [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string titulo
         {
             get { return _titulo; }
             set { _titulo = value; }
         }
         private string _texto;
-
+        [Required(ErrorMessage = "Observaciones es obligatorio")]
+        [Display(Name = "Observaciones")]
+        [StringLength(140, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
         public string texto
         {
             get { return _texto; }
