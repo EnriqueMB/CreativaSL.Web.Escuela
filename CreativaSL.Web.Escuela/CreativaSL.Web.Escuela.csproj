@@ -3048,6 +3048,7 @@
     <Compile Include="Areas\Admin\Controllers\NotificacionProfesorController.cs" />
     <Compile Include="Areas\Admin\Controllers\PlanEstudioController.cs" />
     <Compile Include="Areas\Admin\Controllers\PromocionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Profesor\Controllers\CatCuentaUserController.cs" />
     <Compile Include="Areas\Profesor\Controllers\CatMateriaController.cs" />
@@ -3096,6 +3097,7 @@
     <Compile Include="Models\NotificacionModels.cs" />
     <Compile Include="Models\ParejaPalabra.cs" />
     <Compile Include="Models\PromocionModels.cs" />
+    <Compile Include="Models\ReportesModels.cs" />
     <Compile Include="Models\TareasModels.cs" />
     <Compile Include="Models\_AlumnoXAsistencia_Datos.cs" />
     <Compile Include="Models\_AlumnoXEvento_Datos.cs" />
@@ -3146,6 +3148,7 @@
     <Compile Include="Models\_Notificaciones_Profesor_Datos.cs" />
     <Compile Include="Models\_Notificacion_Datos.cs" />
     <Compile Include="Models\_Promocion_Datos.cs" />
+    <Compile Include="Models\_Reportes_Datos.cs" />
     <Compile Include="Models\_Roles_Datos.cs" />
     <Compile Include="Models\_Tareas_Datos.cs" />
     <Compile Include="Models\_Usuario_Datos.cs" />
@@ -3509,6 +3512,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Reportes\" />
     <Folder Include="Areas\Profesor\Models\" />
     <Folder Include="Content\assets2\img\uploads\" />
     <Folder Include="Content\assets2\plugins\email\img\uploads4\" />
