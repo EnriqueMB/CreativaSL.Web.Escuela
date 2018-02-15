@@ -91,6 +91,31 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Detalle(string id,string id2,string id3)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.IDNotificacionGeneral = id;
+                NotificacionProfesor.id_profesor = id2;
+                
+                NotificacionProfesor.grupo = id3;
+                NotificacionProfesor = NotificacionProfesorDatos.obtenerDetalleCatNotificacionGeneralXID(NotificacionProfesor);
+
+                return View(NotificacionProfesor);
+            }
+            catch (Exception)
+            {
+                NotificacionModels Notificacion = new NotificacionModels();
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No se puede cargar la vista";
+                return View(Notificacion);
+            }
+
+        }
         public ActionResult ReenviarNotificacion(string id,string id2,int id3)
         {
             try
@@ -233,13 +258,34 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
 
         // POST: Admin/NotificacionProfesor/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        //[Authorize(Roles = "3")]
+        public ActionResult Delete(string id, string id2, string id3, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                NotificacionProfesor.conexion = Conexion;
+                NotificacionProfesor.IDNotificacionGeneral = id;
+                NotificacionProfesor.id_profesor = id2;
+                NotificacionProfesor.grupo = id3;
+                NotificacionProfesor.opcion = 2;
+                NotificacionProfesor.TablaAlumnos = new DataTable();
+                NotificacionProfesor.TablaAlumnos.Columns.Add("id_alumno", typeof(string));
+                NotificacionProfesor.user = User.Identity.Name;
+                NotificacionProfesorDatos.insertarNotificacion(NotificacionProfesor);
+                if (NotificacionProfesor.Resultado == 1)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "El registro se elimino correctamente.";
+                    return Json("");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "El registro no se elimino correctamente.";
+                    return Json("");
+                }
             }
             catch
             {

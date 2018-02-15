@@ -439,9 +439,27 @@
     <script>
       
         function llenarTabla() {
-            location.href = "TablaNotificacion/" + $("#ListProfesor").val() + '?id2=' + $('#ListGrupoOrigen').val();
+           
             var grupo = $('#ListGrupoOrigen').val();
             var profesor = $("#ListProfesor").val();
+            var modalidad=$('#ListModalidadOrigen').val();
+            var planestudio = $('#ListPlanEstudioOrigen').val();
+            var curso = $("#ListCursosOrigen").val();
+            var ciclo = $("#ListCicloOrigen").val();
+            var especialidad = $("#ListEspecialidadOrigen").val();
+           
+            if (planestudio != 0) {
+                if (modalidad == '' || profesor == '' || grupo == '' || curso == '' || ciclo == '' || especialidad =='') {
+                    
+                }
+                else {
+                   
+                    location.href = "/Admin/NotificacionProfesor/TablaNotificacion/" + $("#ListProfesor").val() + '?id2=' + $('#ListGrupoOrigen').val();
+                }
+            }
+            else {
+                alert("Seleccione un plan de estudio");
+            }
             //$.ajax({
             //    url: "/Admin/NotificacionProfesor/llenarTabla",
             //    data: {

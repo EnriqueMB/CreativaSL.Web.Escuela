@@ -2837,6 +2837,7 @@
     <Content Include="Areas\Admin\Views\CatPlantillaTipoNotificacion\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NotificacionProfesor\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CatGrupo\Graduar.cshtml" />
+    <Content Include="Areas\Admin\Views\NotificacionProfesor\TablaNotificacion.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

@@ -33,6 +33,53 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+        public void insertarNotificacion(NotificacionesProfesorModels datos)
+        {
+
+            try
+            {
+                datos.Completado = false;
+                //int Resultado = 0;
+                DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_set_NotificacionGeneral",
+                    new SqlParameter("@opcion", datos.opcion),
+                     new SqlParameter("@id_notificacion", datos.IDNotificacionGeneral),
+                     new SqlParameter("@IDPlanEstudios", datos.idplanEstudio),
+                     new SqlParameter("@IDModalidad", datos.IDModalidad),
+                     new SqlParameter("@IDEspecialidad", datos.IDEspecialidad),
+                     new SqlParameter("@IDCurso", datos.curso),
+                     new SqlParameter("@IDCiclo", datos.ciclo),
+                     new SqlParameter("@IDGrupo", datos.grupo),
+                     new SqlParameter("@IDTipoNotificacion", datos.IDTipoNotificacion),
+                     new SqlParameter("@titulo", datos.titulo),
+                     new SqlParameter("@texto", datos.texto),
+                     new SqlParameter("@Tutores", datos.tutores),
+                     new SqlParameter("@TablaAlumnos", datos.TablaAlumnos),
+                     new SqlParameter("@IDUsuario", datos.user)
+
+                     );
+
+                if (dr != null)
+                {
+                    if (dr.Tables.Count == 2)
+                    {
+                        datos.TablaAlumnos = dr.Tables[0];
+
+                        DataTableReader DTR = dr.Tables[1].CreateDataReader();
+                        DataTable Tbl1 = dr.Tables[1];
+                        while (DTR.Read())
+                        {
+                            datos.Resultado = !DTR.IsDBNull(DTR.GetOrdinal("resultado")) ? DTR.GetInt32(DTR.GetOrdinal("resultado")) : 0;
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
         public void actualizarDetalleNotificacion(NotificacionesProfesorModels datos)
         {
 
@@ -65,6 +112,29 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
 
+        }
+        public NotificacionesProfesorModels obtenerDetalleCatNotificacionGeneralXID(NotificacionesProfesorModels Datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_CatNotificacionesGeneralesDetaleXID", Datos.IDNotificacionGeneral);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            Datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public void ReenviarNotificacion(NotificacionesProfesorModels datos)
         {

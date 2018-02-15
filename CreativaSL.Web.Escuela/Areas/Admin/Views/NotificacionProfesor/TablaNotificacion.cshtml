@@ -100,8 +100,8 @@
 
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor",new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2 = Model.id_profesor,id3=Model.grupo })"><i class="icon-trash"></i></a></td>
                                                                                     </tr>
                                                                                 }
 
@@ -165,8 +165,8 @@
 
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2 = Model.id_profesor,id3=Model.grupo })"><i class="icon-trash"></i></a></td>
                                                                                     </tr>
                                                                                 }
                                                                             }
@@ -227,8 +227,8 @@
 
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2 = Model.id_profesor,id3=Model.grupo })"><i class="icon-trash"></i></a></td>
                                                                                     </tr>
                                                                                 }
                                                                             }
@@ -289,8 +289,8 @@
 
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString()})"><i class="icon-circle-arrow-right"></i></a></td>
-                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-book"></i></a></td>
-                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "Notificacion", new { id = notificacion["id_notificacion"].ToString() })"><i class="icon-trash"></i></a></td>
+                                                                                        <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
+                                                                                        <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("Delete", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2 = Model.id_profesor,id3=Model.grupo })"><i class="icon-trash"></i></a></td>
                                                                                     </tr>
                                                                                 }
                                                                             }
@@ -319,6 +319,7 @@
     </div>
 
     <script>
+       
       
         $("#ListPlanEstudioOrigen").change(function () {
             var combo = $('#ListModalidadOrigen').attr('id');

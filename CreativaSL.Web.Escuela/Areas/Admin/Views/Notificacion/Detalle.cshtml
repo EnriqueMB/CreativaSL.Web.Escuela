@@ -34,7 +34,8 @@
                                     <div class="btn-group">
                                         <div class="span12">
                                             @Html.HiddenFor(model => model.IDNotificacionGeneral)
-                                            @*<a href="@Url.Action("Create", "Notificacion")" class="btn btn-default green"><i class="icon-plus"></i> Crear Notificación</a>*@
+                                            @Html.HiddenFor(model => model.grupo)
+                                            <a href="@Url.Action("Index", "Notificacion")" class="btn btn-default red">Regresar</a>
                                         </div>
                                     </div>
                                 </div>
