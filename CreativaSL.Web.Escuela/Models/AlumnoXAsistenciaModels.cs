@@ -80,6 +80,87 @@ namespace CreativaSL.Web.Escuela.Models
             set { _tablaAlumnoXAsistencia = value; }
         }
 
+        private string _NombreMateria;
+
+        public string NombreMateria
+        {
+            get { return _NombreMateria; }
+            set { _NombreMateria = value; }
+        }
+
+        private string _Resumen;
+
+        public string Resumen
+        {
+            get { return _Resumen; }
+            set { _Resumen = value; }
+        }
+
+        private string _NombreProfesor;
+
+        public string NombreProfesor
+        {
+            get { return _NombreProfesor; }
+            set { _NombreProfesor = value; }
+        }
+
+        private bool _EnviarTarea;
+
+        public bool EnviarTarea
+        {
+            get { return _EnviarTarea; }
+            set { _EnviarTarea = value; }
+        }
+
+        private string _Cadena;
+
+        public string Cadena
+        {
+            get { return _Cadena; }
+            set { _Cadena = value; }
+        }
+
+        private string _CadenaFinal;
+
+        public string CadenaFinal
+        {
+            get { return _CadenaFinal; }
+            set { _CadenaFinal = value; }
+        }
+
+        private string _IDNofificacionDetalle;
+
+        public string IDNotificacionDetalle
+        {
+            get { return _IDNofificacionDetalle; }
+            set { _IDNofificacionDetalle = value; }
+        }
+
+        private string _Nombre;
+
+        public string Nombre
+        {
+            get { return _Nombre; }
+            set { _Nombre = value; }
+        }
+
+        private DataTable _TablaCadenaNotificacion;
+
+        public DataTable TablaCadenaNotificacion
+        {
+            get { return _TablaCadenaNotificacion; }
+            set { _TablaCadenaNotificacion = value; }
+        }
+
+        private DataTable _TablaNotificacion;
+
+        public DataTable TablaNotificacion
+        {
+            get { return _TablaNotificacion; }
+            set { _TablaNotificacion = value; }
+        }
+
+
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

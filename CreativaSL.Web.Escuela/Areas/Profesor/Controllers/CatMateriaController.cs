@@ -334,22 +334,58 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 }
                 if (alumnoXtarea_datos.GuardarCalificacion(ref alumnoXtarea) == 1)
                 {
-                    //foreach (DataRow notificacion in alumnoXtarea.TablaNotificacion.Rows)
-                    //{ 
-                    //    int Bagde = 0, IDTipoCelular = 0;
-                    //    Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
-                    //    IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
-
-                    //    Comun.EnviarMensaje(notificacion["idCelular"].ToString(), notificacion["TituloNot"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
-                    //}
-                    TempData["typemessage"] = "1";
-                    TempData["message"] = "Las Calificaciones sea agregaron correctamente";
-                    return RedirectToAction("Tarea", new { id = alumnoXtarea.IDAsignatura });
+                    if (alumnoXtarea.EnviarTarea == true)
+                    {
+                        alumnoXtarea.TablaCadenaNotificacion = new DataTable();
+                        alumnoXtarea.TablaCadenaNotificacion.Columns.Add("IDNoficacion", typeof(string));
+                        alumnoXtarea.TablaCadenaNotificacion.Columns.Add("Titulo", typeof(string));
+                        alumnoXtarea.TablaCadenaNotificacion.Columns.Add("Cadena", typeof(string));
+                        alumnoXtarea.TablaCadenaNotificacion.Columns.Add("Resumen", typeof(string));
+                        foreach (DataRow notificacion in alumnoXtarea.TablaNotificacion.Rows)
+                        {
+                            alumnoXtarea.IDNotificacionDetalle = notificacion["IDNotificacion"].ToString();
+                            alumnoXtarea.Nombre = notificacion["NombreAlumno"].ToString();
+                            alumnoXtarea.FechaTarea = Convert.ToDateTime(notificacion["FechaEntrega"].ToString());
+                            alumnoXtarea.NombreTarea = notificacion["NombreTarea"].ToString();
+                            alumnoXtarea.Cadena = notificacion["TextoEnviar"].ToString();
+                            alumnoXtarea.NombreMateria = notificacion["NombreMateria"].ToString();
+                            alumnoXtarea.Resumen = notificacion["resumen"].ToString();
+                            alumnoXtarea.NombreProfesor = notificacion["NombreProfesor"].ToString();
+                            float Calificacin = 0;
+                            float.TryParse(notificacion["Calificacion"].ToString(), out Calificacin);
+                            alumnoXtarea.Calificacion = Calificacin;
+                            alumnoXtarea_datos.CadenaFinal(alumnoXtarea);
+                            string CadenaFin = alumnoXtarea.CadenaFinal;
+                            int Bagde = 0, IDTipoCelular = 0;
+                            int.TryParse(notificacion["Badge"].ToString(), out Bagde);
+                            int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
+                            Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), alumnoXtarea.Resumen, Bagde, IDTipoCelular);
+                            alumnoXtarea.TablaCadenaNotificacion.Rows.Add(alumnoXtarea.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin, alumnoXtarea.Resumen);
+                        }
+                        if (alumnoXtarea_datos.ActualizarTexto(ref alumnoXtarea) == 1)
+                        {
+                            TempData["typemessage"] = "1";
+                            TempData["message"] = "Las Calificaciones sea agregaron correctamente";
+                            return RedirectToAction("Tarea", new { id = alumnoXtarea.IDAsignatura });
+                        }
+                        else
+                        {
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
+                            return RedirectToAction("Tarea", new { id = alumnoXtarea.IDAsignatura });
+                        }
+                    }
+                    else
+                    {
+                        TempData["typemessage"] = "1";
+                        TempData["message"] = "Las Calificaciones sea agregaron correctamente";
+                        return RedirectToAction("Tarea", new { id = alumnoXtarea.IDAsignatura });
+                    }
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "No puede guardar correctamente";
+                    TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
                     return RedirectToAction("Calificacion", new { id = alumnoXtarea.IDTarea, id2 = alumnoXtarea.IDAsignatura });
                 }
             }
@@ -358,7 +394,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 AlumnoXTareaModels alumnoXtarea = new AlumnoXTareaModels();
                 alumnoXtarea.IDAsignatura = collection["IDAsignatura"];
                 TempData["typemessage"] = "2";
-                TempData["message"] = "No puede guardar correctamente";
+                TempData["message"] = "Ocurrio un error al enviar la información. Contacte a soporte técnico.";
                 return RedirectToAction("Calificacion", new { id = alumnoXtarea.IDAsignatura });
             }
         }
@@ -577,18 +613,54 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 }
                 if (alumnoXexamen_datos.GuardarCalificacion(ref alumnoXexamen) == 1)
                 {
-                    //foreach (DataRow notificacion in alumnoXexamen.tablaNotificaciones.Rows)
-                    //{
-                    //    int Bagde = 0, IDTipoCelular = 0;
-                    //    Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
-                    //    IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
+                    if (alumnoXexamen.EnviarTarea == true)
+                    {
+                        alumnoXexamen.TablaCadenaNotificacion = new DataTable();
+                        alumnoXexamen.TablaCadenaNotificacion.Columns.Add("IDNoficacion", typeof(string));
+                        alumnoXexamen.TablaCadenaNotificacion.Columns.Add("Titulo", typeof(string));
+                        alumnoXexamen.TablaCadenaNotificacion.Columns.Add("Cadena", typeof(string));
+                        alumnoXexamen.TablaCadenaNotificacion.Columns.Add("Resumen", typeof(string));
+                        foreach (DataRow notificacion in alumnoXexamen.TablaNotificacion.Rows)
+                        {
+                            alumnoXexamen.IDNotificacionDetalle = notificacion["IDNotificacion"].ToString();
+                            alumnoXexamen.Nombre = notificacion["NombreAlumno"].ToString();
+                            alumnoXexamen.FechaExamen = Convert.ToDateTime(notificacion["FechaExamen"].ToString());
+                            alumnoXexamen.NombreExamen = notificacion["NombreExamen"].ToString();
+                            alumnoXexamen.Cadena = notificacion["TextoEnviar"].ToString();
+                            alumnoXexamen.NombreMateria = notificacion["NombreMateria"].ToString();
+                            alumnoXexamen.Resumen = notificacion["resumen"].ToString();
+                            alumnoXexamen.NombreProfesor = notificacion["NombreProfesor"].ToString();
+                            float Califiacin = 0;
+                                float.TryParse(notificacion["Calificacion"].ToString(), out Califiacin);
+                            alumnoXexamen.Calificacion = Califiacin;
+                            alumnoXexamen_datos.CadenaFinal(alumnoXexamen);
+                            string CadenaFin = alumnoXexamen.CadenaFinal;
+                            int Bagde = 0, IDTipoCelular = 0;
+                            int.TryParse(notificacion["Badge"].ToString(), out Bagde);
+                            int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
+                            Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), alumnoXexamen.Resumen, Bagde, IDTipoCelular);
+                            alumnoXexamen.TablaCadenaNotificacion.Rows.Add(alumnoXexamen.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin, alumnoXexamen.Resumen);
+                        }
+                        if (alumnoXexamen_datos.ActualizarTexto(ref alumnoXexamen) == 1)
+                        {
+                            TempData["typemessage"] = "1";
+                            TempData["message"] = "Las Calificaciones sea agregaron correctamente";
+                            return RedirectToAction("Examen", new { id = alumnoXexamen.IDAsignatura });
+                        }
+                        else
+                        {
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
+                            return RedirectToAction("Examen", new { id = alumnoXexamen.IDAsignatura });
+                        }
 
-                    //    Comun.EnviarMensaje(notificacion["idCelular"].ToString(), notificacion["TituloNot"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
-                    //}
-
-                    TempData["typemessage"] = "1";
-                    TempData["message"] = "Las Calificaciones sea agregaron correctamente";
-                    return RedirectToAction("Examen", new { id = alumnoXexamen.IDAsignatura });
+                    }
+                    else
+                    {
+                        TempData["typemessage"] = "1";
+                        TempData["message"] = "Las Calificaciones sea agregaron correctamente";
+                        return RedirectToAction("Examen", new { id = alumnoXexamen.IDAsignatura });
+                    }
                 }
                 else
                 {
@@ -710,6 +782,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 alumnoXevento.TablaCadenaNotificacion.Columns.Add("IDNoficacion", typeof(string));
                 alumnoXevento.TablaCadenaNotificacion.Columns.Add("Titulo", typeof(string));
                 alumnoXevento.TablaCadenaNotificacion.Columns.Add("Cadena", typeof(string));
+                alumnoXevento.TablaCadenaNotificacion.Columns.Add("Resumen", typeof(string));
                 foreach (DataRow notificacion in alumnoXevento.TablaNotificaciones.Rows)
                 {
                     alumnoXevento.IDNotificacionDetalle = notificacion["IDNotificacion"].ToString();
@@ -717,14 +790,16 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                     alumnoXevento.FechaEvento = Convert.ToDateTime(notificacion["FechaEvento"].ToString());
                     alumnoXevento.NombreEvento = notificacion["NombreEvento"].ToString();
                     alumnoXevento.Cadena = notificacion["TextoEnviar"].ToString();
+                    alumnoXevento.Resumen = notificacion["resumen"].ToString();
                     alumnoXevento.NombreMateria = notificacion["NombreMateria"].ToString();
+                    alumnoXevento.NombreProfesor = notificacion["NombreProfesor"].ToString();
                     alumnoXevento_datos.CadenaFinal(alumnoXevento);
                     string CadenaFin = alumnoXevento.CadenaFinal;
                     int Bagde = 0, IDTipoCelular = 0;
                     int.TryParse(notificacion["Badge"].ToString(), out Bagde);
                     int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
-                    Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), CadenaFin, Bagde, IDTipoCelular);
-                    alumnoXevento.TablaCadenaNotificacion.Rows.Add(alumnoXevento.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin);
+                    Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), alumnoXevento.Resumen, Bagde, IDTipoCelular);
+                    alumnoXevento.TablaCadenaNotificacion.Rows.Add(alumnoXevento.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin, alumnoXevento.Resumen);
                 }
                 alumnoXevento_datos.ActualizarTexto(ref alumnoXevento);
                 return Json("");
@@ -869,23 +944,56 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 }
                 if (AlumXAsistencia_datos.GuardarAsistencia(ref AlumXAsistencia) == 1)
                 {
-                    //foreach (DataRow notificacion in AlumXAsistencia.tablaNotificaciones.Rows)
-                    //{
-                    //    int Bagde = 0, IDTipoCelular = 0;
-                    //    Bagde = Convert.ToInt32(notificacion["Badge"].ToString());
-                    //    IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
+                    if (AlumXAsistencia.EnviarTarea == true)
+                    {
+                        AlumXAsistencia.TablaCadenaNotificacion = new DataTable();
+                        AlumXAsistencia.TablaCadenaNotificacion.Columns.Add("IDNoficacion", typeof(string));
+                        AlumXAsistencia.TablaCadenaNotificacion.Columns.Add("Titulo", typeof(string));
+                        AlumXAsistencia.TablaCadenaNotificacion.Columns.Add("Cadena", typeof(string));
+                        AlumXAsistencia.TablaCadenaNotificacion.Columns.Add("Resumen", typeof(string));
+                        foreach (DataRow notificacion in AlumXAsistencia.TablaNotificacion.Rows)
+                        {
+                            AlumXAsistencia.IDNotificacionDetalle = notificacion["IDNotificacion"].ToString();
+                            AlumXAsistencia.Nombre = notificacion["NombreAlumno"].ToString();
+                            AlumXAsistencia.FechaLista = Convert.ToDateTime(notificacion["FechaLista"].ToString());
+                            AlumXAsistencia.Cadena = notificacion["TextoEnviar"].ToString();
+                            AlumXAsistencia.NombreMateria = notificacion["NombreMateria"].ToString();
+                            AlumXAsistencia.Resumen = notificacion["resumen"].ToString();
+                            AlumXAsistencia.NombreProfesor = notificacion["NombreProfesor"].ToString();
+                            AlumXAsistencia_datos.CadenaFinal(AlumXAsistencia);
+                            string CadenaFin = AlumXAsistencia.CadenaFinal;
+                            int Bagde = 0, IDTipoCelular = 0;
+                            int.TryParse(notificacion["Badge"].ToString(), out Bagde);
+                            int.TryParse(notificacion["IDCelular"].ToString(), out IDTipoCelular);
+                            Comun.EnviarMensaje(notificacion["IDToken"].ToString(), notificacion["Titulo"].ToString(), AlumXAsistencia.Resumen, Bagde, IDTipoCelular);
+                            AlumXAsistencia.TablaCadenaNotificacion.Rows.Add(AlumXAsistencia.IDNotificacionDetalle, notificacion["Titulo"].ToString(), CadenaFin, AlumXAsistencia.Resumen);
+                        }
+                        if (AlumXAsistencia_datos.ActualizarTexto(ref AlumXAsistencia) == 1)
+                        {
+                            TempData["typemessage"] = "1";
+                            TempData["message"] = "Las Asistencias se agregaron correctamente";
+                            return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+                        }
+                        else
+                        {
+                            TempData["typemessage"] = "2";
+                            TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
+                            return RedirectToAction("Examen", new { id = AlumXAsistencia.IDAsignatura });
+                        }
 
-                    //    Comun.EnviarMensaje(notificacion["idCelular"].ToString(), notificacion["TituloNot"].ToString(), notificacion["descripcion"].ToString(), Bagde, IDTipoCelular);
-                    //}
-
-                    TempData["typemessage"] = "1";
-                    TempData["message"] = "Las Asistencias se agregaron correctamente";
-                    return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+                    }
+                    else
+                    {
+                        TempData["typemessage"] = "1";
+                        TempData["message"] = "Las Asistencias se agregaron correctamente";
+                        return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura });
+                    }
+                   
                 }
                 else
                 {
                     TempData["typemessage"] = "2";
-                    TempData["message"] = "No puede guardar correctamente";
+                    TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
                     return RedirectToAction("ListaAsistencia", new { id = AlumXAsistencia.IDAsignatura});
                 }
             }

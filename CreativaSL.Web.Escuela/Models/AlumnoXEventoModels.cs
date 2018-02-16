@@ -120,6 +120,22 @@ namespace CreativaSL.Web.Escuela.Models
             set { _NombreMateria = value; }
         }
 
+        private string _Resumen;
+
+        public string Resumen
+        {
+            get { return _Resumen; }
+            set { _Resumen = value; }
+        }
+
+        private string _NombreProfesor;
+
+        public string NombreProfesor
+        {
+            get { return _NombreProfesor; }
+            set { _NombreProfesor = value; }
+        }
+
 
         #region Datos de control
         public int Resultado { get; set; }

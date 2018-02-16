@@ -88,7 +88,8 @@ namespace CreativaSL.Web.Escuela.Models
                 _data.Columns.Add("FechaEvento", typeof(DateTime));
                 _data.Columns.Add("NombreEvento", typeof(string));
                 _data.Columns.Add("NombreMateria", typeof(string));
-                object[] par = { datos.Nombre, datos.FechaEvento, datos.NombreEvento, datos.NombreMateria };
+                _data.Columns.Add("NombreProfesor", typeof(string));
+                object[] par = { datos.Nombre, datos.FechaEvento, datos.NombreEvento, datos.NombreMateria, datos.NombreProfesor };
                 _data.Rows.Add(par);
 
                 return _data;
