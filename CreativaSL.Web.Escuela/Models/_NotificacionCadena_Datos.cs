@@ -40,9 +40,10 @@ namespace CreativaSL.Web.Escuela.Models
                 DataTable _data = new DataTable();
                 _data.Columns.Add("Nombre", typeof(string));
                 _data.Columns.Add("FechaLista", typeof(DateTime));
-                _data.Columns.Add("materia", typeof(string));
-           
-                object[] par = { datos.nombreAlumno,  datos.fechaEvento, datos.materia };
+                _data.Columns.Add("Materia", typeof(string));
+                _data.Columns.Add("NombreProfesor", typeof(string));
+
+                object[] par = { datos.nombreAlumno,  datos.fechaEvento, datos.materia,datos.profesor };
                 _data.Rows.Add(par);
 
                 return _data;
@@ -57,12 +58,13 @@ namespace CreativaSL.Web.Escuela.Models
             try
             {
                 DataTable _data = new DataTable();
-                _data.Columns.Add("name", typeof(string));
+                _data.Columns.Add("Nombre", typeof(string));
                 _data.Columns.Add("nombreTarea", typeof(string));
                 _data.Columns.Add("FechaTarea", typeof(DateTime));
-                _data.Columns.Add("materia", typeof(string));
-                _data.Columns.Add("calificacion", typeof(float));
-                object[] par = { datos.nombreAlumno,datos.nombreEvento ,datos.fechaEvento, datos.materia,datos.calificacion };
+                _data.Columns.Add("Materia", typeof(string));
+                _data.Columns.Add("Calificacion", typeof(float));
+                _data.Columns.Add("NombreProfesor", typeof(string));
+                object[] par = { datos.nombreAlumno,datos.nombreEvento ,datos.fechaEvento, datos.materia,datos.calificacion,datos.profesor };
                 _data.Rows.Add(par);
 
                 return _data;
@@ -77,12 +79,13 @@ namespace CreativaSL.Web.Escuela.Models
             try
             {
                 DataTable _data = new DataTable();
-                _data.Columns.Add("name", typeof(string));
-                _data.Columns.Add("nombreExamen", typeof(string));
+                _data.Columns.Add("Nombre", typeof(string));
+                _data.Columns.Add("NombreExamen", typeof(string));
                 _data.Columns.Add("FechaExamen", typeof(DateTime));
-                _data.Columns.Add("materia", typeof(string));
-                _data.Columns.Add("calificacion", typeof(float));
-                object[] par = { datos.nombreAlumno, datos.fechaEvento, datos.nombreEvento,datos.materia,datos.calificacion };
+                _data.Columns.Add("Materia", typeof(string));
+                _data.Columns.Add("Calificacion", typeof(float));
+                _data.Columns.Add("NombreProfesor", typeof(string));
+                object[] par = { datos.nombreAlumno, datos.fechaEvento, datos.nombreEvento,datos.materia,datos.calificacion,datos.profesor };
                 _data.Rows.Add(par);
 
                 return _data;
@@ -100,7 +103,9 @@ namespace CreativaSL.Web.Escuela.Models
                 _data.Columns.Add("Nombre", typeof(string));
                 _data.Columns.Add("FechaEvento", typeof(DateTime));
                 _data.Columns.Add("NombreEvento", typeof(string));
-                object[] par = { datos.nombreAlumno, datos.fechaEvento, datos.nombreEvento };
+                _data.Columns.Add("Materia", typeof(string));
+                _data.Columns.Add("NombreProfesor", typeof(string));
+                object[] par = { datos.nombreAlumno, datos.fechaEvento, datos.nombreEvento,datos.materia,datos.profesor };
                 _data.Rows.Add(par);
 
                 return _data;

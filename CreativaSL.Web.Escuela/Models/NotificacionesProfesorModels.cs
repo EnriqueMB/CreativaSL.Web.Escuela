@@ -280,6 +280,13 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _materia; }
             set { _materia = value; }
         }
+        private string _profesor;
+
+        public string profesor
+        {
+            get { return _profesor; }
+            set { _profesor = value; }
+        }
 
         private string _nombreTarea;
 

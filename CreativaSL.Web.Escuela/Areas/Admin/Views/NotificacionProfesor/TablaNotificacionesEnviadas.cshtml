@@ -1,8 +1,7 @@
 ﻿@model CreativaSL.Web.Escuela.Models.NotificacionesProfesorModels
 @{
-    ViewBag.Title = "TablaNotificacion";
+    ViewBag.Title = "TablaNotificacionesEnviadas";
 }
-
 @section featured
 {
     @{
@@ -22,16 +21,16 @@
                     <h3 class="page-title">Ofelia Narvaez Rincón<small> Administración</small></h3>
                 </div>
             </div>
-           
+
             <div id="dashboard">
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="portlet box blue">
 
                             <div class="portlet-title">
-                                <div class="caption"><i class="icon-edit"></i>Notificaciones</div>
+                                <div class="caption"><i class="icon-edit"></i>Notificaciones ENVIADAS</div>
                             </div>
-                            
+
 
                             <div class="portlet-body">
                                 <div class="clearfix">
@@ -39,18 +38,11 @@
                                         <div class="span12">
 
 
-                                            <a href="@Url.Action("Index", "NotificacionProfesor")" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
-                                        </div>
-                                    </div>
-                                    <div class="btn-group">
-                                        <div class="span12">
-
-
-                                            <a href="@Url.Action("TablaNotificacionesEnviadas", "NotificacionProfesor",new { id = Model.id_profesor, id2 = Model.grupo })" class="btn btn-default green"><i class="icon-prev"></i>Notificaciones Enviadas</a>
+                                            <a href="@Url.Action("TablaNotificacion", "NotificacionProfesor", new { id = Model.id_profesor, id2 = Model.grupo })" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="tabbable">
                                     <!-- Only required for left/right tabs -->
                                     <ul class="nav nav-tabs">
@@ -69,6 +61,7 @@
                                                             <div class="portlet-body flip-scroll" style="text-align:center;">
                                                                 <section id="flip-scroll">
                                                                     <table id="example" class="table table-striped table-hover table-bordered dataTable">
+                                                                        @*<button id="btn-pdf" class="btn btn-default blue">Exportar PDF</button>*@
                                                                         <thead class="flip-content">
                                                                             <tr>
                                                                                 @*<th>Tipo</th>*@
@@ -80,7 +73,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
-                                                                                <th>Enviar</th>
+                                                                                <th>Reenviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
 
@@ -269,7 +262,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
-                                                                                <th>Enviar</th>
+                                                                                <th>Reenviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
 
@@ -324,10 +317,50 @@
             </div>
         </div>
     </div>
+    @*<script src=" https://code.jquery.com/jquery-1.12.4.js"></script
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js "></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src=" https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>*@
 
+    <script src="https://cdn.rawgit.com/simonbengtsson/jsPDF/requirejs-fix-dist/dist/jspdf.debug.js"></script>
+<script src="https://unpkg.com/jspdf-autotable@2.3.2"></script>
     <script>
        
-      
+       
+
+        $('#btn-pdf').click(function () {
+            var doc = new jsPDF('l', 'pt');
+
+            var res = doc.autoTableHtmlToJson(document.getElementById("example"));
+            doc.autoTable(res.columns, res.data, { margin: { top: 80 } });
+
+            var header = function (data) {
+                doc.setFontSize(18);
+                doc.setTextColor(40);
+                doc.setFontStyle('normal');
+                //doc.addImage(headerImgData, 'JPEG', data.settings.margin.left, 20, 50, 50);
+                doc.text("Testing Report", data.settings.margin.left, 50);
+            };
+
+            var options = {
+                beforePageContent: header,
+                margin: {
+                    top: 80
+                },
+                startY: doc.autoTableEndPosY() + 20
+            };
+
+            doc.autoTable(res.columns, res.data, options);
+
+            doc.save("table.pdf");
+        });
+
+
         $("#ListPlanEstudioOrigen").change(function () {
             var combo = $('#ListModalidadOrigen').attr('id');
             getComboModalidad($("#ListPlanEstudioOrigen").val(), combo);
@@ -522,7 +555,6 @@
                     $('#Success').css("display", "block");
                     $('#Success').delay(400).slideDown(400).delay(2000).slideUp(400);
                     $('#Success').css("display", "block");
-                    location.reload();
 
                 },
                 error: function (xhr, ajaxOptions, thrownError, request) {
@@ -548,7 +580,7 @@
                     [10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]
                     ],
                     "iDisplayLength": 10
-
+                   
                 });
                 $('#example2').DataTable({
                     "bSort": false,
@@ -618,6 +650,12 @@
 
     </script>
 }
+
+
+
+
+
+
 
 
 

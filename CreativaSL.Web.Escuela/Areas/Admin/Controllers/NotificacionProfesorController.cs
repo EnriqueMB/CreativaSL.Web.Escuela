@@ -90,6 +90,28 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 throw ex;
             }
         }
+        [HttpGet]
+        public ActionResult TablaNotificacionesEnviadas(string id, string id2)
+        {
+            try
+            {
+                NotificacionesProfesorModels NotificacionProfesor = new NotificacionesProfesorModels();
+                _Notificaciones_Profesor_Datos NotificacionProfesorDatos = new _Notificaciones_Profesor_Datos();
+                NotificacionProfesor.conexion = Conexion;
+
+                NotificacionProfesor.id_profesor = id;
+                NotificacionProfesor.grupo = id2;
+
+
+                NotificacionProfesor = NotificacionProfesorDatos.obtenerCatNotificacionProfesorEnviadas(NotificacionProfesor);
+                return View(NotificacionProfesor);
+                //return RedirectToAction("TablaNotificacion");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         [HttpGet]
         public ActionResult Detalle(string id,string id2,string id3)
@@ -135,6 +157,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     NotificacionProfesor.TablaNotificacionXTipo.Columns.Add("IDNotificacion", typeof(string));
                     NotificacionProfesor.TablaNotificacionXTipo.Columns.Add("Titulo", typeof(string));
                     NotificacionProfesor.TablaNotificacionXTipo.Columns.Add("Cadena", typeof(string));
+                    NotificacionProfesor.TablaNotificacionXTipo.Columns.Add("Resumen", typeof(string));
                     foreach (DataRow notificacion in NotificacionProfesor.TablaAlumnos.Rows)
                     {
                         if (NotificacionProfesor.IDTipoNotificacion == 110) {
@@ -143,6 +166,8 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.nombreEvento = notificacion["nombreEvento"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
                             NotificacionProfesor.resumen= notificacion["resumen"].ToString();
+                            NotificacionProfesor.materia = notificacion["materia"].ToString();
+                            NotificacionProfesor.profesor = notificacion["profesor"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                            
 
@@ -157,6 +182,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
                             NotificacionProfesor.resumen = notificacion["resumen"].ToString();
+                            NotificacionProfesor.profesor = notificacion["profesor"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
 
                         }
@@ -169,6 +195,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
                             NotificacionProfesor.resumen = notificacion["resumen"].ToString();
+                            NotificacionProfesor.profesor = notificacion["profesor"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                         }
                         else if (NotificacionProfesor.IDTipoNotificacion == 113)
@@ -179,9 +206,10 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
                             NotificacionProfesor.resumen = notificacion["resumen"].ToString();
+                            NotificacionProfesor.profesor = notificacion["profesor"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                         }
-                        NotificacionProfesor.TablaNotificacionXTipo.Rows.Add(notificacion["id_notificacionDetalle"].ToString(), notificacion["titulo"].ToString(), NotificacionProfesor.notificacionFinal);
+                        NotificacionProfesor.TablaNotificacionXTipo.Rows.Add(notificacion["id_notificacionDetalle"].ToString(), notificacion["titulo"].ToString(), NotificacionProfesor.notificacionFinal, notificacion["resumen"].ToString());
                        
                        
                         string descripcion = NotificacionProfesor.notificacionFinal;

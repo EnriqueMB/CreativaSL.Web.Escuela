@@ -39,6 +39,7 @@ namespace CreativaSL.Web.Escuela.Models
         [Required(ErrorMessage = "Observaciones es obligatorio")]
         [Display(Name = "Observaciones")]
         [StringLength(140, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string resumen
         {
             get { return _resumen; }

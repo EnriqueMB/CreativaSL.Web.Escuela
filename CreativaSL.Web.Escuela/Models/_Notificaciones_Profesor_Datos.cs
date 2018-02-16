@@ -33,6 +33,29 @@ namespace CreativaSL.Web.Escuela.Models
                 throw ex;
             }
         }
+        public NotificacionesProfesorModels obtenerCatNotificacionProfesorEnviadas(NotificacionesProfesorModels Datos)
+        {
+            try
+            {
+                DataSet ds = null;
+                ds = SqlHelper.ExecuteDataset(Datos.conexion, "spCSLDB_V2_get_CatNotificacionesDefinidasEnviadas", Datos.grupo, Datos.id_profesor);
+                if (ds != null)
+                {
+                    if (ds.Tables.Count > 0)
+                    {
+                        if (ds.Tables[0] != null)
+                        {
+                            Datos.TablaDatos = ds.Tables[0];
+                        }
+                    }
+                }
+                return Datos;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public void insertarNotificacion(NotificacionesProfesorModels datos)
         {
 

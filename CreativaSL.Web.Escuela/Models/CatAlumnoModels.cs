@@ -143,6 +143,7 @@ namespace CreativaSL.Web.Escuela.Models
 
         [Display(Name = "contraseña")]
         [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string passUser
         {
             get { return _passUser; }

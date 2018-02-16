@@ -77,7 +77,10 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _ApMaterno;
-        
+        [Required(ErrorMessage = "El apellido paterno es obligatorio")]
+        [Display(Name = "Apellido Paterno")]
+        [StringLength(120, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
         public string ApMaterno
         {
             get { return _ApMaterno; }
@@ -96,7 +99,10 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _Telefono;
-
+        [Required(ErrorMessage = "El Telefono es obligatorio")]
+        [Display(Name = "Telefono")]
+        [StringLength(15, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[0-9\s\-\(\)\+]*$", ErrorMessage = "Solo numeros")]
         public string Telefono
         {
             get { return _Telefono; }
@@ -104,7 +110,10 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _Direccion;
-
+        [Required(ErrorMessage = "La dirección es obligatoria")]
+        [Display(Name = "Dirección")]
+        [StringLength(1000, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string Direccion
         {
             get { return _Direccion; }
@@ -135,6 +144,7 @@ namespace CreativaSL.Web.Escuela.Models
 
         [Display(Name = "contraseña")]
         [StringLength(50, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y máximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string passUser
         {
             get { return _passUser; }
