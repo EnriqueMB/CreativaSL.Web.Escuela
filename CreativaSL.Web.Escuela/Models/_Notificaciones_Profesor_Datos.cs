@@ -51,6 +51,7 @@ namespace CreativaSL.Web.Escuela.Models
                      new SqlParameter("@IDGrupo", datos.grupo),
                      new SqlParameter("@IDTipoNotificacion", datos.IDTipoNotificacion),
                      new SqlParameter("@titulo", datos.titulo),
+                     new SqlParameter("@resumen", datos.resumen),
                      new SqlParameter("@texto", datos.texto),
                      new SqlParameter("@Tutores", datos.tutores),
                      new SqlParameter("@TablaAlumnos", datos.TablaAlumnos),

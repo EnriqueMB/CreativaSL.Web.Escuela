@@ -142,6 +142,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.fechaEvento= Convert.ToDateTime(notificacion["fechaEvento"].ToString());
                             NotificacionProfesor.nombreEvento = notificacion["nombreEvento"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
+                            NotificacionProfesor.resumen= notificacion["resumen"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                            
 
@@ -155,6 +156,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.calificacion = Convert.ToSingle(notificacion["calificacion"].ToString());
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
+                            NotificacionProfesor.resumen = notificacion["resumen"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
 
                         }
@@ -166,6 +168,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.calificacion = Convert.ToSingle(notificacion["calificacion"].ToString());
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
+                            NotificacionProfesor.resumen = notificacion["resumen"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                         }
                         else if (NotificacionProfesor.IDTipoNotificacion == 113)
@@ -175,6 +178,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                             NotificacionProfesor.calificacion = Convert.ToSingle(notificacion["calificacion"].ToString());
                             NotificacionProfesor.materia = notificacion["materia"].ToString();
                             NotificacionProfesor.notificacionPlantilla = notificacion["descripcion"].ToString();
+                            NotificacionProfesor.resumen = notificacion["resumen"].ToString();
                             NotificacionCadenaDatos.CadenaFinal(NotificacionProfesor);
                         }
                         NotificacionProfesor.TablaNotificacionXTipo.Rows.Add(notificacion["id_notificacionDetalle"].ToString(), notificacion["titulo"].ToString(), NotificacionProfesor.notificacionFinal);
@@ -185,7 +189,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                         Bagde = Convert.ToInt32(notificacion["badge"].ToString());
                         IDTipoCelular = Convert.ToInt32(notificacion["idTipoCelular"].ToString());
                         
-                        Comun.EnviarMensaje(notificacion["token"].ToString(), notificacion["titulo"].ToString(),descripcion, Bagde, IDTipoCelular);
+                        Comun.EnviarMensaje(notificacion["token"].ToString(), notificacion["titulo"].ToString(), notificacion["resumen"].ToString(), Bagde, IDTipoCelular);
                     }
                     NotificacionProfesorDatos.actualizarDetalleNotificacion(NotificacionProfesor);
                 }

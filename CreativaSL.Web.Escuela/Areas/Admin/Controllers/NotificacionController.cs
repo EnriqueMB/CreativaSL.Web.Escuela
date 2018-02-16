@@ -110,6 +110,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 NotificacionGeneral.ciclo = collection["TablaCicloEscolarCmb"];
                 NotificacionGeneral.IDTipoNotificacion = Convert.ToInt32(collection["TablaTipoNotificacionCmb"]);
                 NotificacionGeneral.titulo = collection["titulo"];
+                NotificacionGeneral.resumen = collection["resumen"];
                 NotificacionGeneral.texto = collection["texto"];
                 NotificacionGeneral.tutores = (collection["tutores"]).StartsWith("true");
                 NotificacionGeneral.numAlumnos = Convert.ToInt32(collection["contAlumnos"]);
@@ -151,7 +152,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                     }
                     TempData["typemessage"] = "1";
                     TempData["message"] = "Se ha realizado el envio correctamente.";
-                    return RedirectToAction("NotificacionesGenerales");
+                    return RedirectToAction("Index");
                 }
                 else
                 {

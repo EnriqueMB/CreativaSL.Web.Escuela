@@ -17,7 +17,7 @@ namespace CreativaSL.Web.Escuela.Models
             {
                 object[] parametros =
                 {
-                    datos.opcion, datos.id_plantilla, datos.titulo, datos.texto, datos.id_tipoNotificacion, datos.user
+                    datos.opcion, datos.id_plantilla, datos.titulo,datos.resumen, datos.texto, datos.id_tipoNotificacion, datos.user
                 };
                 object aux = SqlHelper.ExecuteScalar(datos.conexion, "spCSLDB_V2_abc_CatPlantillaTipoNotificacion", parametros);
                 datos.id_plantilla = aux.ToString();
@@ -70,6 +70,7 @@ namespace CreativaSL.Web.Escuela.Models
                 {
                     datos.id_plantilla = dr["id_plantilla"].ToString();
                     datos.titulo = dr["titulo"].ToString();
+                    datos.resumen = dr["resumen"].ToString();
                     datos.texto = dr["texto"].ToString();
                     datos.id_tipoNotificacion =Convert.ToInt32( dr["id_tipoNotificacion"].ToString());
           

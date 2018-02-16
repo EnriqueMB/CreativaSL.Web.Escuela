@@ -29,12 +29,22 @@ namespace CreativaSL.Web.Escuela.Models
         private string _texto;
         [Required(ErrorMessage = "Observaciones es obligatorio")]
         [Display(Name = "Observaciones")]
-        [StringLength(140, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [StringLength(1000, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
         public string texto
         {
             get { return _texto; }
             set { _texto = value; }
         }
+        private string _resumen;
+        [Required(ErrorMessage = "Observaciones es obligatorio")]
+        [Display(Name = "Observaciones")]
+        [StringLength(140, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        public string resumen
+        {
+            get { return _resumen; }
+            set { _resumen = value; }
+        }
+
         private int _id_tipoNotificacion;
 
         public int id_tipoNotificacion

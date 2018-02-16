@@ -169,6 +169,7 @@ namespace CreativaSL.Web.Escuela.Models
         private string _titulo;
         [Required(ErrorMessage = "El título de la notificación es obligatorio ")]
         [Display(Name = "Título")]
+        [StringLength(80, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
         public string titulo
         {
             get { return _titulo; }
@@ -177,12 +178,21 @@ namespace CreativaSL.Web.Escuela.Models
         private string _texto;
         [Required(ErrorMessage = "La descripción  de la notificación es obligatoria ")]
         [Display(Name = "Descripción")]
+        [StringLength(1000, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
         public string texto
         {
             get { return _texto; }
             set { _texto = value; }
         }
-
+        private string _resumen;
+        [Required(ErrorMessage = "El resumen es obligatorio")]
+        [Display(Name = "resumen")]
+        [StringLength(140, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        public string resumen
+        {
+            get { return _resumen; }
+            set { _resumen = value; }
+        }
         #region Datos de control
         public int Resultado { get; set; }
         public bool Completado { get; set; }

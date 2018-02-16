@@ -77,6 +77,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 PlantillaTipoNotificacion.id_tipoNotificacion = Convert.ToInt32(collection["listaTipoNotificacion"]);
                 PlantillaTipoNotificacion.titulo = collection["titulo"];
                 PlantillaTipoNotificacion.texto = collection["texto"];
+                PlantillaTipoNotificacion.resumen = "";
                 PlantillaTipoNotificacion = PlantillaTipoNotificacionDatos.AbcPlatillaTipoNotificacion(PlantillaTipoNotificacion);
                 if (string.IsNullOrEmpty(PlantillaTipoNotificacion.id_plantilla))
                 {
@@ -142,6 +143,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 PlantillaTipoNotificacion.id_plantilla = id;
                 PlantillaTipoNotificacion.id_tipoNotificacion = Convert.ToInt32(collection["listaTipoNotificacion"]);
                 PlantillaTipoNotificacion.titulo = collection["titulo"];
+                PlantillaTipoNotificacion.resumen = collection["resumen"];
                 PlantillaTipoNotificacion.texto = collection["texto"];
                 PlantillaTipoNotificacion = PlantillaTipoNotificacionDatos.AbcPlatillaTipoNotificacion(PlantillaTipoNotificacion);
                 if (string.IsNullOrEmpty(PlantillaTipoNotificacion.id_plantilla))
