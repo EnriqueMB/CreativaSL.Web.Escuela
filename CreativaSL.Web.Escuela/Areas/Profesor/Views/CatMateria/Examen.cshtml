@@ -36,7 +36,7 @@
                                         <div class="span12">
                                             @{string id = Model.IDAsignatura;}
                                             <a href="@Url.Action("CreateExamen", "CatMateria", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Nuevo Examen</a>
-                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +53,6 @@
                                                                     <th>Nombre Examen</th>
                                                                     <th>Descripcion</th>
                                                                     <th>Fecha Examen</th>
-                                                                    <th>Fecha Envio</th>
                                                                     @*<th>Editar</th>*@
                                                                     <th>Eliminar</th>
                                                                     <th>Ver Examen</th>
@@ -66,8 +65,7 @@
                                                                     <tr>
                                                                         <td>@examen["NombreExamen"].ToString()</td>
                                                                         <td>@examen["Descripcion"].ToString()</td>
-                                                                        <td>@examen["FechaExamen"].ToString()</td>
-                                                                        <td>@examen["FechaEnvio"].ToString()</td>
+                                                                        <td>@Convert.ToDateTime(examen["FechaExamen"].ToString()).ToShortDateString()</td>
                                                                         @*<td style="text-align:center;"><a class="btn yellow" href="@Url.Action("EditTarea", "CatMateria", new { id = examen["IDExamen"].ToString(), id2 = id })"><i class="icon-edit"></i></a></td>*@
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("DeleteExamen", "CatMateria", new {id = examen["IDExamen"].ToString(), id2 = id})"><i class="icon-trash"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn green" href="@Url.Action("VerExamen", "CatMateria", new {id = examen["IDExamen"].ToString(), id2 = id})"><i class="icon-book"></i></a></td>

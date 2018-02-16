@@ -35,7 +35,7 @@
                                         <div class="span12">
                                             @{string id = Model.IDAsignatura;}
                                             <a href="@Url.Action("PaseAsistencia", "CatMateria", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Pase de Lista</a>
-                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                                                 @foreach (System.Data.DataRow lista in Model.TablaDatos.Rows)
                                                                 {
                                                                     <tr>
-                                                                        <td>@lista["fechaLista"].ToString()</td>
+                                                                        <td>@Convert.ToDateTime(lista["fechaLista"].ToString()).ToShortDateString()</td>
                                                                         <td>@lista["NombreMateria"].ToString()</td>
                                                                         @*<td style="text-align: center;"><a class="btn green" href="@Url.Action("PaseAsistencia", "CatMateria", new {id = lista["id_lista"].ToString(), id2 = id})"><i class="icon-book"></i></a></td>*@
 

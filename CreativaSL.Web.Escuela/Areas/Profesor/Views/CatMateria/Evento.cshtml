@@ -59,7 +59,7 @@
                                         <div class="span12">
                                             @{string id = Model.IDAsignatura;}
                                             <a href="@Url.Action("CreateEvento", "CatMateria", new { id = id } )" class="btn btn-default green"><i class="icon-plus"></i>Nuevo Evento</a>
-                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                            <a href="@Url.Action("Index", "CatMateria", new { id = id })" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,6 @@
                                                                     <th>Nombre Evento</th>
                                                                     <th>Descripcion</th>
                                                                     <th>Fecha Evento</th>
-                                                                    <th>Fecha Envio</th>
                                                                     @*<th>Editar</th>*@
                                                                     <th>Eliminar</th>
                                                                     <th>Enviar</th>
@@ -88,8 +87,7 @@
                                                                     <tr>
                                                                         <td>@evento["NombreEvento"].ToString()</td>
                                                                         <td>@evento["Descripcion"].ToString()</td>
-                                                                        <td>@evento["FechaEvento"].ToString()</td>
-                                                                        <td>@evento["FechaEnvio"].ToString()</td>
+                                                                        <td>@Convert.ToDateTime(evento["FechaEvento"].ToString()).ToShortDateString()</td>
                                                                         @*<td style="text-align:center;"><a class="btn yellow" href="@Url.Action("EditTarea", "CatMateria", new { id = evento["id_tarea"].ToString(), id2 = id })"><i class="icon-edit"></i></a></td>*@
                                                                         <td style="text-align: center;"><a class="btn red delete" href="@Url.Action("DeleteEvento", "CatMateria", new {id = evento["IDEvento"].ToString(), id2 = id})"><i class="icon-trash"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn green enviar" href="@Url.Action("EnviarEvento", "CatMateria", new {id = evento["IDEvento"].ToString(), id2 = id})"><i class="icon-file"></i></a></td>

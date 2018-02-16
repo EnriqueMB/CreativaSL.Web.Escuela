@@ -46,11 +46,11 @@
                                     <div class="control-group">
                                         <div class="controls">
                                             <h3>Fecha de Entrega</h3>
-                                            <p class="letras_details">@Html.Raw(Model.FechaEntraga)</p>
+                                            <p class="letras_details">@Html.Raw(Model.FechaEntraga.ToShortDateString())</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="span4">
+                                <div class="span4" style="display:none">
                                     <div class="control-group">
                                         <div class="controls">
                                             <h3>Fecha de Envio</h3>
@@ -77,7 +77,7 @@
 
                             <div class="form-actions">
                                 @{string id = Model.IDAsignatura; }
-                                <a href="@Url.Action("Tarea", "CatMateria", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Cancelar</a>
+                                <a href="@Url.Action("Tarea", "CatMateria", new { id = id})" class="btn btn-default red"><i class="icon-prev"></i>Regresar</a>
                             </div>
                         </div>
                     </div>
