@@ -65,7 +65,7 @@
                                                                             <tr>
                                                                                 <td>@grupo["nombreCompleto"].ToString()</td>
                                                                                 @{ string alumno = "";
-                                                                                    if (string.IsNullOrEmpty(@grupo["id_persona"].ToString()))
+                                                                                    if (@grupo["id_persona"].ToString()== @grupo["id_alumno"].ToString())
                                                                                     {
                                                                                         <td>No aplica</td>
                                                                                     }
