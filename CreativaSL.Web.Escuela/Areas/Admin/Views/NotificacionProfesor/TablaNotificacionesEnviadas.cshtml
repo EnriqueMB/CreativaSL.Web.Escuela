@@ -73,6 +73,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
+                                                                                <th>Enviado por</th>
                                                                                 <th>Reenviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
@@ -97,6 +98,7 @@
                                                                                         <td>@notificacion["id_curso"].ToString()</td>
                                                                                         <td>@notificacion["id_ciclo"].ToString()</td>
                                                                                         <td>@notificacion["id_grupo"].ToString()</td>
+                                                                                        <td>@notificacion["enviadopor"].ToString()</td>
 
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor",new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
@@ -138,6 +140,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
+                                                                                <th>Enviado por</th>
                                                                                 <th>Enviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
@@ -162,7 +165,7 @@
                                                                                         <td>@notificacion["id_curso"].ToString()</td>
                                                                                         <td>@notificacion["id_ciclo"].ToString()</td>
                                                                                         <td>@notificacion["id_grupo"].ToString()</td>
-
+                                                                                        <td>@notificacion["enviadopor"].ToString()</td>
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
                                                                                         <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
@@ -200,6 +203,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
+                                                                                <th>Enviado por</th>
                                                                                 <th>Enviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
@@ -224,7 +228,7 @@
                                                                                         <td>@notificacion["id_curso"].ToString()</td>
                                                                                         <td>@notificacion["id_ciclo"].ToString()</td>
                                                                                         <td>@notificacion["id_grupo"].ToString()</td>
-
+                                                                                        <td>@notificacion["enviadopor"].ToString()</td>
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString() })"><i class="icon-circle-arrow-right"></i></a></td>
                                                                                         <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
@@ -262,6 +266,7 @@
                                                                                 <th>Curso</th>
                                                                                 <th>Ciclo</th>
                                                                                 <th>Grupo</th>
+                                                                                <th>Enviado por</th>
                                                                                 <th>Reenviar</th>
                                                                                 <th>Ver detalle</th>
                                                                                 <th>Eliminar</th>
@@ -286,7 +291,7 @@
                                                                                         <td>@notificacion["id_curso"].ToString()</td>
                                                                                         <td>@notificacion["id_ciclo"].ToString()</td>
                                                                                         <td>@notificacion["id_grupo"].ToString()</td>
-
+                                                                                        <td>@notificacion["enviadopor"].ToString()</td>
 
                                                                                         <td style="text-align:center;"><a class="btn blue enviar" href="@Url.Action("ReenviarNotificacion", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= notificacion["id_registro"].ToString(),id3=notificacion["id_tipoNotificacion"].ToString()})"><i class="icon-circle-arrow-right"></i></a></td>
                                                                                         <td style="text-align:center;"><a class="btn blue" href="@Url.Action("Detalle", "NotificacionProfesor", new { id = notificacion["id_notificacion"].ToString(),id2= Model.id_profesor,id3=Model.grupo })"><i class="icon-book"></i></a></td>
