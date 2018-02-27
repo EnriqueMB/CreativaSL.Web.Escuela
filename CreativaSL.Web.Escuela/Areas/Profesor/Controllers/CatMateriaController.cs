@@ -901,6 +901,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
             }
         }
 
+
         [HttpPost]
         public ActionResult PaseAsistencia(string id, FormCollection collection)
         {
@@ -1006,5 +1007,86 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 return RedirectToAction("ListaAsistencia", new { id = alumnoXexamen.IDAsignatura });
             }
         }
+        [HttpGet]
+        public ActionResult CalificacionesFinales(string id)
+        {
+            try
+            {
+                CatAlumnosXGrupoModels alumnoXgrupo = new CatAlumnosXGrupoModels();
+                CatAlumnoXGrupo_Datos alumnoXgrupo_datos = new CatAlumnoXGrupo_Datos();
+                alumnoXgrupo.conexion = Conexion;
+                alumnoXgrupo.IDAsignatura = id;
+                alumnoXgrupo.IDProfesor = User.Identity.Name;
+                alumnoXgrupo = alumnoXgrupo_datos.ObtenerCatAlumnoXGrupoPROFCalificacionFinal(alumnoXgrupo);
+                return View(alumnoXgrupo);
+            }
+            catch (Exception)
+            {
+                AlumnoXExamenModels alumnoXexamen = new AlumnoXExamenModels();
+               
+                TempData["typemessage"] = "2";
+                TempData["message"] = "No puede mostrar la vista";
+                return RedirectToAction("Examen", new { id = alumnoXexamen.IDAsignatura });
+            }
+        }
+        [HttpPost]
+        public ActionResult CalificacionesFinales(string id, FormCollection Collection) {
+            try
+            {
+                CatAlumnosXGrupoModels alumnoXgrupo = new CatAlumnosXGrupoModels();
+                CatAlumnoXGrupo_Datos alumnoXgrupo_datos = new CatAlumnoXGrupo_Datos();
+                alumnoXgrupo.conexion = Conexion;
+                alumnoXgrupo.NumeroAlumnos =Convert.ToInt32(Collection["numeroAlumnos"]);
+                alumnoXgrupo.user = User.Identity.Name;
+                alumnoXgrupo.IDAsignatura = id;
+                alumnoXgrupo.TablaCalificaciones = new DataTable();
+               
+                alumnoXgrupo.TablaCalificaciones.Columns.Add("IDAlumno", typeof(string));
+                alumnoXgrupo.TablaCalificaciones.Columns.Add("Calificacion", typeof(string));
+                float calificacion=0;
+                string alumno = "";
+                for (int auxNumAlum = 1; auxNumAlum <= alumnoXgrupo.NumeroAlumnos; auxNumAlum++)
+                {
+                    try
+                    {
+                        calificacion = Convert.ToSingle(Collection["calificacion" + auxNumAlum.ToString()]);
+                        alumno = Collection["idAlumno" + auxNumAlum.ToString()];
+                       
+
+                        alumnoXgrupo.TablaCalificaciones.Rows.Add( alumno, calificacion);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        if (alumno != "")
+                        {
+
+                            alumnoXgrupo.TablaCalificaciones.Rows.Add(calificacion, alumno);
+                        }
+                    }
+                }
+                alumnoXgrupo_datos.GuardarCalificacion(alumnoXgrupo);
+                if (alumnoXgrupo.Resultado==1)
+                {
+                    TempData["typemessage"] = "1";
+                    TempData["message"] = "Las calificaciones se agregaron correctamente";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["typemessage"] = "2";
+                    TempData["message"] = "Ocurrio un error al enviar la información. Intente nuevamente más tarde.";
+                    return RedirectToAction("Index");
+                }
+
+               
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
     }
 }

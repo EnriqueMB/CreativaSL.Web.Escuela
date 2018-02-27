@@ -146,6 +146,7 @@
             });
             var contador = 0;
             var cont = 0;
+            
             $(".maincheck").each(function () {
                 var c = $(this).attr('data-cont');
                     cont = c - 1;
@@ -183,6 +184,7 @@
                
                 
             });
+            $('#Permiso1').attr('disabled', 'true');
                
             $('#example').DataTable({
                 "bSort": false,

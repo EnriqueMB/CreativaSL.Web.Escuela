@@ -64,7 +64,7 @@ namespace CreativaSL.Web.Escuela.Models
                 List<CatAlumnoModels> lista = new List<CatAlumnoModels>();
                 CatAlumnoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupo", datos.grupo);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_CatAlumnosXGrupoHistorial", datos.grupo);
                 while (dr.Read())
                 {
                     item = new CatAlumnoModels();
@@ -86,7 +86,7 @@ namespace CreativaSL.Web.Escuela.Models
                 List<CatGrupoModels> lista = new List<CatGrupoModels>();
                 CatGrupoModels item;
                 SqlDataReader dr = null;
-                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGrupoXID", datos.ciclo, datos.IDEspecialidad, datos.curso);
+                dr = SqlHelper.ExecuteReader(datos.conexion, "spCSLDB_V2_get_ComboCatGrupoXIDHistorial", datos.ciclo, datos.IDEspecialidad, datos.curso);
                 while (dr.Read())
                 {
                     item = new CatGrupoModels();

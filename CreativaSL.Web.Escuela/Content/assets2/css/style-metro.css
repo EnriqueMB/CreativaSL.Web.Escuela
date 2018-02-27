@@ -509,12 +509,15 @@ input[type="checkbox"].m-wrap:focus {
   border-color: rgba(50, 108, 227, 0.7);
   border-width: 2px;
 }
-
+input[type="text"] {
+  text-transform:uppercase;
+}
 input[class*="span"].m-wrap
 {
   float: none;
   height: 40px !important;
   margin-left: 0;
+
 }
 
 select[class*="span"].m-wrap,

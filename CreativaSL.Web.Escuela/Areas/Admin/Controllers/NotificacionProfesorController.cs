@@ -149,6 +149,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 NotificacionProfesor.conexion = Conexion;
                 NotificacionProfesor.IDNotificacionGeneral = id;
                 NotificacionProfesor.id_registro = id2;
+                NotificacionProfesor.user = User.Identity.Name;
                 NotificacionProfesorDatos.ReenviarNotificacion(NotificacionProfesor);
 
                 if (NotificacionProfesor.Resultado == 1)

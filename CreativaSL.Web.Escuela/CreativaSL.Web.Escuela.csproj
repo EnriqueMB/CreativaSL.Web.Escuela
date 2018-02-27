@@ -2839,6 +2839,10 @@
     <Content Include="Areas\Admin\Views\CatGrupo\Graduar.cshtml" />
     <Content Include="Areas\Admin\Views\NotificacionProfesor\TablaNotificacion.cshtml" />
     <Content Include="Areas\Admin\Views\NotificacionProfesor\TablaNotificacionesEnviadas.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reportes\Detalle.cshtml" />
+    <Content Include="Areas\Profesor\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Profesor\Views\CatMateria\CalificacionesFinales.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -3513,7 +3517,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Reportes\" />
     <Folder Include="Areas\Profesor\Models\" />
     <Folder Include="Content\assets2\img\uploads\" />
     <Folder Include="Content\assets2\plugins\email\img\uploads4\" />

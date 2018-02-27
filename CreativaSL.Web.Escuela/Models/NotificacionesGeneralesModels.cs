@@ -53,6 +53,8 @@ namespace CreativaSL.Web.Escuela.Models
             get { return _idplanEstudio; }
             set { _idplanEstudio = value; }
         }
+       
+
         private string _IDModalidad;
 
         public string IDModalidad

@@ -222,7 +222,7 @@ var App = function () {
         if ($.cookie('sidebar-closed') == 1) {
             container.addClass("sidebar-closed");
         }
-
+        $(".page-container").removeClass("sidebar-closed");
         // handle sidebar show/hide
         $('.page-sidebar .sidebar-toggler').click(function (e) {
             $(".sidebar-search").removeClass("open");

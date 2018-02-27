@@ -72,7 +72,7 @@ namespace CreativaSL.Web.Escuela.Areas.Admin.Controllers
                 Promocion.TablaAlumnos = new DataTable();
                 Promocion.TablaAlumnos.Columns.Add("id_alumno", typeof(string));
                 string idalumno = "";
-                for (int i=0;i<=Promocion.numAlumnos;i++) {
+                for (int i=0;i<=Promocion.numAlumnos+1;i++) {
                     try
                     {
                         idalumno = collection["alumno-" + i.ToString()];

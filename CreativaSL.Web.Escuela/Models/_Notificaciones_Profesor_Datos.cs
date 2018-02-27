@@ -170,7 +170,8 @@ namespace CreativaSL.Web.Escuela.Models
                 DataSet dr = SqlHelper.ExecuteDataset(datos.conexion, CommandType.StoredProcedure, "spCSLDB_V2_get_ReenviarTipoNotificacionXID",
                     new SqlParameter("@id_notificacion", datos.IDNotificacionGeneral),
                     new SqlParameter("@id_registro", datos.id_registro),
-                    new SqlParameter("@tipo_notificacion", datos.IDTipoNotificacion)
+                    new SqlParameter("@tipo_notificacion", datos.IDTipoNotificacion),
+                    new SqlParameter("@idusuario",datos.user)
                      );
 
                 if (dr != null)

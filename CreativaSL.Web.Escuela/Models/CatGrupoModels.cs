@@ -19,7 +19,10 @@ namespace CreativaSL.Web.Escuela.Models
         }
 
         private string _Clave;
-
+        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Display(Name = "nombre")]
+        [StringLength(20, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo {1}.", MinimumLength = 1)]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras y números")]
         public string Clave
         {
             get { return _Clave; }

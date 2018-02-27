@@ -58,6 +58,7 @@
                                                                     <th>Examen</th>
                                                                     <th>Actividades</th>
                                                                     <th>Asistencia</th>
+                                                                    <th>Calificación Final</th>
 
                                                                 </tr>
                                                             </thead>
@@ -76,6 +77,7 @@
                                                                         <td style="text-align: center;"><a class="btn green" href="@Url.Action("Examen", "CatMateria", new {id = profXM["IDAsignatura"].ToString()})"><i class="icon-file"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn green" href="@Url.Action("Evento", "CatMateria", new {id = profXM["IDAsignatura"].ToString()})"><i class="icon-bullhorn"></i></a></td>
                                                                         <td style="text-align: center;"><a class="btn green" href="@Url.Action("ListaAsistencia", "CatMateria", new {id = profXM["IDAsignatura"].ToString()})"><i class="icon-ok"></i></a></td>
+                                                                        <td style="text-align: center;"><a class="btn blue" href="@Url.Action("CalificacionesFinales", "CatMateria", new {id = profXM["IDAsignatura"].ToString(), id2 = profXM["IDMateria"].ToString()})"><i class="icon-list"></i></a></td>
                                                                     </tr>
                                                                 }
                                                             </tbody>

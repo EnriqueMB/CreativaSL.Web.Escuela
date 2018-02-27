@@ -48,6 +48,9 @@ body {
   font-size:13px;
   zoom: 90%;
 }
+input {
+    text-transform:uppercase;
+}
 .paginate_button {
     cursor:pointer!important;
 }

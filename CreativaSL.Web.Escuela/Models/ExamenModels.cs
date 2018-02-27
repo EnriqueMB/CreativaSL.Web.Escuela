@@ -39,7 +39,7 @@ namespace CreativaSL.Web.Escuela.Models
         [Required(ErrorMessage = "El Nombre del Examen es obligatorio")]
         [Display(Name = "Nombre del Examen")]
         [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2} y un maximo de {1}.", MinimumLength = 1)]
-        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ\s]*$", ErrorMessage = "Solo Letras")]
+        [RegularExpression(@"^[A-Za-záéíóúñÁÉÍÓÚÑ0-9\(\)\¿\?\-\,\.\;\:\s]*$", ErrorMessage = "Solo Letras")]
         public string NombreExamen
         {
             get { return _NombreExamen; }

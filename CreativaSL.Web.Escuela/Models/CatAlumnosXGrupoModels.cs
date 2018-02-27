@@ -9,6 +9,14 @@ namespace CreativaSL.Web.Escuela.Models
 {
     public class CatAlumnosXGrupoModels
     {
+        private float _calificacion;
+
+        public float calificacion
+        {
+            get { return _calificacion; }
+            set { _calificacion = value; }
+        }
+
         private string _IDGrupo;
 
         public string IDGrupo
@@ -66,6 +74,21 @@ namespace CreativaSL.Web.Escuela.Models
             set { _TablaDatos = value; }
         }
 
+        private DataTable _TablaCalificaciones;
+
+        public DataTable TablaCalificaciones
+        {
+            get { return _TablaCalificaciones; }
+            set { _TablaCalificaciones = value; }
+        }
+
+        private int _NumeroAlumnos;
+
+        public int NumeroAlumnos
+        {
+            get { return _NumeroAlumnos; }
+            set { _NumeroAlumnos = value; }
+        }
 
         #region Datos de control
         public int Resultado { get; set; }

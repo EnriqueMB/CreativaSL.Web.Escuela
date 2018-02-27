@@ -1,4 +1,5 @@
-﻿using CreativaSL.Web.Escuela.Models;
+﻿using CreativaSL.Web.Escuela.Filters;
+using CreativaSL.Web.Escuela.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
 {
+    [Autorizado]
     public class CatCuentaUserController : Controller
     {
         string Conexion = ConfigurationManager.AppSettings.Get("strConnection");
@@ -32,7 +34,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 return View(cuentaUser);
             }
         }
-
+        [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
             try
@@ -48,7 +50,7 @@ namespace CreativaSL.Web.Escuela.Areas.Profesor.Controllers
                 if (cuentaUser.id_cuenta == Convert.ToString(1))
                 {
                     TempData["typemessage"] = "1";
-                    TempData["message"] = "La Contraseña sea creado correctamente";
+                    TempData["message"] = "La Contraseña se ha creado correctamente";
                 }
                 else
                 {

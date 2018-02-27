@@ -45,7 +45,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _Descripcion = value; }
         }
 
-        private DateTime _FechaEvento;
+        private DateTime _FechaEvento = DateTime.Now;
         [Required(ErrorMessage = "La fecha del evento es obligatorio")]
         [Display(Name = "Fecha del evento")]
         [DataType(DataType.Date)]
@@ -56,7 +56,7 @@ namespace CreativaSL.Web.Escuela.Models
             set { _FechaEvento = value; }
         }
 
-        private DateTime _FechaEnvio;
+        private DateTime _FechaEnvio = DateTime.Now;
         [Required(ErrorMessage = "La fecha de envio es obligatorio")]
         [Display(Name = "Fecha envio")]
         [DataType(DataType.Date)]
